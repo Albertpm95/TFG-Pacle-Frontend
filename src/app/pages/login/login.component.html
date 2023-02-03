@@ -1,0 +1,36 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Login</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form [formGroup]="loginForm">
+			<mat-form-field appearance="fill">
+				<mat-label for="username" name="">Username</mat-label>
+				<input type="text" formControlName="username" matInput required>
+				<mat-error>
+					Por favor introduce un nombre de usuario valido.
+				</mat-error>
+			</mat-form-field>
+			<mat-form-field appearance="fill">
+				<mat-label for="password" name="">Password</mat-label>
+				<input type="password" formControlName="password" matInput required>
+				<mat-error>
+					Por favor introduce un nombre de usuario valido.
+				</mat-error>
+			</mat-form-field>
+		</form>
+	</mat-card-content>
+	<mat-card-actions>
+		<button mat-raised-button type="submit" (click)="login()">Login</button>
+	</mat-card-actions>
+</mat-card>
+
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>
+			<h1>Tests</h1>
+		</mat-card-title></mat-card-header>
+	<mat-card-actions>
+		<button mat-raised-button type="button" (click)="startTests()">Start</button>
+	</mat-card-actions>
+</mat-card>

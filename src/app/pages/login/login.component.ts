@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '@services/auth.service';
+import { ApiService } from '@services/api.service';
+
 
 @Component({
 	templateUrl: './login.component.html',
@@ -22,14 +23,15 @@ export class LoginComponent {
 	startTests() {
 		this.apiService.startTests().subscribe((data: any) => console.log('succes', data));
 	}
-	login() {
+
+	login(): void {
 		if (this.loginForm.status == 'VALID') {
 			console.log(this.loginForm);
 
 			this.authService.login({
 				username: this.loginForm.value.username,
 				password: this.loginForm.value.password
-			}).subscribe(data => console.log('succes', data))
+			}).subscribe(data => console.log('Login succes', data))
 		}
 	}
 }

@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '@services/auth.service';
+import { Router } from '@angular/router';
 import { ApiService } from '@services/api.service';
+import { AuthService } from '@services/auth.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private authService: AuthService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -29,5 +30,7 @@ export class LoginComponent {
         password: this.loginForm.value.password
       }).subscribe(data => console.log('Login succes', data))
     }
+
+    this.router.navigateByUrl('/home');
   }
 }

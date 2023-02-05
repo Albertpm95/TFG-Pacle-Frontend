@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserAction } from '@models/accionusuario';
+import { UserAction } from '@models/acciones-usuario';
 import { ApiService } from '@services/api.service';
 
 @Component({

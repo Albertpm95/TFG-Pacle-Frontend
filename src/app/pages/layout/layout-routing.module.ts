@@ -4,7 +4,8 @@ import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [{
   path: '', component: LayoutComponent
-}]
+},
+]
 
 
 @NgModule({

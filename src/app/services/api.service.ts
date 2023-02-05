@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
-import { UserAction } from '@models/accionusuario';
+import { UserAction } from '@models/acciones-usuario';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
 

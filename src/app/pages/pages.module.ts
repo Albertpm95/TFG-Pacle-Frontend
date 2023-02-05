@@ -10,20 +10,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
-	declarations: [
-		LoginComponent
-	],
-	imports: [
-		CommonModule,
-		PagesRoutingModule,
-		ComponentsModule,
-		MatFormFieldModule,
-		MatCardModule,
-		ReactiveFormsModule,
-		MatInputModule,
-		MatButtonModule
-	]
+  declarations: [
+    LoginComponent
+  ],
+  imports: [
+    CommonModule,
+    PagesRoutingModule,
+    ComponentsModule,
+    LayoutModule,
+    MatFormFieldModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule
+  ]
 })
 export class PagesModule { }

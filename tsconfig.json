@@ -1,59 +1,59 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": "./src",
-		"outDir": "./dist/out-tsc",
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"noImplicitOverride": true,
-		"noPropertyAccessFromIndexSignature": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"sourceMap": true,
-		"declaration": false,
-		"downlevelIteration": true,
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
-		"importHelpers": true,
-		"target": "ES2022",
-		"module": "ES2022",
-		"useDefineForClassFields": false,
-		"lib": [
-			"ES2022",
-			"dom"
-		],
-		"paths": {
-			"@components/*": [
-				"app/components/*"
-			],
-			"@pages/*": [
-				"app/pages/*"
-			],
-			"@layout/*": [
-				"app/layout/*"
-			],
-			"@services/*": [
-				"app/services/*"
-			],
-			"@guards/*": [
-				"app/guards/*"
-			],
-			"@interceptors/*": [
-				"app/interceptors/*"
-			],
-			"@environments/*": [
-				"environments/*"
-			],
-			"@models/*": [
-				"app/models/*"
-			]
-		}
-	},
-	"angularCompilerOptions": {
-		"enableI18nLegacyMessageIdFormat": false,
-		"strictInjectionParameters": true,
-		"strictInputAccessModifiers": true,
-		"strictTemplates": true
-	}
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "@components/*": [
+        "app/pages/components/*"
+      ],
+      "@layout/*": [
+        "app/layout/*"
+      ],
+      "@pages/*": [
+        "app/pages/*"
+      ],
+      "@services/*": [
+        "app/services/*"
+      ],
+      "@guards/*": [
+        "app/guards/*"
+      ],
+      "@interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@environments/*": [
+        "environments/*"
+      ],
+      "@models/*": [
+        "app/models/*"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

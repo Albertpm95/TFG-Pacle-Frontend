@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
-import { ActionsListComponent } from './actions-list/actions-list.component';
+import { ActionsListComponent } from './actions_list/actions-list.component';
 import { ComponentsModule } from '@components/components.module';
 
 import { MatListModule } from '@angular/material/list';

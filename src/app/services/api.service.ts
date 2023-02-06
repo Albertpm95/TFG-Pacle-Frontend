@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment';
+import { environment } from 'environments_2/environment';
 import { UserAction } from '@models/acciones-usuario';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
@@ -16,6 +16,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getUserActions(): Observable<UserAction[]> {
-    return this.http.get<UserAction[]>(this.apiUrl + 'user_actions')
+    return this.http.get<UserAction[]>(this.apiUrl + 'user/actions')
   }
 }

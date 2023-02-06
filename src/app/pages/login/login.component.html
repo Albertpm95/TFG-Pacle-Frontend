@@ -22,7 +22,10 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button type="submit" (click)="login()">Login</button>
+      <button mat-raised-button color="primary" type="submit" (click)="login()">Login</button>
     </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+    </mat-card-footer>
   </mat-card>
 </div>

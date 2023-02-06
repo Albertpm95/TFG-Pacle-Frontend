@@ -9,10 +9,14 @@ import { ApiService } from '@services/api.service';
 })
 export class ActionsListComponent {
 
-  actions_list: UserAction[] = [];
+  actionsList: UserAction[] = [];
+  loaded: boolean = false;
 
   constructor(private apiService: ApiService) {
-    this.apiService.getUserActions().subscribe(actions => { this.actions_list = actions; })
+    this.apiService.getUserActions().subscribe(actions => { this.actionsList = actions; console.log(this.actionsList); this.loaded = true; })
   }
 
+  goTo(userAction: UserAction): void {
+    console.log(userAction)
+  }
 }

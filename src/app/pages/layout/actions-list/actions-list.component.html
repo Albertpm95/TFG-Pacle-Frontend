@@ -1,7 +1,10 @@
-<div>
-  <mat-list>
-    <mat-list-item>
-      <span matListItemTitle routerLink="action.url" *ngFor="let action from actions_list">action.label</span>
+<div class="list-container">
+  <mat-nav-list *ngIf="loaded">
+    <mat-list-item *ngFor="let opcion of actionsList" [activated]="true">
+      <a matListItemTitle href="...">{{ opcion.action_label }}</a>
     </mat-list-item>
-  </mat-list>
+  </mat-nav-list>
+  <div *ngIf="!loaded">
+    <span>No hay acciones disponibles</span>
+  </div>
 </div>

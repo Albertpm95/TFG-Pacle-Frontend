@@ -1,4 +1,4 @@
 export interface UserAction {
-  label: string;
+  action_label: string;
   url: string;
 }

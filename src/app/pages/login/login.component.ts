@@ -13,6 +13,7 @@ import { AuthService } from '@services/auth.service';
 export class LoginComponent {
 
   loginForm: FormGroup;
+  loading: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService, private authService: AuthService, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -22,15 +23,13 @@ export class LoginComponent {
   }
 
   login(): void {
+    this.loading = true;
     if (this.loginForm.status == 'VALID') {
-      console.log(this.loginForm);
-
       this.authService.login({
         username: this.loginForm.value.username,
         password: this.loginForm.value.password
-      }).subscribe(data => console.log('Login succes', data))
+      }).subscribe(data => { if (data) this.router.navigateByUrl('/home') })
     }
-
-    this.router.navigateByUrl('/home');
+    this.loading = false;
   }
 }

@@ -3,3 +3,4 @@ node_modules
 \.vscode
 dist
 environments_2
+environments

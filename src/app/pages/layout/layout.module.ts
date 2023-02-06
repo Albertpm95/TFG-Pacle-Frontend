@@ -7,11 +7,13 @@ import { ActionsListComponent } from './actions_list/actions-list.component';
 import { ComponentsModule } from '@components/components.module';
 
 import { MatListModule } from '@angular/material/list';
+import { ActaComponent } from './acta/acta.component';
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    ActionsListComponent
+    ActionsListComponent,
+    ActaComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ActaComponent } from './acta.component';
+import { CreateActaComponent } from './create/create.component';
+import { ListActaComponent } from './list/list.component';
 
-const routes: Routes = [{ path: 'create', component: ActaComponent }, ];
+const routes: Routes = [
+  { path: 'create', component: CreateActaComponent },
+  { path: 'list', component: ListActaComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

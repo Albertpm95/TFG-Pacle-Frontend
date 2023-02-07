@@ -1,0 +1,25 @@
+.acta-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  mat-card {
+    padding: 2rem;
+    border-radius: 8px;
+    width: min(450px, 90vw);
+
+    mat-card-header {
+      margin-bottom: 2rem;
+    }
+
+    mat-card-content {
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+}

@@ -4,10 +4,10 @@ import { Constants } from 'app/constants';
 
 @Component({
   selector: 'app-acta',
-  templateUrl: './acta.component.html',
-  styleUrls: ['./acta.component.scss']
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.scss']
 })
-export class ActaComponent {
+export class CreateActaComponent {
   actaForm: FormGroup;
   loading: boolean = false;
   constants = Constants;

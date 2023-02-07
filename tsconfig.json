@@ -27,6 +27,9 @@
       "@components/*": [
         "app/pages/components/*"
       ],
+      "@constants": [
+        "app/components"
+      ],
       "@layout/*": [
         "app/layout/*"
       ],

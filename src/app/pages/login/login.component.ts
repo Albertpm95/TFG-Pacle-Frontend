@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ApiService } from '@services/api.service';
 import { AuthService } from '@services/auth.service';
 
-
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],

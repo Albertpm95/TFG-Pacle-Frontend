@@ -8,11 +8,11 @@ export class ComprensionAuditiva {
   observaciones: string;
 
   constructor(
-    puntuacionMaximaParte: number,
-    tarea1: number,
-    tarea2: number,
-    tarea3: number,
-    observaciones: string
+    puntuacionMaximaParte?: number,
+    tarea1?: number,
+    tarea2?: number,
+    tarea3?: number,
+    observaciones?: string
   ) {
     this.puntuacionMaximaParte = puntuacionMaximaParte
       ? puntuacionMaximaParte

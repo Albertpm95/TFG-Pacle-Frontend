@@ -8,10 +8,10 @@ export class ExpresionEscrita {
   puntuacionMaximaParte: number;
 
   constructor(
-    tarea1: TareaExpresion,
-    tarea2: TareaExpresion,
-    observaciones: string,
-    puntuacionMaximaParte: number
+    tarea1?: TareaExpresion,
+    tarea2?: TareaExpresion,
+    observaciones?: string,
+    puntuacionMaximaParte?: number
   ) {
     this.tarea1 = tarea1 ? tarea1 : new TareaExpresion();
     this.tarea2 = tarea2 ? tarea2 : new TareaExpresion();

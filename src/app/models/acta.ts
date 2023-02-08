@@ -20,10 +20,10 @@ export class Acta {
     tipo: string,
     fecha: Date,
     activa: boolean,
-    expresionEscrita: ExpresionEscrita,
-    expresionOral: ExpresionOral,
-    comprensionLectora: ComprensionLectora,
-    comprensionAuditiva: ComprensionAuditiva,
+    expresionEscrita?: ExpresionEscrita,
+    expresionOral?: ExpresionOral,
+    comprensionLectora?: ComprensionLectora,
+    comprensionAuditiva?: ComprensionAuditiva,
     idActa?: string
   ) {
     if (idActa) this.idActa = idActa;

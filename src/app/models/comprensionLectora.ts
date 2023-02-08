@@ -8,11 +8,11 @@ export class ComprensionLectora {
   observaciones: string;
 
   constructor(
-    puntuacionMaximaParte: number,
-    tarea1: number,
-    tarea2: number,
-    tarea3: number,
-    observaciones: string
+    puntuacionMaximaParte?: number,
+    tarea1?: number,
+    tarea2?: number,
+    tarea3?: number,
+    observaciones?: string
   ) {
     this.puntuacionMaximaParte = puntuacionMaximaParte
       ? puntuacionMaximaParte
@@ -22,7 +22,7 @@ export class ComprensionLectora {
     this.tarea3 = tarea3 ? tarea3 : Constants.VALOR_TAREA_DEFECTO;
     this.observaciones = observaciones ? observaciones : '';
   }
-  
+
   private calcularPuntosConseguidos() {
     return this.tarea1 + this.tarea2 + this.tarea3;
   }

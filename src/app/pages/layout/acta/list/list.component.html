@@ -1,1 +1,35 @@
-<p>list works!</p>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Convocatorias</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-table [dataSource]="actas">
+
+        <ng-container matColumnDef="lenguaje">
+          <mat-header-cell *matHeaderCellDef> Lenguaje </mat-header-cell>
+          <mat-cell *matCellDef="let acta"> {{acta.lenguaje}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="tipo">
+          <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+          <mat-cell *matCellDef="let acta"> {{acta.tipo}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+          <mat-header-cell *matHeaderCellDef> fecha </mat-header-cell>
+          <mat-cell *matCellDef="let acta"> {{acta.fecha}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="activa">
+          <mat-header-cell *matHeaderCellDef> Activa </mat-header-cell>
+          <mat-cell *matCellDef="let acta"> {{acta.activa}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['lenguaje', 'tipo', 'fecha', 'activa']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['lenguaje', 'tipo', 'fecha', 'activa']"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
+</div>

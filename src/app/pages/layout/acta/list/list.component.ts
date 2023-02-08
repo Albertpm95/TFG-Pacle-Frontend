@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Acta } from '@models/acta';
+import { ApiService } from '@services/api.service';
 
 @Component({
   selector: 'app-list',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class ListActaComponent {
 
+  actas: Acta[] = []
+
+  constructor(private apiService: ApiService) {
+    this.apiService.getActas().subscribe(actas => { if (actas) this.actas = actas })
+  }
 }

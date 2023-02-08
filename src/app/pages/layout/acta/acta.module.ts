@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ActaRoutingModule } from './acta-routing.module';
 import { CreateActaComponent } from './create/create.component';
 import { ListActaComponent } from './list/list.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ListActaComponent } from './list/list.component';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxMatDatetimePickerModule
+    NgxMatDatetimePickerModule,
+    MatTableModule
   ],
 
 })

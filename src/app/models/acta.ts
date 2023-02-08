@@ -131,6 +131,10 @@ export class Acta {
   tipo: 'Ordinaria' | 'Extraordinaria';
   fecha: Date;
   activa: boolean;
+  expresionOral: ExpresionOral;
+  expresionEscrita: ExpresionEscrita;
+  comprensionLectora: ComprensionLectora;
+  comprensionAuditiva: ComprensionAuditiva;
 
   constructor(actaJSON?: any) {
     if (actaJSON.idActa)
@@ -139,5 +143,9 @@ export class Acta {
     this.tipo = actaJSON.tipo ? actaJSON.tipo : 'Ordinaria';
     this.fecha = actaJSON.fecha ? actaJSON.fecha : Date.now();
     this.activa = actaJSON.activa ? actaJSON.activa : true;
+    this.expresionEscrita = actaJSON.expresionEscrita ? actaJSON.expresionEscrita : new ExpresionEscrita();
+    this.expresionOral = actaJSON.expresionOral ? actaJSON.expresionOral : new ExpresionOral();
+    this.comprensionLectora = actaJSON.comprensionLectora ? actaJSON.comprensionLectora : new ComprensionLectora();
+    this.comprensionAuditiva = actaJSON.comprensionAuditiva ? actaJSON.comprensionAuditiva : new ComprensionAuditiva();
   }
 }

@@ -5,13 +5,18 @@ import { ApiService } from '@services/api.service';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListActaComponent {
-
-  actas: Acta[] = []
+  loading: boolean = true;
+  actas: Acta[] = [];
 
   constructor(private apiService: ApiService) {
-    this.apiService.getActas().subscribe(actas => { if (actas) this.actas = actas })
+    this.apiService.getActas().subscribe((actas) => {
+      if (actas) {
+        this.actas = actas;
+        this.loading = false;
+      }
+    });
   }
 }

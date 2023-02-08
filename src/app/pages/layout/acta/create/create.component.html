@@ -6,24 +6,99 @@
     <mat-card-content>
       <form [formGroup]="actaForm">
         <mat-form-field appearance="fill">
-          <mat-label for="lenguaje" name="lenguaje">Lenguaje de la convocatoria</mat-label>
-          <mat-select>
-            <mat-option value="lenguaje" *ngFor="let lenguaje of constants.Lenguaje">{{lenguaje}}</mat-option>
+          <mat-label for="lenguaje" name="lenguaje"
+            >Lenguaje de la convocatoria</mat-label
+          >
+          <mat-select required>
+            <mat-option *ngFor="let lenguaje of listaIdiomasActa">{{
+              lenguaje
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label for="tipo" name="tipo">Tipo de convocatoria</mat-label>
-          <mat-select>
-            <mat-option value="tipo" *ngFor="let tipo of constants.Tipo">{{tipo}}</mat-option>
+          <mat-select required>
+            <mat-option value="tipo" *ngFor="let tipo of tiposActa">{{
+              tipo
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="fill">
           <mat-label>Fecha de la convocatoria</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha">
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            type="date"
+            [matDatepicker]="picker"
+            formControlName="fecha"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label
+            for="pesoMaximoParteComprensionLectora"
+            name="pesoMaximoParteComprensionLectora"
+            >Peso maximo de la parte de Comprension lectora</mat-label
+          >
+          <input
+            matInput
+            type="number"
+            formControlName="pesoMaximoParteComprensionLectora"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label
+            for="pesomaximoParteExpresionEscrita"
+            name="pesomaximoParteExpresionEscrita"
+            >Peso maximo de la parte de Expresion escrita</mat-label
+          >
+          <input
+            matInput
+            type="number"
+            formControlName="pesomaximoParteExpresionEscrita"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label
+            for="pesomaximoParteComprensionAuditiva"
+            name="pesomaximoParteComprensionAuditiva"
+            >Peso maximo de la parte de Comprension auditiva</mat-label
+          >
+          <input
+            matInput
+            type="number"
+            formControlName="pesomaximoParteComprensionAuditiva"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label
+            for="pesomaximoParteExpresionOral"
+            name="pesomaximoParteExpresionOral"
+            >Peso maximo de la parte de Expresion oral</mat-label
+          >
+          <input
+            matInput
+            type="number"
+            formControlName="pesomaximoParteExpresionOral"
+          />
         </mat-form-field>
       </form>
     </mat-card-content>
+    <mat-card-footer>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="createActa()"
+        >
+          Crear acta
+        </button>
+      </mat-card-actions>
+    </mat-card-footer>
   </mat-card>
 </div>

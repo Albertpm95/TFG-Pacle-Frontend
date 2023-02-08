@@ -8,18 +8,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ActaRoutingModule } from './acta-routing.module';
 import { CreateActaComponent } from './create/create.component';
 import { ListActaComponent } from './list/list.component';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
-  declarations: [
-    CreateActaComponent,
-    ListActaComponent
-  ],
+  declarations: [CreateActaComponent, ListActaComponent],
   imports: [
     CommonModule,
     ActaRoutingModule,
@@ -30,8 +28,9 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     NgxMatDatetimePickerModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule,
+    MatSortModule,
   ],
-
 })
-export class ActaModule { }
+export class ActaModule {}

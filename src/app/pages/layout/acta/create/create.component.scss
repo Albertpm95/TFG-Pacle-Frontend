@@ -6,20 +6,25 @@
   width: 100%;
 
   mat-card {
-    padding: 2rem;
-    border-radius: 8px;
-    width: min(450px, 90vw);
+        width: min(880px, 90vw);
 
     mat-card-header {
-      margin-bottom: 2rem;
+      margin: 2rem auto;
     }
 
     mat-card-content {
       form {
+        margin: auto;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        width: 100%;
+        min-width: min(380px, 100%);
+        max-width: 760px;
       }
+    }
+    mat-card-footer{
+      margin: auto;
     }
   }
 }

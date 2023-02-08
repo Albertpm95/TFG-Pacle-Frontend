@@ -6,20 +6,20 @@ import { ExpresionOral } from './expresionOral';
 
 export class Acta {
   idActa?: string;
-  lenguaje: string;
-  tipo: string;
-  fecha: Date;
-  activa: boolean;
+  lenguaje?: string;
+  tipo?: string;
+  fecha?: Date;
+  activa?: boolean;
   expresionOral: ExpresionOral;
   expresionEscrita: ExpresionEscrita;
   comprensionLectora: ComprensionLectora;
   comprensionAuditiva: ComprensionAuditiva;
 
   constructor(
-    lenguaje: string,
-    tipo: string,
-    fecha: Date,
-    activa: boolean,
+    lenguaje?: string,
+    tipo?: string,
+    fecha?: Date,
+    activa?: boolean,
     expresionEscrita?: ExpresionEscrita,
     expresionOral?: ExpresionOral,
     comprensionLectora?: ComprensionLectora,

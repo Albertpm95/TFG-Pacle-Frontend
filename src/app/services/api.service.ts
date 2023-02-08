@@ -8,28 +8,43 @@ import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-
   title = environment.title;
-  apiUrl = environment.apiURL
+  apiUrl = environment.apiURL;
+  listaIdiomasActa: string[] = [];
+  tipoActa: string[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUserActions(): Observable<UserAction[]> {
-    return this.http.get<UserAction[]>(this.apiUrl + 'user/actions')
+    return this.http.get<UserAction[]>(this.apiUrl + 'user/actions');
   }
 
   getActas(): Observable<Acta[]> {
-    return this.http.get<Acta[]>(this.apiUrl + 'acta/list')
+    return this.http.get<Acta[]>(this.apiUrl + 'actas/list');
   }
 
   getAlumnos(): Observable<Alumno[]> {
-    return this.http.get<Alumno[]>(this.apiUrl + 'acta/list')
+    return this.http.get<Alumno[]>(this.apiUrl + 'actas/list');
   }
 
-  getAlumno(nombre: string, apellidos?: string, id_acta?: string): Observable<Alumno> {
-    return this.http.get<Alumno>(this.apiUrl + 'alumno' + { nombre, apellidos, id_acta })
+  getAlumno(
+    nombre: string,
+    apellidos?: string,
+    id_acta?: string
+  ): Observable<Alumno> {
+    return this.http.get<Alumno>(
+      this.apiUrl + 'alumnos/' + { nombre, apellidos, id_acta }
+    );
+  }
+
+  getIdiomasActa(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + 'actas/idiomas');
+  }
+
+  getTiposActa(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + 'actas/tipos');
   }
 }

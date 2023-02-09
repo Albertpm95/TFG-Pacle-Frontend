@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { CreateActaComponent } from './create/create.component';
 import { ListActaComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: 'create', component: CreateActaComponent },
-  { path: 'list', component: ListActaComponent }
+  // Aso voldria que estiguera dins del router-outlet de Layout.component
+  { path: 'create', component: CreateActaComponent, outlet: 'content' },
+  { path: 'list', component: ListActaComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ActaRoutingModule { }
+export class ActaRoutingModule {}

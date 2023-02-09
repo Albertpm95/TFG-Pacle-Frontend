@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -19,38 +18,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
-      "@components/*": [
-        "app/pages/components/*"
-      ],
-      "@constants": [
-        "app/components"
-      ],
-      "@layout/*": [
-        "app/layout/*"
-      ],
-      "@pages/*": [
-        "app/pages/*"
-      ],
-      "@services/*": [
-        "app/services/*"
-      ],
-      "@guards/*": [
-        "app/guards/*"
-      ],
-      "@interceptors/*": [
-        "app/interceptors/*"
-      ],
-      "@environments/*": [
-        "environments/*"
-      ],
-      "@models/*": [
-        "app/models/*"
-      ]
+      "@constants": ["app/constants"],
+      "@pages/*": ["app/pages/*"],
+      "@components/*": ["app/pages/components/*"],
+      "@layout/*": ["app/pages/layout/*"],
+      "@services/*": ["app/services/*"],
+      "@guards/*": ["app/guards/*"],
+      "@interceptors/*": ["app/interceptors/*"],
+      "@environments/*": ["environments/*"],
+      "@models/*": ["app/models/*"]
     }
   },
   "angularCompilerOptions": {

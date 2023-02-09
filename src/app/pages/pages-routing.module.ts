@@ -4,11 +4,19 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'home', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule) }
+  {
+    path: 'actas',
+  },
+  {
+    path: 'usuarios',
+  },
+  {
+    path: 'alumnos',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PagesRoutingModule { }
+export class PagesRoutingModule {}

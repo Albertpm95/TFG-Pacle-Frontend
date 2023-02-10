@@ -9,7 +9,7 @@ export class Acta {
   lenguaje?: string;
   tipo?: string;
   fecha?: Date;
-  activa?: boolean;
+  estado?: boolean;
   expresionOral: ExpresionOral;
   expresionEscrita: ExpresionEscrita;
   comprensionLectora: ComprensionLectora;
@@ -19,7 +19,7 @@ export class Acta {
     lenguaje?: string,
     tipo?: string,
     fecha?: Date,
-    activa?: boolean,
+    estado?: boolean,
     expresionEscrita?: ExpresionEscrita,
     expresionOral?: ExpresionOral,
     comprensionLectora?: ComprensionLectora,
@@ -30,7 +30,7 @@ export class Acta {
     this.lenguaje = lenguaje ? lenguaje : Constants.LENGUAJE_POR_DEFECTO;
     this.tipo = tipo ? tipo : Constants.TIPO_POR_DEFECTO;
     this.fecha = fecha ? fecha : new Date();
-    this.activa = activa ? activa : true;
+    this.estado = estado ? estado : true;
     this.expresionEscrita = expresionEscrita
       ? expresionEscrita
       : new ExpresionEscrita();

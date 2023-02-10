@@ -47,10 +47,10 @@ export class CreateActaComponent {
     this.loading = true;
     console.log(this.actaForm);
     if (this.actaForm.valid) {
-      (this.acta.lenguaje = this.actaForm.controls['lenguaje'].value),
-        (this.acta.tipo = this.actaForm.controls['tipo'].value),
-        (this.acta.fecha = this.actaForm.controls['fecha'].value),
-        (this.acta.activa = this.actaForm.controls['activa'].value);
+      this.acta.lenguaje = this.actaForm.controls['lenguaje'].value;
+      this.acta.tipo = this.actaForm.controls['tipo'].value;
+      this.acta.fecha = this.actaForm.controls['fecha'].value;
+      this.acta.estado = this.actaForm.controls['estado'].value;
     }
     console.log(this.acta);
     this.loading = false;

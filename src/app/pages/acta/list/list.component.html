@@ -1,42 +1,47 @@
 <div class="container">
-  <mat-card>
+  <mat-card class="mat-elevation-z8">
     <mat-card-header>
-      <mat-card-title>Convocatorias</mat-card-title>
+      <mat-card-title><h1>Lista de Convocatorias</h1></mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <mat-table [dataSource]="actas" *ngIf="!loading">
-        <ng-container matColumnDef="lenguaje">
-          <mat-header-cell *matHeaderCellDef> Lenguaje </mat-header-cell>
-          <mat-cell *matCellDef="let acta"> {{ acta.lenguaje }} </mat-cell>
-        </ng-container>
+    <mat-card-content
+      ><table mat-table [dataSource]="dataSource">
+        <div>
+          <ng-container matColumnDef="lenguaje">
+            <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
+            <td mat-cell *matCellDef="let acta" (click)="editarActa(acta)">
+              <a>{{ acta.lenguaje }}</a>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="tipo">
-          <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-          <mat-cell *matCellDef="let acta"> {{ acta.tipo }} </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="tipo">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let acta" (click)="editarActa(acta)">
+              {{ acta.tipo }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="fecha">
-          <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
-          <mat-cell *matCellDef="let acta">
-            {{ acta.fecha | date : "short" }}
-          </mat-cell>
-        </ng-container>
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let acta" (click)="editarActa(acta)">
+              {{ acta.fecha | date : "short" }}
+            </td>
+          </ng-container>
+        </div>
 
         <ng-container matColumnDef="activa">
-          <mat-header-cell *matHeaderCellDef> Activa </mat-header-cell>
-          <mat-cell *matCellDef="let acta"> {{ acta.activa }} </mat-cell>
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let acta">
+            <mat-slide-toggle
+              (click)="cambiarStatus(acta)"
+              [checked]="acta.estado"
+            ></mat-slide-toggle>
+          </td>
         </ng-container>
-
-        <mat-header-row
-          *matHeaderRowDef="
-            ['lenguaje', 'tipo', 'fecha', 'activa'];
-            sticky: true
-          "
-        ></mat-header-row>
-        <mat-row
-          *matRowDef="let row; columns: ['lenguaje', 'tipo', 'fecha', 'activa']"
-        ></mat-row>
-      </mat-table>
-    </mat-card-content>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table
+    ></mat-card-content>
   </mat-card>
 </div>

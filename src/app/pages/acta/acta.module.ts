@@ -15,6 +15,9 @@ import { CreateActaComponent } from './create/create.component';
 import { ListActaComponent } from './list/list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [CreateActaComponent, ListActaComponent],
@@ -31,6 +34,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatButtonModule,
     MatSortModule,
+    MatIconModule,
+    MatSlideToggleModule,
   ],
 })
 export class ActaModule {}

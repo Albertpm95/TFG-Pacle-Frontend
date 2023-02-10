@@ -4,7 +4,6 @@ import { CreateActaComponent } from './create/create.component';
 import { ListActaComponent } from './list/list.component';
 
 const routes: Routes = [
-  // Aso voldria que estiguera dins del router-outlet de Layout.component
   { path: 'create', component: CreateActaComponent },
   { path: 'list', component: ListActaComponent },
 ];

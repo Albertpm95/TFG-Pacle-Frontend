@@ -11,30 +11,48 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  title = environment.title;
   apiUrl = environment.apiURL;
-  listaIdiomasActa: string[] = [];
-  tipoActa: string[] = [];
 
   constructor(private http: HttpClient) {}
 
+  /**  Usuarios */
   getUserActions(): Observable<UserAction[]> {
     console.log('API Call Get User Actions');
     return this.http.get<UserAction[]>(
       this.apiUrl + Constants.USUARIO_ACCIONES
     );
   }
+  /** ---------------------------------------------------------------------- */
 
+  /** Admin */
+  subirFicheroExcel(excel: File) {
+    return this.http.post<File>(
+      this.apiUrl + Constants.ADMIN_UPLOAD_FILE,
+      excel
+    );
+  }
+  /** ---------------------------------------------------------------------- */
+
+  /** Actas */
   getActas(): Observable<Acta[]> {
     console.log('API Call Get Actas');
     return this.http.get<Acta[]>(this.apiUrl + Constants.ACTA_LIST);
   }
+  getIdiomasActa(): Observable<string[]> {
+    console.log('API Call Get Idiomas');
+    return this.http.get<string[]>(this.apiUrl + Constants.ACTA_IDIOMAS);
+  }
+  getTiposActa(): Observable<string[]> {
+    console.log('API Call Get Tipos');
+    return this.http.get<string[]>(this.apiUrl + Constants.ACTA_TIPOS);
+  }
+  /** ---------------------------------------------------------------------- */
 
+  /** Alumnos */
   getAlumnos(): Observable<Alumno[]> {
     console.log('API Call Get Alumnos');
     return this.http.get<Alumno[]>(this.apiUrl + Constants.ALUMNO_LIST);
   }
-
   getAlumno(
     nombre: string,
     apellidos?: string,
@@ -45,14 +63,5 @@ export class ApiService {
       this.apiUrl + Constants.ALUMNO + { nombre, apellidos, id_acta }
     );
   }
-
-  getIdiomasActa(): Observable<string[]> {
-    console.log('API Call Get Idiomas');
-    return this.http.get<string[]>(this.apiUrl + Constants.ACTA_IDIOMAS);
-  }
-
-  getTiposActa(): Observable<string[]> {
-    console.log('API Call Get Tipos');
-    return this.http.get<string[]>(this.apiUrl + Constants.ACTA_TIPOS);
-  }
+  /** ---------------------------------------------------------------------- */
 }

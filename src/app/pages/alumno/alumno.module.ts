@@ -2,16 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AlumnoRoutingModule } from './alumno-routing.module';
-import { AlumnoComponent } from './alumno.component';
-
+import { CargaComponent } from './carga/carga.component';
 
 @NgModule({
   declarations: [
-    AlumnoComponent
+    CargaComponent
   ],
-  imports: [
-    CommonModule,
-    AlumnoRoutingModule
-  ]
+  imports: [CommonModule, AlumnoRoutingModule],
 })
-export class AlumnoModule { }
+export class AlumnoModule {}

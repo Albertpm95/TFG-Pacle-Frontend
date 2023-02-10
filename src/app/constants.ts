@@ -7,12 +7,15 @@ export class Constants {
   static ACTA = 'actas';
   static ALUMNO = 'alumnos';
   static USUARIO = 'usuarios';
+  static ADMIN = 'admin';
+  static ADMIN_UPLOAD_FILE = Constants.ACTA + '/upload';
   static ACTA_CREATE = Constants.ACTA + '/create';
   static ACTA_LIST = Constants.ACTA + '/list';
   static ACTA_IDIOMAS = Constants.ACTA + '/idiomas';
   static ACTA_TIPOS = Constants.ACTA + '/tipos';
   static ALUMNO_CREATE = Constants.ALUMNO + '/create';
   static ALUMNO_LIST = Constants.ALUMNO + '/list';
+  static ALUMNO_UPLOAD_EXCEL = Constants.ALUMNO + '/upload';
   static USUARIO_ACCIONES = Constants.USUARIO + '/actions';
   static USUARIO_CREATE = Constants.USUARIO + '/create';
   static USUARIO_LIST = Constants.USUARIO + '/list';

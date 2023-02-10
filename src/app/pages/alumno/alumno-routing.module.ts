@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlumnoComponent } from './alumno.component';
+import { Constants } from '@constants';
+import { CargaComponent } from './carga/carga.component';
 
-const routes: Routes = [{ path: '', component: AlumnoComponent }];
+const routes: Routes = [
+  {
+    path: 'upload',
+    component: CargaComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

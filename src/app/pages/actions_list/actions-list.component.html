@@ -1,7 +1,9 @@
-<div class="list-container">
+<div class="list-container container">
   <mat-nav-list *ngIf="loaded">
     <mat-list-item *ngFor="let opcion of actionsList" [activated]="true">
-      <a matListItemTitle href="{{opcion.url}}">{{ opcion.action_label }} | {{opcion.url}}</a>
+      <span matListItemTitle (click)="goTo(opcion.url)"
+        >{{ opcion.action_label }} | {{ opcion.url }}</span
+      >
     </mat-list-item>
   </mat-nav-list>
   <div *ngIf="!loaded">

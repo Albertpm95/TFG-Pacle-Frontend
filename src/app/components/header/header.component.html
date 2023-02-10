@@ -1,9 +1,21 @@
-<div class="header">
-  <mat-toolbar color="primary">
-    <span color="accent">Pacle</span>
-    <span color="accent" class="example-spacer"></span>
-    <button type="button" color="accent" aria-label="User options">
-      <mat-icon color="accent" class="user-icon" aria-hidden="false" aria-label="User options">account_circle</mat-icon>
+<mat-toolbar class="mat-elevation-z1" color="primary">
+  <span color="accent">Pacle</span>
+  <span color="accent" class="example-spacer"></span>
+  <div class="user-container" *ngIf="!router.url.includes('login')">
+    <small (click)="logout()">Desconectarse</small>
+    <button
+      mat-icon-button
+      color="accent"
+      aria-label="User options"
+      type="button"
+    >
+      <mat-icon
+        color="accent"
+        class="user-icon"
+        aria-hidden="false"
+        aria-label="User options"
+        >account_circle</mat-icon
+      >
     </button>
-  </mat-toolbar>
-</div>
+  </div>
+</mat-toolbar>

@@ -1,27 +1,27 @@
 import { Constants } from 'app/constants';
 
 export class TareaExpresion {
-  alcance: number;
-  coherencia: number;
-  correccion: number;
-  eficaciaC: number;
-  id_corrector: string;
-  nombre_corrector: string;
+  alcance: number = Constants.VALOR_TAREA_DEFECTO;
+  coherencia: number = Constants.VALOR_TAREA_DEFECTO;
+  correccion: number = Constants.VALOR_TAREA_DEFECTO;
+  eficaciaC: number = Constants.VALOR_TAREA_DEFECTO;
+  id_corrector?: string;
+  nombre_corrector: string = Constants.VALOR_CORRECTOR_DEFECTO;
 
-  constructor(
-    alcance?: number,
-    coherencia?: number,
-    correccion?: number,
-    eficaciaC?: number,
-    id_corrector?: string,
-    nombre_corrector?: string
+  actualizarTareaExpresion(
+    alcance: number,
+    coherencia: number,
+    correccion: number,
+    eficaciaC: number,
+    id_corrector: string,
+    nombre_corrector: string
   ) {
-    this.alcance = alcance ? alcance : Constants.VALOR_TAREA_DEFECTO;
-    this.coherencia = coherencia ? coherencia : Constants.VALOR_TAREA_DEFECTO;
-    this.correccion = correccion ? correccion : Constants.VALOR_TAREA_DEFECTO;
-    this.eficaciaC = eficaciaC ? eficaciaC : Constants.VALOR_TAREA_DEFECTO;
-    this.id_corrector = id_corrector ? id_corrector : '';
-    this.nombre_corrector = nombre_corrector ? nombre_corrector : '';
+    this.alcance = alcance;
+    this.coherencia = coherencia;
+    this.correccion = correccion;
+    this.eficaciaC = eficaciaC;
+    this.id_corrector = id_corrector;
+    this.nombre_corrector = nombre_corrector;
   }
 
   public calcularTotalPuntosConseguidos(): number {

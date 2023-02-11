@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Constants } from '@constants';
+import { API, Constants } from '@constants';
 import { ApiService } from '@services/api.service';
 import { AuthService } from '@services/auth.service';
 
@@ -35,7 +35,7 @@ export class LoginComponent {
           password: this.loginForm.value.password,
         })
         .subscribe((data) => {
-          if (data) this.router.navigateByUrl(Constants.USUARIO_ACCIONES);
+          if (data) this.router.navigateByUrl(API.USUARIO_ACCIONES);
         });
     }
     this.loading = false;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Constants } from '@constants';
+import { API, Constants, Features } from '@constants';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +13,11 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl(Features.LOGIN);
   }
 
   volver() {
-    console.log('Volviendo a ', Constants.USUARIO_ACCIONES);
-    this.router.navigateByUrl(Constants.USUARIO_ACCIONES);
+    console.log('Volviendo a ', API.USUARIO_ACCIONES);
+    this.router.navigateByUrl(API.USUARIO_ACCIONES);
   }
 }

@@ -1,36 +1,47 @@
 import { Constants } from 'app/constants';
 
 export class ComprensionAuditiva {
-  puntuacionMaximaParte: number;
-  tarea1: number;
-  tarea2: number;
-  tarea3: number;
-  observaciones: string;
+  puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
+  puntuacion_tarea1: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
+  puntuacion_tarea2: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
+  puntuacion_tarea3: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
+  puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO;
+  observaciones: string = '';
 
-  constructor(
-    puntuacionMaximaParte?: number,
-    tarea1?: number,
-    tarea2?: number,
-    tarea3?: number,
-    observaciones?: string
-  ) {
+  crearComprensionAuditiva(puntuacionMaximaParte: number) {
     this.puntuacionMaximaParte = puntuacionMaximaParte
       ? puntuacionMaximaParte
-      : Constants.VALOR_PUNTUACION_MAX_DEFECTO;
-    this.tarea1 = tarea1 ? tarea1 : Constants.VALOR_TAREA_DEFECTO;
-    this.tarea2 = tarea2 ? tarea2 : Constants.VALOR_TAREA_DEFECTO;
-    this.tarea3 = tarea3 ? tarea3 : Constants.VALOR_TAREA_DEFECTO;
-    this.observaciones = observaciones ? observaciones : '';
+      : this.puntuacionMaximaParte;
+  }
+
+  actualizarComprensionAuditiva(
+    puntuacion_tarea1: number,
+    puntuacion_tarea2: number,
+    puntuacion_tarea3: number,
+    observaciones: string
+  ) {
+    this.puntuacion_tarea1 = puntuacion_tarea1
+      ? puntuacion_tarea1
+      : this.puntuacion_tarea1;
+    this.puntuacion_tarea1 = puntuacion_tarea2
+      ? puntuacion_tarea2
+      : this.puntuacion_tarea1;
+    this.puntuacion_tarea1 = puntuacion_tarea3
+      ? puntuacion_tarea3
+      : this.puntuacion_tarea1;
+    this.observaciones = observaciones ? observaciones : this.observaciones;
   }
 
   private calcularPuntosConseguidos() {
-    return this.tarea1 + this.tarea2 + this.tarea3;
+    this.puntosConseguidos =
+      this.puntuacion_tarea1 + this.puntuacion_tarea2 + this.puntuacion_tarea3;
+    return this.puntosConseguidos;
   }
 
-  private calcularPorcentaje() {
+  public calcularPorcentaje(): number {
     return (
       (this.calcularPuntosConseguidos() / this.puntuacionMaximaParte) *
       Constants.PORCIENTO
-    ).toFixed(2);
+    );
   }
 }

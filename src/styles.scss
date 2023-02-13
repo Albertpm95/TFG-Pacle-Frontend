@@ -101,20 +101,17 @@ $md-warning: (
   ),
 );
 
-$Pacle-Primary: mat.define-palette($md-base, 900);
+$Pacle-Primary: mat.define-palette($md-base, 900, A700);
 
 $Pacle-Accent: mat.define-palette($md-acento, 500);
 
 $Pacle-Warning: mat.define-palette($md-warning, 500);
-
-//$Pacle-Theme: mat-light-theme($Pacle-Primary, $Pacle-Accent, $Pacle-Warning);
 
 $Pacle-Theme: mat.define-light-theme(
   (
     color: (
       primary: $Pacle-Primary,
       accent: $Pacle-Accent,
-      jeje: $Pacle-Warning,
       warning: $Pacle-Warning,
     ),
     typography: mat.define-typography-config(),
@@ -131,6 +128,8 @@ body {
 
 html {
   font-size: 10px;
+  height: 100%;
+  background-color: #300060cc;
 }
 
 body {
@@ -139,15 +138,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 mat-card {
   border-radius: 8px;
 }
@@ -160,5 +150,5 @@ mat-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
+  padding: 4rem;
 }

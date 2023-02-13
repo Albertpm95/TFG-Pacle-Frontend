@@ -17,9 +17,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CorrectComponent } from './correct/correct.component';
 
 @NgModule({
-  declarations: [CreateActaComponent, ListActaComponent],
+  declarations: [CreateActaComponent, ListActaComponent, CorrectComponent],
   imports: [
     CommonModule,
     ActaRoutingModule,

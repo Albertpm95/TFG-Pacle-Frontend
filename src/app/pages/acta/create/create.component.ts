@@ -22,16 +22,27 @@ export class CreateActaComponent {
     private apiService: ApiService
   ) {
     this.actaForm = this.formBuilder.group({
-      lenguaje: ['', Validators.required], //'Español' | 'English' | 'Català' | 'Français' | 'Chainese' | 'Deutsch';
-      tipo: ['', Validators.required], //Ordinaria' | 'Extraordinaria';
+      lenguaje: [Constants.LENGUAJE_POR_DEFECTO, Validators.required], //'Español' | 'English' | 'Català' | 'Français' | 'Chainese' | 'Deutsch';
+      tipo: [Constants.TIPO_POR_DEFECTO, Validators.required], //Ordinaria' | 'Extraordinaria';
       fecha: [Date.now, Validators.required], //Date;
-      fecha_test_1: [Date.now, Validators.required], //Date;
-      fecha_test_2: [Date.now, Validators.required], //Date;
-      activa: ['', Validators.required], //boolean;
-      pesoMaximoParteComprensionLectora: [0, Validators.required],
-      pesomaximoParteExpresionEscrita: [0, Validators.required],
-      pesomaximoParteComprensionAuditiva: [0, Validators.required],
-      pesomaximoParteExpresionOral: [0, Validators.required],
+      hora: [Date.now, Validators.required],
+      activa: [Constants.ESTADO_POR_DEFECTO, Validators.required], //boolean;
+      pesoMaximoParteComprensionLectora: [
+        Constants.VALOR_PUNTUACION_MAX_DEFECTO,
+        Validators.required,
+      ],
+      pesomaximoParteExpresionEscrita: [
+        Constants.VALOR_PUNTUACION_MAX_DEFECTO,
+        Validators.required,
+      ],
+      pesomaximoParteComprensionAuditiva: [
+        Constants.VALOR_PUNTUACION_MAX_DEFECTO,
+        Validators.required,
+      ],
+      pesomaximoParteExpresionOral: [
+        Constants.VALOR_PUNTUACION_MAX_DEFECTO,
+        Validators.required,
+      ],
     });
 
     this.apiService.getIdiomasActa().subscribe((idiomas) => {
@@ -45,12 +56,16 @@ export class CreateActaComponent {
 
   createActa() {
     this.loading = true;
-    console.log(this.actaForm);
+    console.log(this.actaForm.value);
     if (this.actaForm.valid) {
       this.acta.lenguaje = this.actaForm.controls['lenguaje'].value;
       this.acta.tipo = this.actaForm.controls['tipo'].value;
-      this.acta.fecha = this.actaForm.controls['fecha'].value;
-      this.acta.estado = this.actaForm.controls['estado'].value;
+      let fecha: Date = this.actaForm.controls['fecha'].value;
+      let hora = this.actaForm.controls['hora'].value.split(':');
+      fecha.setHours(hora[0]);
+      fecha.setMinutes(hora[1]);
+      this.acta.fecha = fecha;
+      this.acta.estado = true;
     }
     console.log(this.acta);
     this.loading = false;

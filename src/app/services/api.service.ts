@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API, Roles } from '@constants';
 import { environment } from '@environments/environment';
-import { UserAction } from '@models/user-actions';
+import { UserAction } from '@models/acciones-usuario';
 import { Acta } from '@models/acta';
 import { Alumno } from '@models/alumno';
 import { Observable } from 'rxjs';
@@ -17,7 +17,10 @@ export class ApiService {
 
   /**  Usuarios */
   getUserActions(): Observable<UserAction[]> {
-    console.log('API Call Get User Actions');
+    console.log(
+      'API Call Get User Actions',
+      this.apiUrl + API.USUARIO_ACCIONES
+    );
     return this.http.get<UserAction[]>(this.apiUrl + API.USUARIO_ACCIONES);
   }
   /** ---------------------------------------------------------------------- */

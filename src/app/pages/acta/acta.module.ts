@@ -1,4 +1,3 @@
-import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxMatDatetimePickerModule,
     MatTableModule,
     MatButtonModule,
     MatSortModule,

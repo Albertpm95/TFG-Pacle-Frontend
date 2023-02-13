@@ -6,11 +6,14 @@
 .col:last-child {
   margin-right: 0;
 }
-.acta-form-container{
+.acta-form-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-mat-form-field{
+mat-form-field {
   max-width: 386px;
+}
+mat-card {
+  width: min(90vw, 780px);
 }

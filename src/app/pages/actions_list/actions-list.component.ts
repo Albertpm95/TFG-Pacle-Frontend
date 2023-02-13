@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAction } from '@models/user-actions';
+import { UserAction } from '@models/acciones-usuario';
+
 import { ApiService } from '@services/api.service';
 
 @Component({

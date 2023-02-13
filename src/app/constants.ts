@@ -18,6 +18,7 @@ export class Roles {
 }
 export class Features {
   static ACTIONS = 'actions';
+  static CORRECT = 'correct';
   static CREATE = 'create';
   static EDIT = 'edit';
   static LIST = 'list';

@@ -7,7 +7,7 @@ import { AlumnoModule } from './alumno/alumno.module';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LoginComponent, title: 'Login' },
   {
     path: API.USUARIO_ACCIONES,
     component: ActionsListComponent,
@@ -15,10 +15,12 @@ const routes: Routes = [
   {
     path: Roles.ACTA,
     loadChildren: () => ActaModule,
+    title: 'Acta',
   },
   {
     path: Roles.ALUMNO,
     loadChildren: () => AlumnoModule,
+    title: 'Alumno',
   },
   {
     path: '**',

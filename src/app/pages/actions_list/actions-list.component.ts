@@ -12,16 +12,26 @@ import { ApiService } from '@services/api.service';
 export class ActionsListComponent {
   actionsList: UserAction[] = [];
   loaded: boolean = false;
+  loading: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router) {
     this.apiService.getUserActions().subscribe((actions) => {
       this.actionsList = actions;
-      this.loaded = true;
     });
   }
 
+  ngOnInit() {
+    this.loaded = true;
+  }
+
   goTo(url: string): void {
+    this.loading = true;
+    console.log(this.loading);
     console.log('Going to: ', url);
     this.router.navigateByUrl(url);
+  }
+
+  userActionsTrackBy(index: any, user: { id: any; }) {
+    return user.id;
   }
 }

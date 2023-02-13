@@ -24,7 +24,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit" (click)="login()">
-        Login
+        <mat-spinner *ngIf="loading"></mat-spinner>
+        <span *ngIf="!loading">Login</span>
       </button>
     </mat-card-actions>
     <mat-card-footer>

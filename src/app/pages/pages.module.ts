@@ -1,32 +1,34 @@
+import { ActaModule } from './acta/acta.module';
+import { ActionsListComponent } from './actions_list/actions-list.component';
+import { AlumnoModule } from './alumno/alumno.module';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ActaModule } from './acta/acta.module';
-import { ActionsListComponent } from './actions_list/actions-list.component';
-import { AlumnoModule } from './alumno/alumno.module';
-import { LoginComponent } from './login/login.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgModule } from '@angular/core';
 import { PagesRoutingModule } from './pages-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent, ActionsListComponent],
   imports: [
-    CommonModule,
-    PagesRoutingModule,
-    MatFormFieldModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatProgressBarModule,
-    MatButtonModule,
-    MatListModule,
-    AlumnoModule,
     ActaModule,
+    AlumnoModule,
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    PagesRoutingModule,
+    ReactiveFormsModule,
   ],
 })
 export class PagesModule {}

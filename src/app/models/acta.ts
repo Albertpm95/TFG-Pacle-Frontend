@@ -27,6 +27,7 @@ export class Acta {
     puntuacionMaximaParteComprensionLectora: number,
     puntuacionMaximaParteComprensionAuditiva: number,
   ) {
+    console.log('Creacion de un acta: ')
     this.lenguaje = lenguaje
     this.tipo = tipo
     this.fecha = fecha

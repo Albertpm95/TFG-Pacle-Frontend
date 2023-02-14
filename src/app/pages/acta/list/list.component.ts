@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Acta } from '@models/acta';
-import { ApiService } from '@services/api.service';
+import { Component } from '@angular/core'
+import { MatTable, MatTableDataSource } from '@angular/material/table'
+import { Acta } from '@models/acta'
+import { ApiService } from '@services/api.service'
 
 @Component({
   selector: 'app-list',
@@ -9,22 +9,22 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListActaComponent {
-  displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa'];
-  dataSource: MatTableDataSource<Acta> = new MatTableDataSource();
+  displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa']
+  dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
 
   constructor(private apiService: ApiService) {
     this.apiService.getActas().subscribe((actas) => {
       if (actas) {
-        this.dataSource = new MatTableDataSource(actas);
+        this.dataSource = new MatTableDataSource(actas)
       }
-    });
+    })
   }
 
   editarActa(acta: Acta) {
-    console.log('Editar acta: ', acta);
+    console.log('Editar acta: ', acta)
   }
 
   cambiarStatus(acta: Acta) {
-    console.log('Cambiar estado acta ', acta);
+    console.log('Cambiar estado acta ', acta)
   }
 }

@@ -57,16 +57,21 @@ export class CreateActaComponent {
 
   createActa() {
     this.loading = true
-    console.log(this.actaForm.value)
     if (this.actaForm.valid) {
-      this.acta.lenguaje = this.actaForm.controls['lenguaje'].value
-      this.acta.tipo = this.actaForm.controls['tipo'].value
       let fecha: Date = this.actaForm.controls['fecha'].value
       let hora = this.actaForm.controls['hora'].value.split(':')
       fecha.setHours(hora[0])
       fecha.setMinutes(hora[1])
-      this.acta.fecha = fecha
-      this.acta.estado = true
+      this.acta.crearActa(
+        this.actaForm.controls['lenguaje'].value,
+        this.actaForm.controls['tipo'].value,
+        fecha,
+        true,
+        this.actaForm.controls['pesoMaximoParteComprensionLectora'].value,
+        this.actaForm.controls['pesoMaximoParteComprensionAuditiva'].value,
+        this.actaForm.controls['pesomaximoParteExpresionEscrita'].value,
+        this.actaForm.controls['pesomaximoParteExpresionOral'].value,
+      )
     }
     console.log(this.acta)
     this.loading = false

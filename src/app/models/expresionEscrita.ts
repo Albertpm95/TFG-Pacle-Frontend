@@ -1,42 +1,42 @@
-import { Constants } from 'app/constants';
-import { TareaExpresion } from './tareaExpresion';
+import { Constants } from 'app/constants'
+import { TareaExpresion } from './tareaExpresion'
 
 export class ExpresionEscrita {
-  tarea1: TareaExpresion = new TareaExpresion();
-  tarea2: TareaExpresion = new TareaExpresion();
-  observaciones: string = '';
-  puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
-  porcentaje: number = Constants.VALOR_TAREA_DEFECTO;
-  puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO;
+  tarea1: TareaExpresion = new TareaExpresion()
+  tarea2: TareaExpresion = new TareaExpresion()
+  observaciones: string = ''
+  puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
+  porcentaje: number = Constants.VALOR_TAREA_DEFECTO
+  puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO
 
   crearExpresionEscrita(puntuacionMaximaParte: number) {
     this.puntuacionMaximaParte = puntuacionMaximaParte
       ? puntuacionMaximaParte
-      : this.puntuacionMaximaParte;
+      : this.puntuacionMaximaParte
   }
 
   actualizarExpresionEscrita(
     tarea1: TareaExpresion,
     tarea2: TareaExpresion,
-    observaciones: string
+    observaciones: string,
   ) {
-    this.tarea1 = tarea1;
-    this.tarea2 = tarea2;
-    this.observaciones = observaciones;
-    this.porcentaje = this.calcularPorcentaje();
+    this.tarea1 = tarea1
+    this.tarea2 = tarea2
+    this.observaciones = observaciones
+    this.porcentaje = this.calcularPorcentaje()
   }
 
-  private calcularPuntosConseguidos() {
+  public calcularPuntosConseguidos() {
     this.puntosConseguidos =
       this.tarea1.calcularTotalPuntosConseguidos() +
-      this.tarea2.calcularTotalPuntosConseguidos();
-    return this.puntosConseguidos;
+      this.tarea2.calcularTotalPuntosConseguidos()
+    return this.puntosConseguidos
   }
 
   public calcularPorcentaje(): number {
     return (
       (this.calcularPuntosConseguidos() / this.puntuacionMaximaParte) *
       Constants.PORCIENTO
-    );
+    )
   }
 }

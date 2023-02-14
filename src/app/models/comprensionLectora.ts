@@ -1,47 +1,48 @@
-import { Constants } from 'app/constants';
+import { Constants } from 'app/constants'
 
 export class ComprensionLectora {
-  puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
-  puntuacion_tarea1: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
-  puntuacion_tarea2: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
-  puntuacion_tarea3: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO;
-  puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO;
-  observaciones: string = '';
+  puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
+  puntuacion_tarea1: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
+  puntuacion_tarea2: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
+  puntuacion_tarea3: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
+  puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO
+  observaciones: string = ''
+  porcentaje: number = Constants.VALOR_TAREA_DEFECTO
 
   crearComprensionLectora(puntuacionMaximaParte: number) {
     this.puntuacionMaximaParte = puntuacionMaximaParte
       ? puntuacionMaximaParte
-      : this.puntuacionMaximaParte;
+      : this.puntuacionMaximaParte
   }
 
   actualizarComprensionLectora(
     puntuacion_tarea1: number,
     puntuacion_tarea2: number,
     puntuacion_tarea3: number,
-    observaciones: string
+    observaciones: string,
   ) {
     this.puntuacion_tarea1 = puntuacion_tarea1
       ? puntuacion_tarea1
-      : this.puntuacion_tarea1;
+      : this.puntuacion_tarea1
     this.puntuacion_tarea1 = puntuacion_tarea2
       ? puntuacion_tarea2
-      : this.puntuacion_tarea1;
+      : this.puntuacion_tarea1
     this.puntuacion_tarea1 = puntuacion_tarea3
       ? puntuacion_tarea3
-      : this.puntuacion_tarea1;
-    this.observaciones = observaciones ? observaciones : this.observaciones;
+      : this.puntuacion_tarea1
+    this.observaciones = observaciones ? observaciones : this.observaciones
   }
 
-  private calcularPuntosConseguidos() {
+  public calcularPuntosConseguidos() {
     this.puntosConseguidos =
-      this.puntuacion_tarea1 + this.puntuacion_tarea2 + this.puntuacion_tarea3;
-    return this.puntosConseguidos;
+      this.puntuacion_tarea1 + this.puntuacion_tarea2 + this.puntuacion_tarea3
+    return this.puntosConseguidos
   }
 
   public calcularPorcentaje(): number {
-    return (
+    this.porcentaje =
       (this.calcularPuntosConseguidos() / this.puntuacionMaximaParte) *
       Constants.PORCIENTO
-    );
+    return this.porcentaje
   }
 }

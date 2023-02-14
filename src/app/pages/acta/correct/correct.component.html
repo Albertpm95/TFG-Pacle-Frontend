@@ -1,1 +1,62 @@
-<p>correct works!</p>
+<div class="acta-form-container container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Creaccion de una convocatoria</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="!loadingActa">
+      <mat-card *ngIf="comprensionLectoraForm">
+        <mat-card-header
+          ><mat-card-title>Comprension Lectora</mat-card-title>
+          <mat-card-subtitle>{{
+            acta.pesoComprensionLectora
+          }}</mat-card-subtitle></mat-card-header
+        >
+        <mat-card-content>
+          <form [formGroup]="comprensionLectoraForm">
+            <mat-form-field appearance="outline" class="number">
+              <label for="comprensionLectoraForm.puntuacion_tarea1"
+                >Tarea 1</label
+              >
+              <input
+                matInput
+                type="number"
+                formControlname="comprensionLectoraForm.puntuacion_tarea1" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="number">
+              <label>Tarea 2</label>
+              <input
+                matInput
+                type="number"
+                formControlname="comprensionLectoraForm.puntuacion_tarea2" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="number">
+              <label>Tarea 3</label>
+              <input
+                matInput
+                type="number"
+                formControlname="comprensionLectoraForm.puntuacion_tarea3" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="textarea">
+              <label>Observaciones</label>
+              <textarea
+                matInput
+                type="text"
+                formControlname="comprensionLectoraForm.observaciones"></textarea>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <label>Puntuacion total</label>
+          <label></label>
+          <label>Porcentaje</label>
+          <label></label>
+          <button mat-raised-button color="accent" type="submit">
+            Corregir
+          </button>
+          ></mat-card-actions
+        >
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -6,7 +6,7 @@ export class TareaExpresion {
   correccion: number = Constants.VALOR_TAREA_DEFECTO;
   eficaciaC: number = Constants.VALOR_TAREA_DEFECTO;
   id_corrector?: string;
-  nombre_corrector: string = Constants.VALOR_CORRECTOR_DEFECTO;
+  nombre_corrector: string = Constants.NOMBRE_CORRECTOR_DEFECTO;
 
   actualizarTareaExpresion(
     alcance: number,

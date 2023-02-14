@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Constants } from '@constants'
 import { Acta } from '@models/acta'
 import { ApiService } from '@services/api.service'
 
@@ -10,7 +11,7 @@ import { ApiService } from '@services/api.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorrectActaComponent {
-  comprensionLectoraForm!: FormGroup
+  comprensionLectoraForm: FormGroup
   comprensionAuditivaForm!: FormGroup
   expresionEscritaForm!: FormGroup
   expresionOralForm!: FormGroup
@@ -21,9 +22,19 @@ export class CorrectActaComponent {
     private formBuilder: FormBuilder,
     private apiService: ApiService,
   ) {
+    this.comprensionLectoraForm = this.formBuilder.group({
+      puntuacion_tarea1: [Constants.VALOR_TAREA_DEFECTO, Validators.required],
+      puntuacion_tarea2: [Constants.VALOR_TAREA_DEFECTO, Validators.required],
+      puntuacion_tarea3: [Constants.VALOR_TAREA_DEFECTO, Validators.required],
+      porcentaje: [Constants.VALOR_TAREA_DEFECTO],
+      puntuacionMaximaParte: [Constants.VALOR_TAREA_DEFECTO, ,],
+      puntosConseguidos: [Constants.VALOR_TAREA_DEFECTO],
+      observaciones: [''],
+    })
+
     this.apiService.getActa('1').subscribe((acta) => {
       this.acta = acta
-      this.comprensionLectoraForm = this.formBuilder.nonNullable.group({
+      this.comprensionLectoraForm = this.formBuilder.group({
         puntuacion_tarea1: [
           this.acta.comprensionLectora.puntuacion_tarea1,
           Validators.required,
@@ -36,20 +47,16 @@ export class CorrectActaComponent {
           this.acta.comprensionLectora.puntuacion_tarea3,
           Validators.required,
         ],
-        porcentaje: [
-          this.acta.comprensionLectora.calcularPorcentaje,
-          { readOnly: true },
-        ],
+        porcentaje: [this.acta.comprensionLectora.calcularPorcentaje],
         puntuacionMaximaParte: [
           this.acta.comprensionLectora.puntuacionMaximaParte,
-          { readOnly: true },
         ],
         puntosConseguidos: [
           this.acta.comprensionLectora.calcularPuntosConseguidos,
-          { readOnly: true },
         ],
         observaciones: [this.acta.comprensionLectora.observaciones],
       })
+
       this.comprensionAuditivaForm = this.formBuilder.nonNullable.group({
         puntuacion_tarea1: [
           this.acta.comprensionAuditiva.puntuacion_tarea1,
@@ -63,17 +70,12 @@ export class CorrectActaComponent {
           this.acta.comprensionAuditiva.puntuacion_tarea3,
           Validators.required,
         ],
-        porcentaje: [
-          this.acta.comprensionAuditiva.calcularPorcentaje,
-          { readOnly: true },
-        ],
+        porcentaje: [this.acta.comprensionAuditiva.calcularPorcentaje],
         puntuacionMaximaParte: [
           this.acta.comprensionAuditiva.puntuacionMaximaParte,
-          { readOnly: true },
         ],
         puntosConseguidos: [
           this.acta.comprensionAuditiva.calcularPuntosConseguidos,
-          { readOnly: true },
         ],
         observaciones: [this.acta.comprensionAuditiva.observaciones],
       })
@@ -123,18 +125,9 @@ export class CorrectActaComponent {
           ],
         },
         observaciones: [this.acta.expresionOral.observaciones],
-        porcentaje: [
-          this.acta.expresionOral.calcularPorcentaje,
-          { readOnly: true },
-        ],
-        puntuacionMaximaParte: [
-          this.acta.expresionOral.puntuacionMaximaParte,
-          { readOnly: true },
-        ],
-        puntosConseguidos: [
-          this.acta.expresionOral.calcularPuntosConseguidos,
-          { readOnly: true },
-        ],
+        porcentaje: [this.acta.expresionOral.calcularPorcentaje],
+        puntuacionMaximaParte: [this.acta.expresionOral.puntuacionMaximaParte],
+        puntosConseguidos: [this.acta.expresionOral.calcularPuntosConseguidos],
       })
       this.comprensionLectoraForm = this.formBuilder.nonNullable.group({
         tarea1: {
@@ -182,21 +175,16 @@ export class CorrectActaComponent {
           ],
         },
         observaciones: [this.acta.expresionEscrita.observaciones],
-        porcentaje: [
-          this.acta.expresionEscrita.calcularPorcentaje,
-          { readOnly: true },
-        ],
+        porcentaje: [this.acta.expresionEscrita.calcularPorcentaje],
         puntuacionMaximaParte: [
           this.acta.expresionEscrita.puntuacionMaximaParte,
-          { readOnly: true },
         ],
         puntosConseguidos: [
           this.acta.expresionEscrita.calcularPuntosConseguidos,
-          { readOnly: true },
         ],
       })
+
       this.loadingActa = true
-      console.log(this.comprensionLectoraForm)
     })
   }
   corregirActa() {}

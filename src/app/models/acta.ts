@@ -75,6 +75,9 @@ export class Acta {
     Object.assign(this, acta)
   }
 
+  public get porcentajeComprensionLectora() {
+    return this.comprensionLectora.calcularPorcentaje()
+  }
   public get pesoComprensionLectora() {
     return this.comprensionLectora.puntuacionMaximaParte
   }

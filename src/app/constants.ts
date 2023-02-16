@@ -1,6 +1,7 @@
 export class Constants {
   static ESTADO_POR_DEFECTO: boolean = true
   static IDIOMAS: string = 'idiomas'
+  static HORARIOS: string = 'horarios'
   static LENGUAJE_POR_DEFECTO: string = 'Español'
   static PORCIENTO: number = 100 // Para calcular el porcentaje
   static TIPO_POR_DEFECTO: string = 'Ordinaria'
@@ -28,6 +29,7 @@ export class Features {
 export class API {
   static ACTA_CORRECT = Roles.ACTA + '/' + Features.CORRECT
   static ACTA_IDIOMAS = Roles.ACTA + '/' + Constants.IDIOMAS
+  static ACTA_HORARIOS = Roles.ACTA + '/' + Constants.HORARIOS
   static ACTA_LIST = Roles.ACTA + '/' + Features.LIST
   static ACTA_TIPOS = Roles.ACTA + '/' + Constants.TIPOS
   static ALUMNO_LIST = Roles.ALUMNO + '/' + Features.LIST

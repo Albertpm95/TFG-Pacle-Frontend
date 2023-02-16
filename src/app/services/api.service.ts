@@ -37,6 +37,10 @@ export class ApiService {
     console.log('API Call Get Idiomas')
     return this.http.get<string[]>(this.apiUrl + API.ACTA_IDIOMAS)
   }
+  getHorariosActa(): Observable<string[]> {
+    console.log('API Call Get Horarios')
+    return this.http.get<string[]>(this.apiUrl + API.ACTA_HORARIOS)
+  }
   getTiposActa(): Observable<string[]> {
     console.log('API Call Get Tipos')
     return this.http.get<string[]>(this.apiUrl + API.ACTA_TIPOS)

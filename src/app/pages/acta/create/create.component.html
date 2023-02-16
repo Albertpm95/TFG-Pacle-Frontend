@@ -1,108 +1,68 @@
-<div class="acta-form-container container">
+<div class="acta-form-container container" *ngIf="convocatoriaNuevaForm">
   <mat-card>
     <mat-card-header>
       <mat-card-title>Creaccion de una convocatoria</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="actaForm">
+      <form [formGroup]="convocatoriaNuevaForm">
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="lenguaje" name="lenguaje"
-              >Lenguaje de la convocatoria</mat-label
-            >
-            <mat-select required formControlName="lenguaje">
-              <mat-option
-                [value]="lenguaje"
-                *ngFor="let lenguaje of listaIdiomasActa"
-                >{{ lenguaje }}</mat-option
-              >
+            <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
+            <mat-select formControlName="lenguaje">
+              <mat-option [value]="lenguaje" *ngFor="let lenguaje of listaIdiomasActa">{{ lenguaje }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="tipo" name="tipo">Tipo de convocatoria</mat-label>
-            <mat-select required formControlName="tipo">
+            <mat-label for="tipo">Tipo de convocatoria</mat-label>
+            <mat-select formControlName="tipo">
               <mat-option [value]="tipo" *ngFor="let tipo of tiposActa">{{
                 tipo
-              }}</mat-option>
+                }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
-          <mat-form-field appearance="fill" class="datepicker col">
-            <mat-label>Fecha de la convocatoria</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fecha" />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+          <mat-form-field appearance="fill" class="col">
+            <mat-label for="fechaParcial">Choose a date</mat-label>
+            <input matInput startAt="fechaParcial" [matDatepicker]="fechaParcial" formControlName="fechaParcial">
+            <mat-datepicker-toggle matIconSuffix [for]="fechaParcial"></mat-datepicker-toggle>
+            <mat-datepicker #fechaParcial></mat-datepicker>
           </mat-form-field>
-          <mat-form-field class="col">
-            <mat-label>Introduce la hora</mat-label>
-            <input matInput type="time" formControlName="hora" />
+          <mat-form-field appearance="fill" class="col">
+            <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
+            <mat-select formControlName="horarioParcial">
+              <mat-option [value]="horario" *ngFor="let horario of horariosActa">{{ horario }}</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label
-              for="pesoMaximoParteComprensionLectora"
-              name="pesoMaximoParteComprensionLectora"
-              >Peso maximo de la parte de Comprension lectora</mat-label
-            >
-            <input
-              matInput
-              type="number"
-              formControlName="pesoMaximoParteComprensionLectora"
-            />
+            <mat-label for="pesoMaximoParteComprensionLectora" name="pesoMaximoParteComprensionLectora">Peso maximo de
+              la parte de Comprension lectora</mat-label>
+            <input matInput type="number" formControlName="pesoMaximoParteComprensionLectora" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label
-              for="pesomaximoParteExpresionEscrita"
-              name="pesomaximoParteExpresionEscrita"
-              >Peso maximo de la parte de Expresion escrita</mat-label
-            >
-            <input
-              matInput
-              type="number"
-              formControlName="pesomaximoParteExpresionEscrita"
-            />
+            <mat-label for="pesomaximoParteExpresionEscrita" name="pesomaximoParteExpresionEscrita">Peso maximo de la
+              parte de Expresion escrita</mat-label>
+            <input matInput type="number" formControlName="pesomaximoParteExpresionEscrita" />
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label
-              for="pesomaximoParteComprensionAuditiva"
-              name="pesomaximoParteComprensionAuditiva"
-              >Peso maximo de la parte de Comprension auditiva</mat-label
-            >
-            <input
-              matInput
-              type="number"
-              formControlName="pesomaximoParteComprensionAuditiva"
-            />
+            <mat-label for="pesomaximoParteComprensionAuditiva" name="pesomaximoParteComprensionAuditiva">Peso maximo de
+              la parte de Comprension auditiva</mat-label>
+            <input matInput type="number" formControlName="pesomaximoParteComprensionAuditiva" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label
-              for="pesomaximoParteExpresionOral"
-              name="pesomaximoParteExpresionOral"
-              >Peso maximo de la parte de Expresion oral</mat-label
-            >
-            <input
-              matInput
-              type="number"
-              formControlName="pesomaximoParteExpresionOral"
-            />
+            <mat-label for="pesomaximoParteExpresionOral" name="pesomaximoParteExpresionOral">Peso maximo de la parte de
+              Expresion oral</mat-label>
+            <input matInput type="number" formControlName="pesomaximoParteExpresionOral" />
           </mat-form-field>
         </div>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        (click)="createActa()"
-      >
+      <button mat-raised-button color="primary" type="submit" (click)="createActa()">
         Crear acta
       </button>
     </mat-card-actions>

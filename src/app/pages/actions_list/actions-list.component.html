@@ -5,10 +5,7 @@
     </mat-card-header>
     <mat-card-content *ngIf="!loading">
       <mat-nav-list>
-        <mat-list-item
-          *ngFor="let opcion of actionsList"
-          (click)="goTo(opcion.url)"
-        >
+        <mat-list-item *ngFor="let opcion of actionsList$ | async" (click)="goTo(opcion.url)">
           <span matListItemTitle>{{ opcion.action_label }}</span>
         </mat-list-item>
       </mat-nav-list>

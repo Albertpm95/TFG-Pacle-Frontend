@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserAction } from '@models/acciones-usuario';
 
 import { ApiService } from '@services/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-actions-list',
@@ -10,15 +11,11 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./actions-list.component.scss'],
 })
 export class ActionsListComponent {
-  actionsList: UserAction[] = [];
+  actionsList$: Observable<UserAction[]> = this.apiService.getUserActions()
   loaded: boolean = false;
   loading: boolean = false;
 
-  constructor(private apiService: ApiService, private router: Router) {
-    this.apiService.getUserActions().subscribe((actions) => {
-      this.actionsList = actions;
-    });
-  }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
     this.loaded = true;

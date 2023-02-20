@@ -9,13 +9,14 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
             <mat-select formControlName="lenguaje">
-              <mat-option [value]="lenguaje" *ngFor="let lenguaje of listaIdiomasActa">{{ lenguaje }}</mat-option>
+              <mat-option [value]="lenguaje" *ngFor="let lenguaje of listaIdiomasActa$ | async">{{ lenguaje
+                }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
             <mat-label for="tipo">Tipo de convocatoria</mat-label>
             <mat-select formControlName="tipo">
-              <mat-option [value]="tipo" *ngFor="let tipo of tiposActa">{{
+              <mat-option [value]="tipo" *ngFor="let tipo of tiposActa$ |async">{{
                 tipo
                 }}</mat-option>
             </mat-select>
@@ -31,19 +32,19 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
             <mat-select formControlName="horarioParcial">
-              <mat-option [value]="horario" *ngFor="let horario of horariosActa">{{ horario }}</mat-option>
+              <mat-option [value]="horario" *ngFor="let horario of horariosActa$ | async">{{ horario }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesoMaximoParteComprensionLectora" name="pesoMaximoParteComprensionLectora">Peso maximo de
-              la parte de Comprension lectora</mat-label>
+            <mat-label for="pesoMaximoParteComprensionLectora" name="pesoMaximoParteComprensionLectora">
+              Peso maximo de la parte de Comprension lectora</mat-label>
             <input matInput type="number" formControlName="pesoMaximoParteComprensionLectora" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesomaximoParteExpresionEscrita" name="pesomaximoParteExpresionEscrita">Peso maximo de la
-              parte de Expresion escrita</mat-label>
+            <mat-label for="pesomaximoParteExpresionEscrita" name="pesomaximoParteExpresionEscrita">
+              Peso maximo de la parte de Expresion escrita</mat-label>
             <input matInput type="number" formControlName="pesomaximoParteExpresionEscrita" />
           </mat-form-field>
         </div>

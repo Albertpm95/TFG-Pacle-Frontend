@@ -4,6 +4,7 @@ import { ConvocatoriaNueva } from '@models/convocatoriaNueva'
 
 import { ApiService } from '@services/api.service'
 import { Constants } from 'app/constants'
+import { Observable } from 'rxjs/internal/Observable'
 
 @Component({
   selector: 'app-acta',
@@ -13,34 +14,27 @@ import { Constants } from 'app/constants'
 })
 export class CreateActaComponent {
   constants = Constants
-  convocatoriaNuevaForm: FormGroup
+  convocatoriaNuevaForm: FormGroup = new FormGroup({})
   convocatoriaNueva: ConvocatoriaNueva = new ConvocatoriaNueva()
   loading: boolean = false
-  listaIdiomasActa: string[] = []
-  tiposActa: string[] = []
-  horariosActa: string[] = []
+  listaIdiomasActa$: Observable<string[]> = this.apiService.getIdiomasActa()
+  tiposActa$: Observable<string[]> = this.apiService.getTiposActa()
+  horariosActa$: Observable<string[]> = this.apiService.getHorariosActa()
 
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
   ) {
-    this.apiService.getIdiomasActa().subscribe((idiomas) => {
-      this.listaIdiomasActa = idiomas
-    })
 
-    this.apiService.getTiposActa().subscribe((tipos) => {
-      this.tiposActa = tipos
-    })
+  }
+  ngOnInit(): void { this.initializeForm() }
 
-    this.apiService.getHorariosActa().subscribe((horarios) => {
-      this.horariosActa = horarios
-    })
-
+  private initializeForm(): void {
     this.convocatoriaNuevaForm = this.formBuilder.group({
       lenguaje: [Constants.LENGUAJE_POR_DEFECTO, Validators.required], //'Español' | 'English' | 'Català' | 'Français' | 'Chainese' | 'Deutsch';
       tipo: [Constants.TIPO_POR_DEFECTO, Validators.required], //Ordinaria' | 'Extraordinaria';
       fechaParcial: [Date.now, Validators.required], //Date;
-      horarioParcial: [this.horariosActa[0], Validators.required],
+      horarioParcial: ['', Validators.required],
       activa: [Constants.ESTADO_POR_DEFECTO, Validators.required], //boolean;
       pesoMaximoParteComprensionLectora: [
         Constants.VALOR_PUNTUACION_MAX_DEFECTO,
@@ -60,8 +54,7 @@ export class CreateActaComponent {
       ],
     })
   }
-
-  createActa() {
+  public createActa(): void {
     this.loading = true
     if (this.convocatoriaNuevaForm.valid) {
       let fechaParcial: Date =

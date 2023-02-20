@@ -13,13 +13,16 @@ export class ListActaComponent {
   dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
 
   constructor(private apiService: ApiService) {
+    this.initializeForm()
+  }
+
+  private initializeForm(): void {
     this.apiService.getActas().subscribe((actas) => {
       if (actas) {
         this.dataSource = new MatTableDataSource(actas)
       }
     })
   }
-
   editarActa(acta: Acta) {
     console.log('Editar acta: ', acta)
   }

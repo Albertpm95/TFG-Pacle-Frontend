@@ -10,11 +10,11 @@ import { Observable } from 'rxjs';
 export class CargaComponent {
   ficheroExcel!: File;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
-  seleccionFichero(file: File) {}
+  seleccionFichero(file: File) { }
 
-  cargarFicheroExcel(file: File) {
+  public cargarFicheroExcel(file: File): Observable<File> {
     return this.apiService.subirFicheroExcel(file);
   }
 }

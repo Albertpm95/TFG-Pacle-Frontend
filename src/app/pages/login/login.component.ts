@@ -21,16 +21,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inicializarForm
+    this.inicializarForm()
   }
 
-  private inicializarForm() {
+  private inicializarForm(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
-  login(): void {
+  public login(): void {
     this.loading = true;
     if (this.loginForm.status == 'VALID') {
       this.authService

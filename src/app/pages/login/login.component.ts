@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { API, Constants } from '@constants';
-import { ApiService } from '@services/api.service';
+import { API } from '@constants';
 import { AuthService } from '@services/auth.service';
 
 @Component({
@@ -10,22 +9,23 @@ import { AuthService } from '@services/auth.service';
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup = new FormGroup({});
   loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
     private authService: AuthService,
     private router: Router
   ) {
+  }
+
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
-
   login(): void {
     this.loading = true;
     if (this.loginForm.status == 'VALID') {

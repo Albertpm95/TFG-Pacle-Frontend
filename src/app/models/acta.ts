@@ -1,65 +1,38 @@
 import { Constants } from 'app/constants'
+import { Alumno } from './alumno'
 import { ComprensionAuditiva } from './comprensionAuditiva'
 import { ComprensionLectora } from './comprensionLectora'
+import { ConvocatoriaNueva } from './convocatoriaNueva'
 import { ExpresionEscrita } from './expresionEscrita'
 import { ExpresionOral } from './expresionOral'
 
 export class Acta {
-  idActa?: string
-  lenguaje: string = Constants.LENGUAJE_POR_DEFECTO
-  tipo: string = Constants.TIPO_POR_DEFECTO
-  fecha: Date = new Date()
-  estado: boolean = Constants.ESTADO_POR_DEFECTO
-  expresionOral: ExpresionOral = new ExpresionOral()
-  expresionEscrita: ExpresionEscrita = new ExpresionEscrita()
-  comprensionLectora: ComprensionLectora = new ComprensionLectora()
+  alumno: Alumno = {DNI:'', apellidos:'', nombre:'', id_alumno:''}
   comprensionAuditiva: ComprensionAuditiva = new ComprensionAuditiva()
+  comprensionLectora: ComprensionLectora = new ComprensionLectora()
+  convocatoria: ConvocatoriaNueva = new ConvocatoriaNueva()
+  expresionEscrita: ExpresionEscrita = new ExpresionEscrita()
+  expresionOral: ExpresionOral = new ExpresionOral()
+  id_acta?: string
 
   constructor() {}
 
   crearActa(
-    lenguaje: string,
-    tipo: string,
-    fecha: Date,
-    estado: boolean,
-    puntuacionMaximaParteExpresionEscrita: number,
-    puntuacionMaximaParteExpresionOral: number,
-    puntuacionMaximaParteComprensionLectora: number,
-    puntuacionMaximaParteComprensionAuditiva: number,
+    alumno: Alumno,
+    convocatoria: ConvocatoriaNueva,
+
   ) {
     console.log('Creacion de un acta: ')
-    this.lenguaje = lenguaje
-    this.tipo = tipo
-    this.fecha = fecha
-    this.estado = estado
-    this.expresionEscrita.crearExpresionEscrita(
-      puntuacionMaximaParteExpresionEscrita,
-    )
-    this.expresionOral.crearExpresionOral(puntuacionMaximaParteExpresionOral)
-    this.comprensionLectora.crearComprensionLectora(
-      puntuacionMaximaParteComprensionLectora,
-    )
-    this.comprensionAuditiva.crearComprensionAuditiva(
-      puntuacionMaximaParteComprensionAuditiva,
-    )
   }
 
   cargarActa(
-    lenguaje: string,
-    tipo: string,
-    fecha: Date,
-    estado: boolean,
     expresionEscrita: ExpresionEscrita,
     expresionOral: ExpresionOral,
     comprensionLectora: ComprensionLectora,
     comprensionAuditiva: ComprensionAuditiva,
-    idActa: string,
+    id_acta: string,
   ) {
-    if (idActa) this.idActa = idActa
-    this.lenguaje = lenguaje
-    this.tipo = tipo
-    this.fecha = fecha
-    this.estado = estado
+    if (id_acta) this.id_acta = id_acta
     this.expresionEscrita = expresionEscrita
       ? expresionEscrita
       : this.expresionEscrita

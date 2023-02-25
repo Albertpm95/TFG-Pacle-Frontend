@@ -1,21 +1,22 @@
 import { Constants } from 'app/constants'
 import { TareaExpresion } from './tareaExpresion'
 
-export class ExpresionEscrita {
+export class Expresion {
   tarea1: TareaExpresion = new TareaExpresion()
   tarea2: TareaExpresion = new TareaExpresion()
   observaciones: string = ''
   puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
   porcentaje: number = Constants.VALOR_TAREA_DEFECTO
   puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO
+  tipo: string = ''
 
-  crearExpresionEscrita(puntuacionMaximaParte: number) {
+  crearExpresion(puntuacionMaximaParte: number) {
     this.puntuacionMaximaParte = puntuacionMaximaParte
       ? puntuacionMaximaParte
       : this.puntuacionMaximaParte
   }
 
-  actualizarExpresionEscrita(
+  actualizarExpresion(
     tarea1: TareaExpresion,
     tarea2: TareaExpresion,
     observaciones: string,

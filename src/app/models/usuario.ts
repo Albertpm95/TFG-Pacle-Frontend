@@ -1,4 +1,14 @@
+import { Roles } from "@constants"
+
 export interface Usuario {
-	username: string;
-	password: string;
+  apellidos: string
+  estado: boolean
+  id_usuario: number
+  nombre: string
+  rol: Roles
+  username: string
+}
+export interface UsuarioLogin {
+  username: string;
+  password: string;
 }

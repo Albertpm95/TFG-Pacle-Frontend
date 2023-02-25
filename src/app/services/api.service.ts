@@ -5,6 +5,7 @@ import { environment } from '@environments/environment'
 import { UserAction } from '@models/acciones-usuario'
 import { Acta } from '@models/acta'
 import { Alumno } from '@models/alumno'
+import { Rol } from '@models/rol'
 import { Observable } from 'rxjs'
 
 @Injectable({
@@ -13,18 +14,14 @@ import { Observable } from 'rxjs'
 export class ApiService {
   apiUrl = environment.apiURL
 
-  constructor(private http: HttpClient) {}
-
-  /**  Usuarios */
-  getUserActions(): Observable<UserAction[]> {
-    console.log('API Call Get User Actions', this.apiUrl + API.USUARIO_ACCIONES)
-    return this.http.get<UserAction[]>(this.apiUrl + API.USUARIO_ACCIONES)
-  }
-  /** ---------------------------------------------------------------------- */
+  constructor(private http: HttpClient) { }
 
   /** Admin */
   subirFicheroExcel(excel: File) {
     return this.http.post<File>(this.apiUrl + API.ALUMNO_UPLOAD_EXCEL, excel)
+  }
+  getRolesUsuario(): Observable<Rol[]>{ 
+    return this.http.get<Rol[]>(this.apiUrl + API.USUARIO_ROLES)
   }
   /** ---------------------------------------------------------------------- */
 

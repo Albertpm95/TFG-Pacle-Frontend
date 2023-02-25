@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAction } from '@models/acciones-usuario';
-
-import { ApiService } from '@services/api.service';
-import { Observable } from 'rxjs';
+import { ACTION_LIST } from '@constants'
 
 @Component({
   selector: 'app-actions-list',
@@ -11,24 +8,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./actions-list.component.scss'],
 })
 export class ActionsListComponent {
-  actionsList$: Observable<UserAction[]> = this.apiService.getUserActions()
-  loaded: boolean = false;
-  loading: boolean = false;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  adminActions = ACTION_LIST.ADMIN_LIST
+  correctorActions = ACTION_LIST.CORRECTOR_LIST
+  gestorActions = ACTION_LIST.GESTOR_LIST
+  constructor(private router: Router) { }
 
-  ngOnInit() {
-    this.loaded = true;
-  }
-
-  goTo(url: string): void {
-    this.loading = true;
-    console.log(this.loading);
+  public goTo(url: string): void {
     console.log('Going to: ', url);
     this.router.navigateByUrl(url);
-  }
-
-  userActionsTrackBy(index: any, user: { id: any; }) {
-    return user.id;
   }
 }

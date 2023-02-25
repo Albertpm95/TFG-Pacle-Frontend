@@ -3,10 +3,20 @@
     <mat-card-header>
       <mat-card-title>Bienvenido</mat-card-title>
     </mat-card-header>
-    <mat-card-content *ngIf="!loading">
-      <mat-nav-list>
-        <mat-list-item *ngFor="let opcion of actionsList$ | async" (click)="goTo(opcion.url)">
-          <span matListItemTitle>{{ opcion.action_label }}</span>
+    <mat-card-content>
+      <mat-nav-list *ngIf="adminActions">
+        <mat-list-item *ngFor="let action of adminActions" (click)="goTo(action.url)">
+          <span matListItemTitle>[{{action.rol}}]{{action.action_label}}</span>
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-nav-list *ngIf="correctorActions">
+        <mat-list-item *ngFor="let action of correctorActions" (click)="goTo(action.url)">
+          <span matListItemTitle>[{{action.rol}}]{{action.action_label}}</span>
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-nav-list *ngIf="gestorActions">
+        <mat-list-item *ngFor="let action of gestorActions" (click)="goTo(action.url)">
+          <span matListItemTitle>[{{action.rol}}]{{action.action_label}}</span>
         </mat-list-item>
       </mat-nav-list>
     </mat-card-content>

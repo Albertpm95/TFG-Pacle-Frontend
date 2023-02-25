@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { ConvocatoriaNueva } from '@models/convocatoriaNueva'
+import { ConvocatoriaNueva } from '@models/convocatoria'
 
 import { ApiService } from '@services/api.service'
 import { Constants } from 'app/constants'

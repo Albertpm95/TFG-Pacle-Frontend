@@ -33,13 +33,14 @@ export class LoginComponent implements OnInit {
   public login(): void {
     this.loading = true;
     if (this.loginForm.status == 'VALID') {
+      let login_form_data = new FormData()
+      login_form_data.append('username', this.loginForm.value.username)
+      login_form_data.append('password', this.loginForm.value.password)
       this.authService
-        .login({
-          username: this.loginForm.value.username,
-          password: this.loginForm.value.password,
-        })
+        .login(login_form_data)
         .subscribe((data) => {
-          if (data) this.router.navigateByUrl(API.USUARIO_ACCIONES);
+          console.log('Subscribe login', data)
+          this.router.navigateByUrl(API.USUARIO_ACCIONES);
         });
     }
     this.loading = false;

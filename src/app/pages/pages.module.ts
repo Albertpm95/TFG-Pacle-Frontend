@@ -2,6 +2,7 @@ import { ActaModule } from './acta/acta.module';
 import { ActionsListComponent } from './actions_list/actions-list.component';
 import { AlumnoModule } from './alumno/alumno.module';
 import { CommonModule } from '@angular/common';
+import { ConvocatoriaModule } from './convocatoria/convocatoria.module';
 import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ActaModule,
     AlumnoModule,
     CommonModule,
+    ConvocatoriaModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -31,4 +33,4 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
   ],
 })
-export class PagesModule {}
+export class PagesModule { }

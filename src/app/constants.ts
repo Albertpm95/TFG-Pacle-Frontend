@@ -23,6 +23,7 @@ export class Paths {
   static ACTA = 'acta'
   static ADMIN = 'admin'
   static ALUMNO = 'alumno'
+  static CONVOCATORIA = 'convocatoria'
   static USUARIO = 'usuario'
 }
 export class Features {
@@ -45,10 +46,11 @@ export class API {
   static USUARIO_ACCIONES = Paths.USUARIO + '/' + Features.ACTIONS
   static USUARIO_LIST = Paths.USUARIO + '/' + Features.LIST
   static USUARIO_ROLES = Paths.USUARIO + '/' + Features.ACTIONS
+  static CONVOCATORIA_LIST: Paths
 }
 
-export const ACTION_LIST = {
-  ADMIN_LIST: [
+export abstract class ACTION_LIST {
+  static readonly ADMIN_LIST: UserAction[] = [
     { action_label: 'Crear un convocatoria nueva', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Ver la lista de convocatorias', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Editar lista de idiomas', url: '', rol: [Roles.ADMIN] },
@@ -57,10 +59,8 @@ export const ACTION_LIST = {
     { action_label: 'Dar de alta un usuario nuevo', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Ver la lista de usuarios', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Cargar CSV', url: '', rol: [Roles.ADMIN] }
-  ],
-  CORRECTOR_LIST: [
-    { action_label: 'Ver la lista de convocatorias activas', url: '', rol: [Roles.CORRECTOR] },
-  ],
-  GESTOR_LIST: [{ action_label: '', url: '', rol: [Roles.GESTOR] },]
+  ]
+  static readonly CORRECTOR_LIST: UserAction[] = [{ action_label: 'Ver la lista de convocatorias activas', url: '', rol: [Roles.CORRECTOR] }]
+  static readonly GESTOR_LIST: UserAction[] = []
 
 }

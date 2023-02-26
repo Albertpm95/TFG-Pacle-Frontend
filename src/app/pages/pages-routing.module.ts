@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { API, Roles } from '@constants';
+import { API, Paths } from '@constants';
 import { ActaModule } from './acta/acta.module';
 import { ActionsListComponent } from './actions_list/actions-list.component';
 import { AlumnoModule } from './alumno/alumno.module';
+import { ConvocatoriaModule } from './convocatoria/convocatoria.module';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -13,14 +14,19 @@ const routes: Routes = [
     component: ActionsListComponent,
   },
   {
-    path: Roles.ACTA,
+    path: Paths.ACTA,
     loadChildren: () => ActaModule,
     title: 'Acta',
   },
   {
-    path: Roles.ALUMNO,
+    path: Paths.ALUMNO,
     loadChildren: () => AlumnoModule,
     title: 'Alumno',
+  },
+  {
+    path: 'convocatoria',
+    loadChildren: () => ConvocatoriaModule,
+    title: 'Convocatoria'
   },
   {
     path: '**',
@@ -32,4 +38,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

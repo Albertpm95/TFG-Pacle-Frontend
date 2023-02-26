@@ -1,38 +1,36 @@
 <div class="convocatoria">
-  <div class="parte">
-    <h3>Creaccion de una convocatoria</h3>
-    <h4>Comprension lectora</h4>
-    <h5>Puntos maximos: {{ acta.pesoComprensionLectora }}</h5>
-    <div>
-      <form [formGroup]="comprensionLectoraForm" *ngIf="comprensionLectoraForm">
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Tarea 1</mat-label>
-            <input matInput formControlname="comprensionLectoraForm.puntuacion_tarea1" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Tarea 2</mat-label>
-            <input matInput formControlname="comprensionLectoraForm.puntuacion_tarea2" />
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Tarea 3</mat-label>
-            <input matInput formControlname="comprensionLectoraForm.puntuacion_tarea3" />
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Observaciones</mat-label>
-            <textarea matInput formControlname="comprensionLectoraForm.observaciones"></textarea>
-          </mat-form-field>
-        </div>
-      </form>
+  <div class="convocatoria-header">
+    <div class="info-convocatoria" *ngIf="convocatoria$ | async">
+
     </div>
-    <div>
-      <h3><label>Puntuacion total: {{ acta.comprensionLectora.calcularPuntosConseguidos() }}</label></h3>
-      <h3><label>Porcentaje: {{ acta.comprensionLectora.calcularPorcentaje() }}</label></h3>
+    <div class="info-alumno" *ngIf="alumno$ | async">
+
     </div>
-    <button mat-raised-button color="accent" type="submit">
-      Guardar
-    </button>
+  </div>
+  <div class="evaluacion">
+    <div class="bloque-lectoescritura">
+      <div class="comprension-lectora" *ngIf="updatedComprensionLectora() | async">
+        <button mat-raised-button color="accent" type="submit">
+          Guardar
+        </button>
+      </div>
+      <div class="expresion-escrita" *ngIf="updatedExpresionEscrita() | async">
+        <button mat-raised-button color="accent" type="submit">
+          Guardar
+        </button>
+      </div>
+    </div>
+    <div class="bloque-destrezas-orales">
+      <div class="comprension-auditiva" *ngIf="updatedComprensionAuditiva() | async">
+        <button mat-raised-button color="accent" type="submit">
+          Guardar
+        </button>
+      </div>
+      <div class="expresion-oral" *ngIf="updatedExpresionOral() | async">
+        <button mat-raised-button color="accent" type="submit">
+          Guardar
+        </button>
+      </div>
+    </div>
   </div>
 </div>

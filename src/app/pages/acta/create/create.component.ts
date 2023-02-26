@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { ConvocatoriaNueva } from '@models/convocatoria'
+import { Convocatoria } from '@models/convocatoria'
 
 import { ApiService } from '@services/api.service'
 import { Constants } from 'app/constants'
@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/internal/Observable'
 export class CreateActaComponent {
   constants = Constants
   convocatoriaNuevaForm: FormGroup = new FormGroup({})
-  convocatoriaNueva: ConvocatoriaNueva = new ConvocatoriaNueva()
+  convocatoriaNueva: Convocatoria = new Convocatoria()
   loading: boolean = false
   listaIdiomasActa$: Observable<string[]> = this.apiService.getIdiomasActa()
   tiposActa$: Observable<string[]> = this.apiService.getTiposActa()
@@ -31,9 +31,9 @@ export class CreateActaComponent {
 
   private initializeForm(): void {
     this.convocatoriaNuevaForm = this.formBuilder.group({
-      lenguaje: [Constants.LENGUAJE_POR_DEFECTO, Validators.required], //'Español' | 'English' | 'Català' | 'Français' | 'Chainese' | 'Deutsch';
-      tipo: [Constants.TIPO_POR_DEFECTO, Validators.required], //Ordinaria' | 'Extraordinaria';
-      fechaParcial: [Date.now, Validators.required], //Date;
+      lenguaje: [Constants.LENGUAJE_POR_DEFECTO, Validators.required],
+      tipo: [Constants.TIPO_POR_DEFECTO, Validators.required],
+      fechaParcial: [Date.now, Validators.required], // Date sin el horario
       horarioParcial: ['', Validators.required],
       activa: [Constants.ESTADO_POR_DEFECTO, Validators.required], //boolean;
       pesoMaximoParteComprensionLectora: [
@@ -54,7 +54,7 @@ export class CreateActaComponent {
       ],
     })
   }
-  public createActa(): void {
+  public createConvocatoria(): void {
     this.loading = true
     if (this.convocatoriaNuevaForm.valid) {
       let fechaParcial: Date =
@@ -63,12 +63,12 @@ export class CreateActaComponent {
         this.convocatoriaNuevaForm.controls['horarioParcial'].value.split(':')
       fechaParcial.setHours(horaParcial[0])
       fechaParcial.setMinutes(horaParcial[1])
-      this.convocatoriaNueva = new ConvocatoriaNueva(
+      this.convocatoriaNueva = new Convocatoria(
         fechaParcial,
         this.convocatoriaNuevaForm.value,
       )
     }
-    console.log(this.convocatoriaNueva)
+    console.log('Creando convocatoria: ', this.convocatoriaNueva)
     this.loading = false
   }
 }

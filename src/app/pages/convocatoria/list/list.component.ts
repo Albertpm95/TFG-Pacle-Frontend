@@ -11,14 +11,18 @@ export class ListConvocatoriaComponent {
   displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa']
   dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
-  constructor(private apiService: ApiService) {
-    this.initializeForm()
-  }
+  listLoaded: boolean = false;
 
-  private initializeForm(): void {
-    this.apiService.getConvocatorias().subscribe((actas) => {
-      if (actas) {
-        this.dataSource = new MatTableDataSource(actas)
+  constructor(private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.initializeList()
+  }
+  private initializeList(): void {
+    this.apiService.getConvocatorias().subscribe((convocatorias) => {
+      if (convocatorias) {
+        this.dataSource = new MatTableDataSource(convocatorias)
+        this.listLoaded = true
       }
     })
   }

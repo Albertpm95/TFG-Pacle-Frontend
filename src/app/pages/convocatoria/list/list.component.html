@@ -6,7 +6,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table mat-table [dataSource]="dataSource">
+      <table mat-table [dataSource]="dataSource" *ngIf="listLoaded">
         <div>
           <ng-container matColumnDef="lenguaje">
             <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
@@ -32,6 +32,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div *ngIf="!listLoaded">
+        <h2>No se han encontrado convocatorias</h2>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

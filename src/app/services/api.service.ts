@@ -12,8 +12,6 @@ import { Observable } from 'rxjs'
   providedIn: 'root',
 })
 export class ApiService {
-
-
   apiUrl = environment.apiURL
 
   constructor(private http: HttpClient) { }
@@ -29,24 +27,24 @@ export class ApiService {
 
   /** Convocatorias */
   getConvocatorias(): Observable<Convocatoria[]> {
-    console.log('API_ENDPOINTS Call Get Actas')
+    console.log('API_ENDPOINTS Call Get Convocatorias')
     return this.http.get<Convocatoria[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
   }
-  getIdiomasActa(): Observable<string[]> {
+  getIdiomasConvocatoria(): Observable<string[]> {
     console.log('API_ENDPOINTS Call Get Idiomas')
-    return this.http.get<string[]>(this.apiUrl + API_ENDPOINTS.ACTA_IDIOMAS)
+    return this.http.get<string[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_IDIOMAS)
   }
-  getHorariosActa(): Observable<string[]> {
+  getHorariosConvocatoria(): Observable<string[]> {
     console.log('API_ENDPOINTS Call Get Horarios')
-    return this.http.get<string[]>(this.apiUrl + API_ENDPOINTS.ACTA_HORARIOS)
+    return this.http.get<string[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_HORARIOS)
   }
-  getTiposActa(): Observable<string[]> {
+  getTiposConvocatoria(): Observable<string[]> {
     console.log('API_ENDPOINTS Call Get Tipos')
-    return this.http.get<string[]>(this.apiUrl + API_ENDPOINTS.ACTA_TIPOS)
+    return this.http.get<string[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_TIPOS)
   }
-  getActa(idActa: number): Observable<Acta> {
-    console.log('API_ENDPOINTS Call Get Acta ID', idActa)
-    return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_EDIT + '/' + idActa)
+  getConvocatoria(idConvocatoria: number): Observable<Acta> {
+    console.log('API_ENDPOINTS Call Get Convocatoria ID', idConvocatoria)
+    return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_EDIT + '/' + idConvocatoria)
   }
   /** ---------------------------------------------------------------------- */
 

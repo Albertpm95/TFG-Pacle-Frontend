@@ -5,8 +5,8 @@ import { EditionConvocatoriaComponent } from './edition/edition.component';
 import { ListConvocatoriaComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: Features.EDIT, component: EditionConvocatoriaComponent },
-  { path: Features.LIST, component: ListConvocatoriaComponent },
+  { path: Features.EDIT, component: EditionConvocatoriaComponent, title: 'Edicion convocatoria' },
+  { path: Features.LIST, component: ListConvocatoriaComponent, title: 'Lista de convocatorias' },
 ];
 
 @NgModule({

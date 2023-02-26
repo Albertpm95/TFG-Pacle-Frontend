@@ -36,23 +36,23 @@ export class Features {
 }
 export class API_ENDPOINTS {
   static ACTA_EDIT = Routers.ACTA + '/' + Features.EDIT
-  static ACTA_HORARIOS = Routers.ACTA + '/' + Constants.HORARIOS
-  static ACTA_IDIOMAS = Routers.ACTA + '/' + Constants.IDIOMAS
-  static ACTA_LIST = Routers.ACTA + '/' + Features.LIST
-  static ACTA_TIPOS = Routers.ACTA + '/' + Constants.TIPOS
-  static ALUMNO_LIST = Routers.ALUMNO + '/' + Features.LIST
+  static ACTA_LIST = Routers.ACTA + 's/' + Features.LIST
+  static ALUMNO_LIST = Routers.ALUMNO + 's/' + Features.LIST
   static ALUMNO_UPLOAD_EXCEL = Routers.ALUMNO + '/' + Features.UPLOAD
   static CONVOCATORIA_EDIT = Routers.CONVOCATORIA + '/' + Features.EDIT
-  static CONVOCATORIA_LIST = Routers.CONVOCATORIA + '/' + Features.LIST
+  static CONVOCATORIA_HORARIOS = Routers.CONVOCATORIA + '/' + Constants.HORARIOS
+  static CONVOCATORIA_IDIOMAS = Routers.CONVOCATORIA + '/' + Constants.IDIOMAS
+  static CONVOCATORIA_LIST = Routers.CONVOCATORIA + 's/' + Features.LIST
+  static CONVOCATORIA_TIPOS = Routers.CONVOCATORIA + '/' + Constants.TIPOS
   static USUARIO_ACCIONES = Routers.USUARIO + '/' + Features.ACTIONS
-  static USUARIO_LIST = Routers.USUARIO + '/' + Features.LIST
+  static USUARIO_LIST = Routers.USUARIO + 's/' + Features.LIST
   static USUARIO_ROLES = Routers.USUARIO + '/' + Features.ACTIONS
 }
 
 export abstract class ACTION_LIST {
   static readonly ADMIN_LIST: UserAction[] = [
-    { action_label: 'Crear un convocatoria nueva', url: '', rol: [Roles.ADMIN] },
-    { action_label: 'Ver la lista de convocatorias', url: '', rol: [Roles.ADMIN] },
+    { action_label: 'Crear un convocatoria nueva', url: API_ENDPOINTS.CONVOCATORIA_EDIT, rol: [Roles.ADMIN] },
+    { action_label: 'Ver la lista de convocatorias', url: API_ENDPOINTS.CONVOCATORIA_LIST, rol: [Roles.ADMIN] },
     { action_label: 'Editar lista de idiomas', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Editar lista de tipos de convocatoria', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Editar lista de horarios', url: '', rol: [Roles.ADMIN] },

@@ -9,14 +9,14 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
             <mat-select formControlName="lenguaje">
-              <mat-option [value]="lenguaje" *ngFor="let lenguaje of listaIdiomasActa$ | async">{{ lenguaje
+              <mat-option [value]="lenguaje" *ngFor="let lenguaje of listaIdiomasConvocatoria$ | async">{{ lenguaje
                 }}</mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
             <mat-label for="tipo">Tipo de convocatoria</mat-label>
             <mat-select formControlName="tipo">
-              <mat-option [value]="tipo" *ngFor="let tipo of tiposActa$ |async">{{
+              <mat-option [value]="tipo" *ngFor="let tipo of listaTiposConvocatoria$ | async">{{
                 tipo
                 }}</mat-option>
             </mat-select>
@@ -32,7 +32,7 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
             <mat-select formControlName="horarioParcial">
-              <mat-option [value]="horario" *ngFor="let horario of horariosActa$ | async">{{ horario }}</mat-option>
+              <mat-option [value]="horario" *ngFor="let horario of listaHorariosConvocatoria$ | async">{{ horario }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

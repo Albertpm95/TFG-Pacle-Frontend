@@ -1,16 +1,17 @@
 import { Component } from '@angular/core'
-import { MatTable, MatTableDataSource } from '@angular/material/table'
+import { MatTableDataSource } from '@angular/material/table'
 import { Acta } from '@models/acta'
-import { ApiService } from '@services/api.service'
+import { API_ENDPOINTS } from '@constants'
 
 @Component({
-  selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListActaComponent {
   displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa']
   dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
+
+  acta_edit_route = API_ENDPOINTS.ACTA_EDIT
 
   constructor() { }
 

@@ -5,18 +5,18 @@
     </mat-card-header>
     <mat-card-content>
       <mat-nav-list *ngIf="adminActions">
-        <mat-list-item *ngFor="let action of adminActions" (click)="goTo(action.url)">
-          <span matListItemTitle>[{{action.rol}}]{{action.action_label}}</span>
+        <mat-list-item *ngFor="let action of adminActions">
+          <a [routerLink]="'/' + action.url">{{action.url}}<span matListItemTitle>[{{action.rol}}] {{action.action_label}}</span></a>
         </mat-list-item>
       </mat-nav-list>
       <mat-nav-list *ngIf="correctorActions">
-        <mat-list-item *ngFor="let action of correctorActions" (click)="goTo(action.url)">
-          <span matListItemTitle>[{{action.rol}}]{{action.action_label}}</span>
+        <mat-list-item *ngFor="let action of correctorActions">
+          <a [routerLink]="'/' + action.url">{{action.url}}<span matListItemTitle>[{{action.rol}}] {{action.action_label}}</span></a>
         </mat-list-item>
       </mat-nav-list>
       <mat-nav-list *ngIf="gestorActions">
-        <mat-list-item *ngFor="let action of gestorActions" (click)="goTo(action.url)">
-          <span matListItemTitle>[{{action.rol}}]{{action.action_label}}</span>
+        <mat-list-item *ngFor="let action of gestorActions">
+          <a [routerLink]="action.url">{{action.url}}<span matListItemTitle>[{{action.rol}}] {{action.action_label}}</span></a>
         </mat-list-item>
       </mat-nav-list>
     </mat-card-content>

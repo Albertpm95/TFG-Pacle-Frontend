@@ -14,9 +14,9 @@ export class EditionConvocatoriaComponent {
   convocatoriaNuevaForm: FormGroup = new FormGroup({})
   convocatoriaNueva: Convocatoria = new Convocatoria()
   loading: boolean = false
-  listaIdiomasActa$: Observable<string[]> = this.apiService.getIdiomasActa()
-  tiposActa$: Observable<string[]> = this.apiService.getTiposActa()
-  horariosActa$: Observable<string[]> = this.apiService.getHorariosActa()
+  listaIdiomasConvocatoria$: Observable<string[]> = this.apiService.getIdiomasConvocatoria()
+  listaTiposConvocatoria$: Observable<string[]> = this.apiService.getTiposConvocatoria()
+  listaHorariosConvocatoria$: Observable<string[]> = this.apiService.getHorariosConvocatoria()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +39,7 @@ export class EditionConvocatoriaComponent {
       tipo: [Constants.TIPO_POR_DEFECTO, Validators.required],
     })
   }
+
   public createConvocatoria(): void {
     this.loading = true
     if (this.convocatoriaNuevaForm.valid) {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { API } from '@constants';
+import { API_ENDPOINTS } from '@constants';
 import { AuthService } from '@services/auth.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         .login(login_form_data)
         .subscribe((data) => {
           console.log('Subscribe login', data)
-          this.router.navigateByUrl(API.USUARIO_ACCIONES);
+          this.router.navigateByUrl(API_ENDPOINTS.USUARIO_ACCIONES);
         });
     }
     this.loading = false;

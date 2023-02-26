@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Features } from '@constants';
-import { CorrectConvocatoriaComponent } from './correct/correct.component';
-import { CreateConvocatoriaComponent } from './create/create.component';
+import { EditionConvocatoriaComponent } from './edition/edition.component';
 import { ListConvocatoriaComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: Features.CREATE, component: CreateConvocatoriaComponent },
+  { path: Features.EDIT, component: EditionConvocatoriaComponent },
   { path: Features.LIST, component: ListConvocatoriaComponent },
-  { path: Features.CORRECT, component: CorrectConvocatoriaComponent },
 ];
 
 @NgModule({

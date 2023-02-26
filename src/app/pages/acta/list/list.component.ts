@@ -12,22 +12,13 @@ export class ListActaComponent {
   displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa']
   dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
 
-  constructor(private apiService: ApiService) {
-    this.initializeForm()
+  constructor() { }
+
+  public editarActa(acta: Acta): void {
+
   }
 
-  private initializeForm(): void {
-    this.apiService.getActas().subscribe((actas) => {
-      if (actas) {
-        this.dataSource = new MatTableDataSource(actas)
-      }
-    })
-  }
-  editarActa(acta: Acta) {
-    console.log('Editar acta: ', acta)
-  }
+  public cambiarStatusActa(acta: Acta): void {
 
-  cambiarStatus(acta: Acta) {
-    console.log('Cambiar estado acta ', acta)
   }
 }

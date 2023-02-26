@@ -1,17 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { Convocatoria } from '@models/convocatoria'
-
-import { ApiService } from '@services/api.service'
-import { Constants } from 'app/constants'
-import { Observable } from 'rxjs/internal/Observable'
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Constants } from '@constants';
+import { Convocatoria } from '@models/convocatoria';
+import { ApiService } from '@services/api.service';
+import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './edition.component.html',
+  styleUrls: ['./edition.component.scss']
 })
-export class CreateConvocatoriaComponent {
+export class EditionConvocatoriaComponent {
   constants = Constants
   convocatoriaNuevaForm: FormGroup = new FormGroup({})
   convocatoriaNueva: Convocatoria = new Convocatoria()

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { API, Paths } from '@constants';
+import { API_ENDPOINTS, Routers } from '@constants';
 import { ActaModule } from './acta/acta.module';
 import { ActionsListComponent } from './actions_list/actions-list.component';
 import { AlumnoModule } from './alumno/alumno.module';
@@ -10,21 +10,22 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Login' },
   {
-    path: API.USUARIO_ACCIONES,
+    path: API_ENDPOINTS.USUARIO_ACCIONES,
     component: ActionsListComponent,
+    title: 'Menu de acciones'
   },
   {
-    path: Paths.ACTA,
+    path: Routers.ACTA,
     loadChildren: () => ActaModule,
     title: 'Acta',
   },
   {
-    path: Paths.ALUMNO,
+    path: Routers.ALUMNO,
     loadChildren: () => AlumnoModule,
     title: 'Alumno',
   },
   {
-    path: 'convocatoria',
+    path: Routers.CONVOCATORIA,
     loadChildren: () => ConvocatoriaModule,
     title: 'Convocatoria'
   },

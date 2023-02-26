@@ -12,12 +12,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { ActaRoutingModule } from './acta-routing.module'
-import { CorrectActaComponent } from './correct/correct.component'
-import { CreateActaComponent } from './create/create.component'
+import { EditionActaComponent } from './edition/edition.component'
 import { ListActaComponent } from './list/list.component'
 
 @NgModule({
-  declarations: [CreateActaComponent, ListActaComponent, CorrectActaComponent],
+  declarations: [EditionActaComponent, ListActaComponent],
   imports: [
     CommonModule,
     ActaRoutingModule,
@@ -34,4 +33,4 @@ import { ListActaComponent } from './list/list.component'
     MatSlideToggleModule,
   ],
 })
-export class ActaModule {}
+export class ActaModule { }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { API, Constants, Features } from '@constants';
+import { API_ENDPOINTS, Features } from '@constants';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ export class HeaderComponent {
   }
 
   volver() {
-    console.log('Volviendo a ', API.USUARIO_ACCIONES);
-    this.router.navigateByUrl(API.USUARIO_ACCIONES);
+    console.log('Volviendo a ', API_ENDPOINTS.USUARIO_ACCIONES);
+    this.router.navigateByUrl(API_ENDPOINTS.USUARIO_ACCIONES);
   }
 }

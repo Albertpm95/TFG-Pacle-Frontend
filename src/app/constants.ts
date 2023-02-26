@@ -19,34 +19,34 @@ export class Roles {
   static GESTOR = 'gestor'
   static CORRECTOR = 'corrector'
 }
-export class Paths {
+export class Routers {
   static ACTA = 'acta'
   static ADMIN = 'admin'
   static ALUMNO = 'alumno'
   static CONVOCATORIA = 'convocatoria'
+  static LOGIN = 'login'
   static USUARIO = 'usuario'
 }
 export class Features {
   static ACTIONS = 'actions'
-  static CORRECT = 'correct'
-  static CREATE = 'create'
   static EDIT = 'edit'
   static LIST = 'list'
   static LOGIN = 'login'
   static UPLOAD = 'upload'
 }
-export class API {
-  static ACTA_CORRECT = Paths.ACTA + '/' + Features.CORRECT
-  static ACTA_HORARIOS = Paths.ACTA + '/' + Constants.HORARIOS
-  static ACTA_IDIOMAS = Paths.ACTA + '/' + Constants.IDIOMAS
-  static ACTA_LIST = Paths.ACTA + '/' + Features.LIST
-  static ACTA_TIPOS = Paths.ACTA + '/' + Constants.TIPOS
-  static ALUMNO_LIST = Paths.ALUMNO + '/' + Features.LIST
-  static ALUMNO_UPLOAD_EXCEL = Paths.ALUMNO + '/' + Features.UPLOAD
-  static USUARIO_ACCIONES = Paths.USUARIO + '/' + Features.ACTIONS
-  static USUARIO_LIST = Paths.USUARIO + '/' + Features.LIST
-  static USUARIO_ROLES = Paths.USUARIO + '/' + Features.ACTIONS
-  static CONVOCATORIA_LIST: Paths
+export class API_ENDPOINTS {
+  static ACTA_EDIT = Routers.ACTA + '/' + Features.EDIT
+  static ACTA_HORARIOS = Routers.ACTA + '/' + Constants.HORARIOS
+  static ACTA_IDIOMAS = Routers.ACTA + '/' + Constants.IDIOMAS
+  static ACTA_LIST = Routers.ACTA + '/' + Features.LIST
+  static ACTA_TIPOS = Routers.ACTA + '/' + Constants.TIPOS
+  static ALUMNO_LIST = Routers.ALUMNO + '/' + Features.LIST
+  static ALUMNO_UPLOAD_EXCEL = Routers.ALUMNO + '/' + Features.UPLOAD
+  static CONVOCATORIA_EDIT = Routers.CONVOCATORIA + '/' + Features.EDIT
+  static CONVOCATORIA_LIST = Routers.CONVOCATORIA + '/' + Features.LIST
+  static USUARIO_ACCIONES = Routers.USUARIO + '/' + Features.ACTIONS
+  static USUARIO_LIST = Routers.USUARIO + '/' + Features.LIST
+  static USUARIO_ROLES = Routers.USUARIO + '/' + Features.ACTIONS
 }
 
 export abstract class ACTION_LIST {

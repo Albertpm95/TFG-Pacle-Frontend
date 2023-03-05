@@ -23,20 +23,14 @@
       "dom"
     ],
     "paths": {
-      "@constants": [
-        "app/constants"
-      ],
-      "@pages/*": [
-        "app/pages/*"
-      ],
       "@components/*": [
         "app/pages/components/*"
       ],
-      "@layout/*": [
-        "app/pages/layout/*"
+      "@constants": [
+        "app/constants"
       ],
-      "@services/*": [
-        "app/services/*"
+      "@environments/*": [
+        "environments/*"
       ],
       "@guards/*": [
         "app/guards/*"
@@ -44,11 +38,20 @@
       "@interceptors/*": [
         "app/interceptors/*"
       ],
-      "@environments/*": [
-        "environments/*"
+      "@layout/*": [
+        "app/pages/layout/*"
       ],
       "@models/*": [
         "app/models/*"
+      ],
+      "@pages/*": [
+        "app/pages/*"
+      ],
+      "@services/*": [
+        "app/services/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
       ]
     }
   },

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 
 import { Observable, Subject } from 'rxjs';
-import { pluck, share, shareReplay, tap } from 'rxjs/operators';
+import { catchError, pluck, share, shareReplay, tap } from 'rxjs/operators';
 import { Usuario, UsuarioLogin } from '../models/usuario';
 
 @Injectable({
@@ -17,6 +17,6 @@ export class AuthService {
 
   login(usuario: FormData) {
     console.log('API Call Login ', usuario);
-    return this.http.post<FormData>(this.apiUrl + 'login', usuario); // TODO Sharerepaly?
+    return this.http.post<FormData>(this.apiUrl + 'login', usuario).pipe(catchError(error => { console.log('Login error: ', error); return error; }));
   }
 }

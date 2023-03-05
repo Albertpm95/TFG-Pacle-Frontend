@@ -28,7 +28,7 @@ export class ApiService {
   /** Convocatorias */
   getConvocatorias(): Observable<Convocatoria[]> {
     console.log('API_ENDPOINTS Call Get Convocatorias')
-    return this.http.get<Convocatoria[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
+    return this.http.get<Convocatoria[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIAS_LIST)
   }
   getIdiomasConvocatoria(): Observable<string[]> {
     console.log('API_ENDPOINTS Call Get Idiomas')
@@ -46,12 +46,16 @@ export class ApiService {
     console.log('API_ENDPOINTS Call Get Convocatoria ID', idConvocatoria)
     return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_EDIT + '/' + idConvocatoria)
   }
+  cambiarEstadoConvocatoria(id_convocatoria: number, estado_nuevo: boolean) {
+    console.log('API_ENDPOINTS Call Patch cambiar estado convocatoria', { id_convocatoria, estado_nuevo })
+    return this.http.patch<Convocatoria>(this.apiUrl, { id_convocatoria, estado_nuevo })
+  }
   /** ---------------------------------------------------------------------- */
 
   /** Actas */
   getActas(): Observable<Acta[]> {
     console.log('API_ENDPOINTS Call Get Actas')
-    return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
+    return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTAS_LIST)
   }
   updateComprensionLectora(): Observable<boolean> {
     throw new Error('Method not implemented.')
@@ -70,12 +74,12 @@ export class ApiService {
   /** Alumnos */
   getAlumnos(): Observable<Alumno[]> {
     console.log('API_ENDPOINTS Call Get Alumnos')
-    return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
+    return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNOS_LIST)
   }
   searchAlumno(nombre: string, apellidos?: string, id_acta?: string): Observable<Alumno> {
     console.log('API_ENDPOINTS Call search Alumno', nombre, apellidos, id_acta)
     return this.http.get<Alumno>(
-      this.apiUrl + Routers.ALUMNO + { nombre, apellidos, id_acta } // TODO Roles no es adecuado para la ruta, actualizar
+      this.apiUrl + Routers.ALUMNO + { nombre, apellidos, id_acta }
     )
   }
   /** ---------------------------------------------------------------------- */

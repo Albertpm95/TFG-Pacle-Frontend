@@ -18,17 +18,38 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "paths": {
-      "@constants": ["app/constants"],
-      "@pages/*": ["app/pages/*"],
-      "@components/*": ["app/pages/components/*"],
-      "@layout/*": ["app/pages/layout/*"],
-      "@services/*": ["app/services/*"],
-      "@guards/*": ["app/guards/*"],
-      "@interceptors/*": ["app/interceptors/*"],
-      "@environments/*": ["environments/*"],
-      "@models/*": ["app/models/*"]
+      "@constants": [
+        "app/constants"
+      ],
+      "@pages/*": [
+        "app/pages/*"
+      ],
+      "@components/*": [
+        "app/pages/components/*"
+      ],
+      "@layout/*": [
+        "app/pages/layout/*"
+      ],
+      "@services/*": [
+        "app/services/*"
+      ],
+      "@guards/*": [
+        "app/guards/*"
+      ],
+      "@interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@environments/*": [
+        "environments/*"
+      ],
+      "@models/*": [
+        "app/models/*"
+      ]
     }
   },
   "angularCompilerOptions": {

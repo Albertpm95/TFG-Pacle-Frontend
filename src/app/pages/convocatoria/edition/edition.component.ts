@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Constants } from '@constants';
 import { Convocatoria } from '@models/convocatoria';
 import { ApiService } from '@services/api.service';
@@ -19,12 +20,16 @@ export class EditionConvocatoriaComponent {
   listaHorariosConvocatoria$: Observable<string[]> = this.apiService.getHorariosConvocatoria()
 
   constructor(
-    private formBuilder: FormBuilder,
     private apiService: ApiService,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
 
   }
-  ngOnInit(): void { this.initializeForm() }
+  ngOnInit(): void {
+    console.log(this.router)
+    this.initializeForm()
+  }
 
   private initializeForm(): void {
     this.convocatoriaNuevaForm = this.formBuilder.group({

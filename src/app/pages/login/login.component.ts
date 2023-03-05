@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(API_ENDPOINTS.USUARIO_ACCIONES);
         });
     }
-    this.loading = false;
+    this.router.navigateByUrl(API_ENDPOINTS.USUARIO_ACCIONES); // TODO Remove
+  }
+
+  ngOnDestroy() {
+    this.loading = true;
   }
 }

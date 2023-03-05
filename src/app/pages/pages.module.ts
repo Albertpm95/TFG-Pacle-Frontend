@@ -14,11 +14,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgModule } from '@angular/core';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [LoginComponent, ActionsListComponent],
   imports: [
     ActaModule,
+    AdminModule,
     AlumnoModule,
     CommonModule,
     ConvocatoriaModule,

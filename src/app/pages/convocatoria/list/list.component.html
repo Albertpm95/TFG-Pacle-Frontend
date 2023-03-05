@@ -35,10 +35,13 @@
               <mat-slide-toggle color="primary" [checked]="convocatoria.estado" (click)="cambiarEstadoConvocatoria(convocatoria)"></mat-slide-toggle>
             </td>
           </ng-container>
+
           <ng-container matColumnDef="id_convocatoria">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let convocatoria" (click)="editarConvocatoria(convocatoria)">
-              <a [routerLink]="['/' + api_endpoints.CONVOCATORIA_EDIT, convocatoria.id_convocatoria]"><mat-icon>edit</mat-icon></a>
+              <a [routerLink]="['/' + api_endpoints.CONVOCATORIA_EDIT, convocatoria.id_convocatoria]">
+                <mat-icon>edit</mat-icon>
+              </a>
             </td>
           </ng-container>
         </div>

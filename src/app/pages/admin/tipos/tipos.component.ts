@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ApiService } from '@services/api.service';
 
 @Component({
   selector: 'app-tipos',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class TiposComponent {
 
+  nuevoTipoForm = new FormControl()
+  tipos$ = this.apiService.getTiposConvocatoria()
+
+  constructor(private apiService: ApiService) {
+
+  }
 }

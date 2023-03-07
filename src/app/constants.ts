@@ -13,6 +13,7 @@ export class Constants {
   static TIPOS: string = 'tipos'
   static VALOR_PUNTUACION_MAX_DEFECTO: number = 0
   static VALOR_TAREA_DEFECTO: number = 0
+  static PANEL: string = 'panel'
 }
 export class Roles {
   static ADMIN = 'admin'
@@ -47,14 +48,19 @@ export class API_ENDPOINTS {
   static USUARIO_ACCIONES = Routers.USUARIO + '/' + Features.ACTIONS
   static USUARIOS_LIST = Routers.USUARIO + '/' + Features.LIST
   static USUARIO_ROLES = Routers.USUARIO + '/' + Features.ACTIONS
+  static ADMIN_IDIOMAS = Routers.ADMIN + '/' + Constants.IDIOMAS
+  static ADMIN_HORARIOS = Routers.ADMIN + '/' + Constants.HORARIOS
+  static ADMIN_TIPOS = Routers.ADMIN + '/' + Constants.TIPOS
+  static ADMIN_PANEL = Routers.ADMIN + '/' + Constants.PANEL
 }
 export abstract class ACTION_LIST {
   static readonly ADMIN_LIST: UserAction[] = [
     { action_label: 'Crear un convocatoria nueva', url: API_ENDPOINTS.CONVOCATORIA_EDIT, rol: [Roles.ADMIN] },
     { action_label: 'Ver la lista de convocatorias', url: API_ENDPOINTS.CONVOCATORIAS_LIST, rol: [Roles.ADMIN] },
-    { action_label: 'Editar lista de idiomas', url: '', rol: [Roles.ADMIN] },
-    { action_label: 'Editar lista de tipos de convocatoria', url: '', rol: [Roles.ADMIN] },
-    { action_label: 'Editar lista de horarios', url: '', rol: [Roles.ADMIN] },
+    { action_label: 'Panel de administrador', url: API_ENDPOINTS.ADMIN_PANEL, rol: [Roles.ADMIN] },
+    { action_label: 'Editar lista de idiomas', url: API_ENDPOINTS.ADMIN_IDIOMAS, rol: [Roles.ADMIN] },
+    { action_label: 'Editar lista de tipos de convocatoria', url: API_ENDPOINTS.ADMIN_TIPOS, rol: [Roles.ADMIN] },
+    { action_label: 'Editar lista de horarios', url: API_ENDPOINTS.ADMIN_HORARIOS, rol: [Roles.ADMIN] },
     { action_label: 'Dar de alta un usuario nuevo', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Ver la lista de usuarios', url: '', rol: [Roles.ADMIN] },
     { action_label: 'Ver la lista de alumnos', url: API_ENDPOINTS.ALUMNOS_LIST, rol: [Roles.ADMIN] },

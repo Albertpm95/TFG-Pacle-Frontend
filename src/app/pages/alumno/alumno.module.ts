@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
+import { SharedModule } from 'app/shared/shared.module';
 
 import { AlumnoRoutingModule } from './alumno-routing.module';
 import { CargaComponent } from './carga/carga.component';
-import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,6 @@ import { EditComponent } from './edit/edit.component';
     ListComponent,
     EditComponent
   ],
-  imports: [CommonModule, AlumnoRoutingModule],
+  imports: [SharedModule, AlumnoRoutingModule],
 })
-export class AlumnoModule {}
+export class AlumnoModule { }

@@ -1,0 +1,23 @@
+.panel-admin-container {
+  padding: 1rem;
+  border: solid 1px gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  .panel-idiomas-container {
+    border: solid 1px gray;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .panel-tipos-container {
+    border: solid 1px gray;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .panel-horarios-container {
+    border: solid 1px gray;
+    margin: 1rem;
+    padding: 1rem;
+  }
+}

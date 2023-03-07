@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ComponentsModule } from './components/components.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { ComponentsModule } from './components/components.module';
     BrowserAnimationsModule,
     MatNativeDateModule,
     ComponentsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

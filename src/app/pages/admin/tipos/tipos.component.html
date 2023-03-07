@@ -1,1 +1,12 @@
-<p>tipos works!</p>
+<div class="tipos-container">
+  <mat-form-field>
+    <mat-label for="tipo_nuevo">Añadir nuevo tipo</mat-label>
+    <input matInput id="tipo_nuevo" [formControl]="nuevoTipoForm">
+    <mat-icon matSuffix>add</mat-icon>
+  </mat-form-field>
+  <mat-list>
+    <mat-list-item *ngFor="let tipo of tipos$ | async">
+      <span matListItemTitle>{{tipo}}</span>
+    </mat-list-item>
+  </mat-list>
+</div>

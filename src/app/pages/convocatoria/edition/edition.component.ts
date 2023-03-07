@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Constants } from '@constants';
+import { CONSTANTS } from '@constants';
 import { Convocatoria } from '@models/convocatoria';
+import { Horario } from '@models/horario';
+import { Idioma } from '@models/idioma';
+import { Tipo } from '@models/tipo';
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';
 
@@ -10,14 +13,14 @@ import { Observable } from 'rxjs';
   templateUrl: './edition.component.html',
   styleUrls: ['./edition.component.scss']
 })
-export class EditionConvocatoriaComponent {
-  constants = Constants
+export class EditionComponent {
+  constants = CONSTANTS
   convocatoriaNuevaForm: FormGroup = new FormGroup({})
   convocatoria: Convocatoria = new Convocatoria()
   loading: boolean = false
-  listaIdiomasConvocatoria$: Observable<string[]> = this.apiService.getIdiomasConvocatoria()
-  listaTiposConvocatoria$: Observable<string[]> = this.apiService.getTiposConvocatoria()
-  listaHorariosConvocatoria$: Observable<string[]> = this.apiService.getHorariosConvocatoria()
+  listaIdiomasConvocatoria$: Observable<Idioma[]> = this.apiService.getIdiomasConvocatoria()
+  listaTiposConvocatoria$: Observable<Tipo[]> = this.apiService.getTiposConvocatoria()
+  listaHorariosConvocatoria$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
 
   constructor(
     private apiService: ApiService,
@@ -37,15 +40,15 @@ export class EditionConvocatoriaComponent {
 
   private initializeForm(): void {
     this.convocatoriaNuevaForm = this.formBuilder.group({
-      activa: [Constants.ESTADO_POR_DEFECTO, Validators.required], //boolean;
+      activa: [CONSTANTS.ESTADO_POR_DEFECTO, Validators.required], //boolean;
       fechaParcial: [Date.now, Validators.required], // Date sin el horario
-      horarioParcial: [Constants.HORARIOS[0], Validators.required],
-      lenguaje: [Constants.LENGUAJE_POR_DEFECTO, Validators.required],
-      pesomaximoParteComprensionAuditiva: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      pesoMaximoParteComprensionLectora: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      pesomaximoParteExpresionEscrita: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      pesomaximoParteExpresionOral: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      tipo: [Constants.TIPO_POR_DEFECTO, Validators.required],
+      horarioParcial: [CONSTANTS.HORARIOS[0], Validators.required],
+      lenguaje: [CONSTANTS.LENGUAJE_POR_DEFECTO, Validators.required],
+      pesomaximoParteComprensionAuditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      pesoMaximoParteComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      pesomaximoParteExpresionEscrita: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      pesomaximoParteExpresionOral: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      tipo: [CONSTANTS.TIPO_POR_DEFECTO, Validators.required],
     })
   }
 
@@ -56,15 +59,15 @@ export class EditionConvocatoriaComponent {
     })
 
     this.convocatoriaNuevaForm = this.formBuilder.group({
-      activa: [Constants.ESTADO_POR_DEFECTO, Validators.required], //boolean;
+      activa: [CONSTANTS.ESTADO_POR_DEFECTO, Validators.required], //boolean;
       fechaParcial: [Date.now, Validators.required], // Date sin el horario
-      horarioParcial: [Constants.HORARIOS[0], Validators.required],
-      lenguaje: [Constants.LENGUAJE_POR_DEFECTO, Validators.required],
-      pesomaximoParteComprensionAuditiva: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      pesoMaximoParteComprensionLectora: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      pesomaximoParteExpresionEscrita: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      pesomaximoParteExpresionOral: [Constants.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      tipo: [Constants.TIPO_POR_DEFECTO, Validators.required],
+      horarioParcial: [CONSTANTS.HORARIOS[0], Validators.required],
+      lenguaje: [CONSTANTS.LENGUAJE_POR_DEFECTO, Validators.required],
+      pesomaximoParteComprensionAuditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      pesoMaximoParteComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      pesomaximoParteExpresionEscrita: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      pesomaximoParteExpresionOral: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      tipo: [CONSTANTS.TIPO_POR_DEFECTO, Validators.required],
     })
   }
 

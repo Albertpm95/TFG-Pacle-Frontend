@@ -1,1 +1,15 @@
-<p>idiomas works!</p>
+<div class="idiomas-container">
+  <mat-form-field>
+    <mat-label for="idioma_nuevo">Añadir nuevo idioma</mat-label>
+    <input matInput id="idioma_nuevo" [formControl]="nuevoIdiomaForm">
+    <mat-icon matSuffix (click)="addIdiomaConvocatoria()">add</mat-icon>
+  </mat-form-field>
+  <mat-list>
+    <div class="list-item" *ngFor="let idioma of idiomas$ | async">
+      <mat-list-item>
+        <span matListItemTitle>{{idioma.lenguaje}}<mat-icon (click)="deleteIdiomaConvocatoria(idioma.idIdioma)">delete</mat-icon></span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>

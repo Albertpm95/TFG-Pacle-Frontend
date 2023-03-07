@@ -7,11 +7,11 @@ import { API_ENDPOINTS } from '@constants'
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListActaComponent {
+export class ListComponent {
   displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa']
   dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
 
-  acta_edit_route = API_ENDPOINTS.ACTA_EDIT
+  
 
   constructor() { }
 

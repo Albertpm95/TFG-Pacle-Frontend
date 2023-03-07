@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Features } from '@constants';
-import { EditionConvocatoriaComponent } from './edition/edition.component';
-import { ListConvocatoriaComponent } from './list/list.component';
+import { COMPONENTS } from '@constants';
+import { EditionComponent } from './edition/edition.component';
+import { ListComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: Features.EDIT, component: EditionConvocatoriaComponent, title: 'Edicion convocatoria' },
-  { path: Features.LIST, component: ListConvocatoriaComponent, title: 'Lista de convocatorias' },
+  { path: COMPONENTS.EDITION, component: EditionComponent, title: 'Edicion convocatoria' },
+  { path: COMPONENTS.LIST, component: ListComponent, title: 'Lista de convocatorias' },
 ];
 
 @NgModule({

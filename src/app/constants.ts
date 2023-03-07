@@ -1,6 +1,6 @@
 import { UserAction } from "@models/acciones-usuario"
 
-export class Constants {
+export class CONSTANTS {
   static ESTADO_POR_DEFECTO: boolean = true
   static HORARIOS: string = 'horarios'
   static IDIOMAS: string = 'idiomas'
@@ -15,57 +15,70 @@ export class Constants {
   static VALOR_TAREA_DEFECTO: number = 0
   static PANEL: string = 'panel'
 }
-export class Roles {
+export class ROLES {
   static ADMIN = 'admin'
   static GESTOR = 'gestor'
   static CORRECTOR = 'corrector'
 }
-export class Routers {
-  static ACTA = 'actas'
-  static ADMIN = 'admins'
-  static ALUMNO = 'alumnos'
-  static CONVOCATORIA = 'convocatorias'
+export class MODULES {
+  static ACTA = 'acta'
+  static ADMIN = 'admin'
+  static ALUMNO = 'alumno'
+  static CONVOCATORIA = 'convocatoria'
   static LOGIN = 'login'
   static USUARIO = 'usuarios'
 }
-export class Features {
-  static ACTIONS = 'actions'
-  static EDIT = 'edit'
+export class API_Routers {
+  static ACTA = 'acta'
+  static ADMIN = 'admin'
+  static ALUMNO = 'alumno'
+  static CONFIG = 'config'
+  static CONVOCATORIA = 'convocatoria'
+  static LOGIN = 'login'
+  static USUARIO = 'usuario'
+}
+export class ACTIONS {
+  static CREATE = 'create'
+  static DELETE = 'delete'
+  static DISABLE = 'disable'
+  static ENABLE = 'enable'
   static LIST = 'list'
   static LOGIN = 'login'
+  static UPDATE = 'update'
   static UPLOAD = 'upload'
 }
 export class API_ENDPOINTS {
-  static ACTA_EDIT = Routers.ACTA + '/' + Features.EDIT
-  static ACTAS_LIST = Routers.ACTA + '/' + Features.LIST
-  static ALUMNOS_LIST = Routers.ALUMNO + '/' + Features.LIST
-  static ALUMNO_UPLOAD_EXCEL = Routers.ALUMNO + '/' + Features.UPLOAD
-  static CONVOCATORIA_EDIT = Routers.CONVOCATORIA + '/' + Features.EDIT
-  static CONVOCATORIA_HORARIOS = Routers.CONVOCATORIA + '/' + Constants.HORARIOS
-  static CONVOCATORIA_IDIOMAS = Routers.CONVOCATORIA + '/' + Constants.IDIOMAS
-  static CONVOCATORIAS_LIST = Routers.CONVOCATORIA + '/' + Features.LIST
-  static CONVOCATORIA_TIPOS = Routers.CONVOCATORIA + '/' + Constants.TIPOS
-  static USUARIO_ACCIONES = Routers.USUARIO + '/' + Features.ACTIONS
-  static USUARIOS_LIST = Routers.USUARIO + '/' + Features.LIST
-  static USUARIO_ROLES = Routers.USUARIO + '/' + Features.ACTIONS
-  static ADMIN_IDIOMAS = Routers.ADMIN + '/' + Constants.IDIOMAS
-  static ADMIN_HORARIOS = Routers.ADMIN + '/' + Constants.HORARIOS
-  static ADMIN_TIPOS = Routers.ADMIN + '/' + Constants.TIPOS
-  static ADMIN_PANEL = Routers.ADMIN + '/' + Constants.PANEL
+  static ACTA_CREATE = API_Routers.ACTA + '/' + ACTIONS.CREATE
+  static ACTA_DELETE = API_Routers.ACTA + '/' + ACTIONS.DELETE
+  static ACTA_LIST = API_Routers.ACTA + '/' + ACTIONS.LIST
+  static ACTA_UPDATE = API_Routers.ACTA + '/' + ACTIONS.UPDATE
+  static ADMIN_UPLOAD_ALUMNOS = API_Routers.ADMIN + '/' + ACTIONS.UPDATE + '/' + API_Routers.ALUMNO
+  static ALUMNO_CREATE = API_Routers.ALUMNO + '/' + ACTIONS.CREATE
+  static ALUMNO_DELETE = API_Routers.ALUMNO + '/' + ACTIONS.DELETE
+  static ALUMNO_LIST = API_Routers.ALUMNO + '/' + ACTIONS.LIST
+  static ALUMNO_UPDATE = API_Routers.ALUMNO + '/' + ACTIONS.UPDATE
+  static CONVOCATORIA_CREATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.CREATE
+  static CONVOCATORIA_DELETE = API_Routers.CONVOCATORIA + '/' + ACTIONS.DELETE
+  static CONVOCATORIA_LIST = API_Routers.CONVOCATORIA + '/' + ACTIONS.LIST
+  static CONVOCATORIA_UPDATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.UPDATE
+  static USUARIO_CREATE = API_Routers.USUARIO + '/' + ACTIONS.CREATE
+  static USUARIO_DELETE = API_Routers.USUARIO + '/' + ACTIONS.DELETE
+  static USUARIO_LIST = API_Routers.USUARIO + '/' + ACTIONS.LIST
+  static USUARIO_UPDATE = API_Routers.USUARIO + '/' + ACTIONS.UPDATE
+}
+export class COMPONENTS {
+  static EDITION = 'edition'
+  static LIST = 'list'
+  static MENU = 'menu'
+  static PANEL = 'panel'
+  static UPLOAD = 'upload'
 }
 export abstract class ACTION_LIST {
-  static readonly ADMIN_LIST: UserAction[] = [
-    { action_label: 'Crear un convocatoria nueva', url: API_ENDPOINTS.CONVOCATORIA_EDIT, rol: [Roles.ADMIN] },
-    { action_label: 'Ver la lista de convocatorias', url: API_ENDPOINTS.CONVOCATORIAS_LIST, rol: [Roles.ADMIN] },
-    { action_label: 'Panel de administrador', url: API_ENDPOINTS.ADMIN_PANEL, rol: [Roles.ADMIN] },
-    { action_label: 'Editar lista de idiomas', url: API_ENDPOINTS.ADMIN_IDIOMAS, rol: [Roles.ADMIN] },
-    { action_label: 'Editar lista de tipos de convocatoria', url: API_ENDPOINTS.ADMIN_TIPOS, rol: [Roles.ADMIN] },
-    { action_label: 'Editar lista de horarios', url: API_ENDPOINTS.ADMIN_HORARIOS, rol: [Roles.ADMIN] },
-    { action_label: 'Dar de alta un usuario nuevo', url: '', rol: [Roles.ADMIN] },
-    { action_label: 'Ver la lista de usuarios', url: '', rol: [Roles.ADMIN] },
-    { action_label: 'Ver la lista de alumnos', url: API_ENDPOINTS.ALUMNOS_LIST, rol: [Roles.ADMIN] },
-    { action_label: 'Cargar CSV', url: '', rol: [Roles.ADMIN] }
+  static readonly MENU: UserAction[] = [
+    { action_label: 'Ver la lista de convocatorias', url: MODULES.CONVOCATORIA + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
+    { action_label: 'Ver la lista de usuarios', url: MODULES.USUARIO + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
+    { action_label: 'Ver la lista de alumnos', url: MODULES.ALUMNO + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
+    { action_label: 'Ver la lista de actas', url: MODULES.ACTA + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
+    { action_label: 'Panel de administrador', url: MODULES.ADMIN + '/' + COMPONENTS.PANEL, rol: [ROLES.ADMIN] },
   ]
-  static readonly CORRECTOR_LIST: UserAction[] = [{ action_label: 'Ver la lista de convocatorias activas', url: '', rol: [Roles.CORRECTOR] }]
-  static readonly GESTOR_LIST: UserAction[] = []
 }

@@ -1,43 +1,39 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { API_ENDPOINTS, Routers } from '@constants'
+import { MODULES } from '@constants'
 import { ActaModule } from './acta/acta.module'
-import { ActionsListComponent } from './actions_list/actions-list.component'
 import { AdminModule } from './admin/admin.module'
 import { AlumnoModule } from './alumno/alumno.module'
 import { ConvocatoriaModule } from './convocatoria/convocatoria.module'
 import { LoginComponent } from './login/login.component'
+import { MenuComponent } from './menu/menu.component'
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, title: 'Login' },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'menu', component: MenuComponent, title: 'Menu' },
   {
-    path: API_ENDPOINTS.USUARIO_ACCIONES,
-    component: ActionsListComponent,
-    title: 'Menu de acciones',
-  },
-  {
-    path: Routers.ACTA,
+    path: MODULES.ACTA,
     loadChildren: () => ActaModule,
     title: 'Acta',
   },
   {
-    path: Routers.ALUMNO,
+    path: MODULES.ALUMNO,
     loadChildren: () => AlumnoModule,
     title: 'Alumno',
   },
   {
-    path: Routers.CONVOCATORIA,
+    path: MODULES.CONVOCATORIA,
     loadChildren: () => ConvocatoriaModule,
     title: 'Convocatoria',
   },
   {
-    path: Routers.ADMIN,
+    path: MODULES.ADMIN,
     loadChildren: () => AdminModule,
     title: 'Panel de admin'
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'login',
   },
 ]
 

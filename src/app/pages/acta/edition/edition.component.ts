@@ -6,7 +6,7 @@ import { ApiService } from '@services/api.service';
   templateUrl: './edition.component.html',
   styleUrls: ['./edition.component.scss']
 })
-export class EditionActaComponent {
+export class EditionComponent {
   @Input() id_acta?: number
 
   constructor(
@@ -15,7 +15,9 @@ export class EditionActaComponent {
   ) {
 
   }
-  ngOnInit(): void { this.initializeForm }
+  ngOnInit(): void {
+
+  }
 
   private initializeForm(): void {
     console.log('Initialize Acta form')

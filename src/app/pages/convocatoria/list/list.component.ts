@@ -8,7 +8,7 @@ import { ApiService } from '@services/api.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListConvocatoriaComponent {
+export class ListComponent {
   displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'estado', 'id_convocatoria', 'acciones']
   dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 

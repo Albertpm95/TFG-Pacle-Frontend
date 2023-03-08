@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { Features } from '@constants'
-import { EditionActaComponent } from './edition/edition.component'
-import { ListActaComponent } from './list/list.component'
+import { COMPONENTS } from '@constants'
+import { EditionComponent } from './edition/edition.component'
+import { ListComponent } from './list/list.component'
 
 const routes: Routes = [
-  { path: Features.EDIT, component: EditionActaComponent },
-  { path: Features.LIST, component: ListActaComponent }
+  { path: COMPONENTS.EDITION, component: EditionComponent },
+  { path: COMPONENTS.LIST, component: ListComponent }
 ]
 
 @NgModule({

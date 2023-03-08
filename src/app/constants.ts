@@ -85,7 +85,7 @@ export class COMPONENTS {
 }
 export abstract class ACTION_LIST {
   static readonly MENU: UserAction[] = [
-    { action_label: 'Ver la lista de convocatorias', url: MODULES.CONVOCATORIA + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
+    { action_label: 'Ver la lista de convocatorias', url: MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
     { action_label: 'Ver la lista de usuarios', url: MODULES.USUARIO + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
     { action_label: 'Ver la lista de alumnos', url: MODULES.ALUMNO + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },
     { action_label: 'Ver la lista de actas', url: MODULES.ACTA + '/' + COMPONENTS.LIST, rol: [ROLES.ADMIN] },

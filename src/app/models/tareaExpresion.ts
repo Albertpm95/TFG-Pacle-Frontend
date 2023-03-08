@@ -1,12 +1,12 @@
-import { Constants } from 'app/constants';
+import { CONSTANTS } from 'app/constants';
 
 export class TareaExpresion {
-  alcance: number = Constants.VALOR_TAREA_DEFECTO;
-  coherencia: number = Constants.VALOR_TAREA_DEFECTO;
-  correccion: number = Constants.VALOR_TAREA_DEFECTO;
-  eficaciaC: number = Constants.VALOR_TAREA_DEFECTO;
+  alcance: number = CONSTANTS.VALOR_TAREA_DEFECTO;
+  coherencia: number = CONSTANTS.VALOR_TAREA_DEFECTO;
+  correccion: number = CONSTANTS.VALOR_TAREA_DEFECTO;
+  eficaciaC: number = CONSTANTS.VALOR_TAREA_DEFECTO;
   id_corrector?: string;
-  nombre_corrector: string = Constants.NOMBRE_CORRECTOR_DEFECTO;
+  nombre_corrector: string = CONSTANTS.NOMBRE_CORRECTOR_DEFECTO;
 
   actualizarTareaExpresion(
     alcance: number,

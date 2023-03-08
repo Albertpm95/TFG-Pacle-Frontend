@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { API_ENDPOINTS } from '@constants';
+import { API_ENDPOINTS, COMPONENTS } from '@constants';
 import { Convocatoria } from '@models/convocatoria';
 import { ApiService } from '@services/api.service';
 
@@ -13,7 +13,7 @@ export class ListComponent {
   dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
   listLoaded: boolean = false;
-  api_endpoints = API_ENDPOINTS
+  edit_route = COMPONENTS.EDITION
 
   constructor(private apiService: ApiService) { }
 

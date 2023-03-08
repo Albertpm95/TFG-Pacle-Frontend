@@ -1,13 +1,13 @@
-import { Constants } from 'app/constants'
+import { CONSTANTS } from 'app/constants'
 import { TareaExpresion } from './tareaExpresion'
 
 export class Expresion {
   tarea1: TareaExpresion = new TareaExpresion()
   tarea2: TareaExpresion = new TareaExpresion()
   observaciones: string = ''
-  puntuacionMaximaParte: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
-  porcentaje: number = Constants.VALOR_TAREA_DEFECTO
-  puntosConseguidos: number = Constants.VALOR_TAREA_DEFECTO
+  puntuacionMaximaParte: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  porcentaje: number = CONSTANTS.VALOR_TAREA_DEFECTO
+  puntosConseguidos: number = CONSTANTS.VALOR_TAREA_DEFECTO
   tipo: string = ''
 
   crearExpresion(puntuacionMaximaParte: number) {
@@ -37,7 +37,7 @@ export class Expresion {
   public calcularPorcentaje(): number {
     return (
       (this.calcularPuntosConseguidos() / this.puntuacionMaximaParte) *
-      Constants.PORCIENTO
+      CONSTANTS.PORCIENTO
     )
   }
 }

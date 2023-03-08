@@ -1,4 +1,4 @@
-import { Constants } from '@constants'
+import { CONSTANTS } from '@constants'
 import { Alumno } from './alumno'
 import { Comprension } from './comprension'
 import { Convocatoria } from './convocatoria'
@@ -10,7 +10,7 @@ export class Acta {
   convocatoria: Convocatoria = new Convocatoria()
   expresion: Expresion = new Expresion()
   id_acta?: string
-  resultado: string = Constants.RESULTADO_ACTA
+  resultado: string = CONSTANTS.RESULTADO_ACTA
 
   public cargarActa(alumno: Alumno, convocatoria: Convocatoria, expresion: Expresion, comprension: Comprension, id_acta: string): void {
     if (id_acta) this.id_acta = id_acta

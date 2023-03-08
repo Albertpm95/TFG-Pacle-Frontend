@@ -19,7 +19,6 @@ export class EditionComponent {
   convocatoria: Convocatoria = new Convocatoria()
   loading: boolean = false
   listaIdiomasConvocatoria$: Observable<Idioma[]> = this.apiService.getIdiomasConvocatoria()
-  listaTiposConvocatoria$: Observable<Tipo[]> = this.apiService.getTiposConvocatoria()
   listaHorariosConvocatoria$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
 
   constructor(
@@ -42,7 +41,7 @@ export class EditionComponent {
     this.convocatoriaNuevaForm = this.formBuilder.group({
       activa: [CONSTANTS.ESTADO_POR_DEFECTO, Validators.required], //boolean;
       fechaParcial: [Date.now, Validators.required], // Date sin el horario
-      horarioParcial: [CONSTANTS.HORARIOS[0], Validators.required],
+      horarioParcial: ['09:00', Validators.required],
       lenguaje: [CONSTANTS.LENGUAJE_POR_DEFECTO, Validators.required],
       pesomaximoParteComprensionAuditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
       pesoMaximoParteComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
@@ -61,7 +60,7 @@ export class EditionComponent {
     this.convocatoriaNuevaForm = this.formBuilder.group({
       activa: [CONSTANTS.ESTADO_POR_DEFECTO, Validators.required], //boolean;
       fechaParcial: [Date.now, Validators.required], // Date sin el horario
-      horarioParcial: [CONSTANTS.HORARIOS[0], Validators.required],
+      horarioParcial: ['09:00', Validators.required],
       lenguaje: [CONSTANTS.LENGUAJE_POR_DEFECTO, Validators.required],
       pesomaximoParteComprensionAuditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
       pesoMaximoParteComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
@@ -80,7 +79,6 @@ export class EditionComponent {
       fechaParcial.setMinutes(horaParcial[1])
       this.convocatoria = new Convocatoria(fechaParcial, this.convocatoriaNuevaForm.value)
     }
-    console.log('Creando convocatoria: ', this.convocatoria)
     this.loading = false
   }
 }

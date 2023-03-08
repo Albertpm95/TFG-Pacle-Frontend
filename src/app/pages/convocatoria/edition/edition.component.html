@@ -13,14 +13,6 @@
                 }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="fill" class="col">
-            <mat-label for="tipo">Tipo de convocatoria</mat-label>
-            <mat-select formControlName="tipo">
-              <mat-option [value]="tipo" *ngFor="let tipo of listaTiposConvocatoria$ | async">{{
-                tipo
-                }}</mat-option>
-            </mat-select>
-          </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">

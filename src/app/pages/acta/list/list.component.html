@@ -11,7 +11,7 @@
           <ng-container matColumnDef="lenguaje">
             <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
             <td mat-cell *matCellDef="let acta">
-              <a [routerLink]="[acta_edit_route, acta.id_acta]">{{ acta.lenguaje }}</a>
+              {{ acta.lenguaje }}
             </td>
           </ng-container>
 

@@ -1,15 +1,15 @@
-import { Constants } from '@constants'
+import { CONSTANTS } from '@constants'
 
 export class Convocatoria {
-  estado: boolean = Constants.ESTADO_POR_DEFECTO
+  estado: boolean = CONSTANTS.ESTADO_POR_DEFECTO
   fecha: Date = new Date()
   horario: string = '00:00'
-  lenguaje: string = Constants.LENGUAJE_POR_DEFECTO
-  puntuacionMaximaParteComprensionAuditiva: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
-  puntuacionMaximaParteComprensionLectora: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
-  puntuacionMaximaParteExpresionEscrita: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
-  puntuacionMaximaParteExpresionOral: number = Constants.VALOR_PUNTUACION_MAX_DEFECTO
-  tipo: string = Constants.TIPO_POR_DEFECTO
+  lenguaje: string = CONSTANTS.LENGUAJE_POR_DEFECTO
+  puntuacionMaximaParteComprensionAuditiva: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  puntuacionMaximaParteComprensionLectora: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  puntuacionMaximaParteExpresionEscrita: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  puntuacionMaximaParteExpresionOral: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  tipo: string = CONSTANTS.TIPO_POR_DEFECTO
   id_convocatoria?: number
 
   constructor(fechaParcial?: Date, convocatoria?: Partial<Convocatoria>) {

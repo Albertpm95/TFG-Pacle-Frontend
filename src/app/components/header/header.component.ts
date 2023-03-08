@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { API_ENDPOINTS, Features } from '@constants';
+import { COMPONENTS, MODULES } from '@constants';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +13,10 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.router.navigateByUrl(Features.LOGIN);
+    this.router.navigateByUrl('/' + MODULES.LOGIN);
   }
 
   volver() {
-    console.log('Volviendo a ', API_ENDPOINTS.USUARIO_ACCIONES);
-    this.router.navigateByUrl(API_ENDPOINTS.USUARIO_ACCIONES);
+    this.router.navigateByUrl('/' + COMPONENTS.MENU);
   }
 }

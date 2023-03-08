@@ -5,10 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ErrorCatchingInterceptor } from '@interceptors/error-catching.interceptor';
 import { ComponentsModule } from './components/components.module';
 import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,9 @@ import { SharedModule } from './shared/shared.module';
     ComponentsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorCatchingInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

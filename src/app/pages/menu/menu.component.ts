@@ -5,4 +5,4 @@ import { ACTION_LIST } from '@constants';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent { actionsList = ACTION_LIST }
+export class MenuComponent { actionsList = ACTION_LIST.MENU }

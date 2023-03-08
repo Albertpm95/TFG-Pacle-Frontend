@@ -17,11 +17,11 @@ export class HorariosComponent {
   constructor(private apiService: ApiService) { }
 
   public deleteHorarioConvocatoria(idTipo: number) {
-    this.apiService.deleteTipoConvocatoria(idTipo)
+    this.apiService.deleteHorarioConvocatoria(idTipo)
   }
 
   public addHorarioConvocatoria() {
     console.log(this.nuevoHorarioForm.valid)
-    this.nuevoHorarioForm.valid ? this.apiService.addTipoConvocatoria(this.nuevoHorarioForm.value) : ''
+    this.nuevoHorarioForm.valid ? this.apiService.addHorarioConvocatoria(this.nuevoHorarioForm.value) : ''
   }
 }

@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { API_ENDPOINTS, Routers } from '@constants'
+import { API_ENDPOINTS, MODULES } from '@constants'
 import { environment } from '@environments/environment'
 import { Acta } from '@models/acta'
 import { Alumno } from '@models/alumno'
+import { Comprension } from '@models/comprension'
 import { Convocatoria } from '@models/convocatoria'
+import { Expresion } from '@models/expresion'
 import { Horario } from '@models/horario'
 import { Idioma } from '@models/idioma'
 import { Rol } from '@models/rol'
@@ -22,24 +24,24 @@ export class ApiService {
   /** Admin */
   subirFicheroExcel(excel: File) {
     return this.http.post<File>(
-      this.apiUrl + API_ENDPOINTS.ALUMNO_UPLOAD_EXCEL,
+      this.apiUrl + API_ENDPOINTS.ADMIN_UPLOAD_ALUMNOS,
       excel,
     )
   }
   getRolesUsuario(): Observable<Rol[]> {
-    return this.http.get<Rol[]>(this.apiUrl + API_ENDPOINTS.USUARIO_ROLES)
+    return this.http.get<Rol[]>(this.apiUrl + API_ENDPOINTS.CONFIG_LIST_ROL)
   }
   /** ---------------------------------------------------------------------- */
 
   /** Convocatorias */
   getConvocatorias(): Observable<Convocatoria[]> {
     return this.http.get<Convocatoria[]>(
-      this.apiUrl + API_ENDPOINTS.CONVOCATORIAS_LIST,
+      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST,
     )
   }
   getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
     return this.http.get<Convocatoria>(
-      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_EDIT + '/' + idConvocatoria,
+      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST + '/' + idConvocatoria,
     )
   }
   cambiarEstadoConvocatoria(id_convocatoria: number, estado_nuevo: boolean) {
@@ -51,60 +53,54 @@ export class ApiService {
   /** ---------------------------------------------------------------------- */
 
   /** Configuracion */
-  getTiposConvocatoria(): Observable<Tipo[]> {
-    return this.http.get<Tipo[]>(this.apiUrl + API_ENDPOINTS.CONFIG_TIPOS)
-  }
-  addTipoConvocatoria(tipo: string): Observable<Tipo> {
-    return this.http.put<Tipo>(this.apiUrl + '/config/tipos/create', { tipo })
-  }
-  deleteTipoConvocatoria(idTipo: number): Observable<Tipo> {
-    return this.http.delete<Tipo>(this.apiUrl + '/config/tipos/delete' + idTipo)
-  }
   getHorariosConvocatoria(): Observable<Horario[]> {
     return this.http.get<Horario[]>(
-      this.apiUrl + API_ENDPOINTS.CONFIG_HORARIOS,
+      this.apiUrl + API_ENDPOINTS.CONFIG_LIST_HORARIO,
     )
   }
   addHorarioConvocatoria(horario: string): Observable<Horario> {
-    return this.http.put<Horario>(this.apiUrl + '/config/horarios/create', { horario })
+    return this.http.put<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_CREATE_HORARIO, { horario })
   }
   deleteHorarioConvocatoria(idHorario: number): Observable<Horario> {
-    return this.http.delete<Horario>(this.apiUrl + '/config/horarios/delete' + idHorario)
+    return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_DELETE_HORARIO + idHorario)
   }
   getIdiomasConvocatoria(): Observable<Idioma[]> {
     return this.http.get<Idioma[]>(
-      this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMAS,
+      this.apiUrl + API_ENDPOINTS.CONFIG_LIST_IDIOMA,
     )
   }
   addIdiomaConvocatoria(idioma: string): Observable<Idioma> {
-    return this.http.put<Idioma>(this.apiUrl + '/config/idiomas/create', { idioma })
+    return this.http.put<Idioma>(this.apiUrl + API_ENDPOINTS.CONFIG_CREATE_IDIOMA, { idioma })
   }
   deleteIdiomaConvocatoria(idIdioma: number): Observable<Tipo> {
-    return this.http.delete<Tipo>(this.apiUrl + '/config/idioma/delete' + idIdioma)
+    return this.http.delete<Tipo>(this.apiUrl + API_ENDPOINTS.CONFIG_DELETE_IDIOMA + idIdioma)
   }
   /** ---------------------------------------------------------------------- */
 
   /** Actas */
   getActas(): Observable<Acta[]> {
-    return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTAS_LIST)
+    return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
   }
-  updateComprensionLectora(): Observable<boolean> {
-    throw new Error('Method not implemented.')
+  getActasID(idActa: number): Observable<Acta> {
+    return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + idActa)
   }
-  updateExpresionEscrita(): Observable<boolean> {
-    throw new Error('Method not implemented.')
+  updateComprensionLectora(comprensionLectora: Comprension): Observable<Comprension> {
+    return this.http.patch<Comprension>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionLectora })
   }
-  updateComprensionAuditiva(): Observable<boolean> {
-    throw new Error('Method not implemented.')
+  updateExpresionEscrita(expresionEscrita: Expresion): Observable<Expresion> {
+    return this.http.patch<Expresion>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
   }
-  updateExpresionOral(): Observable<boolean> {
-    throw new Error('Method not implemented.')
+  updateComprensionAuditiva(comprensionAuditiva: Comprension): Observable<Comprension> {
+    return this.http.patch<Comprension>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionAuditiva })
+  }
+  updateExpresionOral(expresionEscrita: Expresion): Observable<Expresion> {
+    return this.http.patch<Expresion>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
   }
   /** ---------------------------------------------------------------------- */
 
   /** Alumnos */
   getAlumnos(): Observable<Alumno[]> {
-    return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNOS_LIST)
+    return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
   searchAlumno(
     nombre: string,
@@ -112,8 +108,9 @@ export class ApiService {
     id_acta?: string,
   ): Observable<Alumno> {
     return this.http.get<Alumno>(
-      this.apiUrl + Routers.ALUMNO + { nombre, apellidos, id_acta },
+      this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + { nombre, apellidos, id_acta },
     )
   }
   /** ---------------------------------------------------------------------- */
 }
+ 

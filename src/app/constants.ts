@@ -2,15 +2,14 @@ import { UserAction } from "@models/acciones-usuario"
 
 export class CONSTANTS {
   static ESTADO_POR_DEFECTO: boolean = true
-  static HORARIOS: string = 'horarios'
-  static IDIOMAS: string = 'idiomas'
+  static HORARIO: string = 'horario'
+  static IDIOMA: string = 'idioma'
   static LENGUAJE_POR_DEFECTO: string = 'Español'
   static NOMBRE_CORRECTOR_DEFECTO: string = 'No asignado'
   static RESULTADO_ACTA: string = 'No corregido'
   static PORCIENTO: number = 100 // Para calcular el porcentaje
-  static ROLES: string = 'roles'
+  static ROL: string = 'rol'
   static TIPO_POR_DEFECTO: string = 'Ordinaria'
-  static TIPOS: string = 'tipos'
   static VALOR_PUNTUACION_MAX_DEFECTO: number = 0
   static VALOR_TAREA_DEFECTO: number = 0
   static PANEL: string = 'panel'
@@ -32,8 +31,10 @@ export class API_Routers {
   static ACTA = 'acta'
   static ADMIN = 'admin'
   static ALUMNO = 'alumno'
+  static COMPRENSION = 'comprension'
   static CONFIG = 'config'
   static CONVOCATORIA = 'convocatoria'
+  static EXPRESION = 'expression'
   static LOGIN = 'login'
   static USUARIO = 'usuario'
 }
@@ -57,10 +58,19 @@ export class API_ENDPOINTS {
   static ALUMNO_DELETE = API_Routers.ALUMNO + '/' + ACTIONS.DELETE
   static ALUMNO_LIST = API_Routers.ALUMNO + '/' + ACTIONS.LIST
   static ALUMNO_UPDATE = API_Routers.ALUMNO + '/' + ACTIONS.UPDATE
+  static COMPRENSION_UPDATE = API_Routers.COMPRENSION + '/' + ACTIONS.UPDATE
+  static CONFIG_CREATE_HORARIO = API_Routers.CONFIG + '/' + ACTIONS.CREATE + '/' + CONSTANTS.HORARIO
+  static CONFIG_CREATE_IDIOMA = API_Routers.CONFIG + '/' + ACTIONS.CREATE + '/' + CONSTANTS.IDIOMA
+  static CONFIG_DELETE_HORARIO = API_Routers.CONFIG + '/' + ACTIONS.DELETE + '/' + CONSTANTS.HORARIO
+  static CONFIG_DELETE_IDIOMA = API_Routers.CONFIG + '/' + ACTIONS.DELETE + '/' + CONSTANTS.IDIOMA
+  static CONFIG_LIST_HORARIO = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.HORARIO
+  static CONFIG_LIST_IDIOMA = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.IDIOMA
+  static CONFIG_LIST_ROL = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.ROL
   static CONVOCATORIA_CREATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.CREATE
   static CONVOCATORIA_DELETE = API_Routers.CONVOCATORIA + '/' + ACTIONS.DELETE
   static CONVOCATORIA_LIST = API_Routers.CONVOCATORIA + '/' + ACTIONS.LIST
   static CONVOCATORIA_UPDATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.UPDATE
+  static EXPRESION_UPDATE = API_Routers.EXPRESION + '/' + ACTIONS.UPDATE
   static USUARIO_CREATE = API_Routers.USUARIO + '/' + ACTIONS.CREATE
   static USUARIO_DELETE = API_Routers.USUARIO + '/' + ACTIONS.DELETE
   static USUARIO_LIST = API_Routers.USUARIO + '/' + ACTIONS.LIST

@@ -31,6 +31,7 @@ const routes: Routes = [
     loadChildren: () => AdminModule,
     title: 'Panel de admin'
   },
+  { path: 'usuario', loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule) },
   {
     path: '**',
     redirectTo: 'login',

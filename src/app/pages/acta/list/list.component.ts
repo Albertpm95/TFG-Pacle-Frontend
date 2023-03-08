@@ -1,25 +1,31 @@
 import { Component } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
+import { COMPONENTS } from '@constants'
 import { Acta } from '@models/acta'
-import { API_ENDPOINTS } from '@constants'
+import { ApiService } from '@services/api.service'
 
 @Component({
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  displayedColumns: string[] = ['lenguaje', 'tipo', 'fecha', 'activa']
+  displayedColumns: string[] = ['id_acta', 'alumno', 'comprension', 'convocatoria', 'expresion', 'resultado', 'acciones']
   dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
 
-  
+  listLoaded: boolean = false;
+  edit_route = COMPONENTS.EDITION
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
-  public editarActa(acta: Acta): void {
-
+  ngOnInit() {
+    this.initializeList()
   }
-
-  public cambiarStatusActa(acta: Acta): void {
-
+  private initializeList(): void {
+    this.apiService.getActas().subscribe((actas) => {
+      if (actas) {
+        this.dataSource = new MatTableDataSource(actas)
+        this.listLoaded = true
+      }
+    })
   }
 }

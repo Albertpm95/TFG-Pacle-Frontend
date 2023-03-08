@@ -2,39 +2,57 @@
   <mat-card class="mat-elevation-z8">
     <mat-card-header>
       <mat-card-title>
-        <h1>Lista de alumnos</h1>
+        <h1>Lista de usuarios</h1>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <table mat-table [dataSource]="dataSource" *ngIf="listLoaded">
         <div>
-          <ng-container matColumnDef="DNI">
+          <ng-container matColumnDef="apellidos">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let DNI">
-              {{DNI }}
+            <td mat-cell *matCellDef="let apellidos">
+              {{ apellidos }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="id_alumno">
+          <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let id_alumno">
-              {{id_alumno }}
+            <td mat-cell *matCellDef="let estado">
+              {{ estado }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="id_usuario">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let id_usuario">
+              {{ id_usuario }}
             </td>
           </ng-container>
           <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let nombre">
-              {{nombre }}
+              {{ nombre }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="rol">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let rol">
+              {{ rol }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let username">
+              {{ username }}
             </td>
           </ng-container>
           <ng-container matColumnDef="apellidos">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let apellidos">
-              {{ apellidos}}
+              {{ apellidos }}
             </td>
           </ng-container>
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let id_alumno">
+            <td mat-cell *matCellDef="let id_usuario">
 
             </td>
           </ng-container>
@@ -43,7 +61,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
       <div *ngIf="!listLoaded">
-        <h2>No se han encontrado alumnos.</h2>
+        <h2>No se han encontrado usuarios.</h2>
       </div>
     </mat-card-content>
   </mat-card>

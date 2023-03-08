@@ -2,43 +2,61 @@
   <mat-card class="mat-elevation-z8">
     <mat-card-header>
       <mat-card-title>
-        <h1>Lista de Actas</h1>
+        <h1>Lista de actas</h1>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <table mat-table [dataSource]="dataSource">
+      <table mat-table [dataSource]="dataSource" *ngIf="listLoaded">
         <div>
-          <ng-container matColumnDef="lenguaje">
-            <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
-            <td mat-cell *matCellDef="let acta">
-              {{ acta.lenguaje }}
+          <ng-container matColumnDef="id_acta">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let id_acta">
+              {{id_acta }}
             </td>
           </ng-container>
-
-          <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef>Tipo</th>
-            <td mat-cell *matCellDef="let acta" (click)="editarActa(acta)">
-              {{ acta.tipo }}
+          <ng-container matColumnDef="alumno">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let alumno">
+              {{alumno }}
             </td>
           </ng-container>
-
-          <ng-container matColumnDef="fecha">
-            <th mat-header-cell *matHeaderCellDef>Fecha</th>
-            <td mat-cell *matCellDef="let acta" (click)="editarActa(acta)">
-              {{ acta.fecha | date : "short" }}
+          <ng-container matColumnDef="comprension">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let comprension">
+              {{ comprension}}
             </td>
           </ng-container>
+          <ng-container matColumnDef="convocatoria">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let convocatoria">
+              {{ convocatoria}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="expresion">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let expresion">
+              {{ expresion}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="resultado">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let resultado">
+              {{ resultado}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let id_acta">
 
-          <ng-container matColumnDef="activa">
-            <th mat-header-cell *matHeaderCellDef>Estado</th>
-            <td mat-cell *matCellDef="let acta">
-              <mat-slide-toggle (click)="cambiarStatusActa(acta)" [checked]="acta.estado"></mat-slide-toggle>
             </td>
           </ng-container>
         </div>
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+      <div *ngIf="!listLoaded">
+        <h2>No se han encontrado actas.</h2>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

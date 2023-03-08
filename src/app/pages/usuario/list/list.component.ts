@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { COMPONENTS } from '@constants';
-import { Alumno } from '@models/alumno';
+import { Usuario } from '@models/usuario';
 import { ApiService } from '@services/api.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayedColumns: string[] = ['DNI', 'id_alumno', 'nombre', 'apellidos', 'acciones']
-  dataSource: MatTableDataSource<Alumno> = new MatTableDataSource()
+  displayedColumns: string[] = ['apellidos', 'estado', 'id_usuario', 'nombre', 'rol', 'username', 'acciones']
+  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource()
 
   listLoaded: boolean = false;
   edit_route = COMPONENTS.EDITION
@@ -21,11 +21,15 @@ export class ListComponent {
     this.initializeList()
   }
   private initializeList(): void {
-    this.apiService.getAlumnos().subscribe((alumnos) => {
-      if (alumnos) {
-        this.dataSource = new MatTableDataSource(alumnos)
+    this.apiService.getUsuarios().subscribe((usuarios) => {
+      if (usuarios) {
+        this.dataSource = new MatTableDataSource(usuarios)
         this.listLoaded = true
       }
     })
+  }
+  public cambiarEstadoUsuario(usuario: Usuario): void {
+    if (usuario.id_usuario)
+      this.apiService.cambiarEstadoConvocatoria(usuario.id_usuario, !usuario.estado)
   }
 }

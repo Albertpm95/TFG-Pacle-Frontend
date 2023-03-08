@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  templateUrl: './edition.component.html',
+  styleUrls: ['./edition.component.scss']
 })
 export class EditionComponent {
 

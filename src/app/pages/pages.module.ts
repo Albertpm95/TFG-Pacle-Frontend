@@ -18,7 +18,8 @@ import { PagesRoutingModule } from './pages-routing.module';
     AlumnoModule,
     ConvocatoriaModule,
     SharedModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    
   ],
   exports: []
 })

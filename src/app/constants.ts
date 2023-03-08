@@ -25,7 +25,7 @@ export class MODULES {
   static ALUMNO = 'alumno'
   static CONVOCATORIA = 'convocatoria'
   static LOGIN = 'login'
-  static USUARIO = 'usuarios'
+  static USUARIO = 'usuario'
 }
 export class API_Routers {
   static ACTA = 'acta'

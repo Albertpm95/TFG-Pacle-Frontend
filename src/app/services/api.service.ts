@@ -11,6 +11,7 @@ import { Horario } from '@models/horario'
 import { Idioma } from '@models/idioma'
 import { Rol } from '@models/rol'
 import { Tipo } from '@models/tipo'
+import { Usuario } from '@models/usuario'
 import { Observable } from 'rxjs'
 
 @Injectable({
@@ -112,5 +113,19 @@ export class ApiService {
     )
   }
   /** ---------------------------------------------------------------------- */
+
+  /** Usuarios */
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
+  }
+  searchUsuario(
+    nombre: string,
+    apellidos?: string,
+    id_usuario?: string,
+  ): Observable<Usuario> {
+    return this.http.get<Usuario>(
+      this.apiUrl + API_ENDPOINTS.USUARIO_UPDATE + { nombre, apellidos, id_usuario },
+    )
+  }
+  /** ---------------------------------------------------------------------- */
 }
- 

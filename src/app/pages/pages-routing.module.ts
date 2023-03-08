@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { MODULES } from '@constants'
+import { COMPONENTS, MODULES } from '@constants'
 import { ActaModule } from './acta/acta.module'
 import { AdminModule } from './admin/admin.module'
 import { AlumnoModule } from './alumno/alumno.module'
 import { ConvocatoriaModule } from './convocatoria/convocatoria.module'
 import { LoginComponent } from './login/login.component'
 import { MenuComponent } from './menu/menu.component'
+import { UsuarioModule } from './usuario/usuario.module'
+import { WildcardComponent } from './wildcard/wildcard.component'
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, title: 'Login' },
-  { path: 'menu', component: MenuComponent, title: 'Menu' },
+  { path: COMPONENTS.LOGIN, component: LoginComponent, title: 'Login' },
+  { path: COMPONENTS.MENU, component: MenuComponent, title: 'Menu' },
   {
     path: MODULES.ACTA,
     loadChildren: () => ActaModule,
@@ -29,13 +31,23 @@ const routes: Routes = [
   {
     path: MODULES.ADMIN,
     loadChildren: () => AdminModule,
-    title: 'Panel de admin'
+    title: 'Panel de admin',
   },
-  { path: 'usuario', loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule) },
+  {
+    path: MODULES.USUARIO,
+    loadChildren: () => UsuarioModule,
+    title: 'Usuario',
+  },
+  {
+    path: '',
+    redirectTo: COMPONENTS.LOGIN,
+    pathMatch: 'prefix'
+  },
   {
     path: '**',
-    redirectTo: 'login',
-  },
+    component: WildcardComponent,
+    title: '404'
+  }
 ]
 
 @NgModule({

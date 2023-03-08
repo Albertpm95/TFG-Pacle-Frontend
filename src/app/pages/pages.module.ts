@@ -9,9 +9,10 @@ import { AlumnoModule } from './alumno/alumno.module';
 import { ConvocatoriaModule } from './convocatoria/convocatoria.module';
 import { LoginComponent } from './login/login.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { WildcardComponent } from './wildcard/wildcard.component';
 
 @NgModule({
-  declarations: [LoginComponent, MenuComponent],
+  declarations: [LoginComponent, MenuComponent, WildcardComponent],
   imports: [
     ActaModule,
     AdminModule,

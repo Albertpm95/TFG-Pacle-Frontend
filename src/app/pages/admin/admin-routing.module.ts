@@ -4,7 +4,7 @@ import { PanelAdminComponent } from './admin.component';
 
 
 const routes: Routes = [
-  { path: '', component: PanelAdminComponent, title: 'Panel de administracion' },
+  { path: 'panel', component: PanelAdminComponent, title: 'Panel de administracion' }
 ];
 
 @NgModule({

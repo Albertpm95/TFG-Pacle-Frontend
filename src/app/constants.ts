@@ -24,7 +24,6 @@ export class MODULES {
   static ADMIN = 'admin'
   static ALUMNO = 'alumno'
   static CONVOCATORIA = 'convocatoria'
-  static LOGIN = 'login'
   static USUARIO = 'usuario'
 }
 export class API_Routers {
@@ -59,13 +58,13 @@ export class API_ENDPOINTS {
   static ALUMNO_LIST = API_Routers.ALUMNO + '/' + ACTIONS.LIST
   static ALUMNO_UPDATE = API_Routers.ALUMNO + '/' + ACTIONS.UPDATE
   static COMPRENSION_UPDATE = API_Routers.COMPRENSION + '/' + ACTIONS.UPDATE
-  static CONFIG_CREATE_HORARIO = API_Routers.CONFIG + '/' + ACTIONS.CREATE + '/' + CONSTANTS.HORARIO
-  static CONFIG_CREATE_IDIOMA = API_Routers.CONFIG + '/' + ACTIONS.CREATE + '/' + CONSTANTS.IDIOMA
-  static CONFIG_DELETE_HORARIO = API_Routers.CONFIG + '/' + ACTIONS.DELETE + '/' + CONSTANTS.HORARIO
-  static CONFIG_DELETE_IDIOMA = API_Routers.CONFIG + '/' + ACTIONS.DELETE + '/' + CONSTANTS.IDIOMA
-  static CONFIG_LIST_HORARIO = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.HORARIO
-  static CONFIG_LIST_IDIOMA = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.IDIOMA
-  static CONFIG_LIST_ROL = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.ROL
+  static CONFIG_HORARIO_CREATE = API_Routers.CONFIG + '/' + CONSTANTS.HORARIO + '/' + ACTIONS.CREATE
+  static CONFIG_HORARIO_DELETE = API_Routers.CONFIG + '/' + CONSTANTS.HORARIO + '/' + ACTIONS.DELETE
+  static CONFIG_HORARIO_LIST = API_Routers.CONFIG + '/' + CONSTANTS.HORARIO + '/' + ACTIONS.LIST
+  static CONFIG_IDIOMA_CREATE = API_Routers.CONFIG + '/' + CONSTANTS.IDIOMA + '/' + ACTIONS.CREATE
+  static CONFIG_IDIOMA_DELETE = API_Routers.CONFIG + '/' + CONSTANTS.IDIOMA + '/' + ACTIONS.DELETE
+  static CONFIG_IDIOMA_LIST = API_Routers.CONFIG + '/' + CONSTANTS.IDIOMA + '/' + ACTIONS.LIST
+  static CONFIG_ROL_LIST = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.ROL
   static CONVOCATORIA_CREATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.CREATE
   static CONVOCATORIA_DELETE = API_Routers.CONVOCATORIA + '/' + ACTIONS.DELETE
   static CONVOCATORIA_LIST = API_Routers.CONVOCATORIA + '/' + ACTIONS.LIST
@@ -82,6 +81,7 @@ export class COMPONENTS {
   static MENU = 'menu'
   static PANEL = 'panel'
   static UPLOAD = 'upload'
+  static LOGIN = 'login'
 }
 export abstract class ACTION_LIST {
   static readonly MENU: UserAction[] = [

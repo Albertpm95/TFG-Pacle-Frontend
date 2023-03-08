@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { COMPONENTS } from '@constants';
 import { Convocatoria } from '@models/convocatoria';
@@ -12,6 +13,7 @@ export class ListComponent {
   displayedColumns: string[] = ['lenguaje', 'fecha', 'estado', 'id_convocatoria', 'acciones']
   dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
+  nuevaConvocatoriaForm = new FormControl()
   listLoaded: boolean = false;
   edit_route = COMPONENTS.EDITION
 

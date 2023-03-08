@@ -4,6 +4,13 @@
       <mat-card-title>
         <h1>Lista de convocatorias</h1>
       </mat-card-title>
+      <mat-card-subtitle>
+        <mat-form-field>
+          <mat-label for="idioma_nuevo">Añadir nuevo idioma</mat-label>
+          <input matInput id="idioma_nuevo" [formControl]="nuevaConvocatoriaForm">
+          <mat-icon matSuffix>add</mat-icon>
+        </mat-form-field>
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <table mat-table [dataSource]="dataSource" *ngIf="listLoaded">

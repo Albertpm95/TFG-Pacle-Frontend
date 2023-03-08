@@ -30,7 +30,7 @@ export class ApiService {
     )
   }
   getRolesUsuario(): Observable<Rol[]> {
-    return this.http.get<Rol[]>(this.apiUrl + API_ENDPOINTS.CONFIG_LIST_ROL)
+    return this.http.get<Rol[]>(this.apiUrl + API_ENDPOINTS.CONFIG_ROL_LIST)
   }
   /** ---------------------------------------------------------------------- */
 
@@ -56,25 +56,25 @@ export class ApiService {
   /** Configuracion */
   getHorariosConvocatoria(): Observable<Horario[]> {
     return this.http.get<Horario[]>(
-      this.apiUrl + API_ENDPOINTS.CONFIG_LIST_HORARIO,
+      this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_LIST,
     )
   }
   addHorarioConvocatoria(horario: string): Observable<Horario> {
-    return this.http.put<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_CREATE_HORARIO, { horario })
+    return this.http.put<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_CREATE, { horario })
   }
   deleteHorarioConvocatoria(idHorario: number): Observable<Horario> {
-    return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_DELETE_HORARIO + idHorario)
+    return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_DELETE + idHorario)
   }
   getIdiomasConvocatoria(): Observable<Idioma[]> {
     return this.http.get<Idioma[]>(
-      this.apiUrl + API_ENDPOINTS.CONFIG_LIST_IDIOMA,
+      this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
   }
   addIdiomaConvocatoria(idioma: string): Observable<Idioma> {
-    return this.http.put<Idioma>(this.apiUrl + API_ENDPOINTS.CONFIG_CREATE_IDIOMA, { idioma })
+    return this.http.put<Idioma>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { idioma })
   }
   deleteIdiomaConvocatoria(idIdioma: number): Observable<Tipo> {
-    return this.http.delete<Tipo>(this.apiUrl + API_ENDPOINTS.CONFIG_DELETE_IDIOMA + idIdioma)
+    return this.http.delete<Tipo>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idIdioma)
   }
   /** ---------------------------------------------------------------------- */
 

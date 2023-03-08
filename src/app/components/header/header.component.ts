@@ -9,11 +9,10 @@ import { COMPONENTS, MODULES } from '@constants';
 })
 export class HeaderComponent {
   constructor(public router: Router) {
-    console.log('Constructor header');
   }
 
   logout() {
-    this.router.navigateByUrl('/' + MODULES.LOGIN);
+    this.router.navigateByUrl('/' + COMPONENTS.LOGIN);
   }
 
   volver() {

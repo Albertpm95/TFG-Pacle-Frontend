@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   constructor() {
-    console.log('Constructor footer');
   }
 }

@@ -5,7 +5,7 @@ import { Convocatoria } from './convocatoria'
 import { Expresion } from './expresion'
 
 export class Acta {
-  alumno: Alumno = { DNI: '', apellidos: '', nombre: '', id_alumno: '' }
+  alumno: Alumno = { dni: '', apellidos: '', nombre: '', id_alumno: '' }
   comprension: Comprension = new Comprension()
   convocatoria: Convocatoria = new Convocatoria()
   expresion: Expresion = new Expresion()

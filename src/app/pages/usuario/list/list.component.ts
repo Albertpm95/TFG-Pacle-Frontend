@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { COMPONENTS } from '@constants';
 import { Usuario } from '@models/usuario';
@@ -10,10 +9,9 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayedColumns: string[] = ['apellidos', 'estado', 'id_usuario', 'nombre', 'rol', 'username', 'acciones']
+  displayedColumns: string[] = ['id_usuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource()
 
-  nuevoUsuarioForm = new FormControl()
   listLoaded: boolean = false;
   edit_route = COMPONENTS.EDITION
 
@@ -25,8 +23,10 @@ export class ListComponent {
   private initializeList(): void {
     this.apiService.getUsuarios().subscribe((usuarios) => {
       if (usuarios) {
+        console.log(usuarios)
         this.dataSource = new MatTableDataSource(usuarios)
-        this.listLoaded = true
+        if (usuarios.length)
+          this.listLoaded = true
       }
     })
   }

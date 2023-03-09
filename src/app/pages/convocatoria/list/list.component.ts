@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { COMPONENTS } from '@constants';
 import { Convocatoria } from '@models/convocatoria';
@@ -10,10 +9,9 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayedColumns: string[] = ['lenguaje', 'fecha', 'estado', 'id_convocatoria', 'acciones']
+  displayedColumns: string[] = ['lenguaje', 'fecha', 'horario', 'estado', 'id_convocatoria', 'acciones']
   dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
-  nuevaConvocatoriaForm = new FormControl()
   listLoaded: boolean = false;
   edit_route = COMPONENTS.EDITION
 
@@ -24,9 +22,11 @@ export class ListComponent {
   }
   private initializeList(): void {
     this.apiService.getConvocatorias().subscribe((convocatorias) => {
+      console.log(convocatorias)
       if (convocatorias) {
         this.dataSource = new MatTableDataSource(convocatorias)
-        this.listLoaded = true
+        if (convocatorias.length)
+          this.listLoaded = true
       }
     })
   }

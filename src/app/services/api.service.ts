@@ -116,7 +116,7 @@ export class ApiService {
 
   /** Usuarios */
   getUsuarios(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
+    return this.http.get<Usuario[]>(this.apiUrl + API_ENDPOINTS.USUARIO_LIST)
   }
   searchUsuario(
     nombre: string,

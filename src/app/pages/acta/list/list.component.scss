@@ -1,6 +1,7 @@
-.section-title{
-  padding: 2rem;
-}
-table {
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }

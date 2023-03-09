@@ -1,6 +1,6 @@
 import { CONSTANTS } from 'app/constants'
 
-export class Comprension {
+export class ComprensionLectora {
   puntuacionMaximaParte: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
   puntuacionTarea1: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
   puntuacionTarea2: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
@@ -8,7 +8,6 @@ export class Comprension {
   puntosConseguidos: number = CONSTANTS.VALOR_TAREA_DEFECTO
   observaciones: string = ''
   porcentaje: number = CONSTANTS.VALOR_TAREA_DEFECTO
-  tipo: string = ''
 
   public crearComprension(puntuacionMaximaParte: number): void {
     this.puntuacionMaximaParte = puntuacionMaximaParte ?? this.puntuacionMaximaParte

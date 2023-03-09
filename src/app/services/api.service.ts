@@ -4,9 +4,10 @@ import { API_ENDPOINTS, MODULES } from '@constants'
 import { environment } from '@environments/environment'
 import { Acta } from '@models/acta'
 import { Alumno } from '@models/alumno'
-import { Comprension } from '@models/comprension'
+import { ComprensionAuditiva } from '@models/comprension_auditiva'
+import { ComprensionLectora } from '@models/comprension_lectora'
 import { Convocatoria } from '@models/convocatoria'
-import { Expresion } from '@models/expresion'
+import { ExpresionEscrita } from '@models/expresion_escrita'
 import { Horario } from '@models/horario'
 import { Idioma } from '@models/idioma'
 import { Rol } from '@models/rol'
@@ -85,17 +86,17 @@ export class ApiService {
   getActasID(idActa: number): Observable<Acta> {
     return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + idActa)
   }
-  updateComprensionLectora(comprensionLectora: Comprension): Observable<Comprension> {
-    return this.http.patch<Comprension>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionLectora })
+  updateComprensionLectora(comprensionLectora: ComprensionLectora): Observable<ComprensionLectora> {
+    return this.http.patch<ComprensionLectora>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionLectora })
   }
-  updateExpresionEscrita(expresionEscrita: Expresion): Observable<Expresion> {
-    return this.http.patch<Expresion>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
+  updateExpresionEscrita(expresionEscrita: ExpresionEscrita): Observable<ExpresionEscrita> {
+    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
   }
-  updateComprensionAuditiva(comprensionAuditiva: Comprension): Observable<Comprension> {
-    return this.http.patch<Comprension>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionAuditiva })
+  updateComprensionAuditiva(comprensionAuditiva: ComprensionAuditiva): Observable<ComprensionAuditiva> {
+    return this.http.patch<ComprensionAuditiva>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionAuditiva })
   }
-  updateExpresionOral(expresionEscrita: Expresion): Observable<Expresion> {
-    return this.http.patch<Expresion>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
+  updateExpresionOral(expresionEscrita: ExpresionEscrita): Observable<ExpresionEscrita> {
+    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
   }
   /** ---------------------------------------------------------------------- */
 

@@ -1,23 +1,30 @@
 import { CONSTANTS } from '@constants'
 import { Alumno } from './alumno'
-import { Comprension } from './comprension'
+import { ComprensionAuditiva } from './comprension_auditiva'
+import { ComprensionLectora } from './comprension_lectora'
 import { Convocatoria } from './convocatoria'
-import { Expresion } from './expresion'
+import { ExpresionEscrita } from './expresion_escrita'
+import { ExpresionOral } from './expresion_oral'
+
 
 export class Acta {
   alumno: Alumno = { dni: '', apellidos: '', nombre: '', id_alumno: '' }
-  comprension: Comprension = new Comprension()
+  comprensionAuditiva: ComprensionAuditiva = new ComprensionAuditiva()
+  comprensionLectora: ComprensionLectora = new ComprensionLectora()
   convocatoria: Convocatoria = new Convocatoria()
-  expresion: Expresion = new Expresion()
+  expresionEscrita: ExpresionEscrita = new ExpresionEscrita()
+  expresionOral: ExpresionOral = new ExpresionOral()
   id_acta?: string
   resultado: string = CONSTANTS.RESULTADO_ACTA
 
-  public cargarActa(alumno: Alumno, convocatoria: Convocatoria, expresion: Expresion, comprension: Comprension, id_acta: string): void {
+  public cargarActa(alumno: Alumno, convocatoria: Convocatoria, expresionEscrita: ExpresionEscrita, expresionOral: ExpresionOral, comprensionLectora: ComprensionLectora, comprensionAuditiva: ComprensionAuditiva, id_acta: string): void {
     if (id_acta) this.id_acta = id_acta
     this.alumno = alumno ?? this.alumno
     this.convocatoria = convocatoria ?? this.convocatoria
-    this.expresion = expresion ?? this.expresion
-    this.comprension = comprension ?? this.comprension
+    this.expresionEscrita = expresionEscrita ?? this.expresionEscrita
+    this.expresionOral = expresionOral ?? this.expresionOral
+    this.comprensionAuditiva = comprensionAuditiva ?? this.comprensionAuditiva
+    this.comprensionLectora = comprensionLectora ?? this.comprensionLectora
   }
 
   public corregirActa(acta?: Partial<Acta>): void {

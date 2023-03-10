@@ -8,7 +8,7 @@ import { ExpresionOral } from './expresion_oral'
 
 
 export class Acta {
-  alumno: Alumno = { dni: '', apellidos: '', nombre: '', id_alumno: '' }
+  alumno: Alumno | undefined
   comprensionAuditiva: ComprensionAuditiva = new ComprensionAuditiva()
   comprensionLectora: ComprensionLectora = new ComprensionLectora()
   convocatoria: Convocatoria = new Convocatoria()
@@ -19,7 +19,7 @@ export class Acta {
 
   public cargarActa(alumno: Alumno, convocatoria: Convocatoria, expresionEscrita: ExpresionEscrita, expresionOral: ExpresionOral, comprensionLectora: ComprensionLectora, comprensionAuditiva: ComprensionAuditiva, id_acta: string): void {
     if (id_acta) this.id_acta = id_acta
-    this.alumno = alumno ?? this.alumno
+    this.alumno = alumno
     this.convocatoria = convocatoria ?? this.convocatoria
     this.expresionEscrita = expresionEscrita ?? this.expresionEscrita
     this.expresionOral = expresionOral ?? this.expresionOral

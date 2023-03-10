@@ -1,19 +1,30 @@
 import { CONSTANTS } from '@constants'
+import { Horario } from './horario'
+import { Lenguaje } from './lenguaje'
 
 export class Convocatoria {
   estado: boolean = CONSTANTS.ESTADO_POR_DEFECTO
   fecha: Date = new Date()
-  horario: string = '00:00'
-  lenguaje: string = CONSTANTS.LENGUAJE_POR_DEFECTO
-  puntuacionMaximaParteComprensionAuditiva: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
-  puntuacionMaximaParteComprensionLectora: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
-  puntuacionMaximaParteExpresionEscrita: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
-  puntuacionMaximaParteExpresionOral: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
-  tipo: string = CONSTANTS.TIPO_POR_DEFECTO
-  id_convocatoria?: number
+  horario: Horario = new Horario
+  lenguaje: Lenguaje = new Lenguaje
+  comprension_auditiva_puntuacion_maxima_parte: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  comprension_lectora_puntuacion_maxima_parte: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  expresion_escrita_puntuacion_maxima_parte: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  expresion_oral_puntuacion_maxima_parte: number = CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO
+  id_convocatoria: number | undefined
 
-  constructor(fechaParcial?: Date, convocatoria?: Partial<Convocatoria>) {
-    Object.assign(this, convocatoria)
-    this.fecha = fechaParcial ? fechaParcial : this.fecha
+  constructor(convocatoria?: Partial<Convocatoria>, fecha?: Date) {
+    if (fecha)
+      this.fecha = fecha
+
+    if (convocatoria) {
+      this.horario = convocatoria.horario ?? this.horario
+      this.lenguaje = convocatoria.lenguaje ?? this.lenguaje
+      this.comprension_auditiva_puntuacion_maxima_parte = convocatoria.comprension_auditiva_puntuacion_maxima_parte ?? this.comprension_auditiva_puntuacion_maxima_parte
+      this.comprension_lectora_puntuacion_maxima_parte = convocatoria.comprension_lectora_puntuacion_maxima_parte ?? this.comprension_lectora_puntuacion_maxima_parte
+      this.expresion_escrita_puntuacion_maxima_parte = convocatoria.expresion_escrita_puntuacion_maxima_parte ?? this.expresion_escrita_puntuacion_maxima_parte
+      this.expresion_oral_puntuacion_maxima_parte = convocatoria.expresion_oral_puntuacion_maxima_parte ?? this.expresion_oral_puntuacion_maxima_parte
+      this.id_convocatoria = convocatoria.id_convocatoria
+    }
   }
 }

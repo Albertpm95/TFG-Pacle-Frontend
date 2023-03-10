@@ -1,5 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { COMPONENTS, CONSTANTS, MODULES } from '@constants';
+import { Acta } from '@models/acta';
+import { Alumno } from '@models/alumno';
+
 import { ApiService } from '@services/api.service';
 
 @Component({
@@ -7,21 +12,10 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./edition.component.scss']
 })
 export class EditionComponent {
-  @Input() id_acta?: number
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private apiService: ApiService,
-  ) {
+  constructor() {
 
   }
   ngOnInit(): void {
 
-  }
-
-  private initializeForm(): void {
-    console.log('Initialize Acta form')
-  }
-  public createActa(): void {
   }
 }

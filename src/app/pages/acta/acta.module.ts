@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core'
 import { SharedModule } from '@shared/shared.module'
 import { ActaRoutingModule } from './acta-routing.module'
-import { EditionComponent } from './edition/edition.component'
+import { EditionModule } from './edition/edition.module'
+
 import { ListComponent } from './list/list.component'
 
 @NgModule({
-  declarations: [EditionComponent, ListComponent],
+  declarations: [ListComponent],
   imports: [
     ActaRoutingModule,
+    EditionModule,
     SharedModule
   ],
 })

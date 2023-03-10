@@ -6,7 +6,7 @@
     <mat-card-content>
       <mat-nav-list *ngIf="actionsList">
         <mat-list-item *ngFor="let action of actionsList">
-          <a [routerLink]="'/' + action.url">{{action.url}}
+          <a [routerLink]="'/' + action.url">
             <span matListItemTitle> {{action.action_label}}</span>
           </a>
         </mat-list-item>

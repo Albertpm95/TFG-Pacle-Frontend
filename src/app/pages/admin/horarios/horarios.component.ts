@@ -16,8 +16,9 @@ export class HorariosComponent {
 
   constructor(private apiService: ApiService) { }
 
-  public deleteHorarioConvocatoria(idTipo: number) {
-    this.apiService.deleteHorarioConvocatoria(idTipo)
+  public deleteHorarioConvocatoria(id_horario: number | undefined) {
+    if (id_horario)
+      this.apiService.deleteHorarioConvocatoria(id_horario)
   }
 
   public addHorarioConvocatoria() {

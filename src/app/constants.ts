@@ -3,7 +3,8 @@ import { UserAction } from "@models/acciones-usuario"
 export class CONSTANTS {
   static ESTADO_POR_DEFECTO: boolean = true
   static HORARIO: string = 'horario'
-  static IDIOMA: string = 'idioma'
+  static HORARIO_POR_DEFECTO: string = '09:00'
+  static LENGUAJE: string = 'lenguaje'
   static LENGUAJE_POR_DEFECTO: string = 'Español'
   static NOMBRE_CORRECTOR_DEFECTO: string = 'No asignado'
   static RESULTADO_ACTA: string = 'No corregido'
@@ -61,9 +62,9 @@ export class API_ENDPOINTS {
   static CONFIG_HORARIO_CREATE = API_Routers.CONFIG + '/' + CONSTANTS.HORARIO + '/' + ACTIONS.CREATE
   static CONFIG_HORARIO_DELETE = API_Routers.CONFIG + '/' + CONSTANTS.HORARIO + '/' + ACTIONS.DELETE
   static CONFIG_HORARIO_LIST = API_Routers.CONFIG + '/' + CONSTANTS.HORARIO + '/' + ACTIONS.LIST
-  static CONFIG_IDIOMA_CREATE = API_Routers.CONFIG + '/' + CONSTANTS.IDIOMA + '/' + ACTIONS.CREATE
-  static CONFIG_IDIOMA_DELETE = API_Routers.CONFIG + '/' + CONSTANTS.IDIOMA + '/' + ACTIONS.DELETE
-  static CONFIG_IDIOMA_LIST = API_Routers.CONFIG + '/' + CONSTANTS.IDIOMA + '/' + ACTIONS.LIST
+  static CONFIG_IDIOMA_CREATE = API_Routers.CONFIG + '/' + CONSTANTS.LENGUAJE + '/' + ACTIONS.CREATE
+  static CONFIG_IDIOMA_DELETE = API_Routers.CONFIG + '/' + CONSTANTS.LENGUAJE + '/' + ACTIONS.DELETE
+  static CONFIG_IDIOMA_LIST = API_Routers.CONFIG + '/' + CONSTANTS.LENGUAJE + '/' + ACTIONS.LIST
   static CONFIG_ROL_LIST = API_Routers.CONFIG + '/' + ACTIONS.LIST + '/' + CONSTANTS.ROL
   static CONVOCATORIA_CREATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.CREATE
   static CONVOCATORIA_DELETE = API_Routers.CONVOCATORIA + '/' + ACTIONS.DELETE

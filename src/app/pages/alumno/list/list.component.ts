@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { COMPONENTS } from '@constants';
+import { COMPONENTS, MODULES } from '@constants';
 import { Alumno } from '@models/alumno';
 import { ApiService } from '@services/api.service';
 
@@ -11,9 +11,10 @@ import { ApiService } from '@services/api.service';
 export class ListComponent {
   displayedColumns: string[] = ['dni', 'id_alumno', 'nombre', 'apellidos', 'acciones']
   dataSource: MatTableDataSource<Alumno> = new MatTableDataSource()
-  listLoaded: boolean = false;
-  edit_route = COMPONENTS.EDITION
 
+  listLoaded: boolean = false;
+  edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
+  
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {

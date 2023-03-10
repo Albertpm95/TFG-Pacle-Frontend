@@ -1,30 +1,30 @@
 <div class="convocatoria-form-container container" *ngIf="convocatoriaNuevaForm">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Creaccion de una convocatoria</mat-card-title>
+      <mat-card-title *ngIf="convocatoria.id_convocatoria">Creaccion de una convocatoria</mat-card-title>
+      <mat-card-title *ngIf="!convocatoria.id_convocatoria">Edicion de una convocatoria</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="convocatoriaNuevaForm">
+      <form [formGroup]="convocatoriaNuevaForm" *ngIf="!loading">
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
             <mat-select formControlName="lenguaje">
-              <mat-option [value]="lenguaje" *ngFor="let lenguaje of listaIdiomasConvocatoria$ | async">{{ lenguaje
-                }}</mat-option>
+              <mat-option [value]="lenguaje.lenguaje" *ngFor="let lenguaje of listaIdiomasConvocatoria$ | async">{{ lenguaje.lenguaje }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label for="fechaParcial">Choose a date</mat-label>
-            <input matInput startAt="fechaParcial" [matDatepicker]="fechaParcial" formControlName="fechaParcial">
+            <input matInput startAt="fechaParcial" [matDatepicker]="fechaParcial" formControlName="fechaParcial" />
             <mat-datepicker-toggle matIconSuffix [for]="fechaParcial"></mat-datepicker-toggle>
             <mat-datepicker #fechaParcial></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
             <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
             <mat-select formControlName="horarioParcial">
-              <mat-option [value]="horario" *ngFor="let horario of listaHorariosConvocatoria$ | async">{{ horario }}</mat-option>
+              <mat-option [value]="horario.horario" *ngFor="let horario of listaHorariosConvocatoria$ | async">{{ horario.horario }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -42,21 +42,22 @@
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesomaximoParteComprensionAuditiva" name="pesomaximoParteComprensionAuditiva">Peso maximo de
-              la parte de Comprension auditiva</mat-label>
+            <mat-label for="pesomaximoParteComprensionAuditiva" name="pesomaximoParteComprensionAuditiva">Peso maximo de la parte de Comprension auditiva</mat-label>
             <input matInput type="number" formControlName="pesomaximoParteComprensionAuditiva" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesomaximoParteExpresionOral" name="pesomaximoParteExpresionOral">Peso maximo de la parte de
-              Expresion oral</mat-label>
+            <mat-label for="pesomaximoParteExpresionOral" name="pesomaximoParteExpresionOral">Peso maximo de la parte de Expresion oral</mat-label>
             <input matInput type="number" formControlName="pesomaximoParteExpresionOral" />
           </mat-form-field>
         </div>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()">
+      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()" *ngIf="convocatoria.id_convocatoria">
         Crear Convocatoria
+      </button>
+      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()" *ngIf="!convocatoria.id_convocatoria">
+        Actualizar Convocatoria
       </button>
     </mat-card-actions>
   </mat-card>

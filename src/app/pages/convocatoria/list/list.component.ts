@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { COMPONENTS } from '@constants';
+import { COMPONENTS, MODULES } from '@constants';
 import { Convocatoria } from '@models/convocatoria';
 import { ApiService } from '@services/api.service';
 
@@ -13,7 +13,7 @@ export class ListComponent {
   dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
   listLoaded: boolean = false;
-  edit_route = COMPONENTS.EDITION
+  edit_route = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.EDITION
 
   constructor(private apiService: ApiService) { }
 
@@ -22,7 +22,6 @@ export class ListComponent {
   }
   private initializeList(): void {
     this.apiService.getConvocatorias().subscribe((convocatorias) => {
-      console.log(convocatorias)
       if (convocatorias) {
         this.dataSource = new MatTableDataSource(convocatorias)
         if (convocatorias.length)

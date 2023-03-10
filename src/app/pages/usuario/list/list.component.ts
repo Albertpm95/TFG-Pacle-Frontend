@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { COMPONENTS } from '@constants';
+import { COMPONENTS, MODULES } from '@constants';
 import { Usuario } from '@models/usuario';
 import { ApiService } from '@services/api.service';
 
@@ -13,7 +13,7 @@ export class ListComponent {
   dataSource: MatTableDataSource<Usuario> = new MatTableDataSource()
 
   listLoaded: boolean = false;
-  edit_route = COMPONENTS.EDITION
+  edit_route = '/' + MODULES.USUARIO + '/' + COMPONENTS.EDITION
 
   constructor(private apiService: ApiService) { }
 

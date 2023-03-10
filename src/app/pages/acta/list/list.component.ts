@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
-import { COMPONENTS } from '@constants'
+import { COMPONENTS, MODULES } from '@constants'
 import { Acta } from '@models/acta'
 import { ApiService } from '@services/api.service'
 @Component({
@@ -8,12 +8,11 @@ import { ApiService } from '@services/api.service'
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  displayedColumns: string[] = ['id_acta', 'alumno', 'comprension', 'convocatoria', 'expresion', 'resultado', 'acciones']
+  displayedColumns: string[] = ['id_acta', 'alumno', 'convocatoria', 'resultado', 'acciones']
   dataSource: MatTableDataSource<Acta> = new MatTableDataSource()
 
-
   listLoaded: boolean = false;
-  edit_route = COMPONENTS.EDITION
+  edit_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
 
   constructor(private apiService: ApiService) { }
 

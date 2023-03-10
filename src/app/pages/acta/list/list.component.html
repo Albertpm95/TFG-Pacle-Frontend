@@ -5,7 +5,7 @@
         <mat-card-title>
           <h1>Lista de actas</h1>
         </mat-card-title>
-        <button mat-raised-button>Añadir acta nuevo<mat-icon matPrefix>add</mat-icon></button>
+        <button mat-raised-button [routerLink]="[edit_route]">Añadir acta nuevo<mat-icon matPrefix>add</mat-icon></button>
       </div>
     </mat-card-header>
     <mat-card-content>
@@ -13,44 +13,32 @@
         <div>
           <ng-container matColumnDef="id_acta">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let id_acta">
-              {{id_acta }}
+            <td mat-cell *matCellDef="let acta">
+              {{ acta.id_acta }}
             </td>
           </ng-container>
           <ng-container matColumnDef="alumno">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let alumno">
-              {{alumno }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="comprension">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let comprension">
-              {{ comprension}}
+            <td mat-cell *matCellDef="let acta">
+              {{acta.alumno.dni }}
             </td>
           </ng-container>
           <ng-container matColumnDef="convocatoria">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let convocatoria">
-              {{ convocatoria}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="expresion">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let expresion">
-              {{ expresion}}
+            <td mat-cell *matCellDef="let acta">
+              {{ acta.convocatoria}}
             </td>
           </ng-container>
           <ng-container matColumnDef="resultado">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let resultado">
-              {{ resultado}}
+            <td mat-cell *matCellDef="let acta">
+              {{ acta.resultado}}
             </td>
           </ng-container>
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let id_acta">
-              <button mat-icon-button><mat-icon>edit</mat-icon></button>
+            <td mat-cell *matCellDef="let acta">
+              <button mat-icon-button [routerLink]="[edit_route, { id_acta: acta.id_acta}]"><mat-icon>edit</mat-icon></button>
               <button mat-icon-button><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>

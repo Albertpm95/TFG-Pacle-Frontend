@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Idioma } from '@models/idioma';
+import { Lenguaje } from '@models/lenguaje';
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -13,12 +13,13 @@ import { Observable } from 'rxjs/internal/Observable';
 export class IdiomasComponent {
 
   nuevoIdiomaForm = new FormControl()
-  idiomas$: Observable<Idioma[]> = this.apiService.getIdiomasConvocatoria()
+  idiomas$: Observable<Lenguaje[]> = this.apiService.getIdiomasConvocatoria()
 
   constructor(private apiService: ApiService) { }
 
-  public deleteIdiomaConvocatoria(idIdioma: number) {
-    this.apiService.deleteIdiomaConvocatoria(idIdioma)
+  public deleteIdiomaConvocatoria(id_lenguaje: number | undefined) {
+    if (id_lenguaje)
+      this.apiService.deleteIdiomaConvocatoria(id_lenguaje)
   }
 
   public addIdiomaConvocatoria() {

@@ -3,3 +3,4 @@ node_modules
 \.vscode
 dist
 environments
+src/app/models/fake-db.ts

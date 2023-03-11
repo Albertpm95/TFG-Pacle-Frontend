@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-expresion-escrita',
+  selector: 'expresion-escrita',
   templateUrl: './expresion-escrita.component.html',
   styleUrls: ['./expresion-escrita.component.scss']
 })

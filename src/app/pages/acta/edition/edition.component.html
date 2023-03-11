@@ -1,3 +1,58 @@
 <div class="acta-edition-container">
-
+  <div class="header">
+    <div class="info-corrector" *ngIf="acta.corrector">
+      <label>
+        <h5>ID:</h5> {{ acta.corrector.id_usuario }}
+      </label>
+      <label *ngIf="acta.corrector.rol">
+        <h5>Rol:</h5> {{ acta.corrector.rol.rol }}
+      </label>
+      <label>
+        <h5>Corrector:</h5> {{ acta.corrector.nombre }} {{ acta.corrector.apellidos }}
+      </label>
+    </div>
+    <div class="info-convocatoria" *ngIf="acta.convocatoria">
+      <label>
+        <h5>ID:</h5> {{ acta.convocatoria.id_convocatoria }}
+      </label>
+      <label>
+        <h5>Fecha:</h5> {{ acta.convocatoria.fecha | date }}
+      </label>
+      <label>
+        <h5>Hora:</h5> {{ acta.convocatoria.horario.horario }}
+      </label>
+      <label>
+        <h5>Lenguaje:</h5> {{ acta.convocatoria.lenguaje.lenguaje }}
+      </label>
+      <label>
+        <h5>Nivel:</h5> {{ acta.convocatoria.nivel.nivel }}
+      </label>
+    </div>
+  </div>
+  <div class="content">
+    <div class="bloque-lectura-escritura">
+      <div class="parte"></div>
+      <div class="parte"></div>
+    </div>
+    <div class="bloque-oral-auditiva">
+      <div class="parte"></div>
+      <div class="parte"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="info-acta" *ngIf="acta">
+      <label>
+        <h5>Resultado bloque lectoescritura:</h5> 50%
+      </label>
+      <label>
+        <h5>Resultado bloque destrezas orales:</h5> 75%
+      </label>
+      <label>
+        <h5>Resultado global de la prueba:</h5> 75%
+      </label>
+      <label>
+        <h5>Resultado:</h5> {{ acta.resultado }}
+      </label>
+    </div>
+  </div>
 </div>

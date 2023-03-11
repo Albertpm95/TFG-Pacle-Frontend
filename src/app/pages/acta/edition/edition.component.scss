@@ -1,0 +1,83 @@
+.acta-edition-container {
+  border: solid 1px black;
+  padding: 1rem;
+  height: 100%;
+  .header {
+    padding: 1rem;
+    margin: 1rem;
+    border: solid 1px black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .info-corrector {
+      padding: 1rem;
+      margin: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: solid 1px black;
+      label {
+        margin: 0.25rem 0.75rem;
+        h5 {
+          margin: 0.25rem;
+        }
+      }
+    }
+    .info-convocatoria {
+      padding: 1rem;
+      margin: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: solid 1px black;
+      label {
+        margin: 0.25rem 0.75rem;
+        h5 {
+          margin: 0.25rem 0;
+        }
+      }
+    }
+  }
+  .content {
+    padding: 1rem;
+    margin: 1rem;
+    border: solid 1px black;
+    .bloque-lectura-escritura {
+      display: flex;
+      flex-direction: row;
+      padding: 1rem;
+      margin: 1rem;
+      border: solid 1px black;
+    }
+    .bloque-oral-auditiva {
+      display: flex;
+      flex-direction: row;
+      padding: 1rem;
+      margin: 1rem;
+      border: solid 1px black;
+    }
+  }
+  .footer {
+    .info-acta {
+      padding: 1rem;
+      margin: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: solid 1px black;
+      label {
+        margin: 0.25rem 0.75rem;
+        h5 {
+          margin: 0.25rem 0;
+        }
+      }
+    }
+  }
+}
+.parte {
+  padding: 1rem;
+  margin: 1rem;
+  border: solid 1px black;
+  height: 50%;
+  width: 50%;
+}

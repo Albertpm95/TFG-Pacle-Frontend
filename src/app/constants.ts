@@ -7,6 +7,7 @@ export class CONSTANTS {
   static LENGUAJE: string = 'lenguaje'
   static LENGUAJE_POR_DEFECTO: string = 'Español'
   static NOMBRE_CORRECTOR_DEFECTO: string = 'No asignado'
+  static NOMBRE_TAREA_DEFECTO: string = 'No asignado'
   static RESULTADO_ACTA: string = 'No corregido'
   static PORCIENTO: number = 100 // Para calcular el porcentaje
   static ROL: string = 'rol'

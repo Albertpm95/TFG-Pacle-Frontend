@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { COMPONENTS, CONSTANTS, MODULES } from '@constants';
-import { Convocatoria } from '@models/convocatoria';
 import { Horario } from '@models/horario';
 import { Lenguaje } from '@models/lenguaje';
 
@@ -16,7 +15,8 @@ import { Observable } from 'rxjs';
 export class EditionComponent {
   constants = CONSTANTS
   convocatoriaNuevaForm: FormGroup = new FormGroup('')
-  convocatoria: Convocatoria = new Convocatoria()
+
+  creating: boolean = true
   loading: boolean = true
   listaIdiomasConvocatoria$: Observable<Lenguaje[]> = this.apiService.getIdiomasConvocatoria()
   listaHorariosConvocatoria$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
@@ -51,17 +51,17 @@ export class EditionComponent {
 
   private loadForm(idConvocatoria: number): void {
     this.apiService.getConvocatoria(idConvocatoria).subscribe(convocatoria => {
-      this.convocatoria = convocatoria
       this.convocatoriaNuevaForm = this.formBuilder.group({
-        fechaParcial: [this.convocatoria.fecha, Validators.required], // Date sin el horario
-        horarioParcial: [this.convocatoria.horario.horario, Validators.required],
-        lenguaje: [this.convocatoria.lenguaje.lenguaje, Validators.required],
-        pesomaximoParteComprensionAuditiva: [this.convocatoria.comprension_auditiva_puntuacion_maxima_parte, Validators.required],
-        pesoMaximoParteComprensionLectora: [this.convocatoria.comprension_lectora_puntuacion_maxima_parte, Validators.required],
-        pesomaximoParteExpresionEscrita: [this.convocatoria.expresion_escrita_puntuacion_maxima_parte, Validators.required],
-        pesomaximoParteExpresionOral: [this.convocatoria.expresion_oral_puntuacion_maxima_parte, Validators.required],
+        fechaParcial: [convocatoria.fecha, Validators.required], // Date sin el horario
+        horarioParcial: [convocatoria.horario.horario, Validators.required],
+        lenguaje: [convocatoria.lenguaje.lenguaje, Validators.required],
+        pesomaximoParteComprensionAuditiva: [convocatoria.comprension_auditiva_puntuacion_maxima_parte, Validators.required],
+        pesoMaximoParteComprensionLectora: [convocatoria.comprension_lectora_puntuacion_maxima_parte, Validators.required],
+        pesomaximoParteExpresionEscrita: [convocatoria.expresion_escrita_puntuacion_maxima_parte, Validators.required],
+        pesomaximoParteExpresionOral: [convocatoria.expresion_oral_puntuacion_maxima_parte, Validators.required],
       })
       console.log(this.convocatoriaNuevaForm.value)
+      this.creating = false
       this.loading = false
     })
   }
@@ -74,13 +74,13 @@ export class EditionComponent {
       let fechaParcial = new Date(dateString)
       fechaParcial.setHours(horaParcial[0])
       fechaParcial.setMinutes(horaParcial[1])
-      this.convocatoria = new Convocatoria(this.convocatoriaNuevaForm.value, fechaParcial)
-      this.apiService.updateConvocatoria(this.convocatoria).subscribe(convocatoria => {
+      /*let convocatoria: Convocatoria
+      this.apiService.updateConvocatoria(convocatoria).subscribe(convocatoria => {
         console.log(convocatoria)
         if (convocatoria.id_convocatoria)
           this.router.navigate([this.list_route])
       })
+      */
     }
-    this.loading = false
   }
 }

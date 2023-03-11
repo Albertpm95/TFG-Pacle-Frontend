@@ -8,10 +8,10 @@ import { ComprensionAuditiva } from '@models/comprension_auditiva'
 import { ComprensionLectora } from '@models/comprension_lectora'
 import { Convocatoria } from '@models/convocatoria'
 import { ExpresionEscrita } from '@models/expresion_escrita'
+import { FakeDB } from '@models/fake-db'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
 import { Rol } from '@models/rol'
-import { Tipo } from '@models/tipo'
 import { Usuario } from '@models/usuario'
 import { Observable, of } from 'rxjs'
 
@@ -77,8 +77,8 @@ export class ApiService {
   addIdiomaConvocatoria(lenguaje: string): Observable<Lenguaje> {
     return this.http.put<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { lenguaje })
   }
-  deleteIdiomaConvocatoria(idIdioma: number): Observable<Tipo> {
-    return this.http.delete<Tipo>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idIdioma)
+  deleteIdiomaConvocatoria(idIdioma: number): Observable<Lenguaje> {
+    return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idIdioma)
   }
   /** ---------------------------------------------------------------------- */
 
@@ -117,10 +117,9 @@ export class ApiService {
     return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
   getAlumnoID(id_alumno: number): Observable<Alumno> {
-    console.log(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + id_alumno)
     //return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + id_alumno)
-    let alumno: Alumno = { dni: '20237490C', apellidos: "Swanson", nombre: "Bob", id_alumno: 1 }
-    return of(alumno)
+    console.log('Retrieving fake alumno')
+    return of(FakeDB.alumnoFake)
   }
   updateAlumno(alumno: Alumno): Observable<Alumno> {
     return this.http.post<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE, { alumno })

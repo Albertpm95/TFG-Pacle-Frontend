@@ -36,7 +36,8 @@
         </comprension-lectora>
       </div>
       <div class="parte">
-        <expresion-escrita></expresion-escrita>
+        <expresion-escrita [expresionEscrita]="acta.expresionEscrita" [puntuacionMaxima]="acta.convocatoria.expresion_escrita_puntuacion_maxima_parte">
+        </expresion-escrita>
       </div>
     </div>
     <div class="bloque-oral-auditiva">
@@ -45,7 +46,8 @@
         </comprension-auditiva>
       </div>
       <div class="parte">
-        <expresion-oral></expresion-oral>
+        <expresion-oral [expresionOral]="acta.expresionOral" [puntuacionMaxima]="acta.convocatoria.expresion_oral_puntuacion_maxima_parte">
+        </expresion-oral>
       </div>
     </div>
   </div>

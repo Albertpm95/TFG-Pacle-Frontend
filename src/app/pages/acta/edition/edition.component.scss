@@ -1,17 +1,17 @@
 .acta-edition-container {
   border: solid 1px black;
-  padding: 1rem;
+  padding: 0.5rem;
   height: 100%;
   .header {
-    padding: 1rem;
-    margin: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
     border: solid 1px black;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .info-corrector {
-      padding: 1rem;
-      margin: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -24,8 +24,8 @@
       }
     }
     .info-convocatoria {
-      padding: 1rem;
-      margin: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -39,28 +39,28 @@
     }
   }
   .content {
-    padding: 1rem;
-    margin: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
     border: solid 1px black;
     .bloque-lectura-escritura {
       display: flex;
       flex-direction: row;
-      padding: 1rem;
-      margin: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem;
       border: solid 1px black;
     }
     .bloque-oral-auditiva {
       display: flex;
       flex-direction: row;
-      padding: 1rem;
-      margin: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem;
       border: solid 1px black;
     }
   }
   .footer {
     .info-acta {
-      padding: 1rem;
-      margin: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -75,8 +75,8 @@
   }
 }
 .parte {
-  padding: 1rem;
-  margin: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
   border: solid 1px black;
   height: 50%;
   width: 50%;

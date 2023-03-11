@@ -3,6 +3,7 @@ import { Usuario } from "./usuario"
 
 
 export interface ExpresionOral {
+  id_expresion_oral?: number
   observaciones: string
   puntuacionMaximaParte: number
   porcentaje: number

@@ -2,10 +2,11 @@ import { Tarea } from './tareaExpresion'
 import { Usuario } from './usuario'
 
 export interface ComprensionAuditiva {
-  puntuacionMaximaParte: number
+  id_comprension_auditiva?: number
+  puntuacionMaximaParte?: number
   listaTareas: Tarea[]
-  puntosConseguidos: number
+  puntosConseguidos?: number
   observaciones: string
-  porcentaje: number
+  porcentaje?: number
   corrector: Usuario
 }

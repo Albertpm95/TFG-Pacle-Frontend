@@ -29,8 +29,8 @@
     </form>
   </div>
   <div class="footer">
-    <label>Puntuacion total:</label>
-    <label>Porcentaje: </label>
+    <label *ngIf="comprensionAuditiva && comprensionAuditiva.puntosConseguidos">Puntuacion total: {{ comprensionAuditiva.puntosConseguidos }}</label>
+    <label *ngIf="comprensionAuditiva && comprensionAuditiva.porcentaje">Porcentaje: {{ comprensionAuditiva.porcentaje }} %</label>
   </div>
 </div>
 <div class="loading" *ngIf="loading">

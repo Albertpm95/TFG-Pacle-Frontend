@@ -32,7 +32,8 @@
   <div class="content">
     <div class="bloque-lectura-escritura">
       <div class="parte">
-        <comprension-lectora></comprension-lectora>
+        <comprension-lectora [comprensionLectora]="acta.comprensionLectora" [puntuacionMaxima]="acta.convocatoria.comprension_lectora_puntuacion_maxima_parte">
+        </comprension-lectora>
       </div>
       <div class="parte">
         <expresion-escrita></expresion-escrita>
@@ -40,7 +41,8 @@
     </div>
     <div class="bloque-oral-auditiva">
       <div class="parte">
-        <comprension-auditiva [comprensionAuditiva]="acta.comprensionAuditiva" [puntuacionMaxima]="acta.convocatoria.comprension_auditiva_puntuacion_maxima_parte"></comprension-auditiva>
+        <comprension-auditiva [comprensionAuditiva]="acta.comprensionAuditiva" [puntuacionMaxima]="acta.convocatoria.comprension_auditiva_puntuacion_maxima_parte">
+        </comprension-auditiva>
       </div>
       <div class="parte">
         <expresion-oral></expresion-oral>
@@ -50,13 +52,13 @@
   <div class="footer">
     <div class="info-acta" *ngIf="acta">
       <label>
-        <h5>Resultado bloque lectoescritura:</h5> 50%
+        <h5>Resultado bloque lectoescritura:</h5> {{acta.resultado_bloque_lectoescritura}}%
       </label>
       <label>
-        <h5>Resultado bloque destrezas orales:</h5> 75%
+        <h5>Resultado bloque destrezas orales:</h5> {{acta.resultado_bloque_destrezas_orales}}%
       </label>
       <label>
-        <h5>Resultado global de la prueba:</h5> 75%
+        <h5>Resultado global de la prueba:</h5> {{acta.resultado_global}}%
       </label>
       <label>
         <h5>Resultado:</h5> {{ acta.resultado }}

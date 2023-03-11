@@ -12,9 +12,12 @@ export interface Acta {
   comprensionAuditiva: ComprensionAuditiva
   comprensionLectora: ComprensionLectora
   convocatoria: Convocatoria
+  corrector: Usuario
   expresionEscrita: ExpresionEscrita
   expresionOral: ExpresionOral
   id_acta?: number
   resultado: string
-  corrector: Usuario
+  resultado_bloque_lectoescritura: number
+  resultado_bloque_destrezas_orales: number
+  resultado_global: number
 }

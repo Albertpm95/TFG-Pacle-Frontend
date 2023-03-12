@@ -4,17 +4,16 @@
   .header {
     padding: 0.25rem;
     margin: 0.5rem;
-
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     .info-corrector {
       padding: 0.25rem;
       margin: 0.5rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-
+      width: 40%;
       label {
         margin: 0.25rem 0.75rem;
         h5 {
@@ -26,9 +25,9 @@
       padding: 0.25rem;
       margin: 0.5rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-
+      width: 40%;
       label {
         margin: 0.25rem 0.75rem;
         h5 {
@@ -40,7 +39,6 @@
   .content {
     padding: 0.25rem;
     margin: 0.5rem;
-
     .bloque-lectura-escritura {
       display: flex;
       flex-direction: row;
@@ -59,9 +57,8 @@
       padding: 0.25rem;
       margin: 0.5rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
-
       label {
         margin: 0.25rem 0.75rem;
         h5 {

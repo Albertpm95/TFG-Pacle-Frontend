@@ -1,12 +1,8 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpResponse
+  HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 } from '@angular/common/http';
-import { catchError, Observable, retry, throwError, timer } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class ErrorCatchingInterceptor implements HttpInterceptor {
@@ -15,15 +11,14 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      retry({
-        count: 0,
-        delay: (_, retryCount) => timer(retryCount * 1000),
-      }),
+      //      retry({        count: 0,        delay: (_, retryCount) => timer(retryCount * 1000),      }),
       catchError((error) => {
-        console.log('Error interceptado')
+        if (error instanceof HttpErrorResponse) { }
+        else {
+          console.log('An error ocurred.')
+        }
         return throwError(() => {
-          console.log('Error rethrown')
-          return error
+          return new error(error.statusText)
         })
       })
     )

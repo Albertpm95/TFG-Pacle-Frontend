@@ -11,7 +11,6 @@ export class CONSTANTS {
   static RESULTADO_ACTA: string = 'No corregido'
   static PORCIENTO: number = 100 // Para calcular el porcentaje
   static ROL: string = 'rol'
-  static TIPO_POR_DEFECTO: string = 'Ordinaria'
   static VALOR_PUNTUACION_MAX_DEFECTO: number = 0
   static VALOR_TAREA_DEFECTO: number = 0
   static PANEL: string = 'panel'
@@ -35,7 +34,7 @@ export class API_Routers {
   static COMPRENSION = 'comprension'
   static CONFIG = 'config'
   static CONVOCATORIA = 'convocatoria'
-  static EXPRESION = 'expression'
+  static EXPRESION = 'expresion'
   static LOGIN = 'login'
   static USUARIO = 'usuario'
 }

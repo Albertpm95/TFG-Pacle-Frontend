@@ -22,6 +22,7 @@ export class ComprensionAuditivaComponent {
   corrector$: Observable<Usuario[]> = this.apiService.getUsuarios()
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
+
   ngOnInit() {
     this.comprensionAuditiva.id_comprension_auditiva ? this.loadForm() : this.initializeNewForm()
     this.comprensionAuditiva.puntuacionMaximaParte = this.puntuacionMaxima
@@ -36,6 +37,7 @@ export class ComprensionAuditivaComponent {
     })
     this.loading = false
   }
+
   private loadForm() { this.loading = false }
 
   private loadTareas() {
@@ -48,6 +50,7 @@ export class ComprensionAuditivaComponent {
     })
 
   }
+
   public get listaTareas() {
     return this.form.get('listaTareas') as FormArray;
   }
@@ -72,6 +75,7 @@ export class ComprensionAuditivaComponent {
     this.comprensionAuditiva.puntosConseguidos = puntosTotales
     return puntosTotales
   }
+
   private extractForm(): void {
     this.comprensionAuditiva = {
       corrector: this.form.value['corrector'],

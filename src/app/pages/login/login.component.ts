@@ -35,10 +35,7 @@ export class LoginComponent implements OnInit {
       let login_form_data = new FormData()
       login_form_data.append('username', this.loginForm.value.username)
       login_form_data.append('password', this.loginForm.value.password)
-      this.authService.login(login_form_data).subscribe((data) => {
-        console.log('Subscribe login', data)
-        this.router.navigateByUrl(COMPONENTS.MENU)
-      })
+      this.authService.login(login_form_data)//.subscribe((data) => {        this.router.navigateByUrl(COMPONENTS.MENU)      })
     }
     this.router.navigateByUrl(COMPONENTS.MENU) // TODO Remove
   }

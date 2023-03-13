@@ -1,12 +1,12 @@
-import { Tarea } from './tareaExpresion'
+import { Tarea } from './tarea'
 import { Usuario } from './usuario'
 
 export interface ComprensionLectora {
+  corrector: Usuario
   id_comprension_lectora?: number
-  puntuacionMaximaParte: number
-  listaTareas: Tarea[]
-  puntosConseguidos: number
+  lista_tareas: Tarea[]
   observaciones: string
   porcentaje: number
-  corrector: Usuario
+  puntos_conseguidos: number
+  puntuacion_maxima: number
 }

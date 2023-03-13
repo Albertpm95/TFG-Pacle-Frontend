@@ -1,13 +1,12 @@
-import { Tarea } from './tareaExpresion'
-import { Usuario } from './usuario'
+import { TareaExpresion } from './tarea'
 
 
 export interface ExpresionEscrita {
   id_expresion_escrita?: number
+  tareas_corrector_1: TareaExpresion
+  tareas_corrector_2: TareaExpresion
   observaciones: string
-  puntuacionMaximaParte: number
   porcentaje: number
-  puntosConseguidos: number
-  listaTareas: Tarea[]
-  corrector: Usuario
+  puntos_conseguidos: number
+  puntuacion_maxima: number
 }

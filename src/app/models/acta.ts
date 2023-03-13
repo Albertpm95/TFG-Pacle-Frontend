@@ -9,12 +9,12 @@ import { Usuario } from './usuario'
 
 export interface Acta {
   alumno: Alumno
-  comprensionAuditiva: ComprensionAuditiva
-  comprensionLectora: ComprensionLectora
+  comprension_auditiva: ComprensionAuditiva
+  comprension_lectora: ComprensionLectora
   convocatoria: Convocatoria
   corrector: Usuario
-  expresionEscrita: ExpresionEscrita
-  expresionOral: ExpresionOral
+  expresion_escrita: ExpresionEscrita
+  expresion_oral: ExpresionOral
   id_acta?: number
   resultado: string
   resultado_bloque_lectoescritura: number

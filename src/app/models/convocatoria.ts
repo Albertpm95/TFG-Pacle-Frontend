@@ -8,9 +8,9 @@ export interface Convocatoria {
   horario: Horario
   lenguaje: Lenguaje
   nivel: Nivel
-  comprension_auditiva_puntuacion_maxima_parte: number
-  comprension_lectora_puntuacion_maxima_parte: number
-  expresion_escrita_puntuacion_maxima_parte: number
-  expresion_oral_puntuacion_maxima_parte: number
+  auditiva_puntuacion_maxima: number
+  lectora_puntuacion_maxima: number
+  escrita_puntuacion_maxima: number
+  oral_puntuacion_maxima: number
   id_convocatoria: number
 }

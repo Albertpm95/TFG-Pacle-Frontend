@@ -41,9 +41,9 @@ export class ApiService {
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST,
     )
   }
-  getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
+  getConvocatoria(id_convocatoria: number): Observable<Convocatoria> {
     return this.http.get<Convocatoria>(
-      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria,
+      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + id_convocatoria,
     )
   }
   cambiarEstadoConvocatoria(id_convocatoria: number, estado_nuevo: boolean) {
@@ -66,8 +66,8 @@ export class ApiService {
   addHorarioConvocatoria(horario: string): Observable<Horario> {
     return this.http.put<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_CREATE, { horario })
   }
-  deleteHorarioConvocatoria(idHorario: number): Observable<Horario> {
-    return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_DELETE + idHorario)
+  deleteHorarioConvocatoria(id_horario: number): Observable<Horario> {
+    return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_DELETE + id_horario)
   }
   getIdiomasConvocatoria(): Observable<Lenguaje[]> {
     return this.http.get<Lenguaje[]>(
@@ -77,8 +77,8 @@ export class ApiService {
   addIdiomaConvocatoria(lenguaje: string): Observable<Lenguaje> {
     return this.http.put<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { lenguaje })
   }
-  deleteIdiomaConvocatoria(idIdioma: number): Observable<Lenguaje> {
-    return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idIdioma)
+  deleteIdiomaConvocatoria(id_lenguaje: number): Observable<Lenguaje> {
+    return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + id_lenguaje)
   }
   /** ---------------------------------------------------------------------- */
 
@@ -86,8 +86,8 @@ export class ApiService {
   getActas(): Observable<Acta[]> {
     return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
   }
-  getActaID(idActa: number): Observable<Acta> {
-    return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + idActa)
+  getActaID(id_acta: number): Observable<Acta> {
+    return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + id_acta)
   }
   /** ---------------------------------------------------------------------- */
 
@@ -103,12 +103,12 @@ export class ApiService {
   /** ---------------------------------------------------------------------- */
 
   /** Expresion */
-  updateExpresionEscrita(expresionEscrita: ExpresionEscrita): Observable<ExpresionEscrita> {
-    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
+  updateExpresionEscrita(expresion_escrita: ExpresionEscrita): Observable<ExpresionEscrita> {
+    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresion_escrita })
   }
 
-  updateExpresionOral(expresionEscrita: ExpresionEscrita): Observable<ExpresionEscrita> {
-    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
+  updateExpresionOral(expresion_oral: ExpresionEscrita): Observable<ExpresionEscrita> {
+    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresion_oral })
   }
   /** ---------------------------------------------------------------------- */
 
@@ -117,7 +117,7 @@ export class ApiService {
     return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
   getAlumnoID(id_alumno: number): Observable<Alumno> {
-    //return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + id_alumno)
+    this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + id_alumno)
     console.log('Retrieving fake alumno')
     return of(FakeDB.alumnoFake)
   }

@@ -1,9 +1,14 @@
 <div class="acta-edition-container">
   <div class="header">
-    <div class="info-corrector" *ngIf="acta.corrector">
+    <div class="info" *ngIf="acta.alumno">
       <label>
-        <h5>ID:</h5> {{ acta.corrector.id_usuario }}
+        <h5>DNI:</h5> {{ acta.alumno.dni }}
       </label>
+      <label>
+        <h5>Alumno:</h5> {{ acta.alumno.nombre }} {{ acta.alumno.apellidos }}
+      </label>
+    </div>
+    <div class="info" *ngIf="acta.corrector">
       <label *ngIf="acta.corrector.rol">
         <h5>Rol:</h5> {{ acta.corrector.rol.rol }}
       </label>
@@ -11,10 +16,7 @@
         <h5>Corrector:</h5> {{ acta.corrector.nombre }} {{ acta.corrector.apellidos }}
       </label>
     </div>
-    <div class="info-convocatoria" *ngIf="acta.convocatoria">
-      <label>
-        <h5>ID:</h5> {{ acta.convocatoria.id_convocatoria }}
-      </label>
+    <div class="info" *ngIf="acta.convocatoria">
       <label>
         <h5>Fecha:</h5> {{ acta.convocatoria.fecha | date }}
       </label>

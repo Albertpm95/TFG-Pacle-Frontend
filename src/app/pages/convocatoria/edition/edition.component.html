@@ -1,16 +1,16 @@
-<div class="convocatoria-form-container container" *ngIf="convocatoriaNuevaForm">
+<div class="convocatoria-form-container container" *ngIf="convocatoria_form">
   <mat-card>
     <mat-card-header>
       <mat-card-title *ngIf="creating">Creaccion de una convocatoria</mat-card-title>
       <mat-card-title *ngIf="!creating">Edicion de una convocatoria</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="convocatoriaNuevaForm" *ngIf="!loading">
+      <form [formGroup]="convocatoria_form" *ngIf="!loading">
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
             <mat-select formControlName="lenguaje">
-              <mat-option [value]="lenguaje.lenguaje" *ngFor="let lenguaje of listaIdiomasConvocatoria$ | async">{{ lenguaje.lenguaje }}</mat-option>
+              <mat-option [value]="lenguaje.lenguaje" *ngFor="let lenguaje of lista_idiomas_convocatoria$ | async">{{ lenguaje.lenguaje }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -24,30 +24,30 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
             <mat-select formControlName="horarioParcial">
-              <mat-option [value]="horario.horario" *ngFor="let horario of listaHorariosConvocatoria$ | async">{{ horario.horario }}</mat-option>
+              <mat-option [value]="horario.horario" *ngFor="let horario of lista_horarios_convocatoria$ | async">{{ horario.horario }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesoMaximoParteComprensionLectora" name="pesoMaximoParteComprensionLectora">
+            <mat-label for="maximo_comprension_lectora" name="maximo_comprension_lectora">
               Peso maximo de la parte de Comprension lectora</mat-label>
-            <input matInput type="number" formControlName="pesoMaximoParteComprensionLectora" />
+            <input matInput type="number" formControlName="maximo_comprension_lectora" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesomaximoParteExpresionEscrita" name="pesomaximoParteExpresionEscrita">
+            <mat-label for="maximo_expresion_escrita" name="maximo_expresion_escrita">
               Peso maximo de la parte de Expresion escrita</mat-label>
-            <input matInput type="number" formControlName="pesomaximoParteExpresionEscrita" />
+            <input matInput type="number" formControlName="maximo_expresion_escrita" />
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesomaximoParteComprensionAuditiva" name="pesomaximoParteComprensionAuditiva">Peso maximo de la parte de Comprension auditiva</mat-label>
-            <input matInput type="number" formControlName="pesomaximoParteComprensionAuditiva" />
+            <mat-label for="maximo_comprension_auditiva" name="maximo_comprension_auditiva">Peso maximo de la parte de Comprension auditiva</mat-label>
+            <input matInput type="number" formControlName="maximo_comprension_auditiva" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="pesomaximoParteExpresionOral" name="pesomaximoParteExpresionOral">Peso maximo de la parte de Expresion oral</mat-label>
-            <input matInput type="number" formControlName="pesomaximoParteExpresionOral" />
+            <mat-label for="maximo_expresion_oral" name="maximo_expresion_oral">Peso maximo de la parte de Expresion oral</mat-label>
+            <input matInput type="number" formControlName="maximo_expresion_oral" />
           </mat-form-field>
         </div>
       </form>

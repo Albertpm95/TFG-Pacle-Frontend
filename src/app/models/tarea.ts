@@ -8,5 +8,5 @@ export interface Tarea {
 
 export interface TareaExpresion {
   corrector: Usuario
-  listaTareas: Tarea[]
+  lista_tareas: Tarea[]
 }

@@ -32,21 +32,21 @@
   <div class="content">
     <div class="bloque-lectura-escritura">
       <div class="parte">
-        <comprension-lectora [comprensionLectora]="acta.comprensionLectora" [puntuacionMaxima]="acta.convocatoria.comprension_lectora_puntuacion_maxima_parte">
+        <comprension-lectora [comprension_lectora]="acta.comprension_lectora" [puntuacion_maxima]="acta.convocatoria.maximo_comprension_auditiva">
         </comprension-lectora>
       </div>
       <div class="parte">
-        <expresion-escrita [expresionEscrita]="acta.expresionEscrita" [puntuacionMaxima]="acta.convocatoria.expresion_escrita_puntuacion_maxima_parte">
+        <expresion-escrita [expresion_escrita]="acta.expresion_escrita" [puntuacion_maxima]="acta.convocatoria.maximo_expresion_escrita">
         </expresion-escrita>
       </div>
     </div>
     <div class="bloque-oral-auditiva">
       <div class="parte">
-        <comprension-auditiva [comprensionAuditiva]="acta.comprensionAuditiva" [puntuacionMaxima]="acta.convocatoria.comprension_auditiva_puntuacion_maxima_parte">
+        <comprension-auditiva [comprension_auditiva]="acta.comprension_auditiva" [puntuacion_maxima]="acta.convocatoria.maximo_comprension_auditiva">
         </comprension-auditiva>
       </div>
       <div class="parte">
-        <expresion-oral [expresionOral]="acta.expresionOral" [puntuacionMaxima]="acta.convocatoria.expresion_oral_puntuacion_maxima_parte">
+        <expresion-oral [expresion_oral]="acta.expresion_oral" [puntuacion_maxima]="acta.convocatoria.maximo_expresion_oral">
         </expresion-oral>
       </div>
     </div>

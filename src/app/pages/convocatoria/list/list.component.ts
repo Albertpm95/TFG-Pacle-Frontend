@@ -9,10 +9,10 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayedColumns: string[] = ['lenguaje', 'fecha', 'horario', 'estado', 'id_convocatoria', 'acciones']
-  dataSource: MatTableDataSource<Convocatoria> = new MatTableDataSource()
+  displayed_columns: string[] = ['lenguaje', 'fecha', 'horario', 'estado', 'id_convocatoria', 'acciones']
+  data_source: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
-  listLoaded: boolean = false;
+  list_loaded: boolean = false;
   edit_route = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.EDITION
 
   constructor(private apiService: ApiService) { }
@@ -23,9 +23,9 @@ export class ListComponent {
   private initializeList(): void {
     this.apiService.getConvocatorias().subscribe((convocatorias) => {
       if (convocatorias) {
-        this.dataSource = new MatTableDataSource(convocatorias)
+        this.data_source = new MatTableDataSource(convocatorias)
         if (convocatorias.length)
-          this.listLoaded = true
+          this.list_loaded = true
       }
     })
   }

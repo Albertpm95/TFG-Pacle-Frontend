@@ -1,34 +1,52 @@
-form {
-  display: flex;
-  flex-flow: row wrap;
-  .tareas-container {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    .tarea {
-      width: 100%;
+.container {
+  div {
+    form {
       display: flex;
-      flex-flow: row nowrap;
-      .tarea-label {
-        width: 85%;
-        height: 25px;
-        padding: 0.6rem 1rem;
-        border: none;
+      flex-flow: column wrap;
+      align-items: center;
+      .tareas-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin: 1rem 0;
       }
-      .tarea-valor {
-        width: 15%;
-        height: 25px;
-        padding: 0.6rem 1rem;
+      .inputs-container {
+        width: 49%;
+        display: flex;
+        flex-flow: column wrap;
+      }
+      .tareas-corrector {
+        width: 49%;
+        .corrector-container {
+          width: 100%;
+        }
+
+        mat-select {
+          width: 98%;
+        }
+
+        .tarea {
+          width: 100%;
+          display: flex;
+          flex-flow: row nowrap;
+        }
+        .tarea-label {
+          width: 85%;
+          height: 25px;
+          padding: 0.6rem 1rem;
+          border: none;
+        }
+        .tarea-valor {
+          width: 15%;
+          height: 25px;
+          padding: 0.6rem 1rem;
+        }
       }
     }
   }
-  .inputs-container {
-    width: 49%;
-    display: flex;
-    flex-flow: column wrap;
-  }
 }
-
 .loading {
   display: flex;
   justify-content: center;

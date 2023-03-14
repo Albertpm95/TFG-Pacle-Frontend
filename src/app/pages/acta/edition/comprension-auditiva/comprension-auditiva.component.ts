@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class ComprensionAuditivaComponent {
 
-  @Input() comprensionAuditiva!: ComprensionAuditiva
-  @Input() puntuacionMaxima!: number
+  @Input() comprension_auditiva!: ComprensionAuditiva
+  @Input() puntuacion_maxima!: number
 
   loading: boolean = true
   form: FormGroup = new FormGroup({})
@@ -24,8 +24,8 @@ export class ComprensionAuditivaComponent {
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.comprensionAuditiva.id_comprension_auditiva ? this.loadForm() : this.initializeNewForm()
-    this.comprensionAuditiva.puntuacionMaximaParte = this.puntuacionMaxima
+    this.comprension_auditiva.id_comprension_auditiva ? this.loadForm() : this.initializeNewForm()
+    this.comprension_auditiva.puntuacion_maxima = this.puntuacion_maxima
     this.loadTareas()
   }
 
@@ -33,7 +33,7 @@ export class ComprensionAuditivaComponent {
     this.form = this.formBuilder.group({
       observaciones: [''],
       corrector: ['', Validators.required],
-      listaTareas: this.formBuilder.array([]),
+      lista_tareas: this.formBuilder.array([]),
     })
     this.loading = false
   }
@@ -41,48 +41,48 @@ export class ComprensionAuditivaComponent {
   private loadForm() { this.loading = false }
 
   private loadTareas() {
-    this.comprensionAuditiva.listaTareas.forEach(tarea => {
+    this.comprension_auditiva.lista_tareas.forEach(tarea => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
         valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
-      this.listaTareas.push(tareaForm)
+      this.lista_tareas.push(tareaForm)
     })
 
   }
 
-  public get listaTareas() {
-    return this.form.get('listaTareas') as FormArray;
+  public get lista_tareas() {
+    return this.form.get('lista_tareas') as FormArray;
   }
 
   public save(): void {
     if (this.form.valid) {
       this.extractForm()
-      this.apiService.updateComprensionAuditiva(this.comprensionAuditiva)
+      this.apiService.updateComprensionAuditiva(this.comprension_auditiva)
     }
   }
 
   private calcularPorcentaje(): number {
-    return this.comprensionAuditiva.puntosConseguidos * CONSTANTS.PORCIENTO / this.comprensionAuditiva.puntuacionMaximaParte
+    return this.comprension_auditiva.puntos_conseguidos * CONSTANTS.PORCIENTO / this.comprension_auditiva.puntuacion_maxima
   }
 
   private calcularPuntosTotales(): number {
     let puntosTotales: number = 0;
-    this.listaTareas.controls.forEach(control => {
+    this.lista_tareas.controls.forEach(control => {
       if (control.valid)
         puntosTotales += control.value['valor']
     })
-    this.comprensionAuditiva.puntosConseguidos = puntosTotales
+    this.comprension_auditiva.puntos_conseguidos = puntosTotales
     return puntosTotales
   }
 
   private extractForm(): void {
-    this.comprensionAuditiva = {
+    this.comprension_auditiva = {
       corrector: this.form.value['corrector'],
       observaciones: this.form.value['observaciones'],
-      listaTareas: this.form.value['listaTareas'],
-      puntuacionMaximaParte: this.puntuacionMaxima,
-      puntosConseguidos: this.calcularPuntosTotales(),
+      lista_tareas: this.form.value['lista_tareas'],
+      puntuacion_maxima: this.puntuacion_maxima,
+      puntos_conseguidos: this.calcularPuntosTotales(),
       porcentaje: this.calcularPorcentaje()
     }
   }

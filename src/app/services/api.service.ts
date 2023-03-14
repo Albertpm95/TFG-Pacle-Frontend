@@ -92,12 +92,12 @@ export class ApiService {
   /** ---------------------------------------------------------------------- */
 
   /** Comprension */
-  updateComprensionLectora(comprensionLectora: ComprensionLectora): Observable<ComprensionLectora> {
-    return this.http.patch<ComprensionLectora>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionLectora })
+  updateComprensionLectora(comprension_lectora: ComprensionLectora): Observable<ComprensionLectora> {
+    return this.http.patch<ComprensionLectora>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprension_lectora })
   }
 
-  updateComprensionAuditiva(comprensionAuditiva: ComprensionAuditiva): Observable<ComprensionAuditiva> {
-    return this.http.patch<ComprensionAuditiva>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionAuditiva })
+  updateComprensionAuditiva(comprension_auditiva: ComprensionAuditiva): Observable<ComprensionAuditiva> {
+    return this.http.patch<ComprensionAuditiva>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprension_auditiva })
   }
 
   /** ---------------------------------------------------------------------- */

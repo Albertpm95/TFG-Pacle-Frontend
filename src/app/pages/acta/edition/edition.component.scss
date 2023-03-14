@@ -39,15 +39,18 @@
   .content {
     padding: 0.25rem;
     margin: 0.5rem;
+    display: flex;
     .bloque-lectura-escritura {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      width: 50%;
       padding: 0.25rem;
       margin: 0.5rem;
     }
     .bloque-oral-auditiva {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      width: 50%;
       padding: 0.25rem;
       margin: 0.5rem;
     }
@@ -71,7 +74,4 @@
 .parte {
   padding: 0.25rem;
   margin: 0.5rem;
-
-  height: 50%;
-  width: 50%;
 }

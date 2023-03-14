@@ -9,10 +9,10 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayedColumns: string[] = ['id_usuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
-  dataSource: MatTableDataSource<Usuario> = new MatTableDataSource()
+  displayed_columns: string[] = ['id_usuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
+  data_source: MatTableDataSource<Usuario> = new MatTableDataSource()
 
-  listLoaded: boolean = false;
+  list_loaded: boolean = false;
   edit_route = '/' + MODULES.USUARIO + '/' + COMPONENTS.EDITION
 
   constructor(private apiService: ApiService) { }
@@ -24,9 +24,9 @@ export class ListComponent {
     this.apiService.getUsuarios().subscribe((usuarios) => {
       if (usuarios) {
         console.log(usuarios)
-        this.dataSource = new MatTableDataSource(usuarios)
+        this.data_source = new MatTableDataSource(usuarios)
         if (usuarios.length)
-          this.listLoaded = true
+          this.list_loaded = true
       }
     })
   }

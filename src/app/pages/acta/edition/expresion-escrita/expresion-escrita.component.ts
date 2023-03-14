@@ -14,8 +14,8 @@ import { Observable } from 'rxjs';
 })
 export class ExpresionEscritaComponent {
 
-  @Input() expresionEscrita!: ExpresionEscrita
-  @Input() puntuacionMaxima!: number
+  @Input() expresion_escrita!: ExpresionEscrita
+  @Input() puntuacion_maxima!: number
 
   loading: boolean = true
   form: FormGroup = new FormGroup({})
@@ -23,9 +23,10 @@ export class ExpresionEscritaComponent {
   corrector$: Observable<Usuario[]> = this.apiService.getUsuarios()
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
+
   ngOnInit() {
-    this.expresionEscrita.id_expresion_escrita ? this.loadForm() : this.initializeNewForm()
-    this.expresionEscrita.puntuacionMaximaParte = this.puntuacionMaxima
+    this.expresion_escrita.id_expresion_escrita ? this.loadForm() : this.initializeNewForm()
+    this.expresion_escrita.puntuacion_maxima = this.puntuacion_maxima
     this.loadTareas()
   }
 
@@ -33,53 +34,69 @@ export class ExpresionEscritaComponent {
     this.form = this.formBuilder.group({
       observaciones: [''],
       corrector: ['', Validators.required],
-      listaTareas: this.formBuilder.array([]),
+      tareas_corrector_1: this.formBuilder.group({
+        corrector: ['', Validators.required],
+        lista_tareas: this.formBuilder.array([])
+      }),
+      tareas_corrector_2: this.formBuilder.group({
+        corrector: ['', Validators.required],
+        lista_tareas: this.formBuilder.array([])
+      })
     })
     this.loading = false
   }
   private loadForm() { this.loading = false }
 
   private loadTareas() {
-    this.expresionEscrita.listaTareas.forEach(tarea => {
+    this.expresion_escrita.tareas_corrector_1.lista_tareas.forEach(tarea => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
         valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
-      this.listaTareas.push(tareaForm)
+      this.listaTareasCorrector1.push(tareaForm)
     })
-
+    this.expresion_escrita.tareas_corrector_2.lista_tareas.forEach(tarea => {
+      let tareaForm = this.formBuilder.group({
+        nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
+        valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
+      })
+      this.listaTareasCorrector2.push(tareaForm)
+    })
   }
-  public get listaTareas() {
-    return this.form.get('listaTareas') as FormArray;
+  public get listaTareasCorrector1() {
+    return this.form.get('tareas_corrector_1')?.get('lista_tareas') as FormArray;
+  }
+  public get listaTareasCorrector2() {
+    return this.form.get('tareas_corrector_2')?.get('lista_tareas') as FormArray;
   }
 
   public save(): void {
     if (this.form.valid) {
       this.extractForm()
-      this.apiService.updateComprensionLectora(this.expresionEscrita)
+      this.apiService.updateExpresionEscrita(this.expresion_escrita)
     }
   }
 
   private calcularPorcentaje(): number {
-    return this.expresionEscrita.puntosConseguidos * CONSTANTS.PORCIENTO / this.expresionEscrita.puntuacionMaximaParte
+    return this.expresion_escrita.puntos_conseguidos * CONSTANTS.PORCIENTO / this.expresion_escrita.puntuacion_maxima
   }
 
   private calcularPuntosTotales(): number {
     let puntosTotales: number = 0;
-    this.listaTareas.controls.forEach(control => {
+    this.listaTareasCorrector1.controls.forEach(control => {
       if (control.valid)
         puntosTotales += control.value['valor']
     })
-    this.expresionEscrita.puntosConseguidos = puntosTotales
+    this.expresion_escrita.puntos_conseguidos = puntosTotales
     return puntosTotales
   }
   private extractForm(): void {
-    this.expresionEscrita = {
-      corrector: this.form.value['corrector'],
+    this.expresion_escrita = {
+      tareas_corrector_1: this.form.value[''],
+      tareas_corrector_2: this.form.value[''],
       observaciones: this.form.value['observaciones'],
-      listaTareas: this.form.value['listaTareas'],
-      puntuacionMaximaParte: this.puntuacionMaxima,
-      puntosConseguidos: this.calcularPuntosTotales(),
+      puntuacion_maxima: this.puntuacion_maxima,
+      puntos_conseguidos: this.calcularPuntosTotales(),
       porcentaje: this.calcularPorcentaje()
     }
   }

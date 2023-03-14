@@ -5,8 +5,8 @@
   <div class="form">
     <form [formGroup]="form" (submit)="save()">
       <div class="tareas-container">
-        <ng-container formArrayName="listaTareas">
-          <ng-container *ngFor="let tarea of listaTareas.controls; let i = index">
+        <ng-container formArrayName="lista_tareas">
+          <ng-container *ngFor="let tarea of lista_tareas.controls; let i = index">
             <div class="tarea" [formGroupName]="i">
               <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
               <input matInput type="number" formControlName="valor" class="tarea-valor">
@@ -32,8 +32,8 @@
     </form>
   </div>
   <div class="footer">
-    <label *ngIf="comprensionLectora && comprensionLectora.puntosConseguidos">Puntuacion total: {{ comprensionLectora.puntosConseguidos }}</label>
-    <label *ngIf="comprensionLectora && comprensionLectora.porcentaje">Porcentaje: {{ comprensionLectora.porcentaje }} %</label>
+    <label *ngIf="comprension_lectora && comprension_lectora.puntos_conseguidos">Puntuacion total: {{ comprension_lectora.puntos_conseguidos }}</label>
+    <label *ngIf="comprension_lectora && comprension_lectora.porcentaje">Porcentaje: {{ comprension_lectora.porcentaje }} %</label>
   </div>
 </div>
 <div class="loading" *ngIf="loading">

@@ -9,12 +9,12 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayedColumns: string[] = ['dni', 'id_alumno', 'nombre', 'apellidos', 'acciones']
-  dataSource: MatTableDataSource<Alumno> = new MatTableDataSource()
+  displayed_columns: string[] = ['dni', 'id_alumno', 'nombre', 'apellidos', 'acciones']
+  data_source: MatTableDataSource<Alumno> = new MatTableDataSource()
 
-  listLoaded: boolean = false;
+  list_loaded: boolean = false;
   edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
-  
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -24,9 +24,9 @@ export class ListComponent {
     this.apiService.getAlumnos().subscribe((alumnos) => {
       console.log(alumnos)
       if (alumnos) {
-        this.dataSource = new MatTableDataSource(alumnos)
+        this.data_source = new MatTableDataSource(alumnos)
         if (alumnos.length)
-          this.listLoaded = true
+          this.list_loaded = true
       }
     })
   }

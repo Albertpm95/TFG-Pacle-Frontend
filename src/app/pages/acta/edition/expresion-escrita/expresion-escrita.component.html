@@ -2,38 +2,66 @@
   <div class="header">
     <h4>Expresion escrita</h4>
   </div>
-  <div class="form">
+  <div>
     <form [formGroup]="form" (submit)="save()">
       <div class="tareas-container">
-        <ng-container formArrayName="listaTareas">
-          <ng-container *ngFor="let tarea of listaTareas.controls; let i = index">
-            <div class="tarea" [formGroupName]="i">
-              <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
-              <input matInput type="number" formControlName="valor" class="tarea-valor">
-            </div>
+        <div class="tareas-corrector" formGroupName="tareas_corrector_1">
+          <mat-form-field class="corrector-container">
+            <mat-label for="corrector">Corrector</mat-label>
+            <mat-select formControlName="corrector">
+              <mat-option [value]="corrector.username" *ngFor="let corrector of corrector$ | async">
+                {{corrector.nombre}} {{corrector.apellidos}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <ng-container formArrayName="lista_tareas">
+            <ng-container *ngFor="let tarea of listaTareasCorrector1.controls; let i = index">
+              <div class="tarea" [formGroupName]="i">
+                <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
+                <input matInput type="number" formControlName="valor" class="tarea-valor">
+              </div>
+            </ng-container>
           </ng-container>
-        </ng-container>
+        </div>
+        <div class="tareas-corrector" formGroupName="tareas_corrector_2">
+          <mat-form-field class="corrector-container">
+            <mat-label for="corrector">Corrector</mat-label>
+            <mat-select formControlName="corrector">
+              <mat-option [value]="corrector.username" *ngFor="let corrector of corrector$ | async">
+                {{corrector.nombre}} {{corrector.apellidos}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <ng-container formArrayName="lista_tareas">
+            <ng-container *ngFor="let tarea of listaTareasCorrector1.controls; let i = index">
+              <div class="tarea" [formGroupName]="i">
+                <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
+                <input matInput type="number" formControlName="valor" class="tarea-valor">
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
       </div>
       <div class="inputs-container">
         <mat-form-field>
-          <mat-label for="corrector">Corrector</mat-label>
+          <mat-label for="observaciones">Observaciones</mat-label>
+          <textarea matInput class="observaciones" formControlName="observaciones"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="corrector-container" for="corrector">Corrector</mat-label>
           <mat-select formControlName="corrector">
             <mat-option [value]="corrector.username" *ngFor="let corrector of corrector$ | async">
               {{corrector.nombre}} {{corrector.apellidos}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field>
-          <mat-label for="observaciones">Observaciones</mat-label>
-          <textarea matInput id="observaciones" formControlName="observaciones"></textarea>
-        </mat-form-field>
         <button mat-button type="submit" color="primary">Guardar</button>
       </div>
     </form>
   </div>
   <div class="footer">
-    <label *ngIf="expresionEscrita && expresionEscrita.puntosConseguidos">Puntuacion total: {{ expresionEscrita.puntosConseguidos }}</label>
-    <label *ngIf="expresionEscrita && expresionEscrita.porcentaje">Porcentaje: {{ expresionEscrita.porcentaje }} %</label>
+    <label *ngIf="expresion_escrita && expresion_escrita.puntos_conseguidos">Puntuacion total: {{ expresion_escrita.puntos_conseguidos }}</label>
+    <label *ngIf="expresion_escrita && expresion_escrita.porcentaje">Porcentaje: {{ expresion_escrita.porcentaje }} %</label>
   </div>
 </div>
 <div class="loading" *ngIf="loading">

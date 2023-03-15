@@ -144,3 +144,9 @@ mat-card {
 h4 {
   margin: 1rem 0;
 }
+
+.container {
+  width: min(100vw, 1920px);
+  display: flex;
+  flex-direction: column;
+}

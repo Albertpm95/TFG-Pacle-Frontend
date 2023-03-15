@@ -1,6 +1,15 @@
+import { Genero } from "./genero"
+
 export interface Alumno {
-  id_alumno?: number
+  idAlumno?: number
   dni: string
   nombre: string
   apellidos: string
+  direccion: string
+  email: string
+  telefono: number
+  genero: Genero
+  fechaNacimiento: Date
+  colectivoUV: string
+  pruebaAdatada: boolean
 }

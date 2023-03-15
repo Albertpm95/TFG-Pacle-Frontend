@@ -1,8 +1,8 @@
 <div class="alumno-form-container container" *ngIf="alumnoNuevoForm">
   <mat-card>
     <mat-card-header>
-      <mat-card-title *ngIf="alumno && !alumno.id_alumno">Creaccion de un alumno</mat-card-title>
-      <mat-card-title *ngIf="alumno && alumno.id_alumno">Edicion de un alumno</mat-card-title>
+      <mat-card-title *ngIf="alumno && !alumno.idAlumno">Creaccion de un alumno</mat-card-title>
+      <mat-card-title *ngIf="alumno && alumno.idAlumno">Edicion de un alumno</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="alumnoNuevoForm" *ngIf="!loading">
@@ -27,10 +27,10 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" (click)="saveAlumno()" *ngIf="alumno &&alumno.id_alumno">
+      <button mat-raised-button color="primary" type="submit" (click)="saveAlumno()" *ngIf="alumno &&alumno.idAlumno">
         Crear Alumno
       </button>
-      <button mat-raised-button color="primary" type="submit" (click)="saveAlumno()" *ngIf="alumno &&!alumno.id_alumno">
+      <button mat-raised-button color="primary" type="submit" (click)="saveAlumno()" *ngIf="alumno &&!alumno.idAlumno">
         Actualizar Alumno
       </button>
     </mat-card-actions>

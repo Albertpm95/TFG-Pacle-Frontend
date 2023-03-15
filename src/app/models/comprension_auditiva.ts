@@ -3,10 +3,10 @@ import { Usuario } from './usuario'
 
 export interface ComprensionAuditiva {
   corrector: Usuario
-  id_comprension_auditiva?: number
-  lista_tareas: Tarea[]
+  idComprensionAuditiva?: number
+  listaTareas: Tarea[]
   observaciones: string
   porcentaje: number
-  puntos_conseguidos: number
-  puntuacion_maxima: number
+  puntosConseguidos: number
+  puntuacionMaxima: number
 }

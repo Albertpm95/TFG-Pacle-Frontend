@@ -1,6 +1,6 @@
 import { CONSTANTS } from "@constants"
 
 export class Lenguaje {
-  id_lenguaje: number | undefined
+  idLenguaje?: number
   lenguaje: string = CONSTANTS.LENGUAJE_POR_DEFECTO
 }

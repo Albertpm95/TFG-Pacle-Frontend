@@ -3,7 +3,7 @@ import { Rol } from "./rol"
 export interface Usuario {
   apellidos: string
   estado: boolean
-  id_usuario: number
+  idUsuario: number
   nombre: string
   rol: Rol
   username: string

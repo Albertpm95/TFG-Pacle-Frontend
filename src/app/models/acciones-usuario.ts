@@ -1,5 +1,5 @@
 export interface UserAction {
-  action_label: string
+  actionLabel: string
   url: string
   rol: string[]
   params?: string[]

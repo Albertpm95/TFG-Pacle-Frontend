@@ -34,31 +34,31 @@
   <div class="content">
     <div class="bloque-lectura-escritura">
       <div class="parte">
-        <comprension-lectora [comprension_lectora]="acta.comprension_lectora" [puntuacion_maxima]="acta.convocatoria.maximo_comprension_auditiva"> </comprension-lectora>
+        <comprension-lectora [comprensionLectora]="acta.comprensionLectora" [puntuacionMaxima]="acta.convocatoria.maximo_comprension_auditiva"> </comprension-lectora>
       </div>
       <div class="parte">
-        <expresion-escrita [expresion_escrita]="acta.expresion_escrita" [puntuacion_maxima]="acta.convocatoria.maximo_expresion_escrita"> </expresion-escrita>
+        <expresion-escrita [expresionEscrita]="acta.expresionEscrita" [puntuacionMaxima]="acta.convocatoria.maximo_expresion_escrita"> </expresion-escrita>
       </div>
     </div>
     <div class="bloque-oral-auditiva">
       <div class="parte">
-        <comprension-auditiva [comprension_auditiva]="acta.comprension_auditiva" [puntuacion_maxima]="acta.convocatoria.maximo_comprension_auditiva"> </comprension-auditiva>
+        <comprension-auditiva [comprensionAuditiva]="acta.comprensionAuditiva" [puntuacionMaxima]="acta.convocatoria.maximo_comprension_auditiva"> </comprension-auditiva>
       </div>
       <div class="parte">
-        <expresion-oral [expresion_oral]="acta.expresion_oral" [puntuacion_maxima]="acta.convocatoria.maximo_expresion_oral"> </expresion-oral>
+        <expresion-oral [expresionOral]="acta.expresionOral" [puntuacionMaxima]="acta.convocatoria.maximo_expresion_oral"> </expresion-oral>
       </div>
     </div>
   </div>
   <div class="footer">
     <div class="info-acta" *ngIf="acta">
       <label>
-        <h5>Resultado bloque lectoescritura:</h5> {{acta.resultado_bloque_lectoescritura}}%
+        <h5>Resultado bloque lectoescritura:</h5> {{acta.resultadoLectoEscritura}}%
       </label>
       <label>
-        <h5>Resultado bloque destrezas orales:</h5> {{acta.resultado_bloque_destrezas_orales}}%
+        <h5>Resultado bloque destrezas orales:</h5> {{acta.resultadoDestrezasOrales}}%
       </label>
       <label>
-        <h5>Resultado global de la prueba:</h5> {{acta.resultado_global}}%
+        <h5>Resultado global de la prueba:</h5> {{acta.resultadoGlobal}}%
       </label>
       <label>
         <h5>Resultado:</h5> {{ acta.resultado }}

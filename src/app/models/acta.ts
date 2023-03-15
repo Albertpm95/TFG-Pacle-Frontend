@@ -6,18 +6,17 @@ import { ExpresionEscrita } from './expresion_escrita'
 import { ExpresionOral } from './expresion_oral'
 import { Usuario } from './usuario'
 
-
 export interface Acta {
   alumno: Alumno
-  comprension_auditiva: ComprensionAuditiva
-  comprension_lectora: ComprensionLectora
+  comprensionAuditiva: ComprensionAuditiva
+  comprensionLectora: ComprensionLectora
   convocatoria: Convocatoria
   corrector: Usuario
-  expresion_escrita: ExpresionEscrita
-  expresion_oral: ExpresionOral
-  id_acta?: number
+  expresionEscrita: ExpresionEscrita
+  expresionOral: ExpresionOral
+  idActa?: number
   resultado: string
-  resultado_bloque_lectoescritura: number
-  resultado_bloque_destrezas_orales: number
-  resultado_global: number
+  resultadoLectoEscritura: number
+  resultadoDestrezasOrales: number
+  resultadoGlobal: number
 }

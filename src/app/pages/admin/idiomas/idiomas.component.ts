@@ -17,9 +17,9 @@ export class IdiomasComponent {
 
   constructor(private apiService: ApiService) { }
 
-  public deleteIdiomaConvocatoria(id_lenguaje: number | undefined) {
-    if (id_lenguaje)
-      this.apiService.deleteIdiomaConvocatoria(id_lenguaje)
+  public deleteIdiomaConvocatoria(idLenguaje: number | undefined) {
+    if (idLenguaje)
+      this.apiService.deleteIdiomaConvocatoria(idLenguaje)
   }
 
   public addIdiomaConvocatoria() {

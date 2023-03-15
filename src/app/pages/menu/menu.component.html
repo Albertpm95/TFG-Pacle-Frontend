@@ -6,7 +6,7 @@
     <mat-card-content>
       <mat-nav-list *ngIf="actionsList">
         <mat-list-item *ngFor="let action of actionsList" [routerLink]="'/' + action.url">
-          {{action.action_label}}
+          {{action.actionLabel}}
         </mat-list-item>
       </mat-nav-list>
     </mat-card-content>

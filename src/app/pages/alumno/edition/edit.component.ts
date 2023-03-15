@@ -27,7 +27,7 @@ export class EditionComponent {
 
   }
   ngOnInit(): void {
-    let idAlumno = this.activactedRoute.snapshot.params['id_alumno']
+    let idAlumno = this.activactedRoute.snapshot.params['idAlumno']
 
     idAlumno ? this.loadForm(idAlumno) : this.initializeForm()
   }
@@ -47,7 +47,7 @@ export class EditionComponent {
         dni: [alumno.dni, Validators.required],
         nombre: [alumno.nombre, Validators.required],
         apellidos: [alumno.apellidos, Validators.required],
-        id_alumno: [alumno.id_alumno, Validators.required]
+        idAlumno: [alumno.idAlumno, Validators.required]
       })
     })
   }

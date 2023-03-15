@@ -5,7 +5,7 @@
   <div>
     <form [formGroup]="form" (submit)="save()">
       <div class="tareas-container">
-        <div class="tareas-corrector" formGroupName="tareas_corrector_1">
+        <div class="tareas-corrector" formGroupName="tareasCorrector1">
           <mat-form-field class="corrector-container">
             <mat-label for="corrector">Corrector</mat-label>
             <mat-select formControlName="corrector">
@@ -14,7 +14,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ng-container formArrayName="lista_tareas">
+          <ng-container formArrayName="listaTareas">
             <ng-container *ngFor="let tarea of listaTareasCorrector1.controls; let i = index">
               <div class="tarea" [formGroupName]="i">
                 <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
@@ -23,7 +23,7 @@
             </ng-container>
           </ng-container>
         </div>
-        <div class="tareas-corrector" formGroupName="tareas_corrector_2">
+        <div class="tareas-corrector" formGroupName="tareasCorrector2">
           <mat-form-field class="corrector-container">
             <mat-label for="corrector">Corrector</mat-label>
             <mat-select formControlName="corrector">
@@ -32,7 +32,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ng-container formArrayName="lista_tareas">
+          <ng-container formArrayName="listaTareas">
             <ng-container *ngFor="let tarea of listaTareasCorrector1.controls; let i = index">
               <div class="tarea" [formGroupName]="i">
                 <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
@@ -60,8 +60,8 @@
     </form>
   </div>
   <div class="footer">
-    <label *ngIf="expresion_oral && expresion_oral.puntos_conseguidos">Puntuacion total: {{ expresion_oral.puntos_conseguidos }}</label>
-    <label *ngIf="expresion_oral && expresion_oral.porcentaje">Porcentaje: {{ expresion_oral.porcentaje }} %</label>
+    <label *ngIf="expresionOral && expresionOral.puntosConseguidos">Puntuacion total: {{ expresionOral.puntosConseguidos }}</label>
+    <label *ngIf="expresionOral && expresionOral.porcentaje">Porcentaje: {{ expresionOral.porcentaje }} %</label>
   </div>
 </div>
 <div class="loading" *ngIf="loading">

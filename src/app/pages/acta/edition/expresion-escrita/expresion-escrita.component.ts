@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CONSTANTS } from '@constants';
-import { ExpresionEscrita } from '@models/expresion_escrita';
+import { ExpresionEscrita } from '@models/expresionEscrita';
 import { Usuario } from '@models/usuario';
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';
@@ -14,8 +14,8 @@ import { Observable } from 'rxjs';
 })
 export class ExpresionEscritaComponent {
 
-  @Input() expresion_escrita!: ExpresionEscrita
-  @Input() puntuacion_maxima!: number
+  @Input() expresionEscrita!: ExpresionEscrita
+  @Input() puntuacionMaxima!: number
 
   loading: boolean = true
   form: FormGroup = new FormGroup({})
@@ -25,8 +25,8 @@ export class ExpresionEscritaComponent {
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.expresion_escrita.id_expresion_escrita ? this.loadForm() : this.initializeNewForm()
-    this.expresion_escrita.puntuacion_maxima = this.puntuacion_maxima
+    this.expresionEscrita.idExpresionEscrita ? this.loadForm() : this.initializeNewForm()
+    this.expresionEscrita.puntuacionMaxima = this.puntuacionMaxima
     this.loadTareas()
   }
 
@@ -34,13 +34,13 @@ export class ExpresionEscritaComponent {
     this.form = this.formBuilder.group({
       observaciones: [''],
       corrector: ['', Validators.required],
-      tareas_corrector_1: this.formBuilder.group({
+      tareasCorrector1: this.formBuilder.group({
         corrector: ['', Validators.required],
-        lista_tareas: this.formBuilder.array([])
+        listaTareas: this.formBuilder.array([])
       }),
-      tareas_corrector_2: this.formBuilder.group({
+      tareasCorrector2: this.formBuilder.group({
         corrector: ['', Validators.required],
-        lista_tareas: this.formBuilder.array([])
+        listaTareas: this.formBuilder.array([])
       })
     })
     this.loading = false
@@ -48,14 +48,14 @@ export class ExpresionEscritaComponent {
   private loadForm() { this.loading = false }
 
   private loadTareas() {
-    this.expresion_escrita.tareas_corrector_1.lista_tareas.forEach(tarea => {
+    this.expresionEscrita.tareasCorrector1.listaTareas.forEach(tarea => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
         valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
       this.listaTareasCorrector1.push(tareaForm)
     })
-    this.expresion_escrita.tareas_corrector_2.lista_tareas.forEach(tarea => {
+    this.expresionEscrita.tareasCorrector2.listaTareas.forEach(tarea => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
         valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
@@ -64,21 +64,21 @@ export class ExpresionEscritaComponent {
     })
   }
   public get listaTareasCorrector1() {
-    return this.form.get('tareas_corrector_1')?.get('lista_tareas') as FormArray;
+    return this.form.get('tareasCorrector1')?.get('listaTareas') as FormArray;
   }
   public get listaTareasCorrector2() {
-    return this.form.get('tareas_corrector_2')?.get('lista_tareas') as FormArray;
+    return this.form.get('tareasCorrector2')?.get('listaTareas') as FormArray;
   }
 
   public save(): void {
     if (this.form.valid) {
       this.extractForm()
-      this.apiService.updateExpresionEscrita(this.expresion_escrita)
+      this.apiService.updateExpresionEscrita(this.expresionEscrita)
     }
   }
 
   private calcularPorcentaje(): number {
-    return this.expresion_escrita.puntos_conseguidos * CONSTANTS.PORCIENTO / this.expresion_escrita.puntuacion_maxima
+    return this.expresionEscrita.puntosConseguidos * CONSTANTS.PORCIENTO / this.expresionEscrita.puntuacionMaxima
   }
 
   private calcularPuntosTotales(): number {
@@ -87,16 +87,16 @@ export class ExpresionEscritaComponent {
       if (control.valid)
         puntosTotales += control.value['valor']
     })
-    this.expresion_escrita.puntos_conseguidos = puntosTotales
+    this.expresionEscrita.puntosConseguidos = puntosTotales
     return puntosTotales
   }
   private extractForm(): void {
-    this.expresion_escrita = {
-      tareas_corrector_1: this.form.value[''],
-      tareas_corrector_2: this.form.value[''],
+    this.expresionEscrita = {
+      tareasCorrector1: this.form.value[''],
+      tareasCorrector2: this.form.value[''],
       observaciones: this.form.value['observaciones'],
-      puntuacion_maxima: this.puntuacion_maxima,
-      puntos_conseguidos: this.calcularPuntosTotales(),
+      puntuacionMaxima: this.puntuacionMaxima,
+      puntosConseguidos: this.calcularPuntosTotales(),
       porcentaje: this.calcularPorcentaje()
     }
   }

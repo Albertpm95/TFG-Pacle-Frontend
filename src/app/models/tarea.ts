@@ -1,12 +1,12 @@
 import { Usuario } from "./usuario"
 
 export interface Tarea {
-  id_tarea: number
+  idTarea: number
   nombreTarea: string
   valor: number
 }
 
 export interface TareaExpresion {
   corrector: Usuario
-  lista_tareas: Tarea[]
+  listaTareas: Tarea[]
 }

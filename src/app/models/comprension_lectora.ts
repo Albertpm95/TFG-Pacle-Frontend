@@ -3,10 +3,10 @@ import { Usuario } from './usuario'
 
 export interface ComprensionLectora {
   corrector: Usuario
-  id_comprension_lectora?: number
-  lista_tareas: Tarea[]
+  idComprensionLectora?: number
+  listaTareas: Tarea[]
   observaciones: string
   porcentaje: number
-  puntos_conseguidos: number
-  puntuacion_maxima: number
+  puntosConseguidos: number
+  puntuacionMaxima: number
 }

@@ -9,7 +9,7 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayed_columns: string[] = ['id_usuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
+  displayed_columns: string[] = ['idUsuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
   data_source: MatTableDataSource<Usuario> = new MatTableDataSource()
 
   list_loaded: boolean = false;
@@ -31,7 +31,7 @@ export class ListComponent {
     })
   }
   public cambiarEstadoUsuario(usuario: Usuario): void {
-    if (usuario.id_usuario)
-      this.apiService.cambiarEstadoConvocatoria(usuario.id_usuario, !usuario.estado)
+    if (usuario.idUsuario)
+      this.apiService.cambiarEstadoConvocatoria(usuario.idUsuario, !usuario.estado)
   }
 }

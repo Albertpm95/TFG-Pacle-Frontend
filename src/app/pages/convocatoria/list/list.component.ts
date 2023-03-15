@@ -9,7 +9,7 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayed_columns: string[] = ['lenguaje', 'fecha', 'horario', 'estado', 'id_convocatoria', 'acciones']
+  displayed_columns: string[] = ['lenguaje', 'fecha', 'horario', 'estado', 'idConvocatoria', 'acciones']
   data_source: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
   list_loaded: boolean = false;
@@ -30,7 +30,7 @@ export class ListComponent {
     })
   }
   public cambiarEstadoConvocatoria(convocatoria: Convocatoria): void {
-    if (convocatoria.id_convocatoria)
-      this.apiService.cambiarEstadoConvocatoria(convocatoria.id_convocatoria, !convocatoria.estado)
+    if (convocatoria.idConvocatoria)
+      this.apiService.cambiarEstadoConvocatoria(convocatoria.idConvocatoria, !convocatoria.estado)
   }
 }

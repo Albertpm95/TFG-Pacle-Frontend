@@ -42,14 +42,14 @@ export class ApiService {
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST,
     )
   }
-  getConvocatoria(id_convocatoria: number): Observable<Convocatoria> {
+  getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
     return this.http.get<Convocatoria>(
-      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + id_convocatoria,
+      this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria,
     )
   }
-  cambiarEstadoConvocatoria(id_convocatoria: number, estado_nuevo: boolean) {
+  cambiarEstadoConvocatoria(idConvocatoria: number, estado_nuevo: boolean) {
     return this.http.patch<Convocatoria>(this.apiUrl, {
-      id_convocatoria,
+      idConvocatoria,
       estado_nuevo,
     })
   }

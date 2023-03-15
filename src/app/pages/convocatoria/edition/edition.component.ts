@@ -31,7 +31,7 @@ export class EditionComponent {
 
   }
   ngOnInit(): void {
-    let idConvocatoria = this.activactedRoute.snapshot.params['id_convocatoria']
+    let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
 
     idConvocatoria ? this.loadForm(idConvocatoria) : this.initializeForm()
   }
@@ -77,7 +77,7 @@ export class EditionComponent {
       /*let convocatoria: Convocatoria
       this.apiService.updateConvocatoria(convocatoria).subscribe(convocatoria => {
         console.log(convocatoria)
-        if (convocatoria.id_convocatoria)
+        if (convocatoria.idConvocatoria)
           this.router.navigate([this.list_route])
       })
       */

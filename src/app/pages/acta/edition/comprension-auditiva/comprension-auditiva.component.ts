@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CONSTANTS } from '@constants';
-import { ComprensionAuditiva } from '@models/comprensionAuditiva';
+
+import { ComprensionAuditiva } from '@models/comprension_auditiva';
 import { Usuario } from '@models/usuario';
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';

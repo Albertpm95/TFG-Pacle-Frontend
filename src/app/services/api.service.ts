@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { API_ENDPOINTS, MODULES } from '@constants'
+import { API_ENDPOINTS } from '@constants'
 import { environment } from '@environments/environment'
 import { Acta } from '@models/acta'
 import { Alumno } from '@models/alumno'
-import { ComprensionAuditiva } from '@models/comprensionAuditiva'
-import { ComprensionLectora } from '@models/comprensionLectora'
+import { ComprensionAuditiva } from '@models/comprension_auditiva'
+import { ComprensionLectora } from '@models/comprension_lectora'
 import { Convocatoria } from '@models/convocatoria'
-import { ExpresionEscrita } from '@models/expresionEscrita'
+import { ExpresionEscrita } from '@models/expresion_escrita'
+import { ExpresionOral } from '@models/expresion_oral'
 import { FakeDB } from '@models/fake-db'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
@@ -107,8 +108,8 @@ export class ApiService {
     return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
   }
 
-  updateExpresionOral(expresionOral: ExpresionEscrita): Observable<ExpresionEscrita> {
-    return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionOral })
+  updateExpresionOral(expresionOral: ExpresionOral): Observable<ExpresionOral> {
+    return this.http.patch<ExpresionOral>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionOral })
   }
   /** ---------------------------------------------------------------------- */
 

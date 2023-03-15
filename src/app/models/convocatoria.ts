@@ -8,9 +8,9 @@ export interface Convocatoria {
   horario: Horario
   lenguaje: Lenguaje
   nivel: Nivel
-  maximo_comprension_auditiva: number
-  maximo_comprension_lectora: number
-  maximo_expresion_escrita: number
-  maximo_expresion_oral: number
+  maxComprensionAuditiva: number
+  maxComprensionLectora: number
+  maxExpresionEscrita: number
+  maxExpresion_oral: number
   id_convocatoria: number
 }

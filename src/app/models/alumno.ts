@@ -1,3 +1,4 @@
+import { Direccion } from "./direccion"
 import { Genero } from "./genero"
 
 export interface Alumno {
@@ -5,7 +6,7 @@ export interface Alumno {
   dni: string
   nombre: string
   apellidos: string
-  direccion: string
+  direccion: Direccion
   email: string
   telefono: number
   genero: Genero

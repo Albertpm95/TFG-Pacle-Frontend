@@ -41,10 +41,10 @@ export class EditionComponent {
       fecha_parcial: [Date.now, Validators.required], // Date sin el horario
       horario_parcial: ['09:00', Validators.required],
       lenguaje: [CONSTANTS.LENGUAJE_POR_DEFECTO, Validators.required],
-      maximo_comprension_auditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      maximo_comprension_lectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      maximo_expresion_escrita: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      maximo_expresion_oral: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      maxComprensionAuditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      maxComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      maxExpresionEscrita: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      maxExpresion_oral: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
 
     })
   }
@@ -55,10 +55,10 @@ export class EditionComponent {
         fecha_parcial: [convocatoria.fecha, Validators.required], // Date sin el horario
         horario_parcial: [convocatoria.horario.horario, Validators.required],
         lenguaje: [convocatoria.lenguaje.lenguaje, Validators.required],
-        maximo_comprension_auditiva: [convocatoria.maximo_comprension_auditiva, Validators.required],
-        maximo_comprension_lectora: [convocatoria.maximo_comprension_lectora, Validators.required],
-        maximo_expresion_escrita: [convocatoria.maximo_expresion_escrita, Validators.required],
-        maximo_expresion_oral: [convocatoria.maximo_expresion_oral, Validators.required],
+        maxComprensionAuditiva: [convocatoria.maxComprensionAuditiva, Validators.required],
+        maxComprensionLectora: [convocatoria.maxComprensionLectora, Validators.required],
+        maxExpresionEscrita: [convocatoria.maxExpresionEscrita, Validators.required],
+        maxExpresion_oral: [convocatoria.maxExpresion_oral, Validators.required],
       })
       console.log(this.convocatoria_form.value)
       this.creating = false

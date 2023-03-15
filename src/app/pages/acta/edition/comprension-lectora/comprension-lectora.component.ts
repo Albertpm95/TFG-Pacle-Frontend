@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CONSTANTS } from '@constants';
-import { ComprensionLectora } from '@models/comprensionLectora';
+import { ComprensionLectora } from '@models/comprension_lectora';
+
 import { Usuario } from '@models/usuario';
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';

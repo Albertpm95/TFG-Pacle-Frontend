@@ -40,11 +40,13 @@ export class ApiService {
 
   /** Convocatorias */
   getConvocatorias(): Observable<Convocatoria[]> {
+    return of([FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake]) // TODO Remove
     return this.http.get<Convocatoria[]>(
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST,
     )
   }
   getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
+    return of(FakeDB.convocatoriaFake)
     return this.http.get<Convocatoria>(
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria,
     )
@@ -62,6 +64,7 @@ export class ApiService {
 
   /** Configuracion */
   getHorariosConvocatoria(): Observable<Horario[]> {
+    return of([FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake,])
     return this.http.get<Horario[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_LIST,
     )
@@ -72,18 +75,20 @@ export class ApiService {
   deleteHorarioConvocatoria(idHorario: number): Observable<Horario> {
     return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_DELETE + idHorario)
   }
-  getIdiomasConvocatoria(): Observable<Lenguaje[]> {
+  getLenguajesConvocatoria(): Observable<Lenguaje[]> {
+    return of([FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake,])
     return this.http.get<Lenguaje[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
   }
-  addIdiomaConvocatoria(lenguaje: string): Observable<Lenguaje> {
+  addLenguajeConvocatoria(lenguaje: string): Observable<Lenguaje> {
     return this.http.put<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { lenguaje })
   }
-  deleteIdiomaConvocatoria(idLenguaje: number): Observable<Lenguaje> {
+  deleteLenguajeConvocatoria(idLenguaje: number): Observable<Lenguaje> {
     return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idLenguaje)
   }
   getNivelesConvocatoria(): Observable<Nivel[]> {
+    return of([FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake,])
     return this.http.get<Nivel[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -95,6 +100,7 @@ export class ApiService {
     return this.http.delete<Nivel>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idNivel)
   }
   getGenerosConvocatoria(): Observable<Genero[]> {
+    return of([FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake,])
     return this.http.get<Genero[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -109,6 +115,7 @@ export class ApiService {
 
   /** Actas */
   getActas(): Observable<Acta[]> {
+    return of([FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake])
     return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
   }
   getActaID(idActa: number): Observable<Acta> {
@@ -139,6 +146,7 @@ export class ApiService {
 
   /** Alumnos */
   getAlumnos(): Observable<Alumno[]> {
+    return of([FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake,])
     return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
   getAlumnoID(idAlumno: number): Observable<Alumno> {
@@ -153,6 +161,7 @@ export class ApiService {
 
   /** Usuarios */
   getUsuarios(): Observable<Usuario[]> {
+    return of([FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake,])
     return this.http.get<Usuario[]>(this.apiUrl + API_ENDPOINTS.USUARIO_LIST)
   }
   getUsuarioID(

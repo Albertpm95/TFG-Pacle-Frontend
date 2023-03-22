@@ -20,7 +20,7 @@ export class EditionComponent {
 
   creating: boolean = true
   loading: boolean = true
-  listaLenguajesConvocatoria$: Observable<Lenguaje[]> = this.apiService.getIdiomasConvocatoria()
+  listaLenguajesConvocatoria$: Observable<Lenguaje[]> = this.apiService.getLenguajesConvocatoria()
   listaHorariosConvocatoria$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
   listaNivelesConvocatoria$: Observable<Nivel[]> = this.apiService.getNivelesConvocatoria()
   listaGenerosConvocatoria$: Observable<Genero[]> = this.apiService.getGenerosConvocatoria()

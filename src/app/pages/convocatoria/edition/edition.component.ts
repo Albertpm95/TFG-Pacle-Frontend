@@ -23,7 +23,6 @@ export class EditionComponent {
   listaLenguajesConvocatoria$: Observable<Lenguaje[]> = this.apiService.getLenguajesConvocatoria()
   listaHorariosConvocatoria$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
   listaNivelesConvocatoria$: Observable<Nivel[]> = this.apiService.getNivelesConvocatoria()
-  listaGenerosConvocatoria$: Observable<Genero[]> = this.apiService.getGenerosConvocatoria()
   listRoute = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST
 
   constructor(
@@ -34,9 +33,7 @@ export class EditionComponent {
 
   }
   ngOnInit(): void {
-    let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
-
-    idConvocatoria ? this.loadForm(idConvocatoria) : this.initializeForm()
+    this.activactedRoute.snapshot.params['idConvocatoria'] ? this.loadForm(this.activactedRoute.snapshot.params['idConvocatoria']) : this.initializeForm()
   }
 
   private initializeForm(): void {
@@ -50,22 +47,22 @@ export class EditionComponent {
       maxComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
       maxExpresionEscrita: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
       maxExpresionOral: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-
     })
+    this.creating = false
+    this.loading = false
   }
 
   private loadForm(idConvocatoria: number): void {
     this.apiService.getConvocatoria(idConvocatoria).subscribe(convocatoria => {
       this.convocatoriaForm = this.formBuilder.group({
-        fecha_parcial: [convocatoria.fecha, Validators.required], // Date sin el horario
-        horario_parcial: [convocatoria.horario.horario, Validators.required],
+        fechaParcial: [convocatoria.fecha, Validators.required], // Date sin el horario
+        horarioParcial: [convocatoria.horario.horario, Validators.required],
         lenguaje: [convocatoria.lenguaje.lenguaje, Validators.required],
         maxComprensionAuditiva: [convocatoria.maxComprensionAuditiva, Validators.required],
         maxComprensionLectora: [convocatoria.maxComprensionLectora, Validators.required],
         maxExpresionEscrita: [convocatoria.maxExpresionEscrita, Validators.required],
         maxExpresionOral: [convocatoria.maxExpresion_oral, Validators.required],
       })
-      console.log(this.convocatoriaForm.value)
       this.creating = false
       this.loading = false
     })
@@ -74,11 +71,11 @@ export class EditionComponent {
   public saveConvocatoria(): void {
     this.loading = true
     if (this.convocatoriaForm.valid) {
-      let date_string = this.convocatoriaForm.controls['fecha_parcial'].value
-      let hora_parcial = this.convocatoriaForm.controls['horario_parcial'].value.split(':')
-      let fecha_parcial = new Date(date_string)
-      fecha_parcial.setHours(hora_parcial[0])
-      fecha_parcial.setMinutes(hora_parcial[1])
+      let date_string = this.convocatoriaForm.controls['fechaParcial'].value
+      let hora_parcial = this.convocatoriaForm.controls['horarioParcial'].value.split(':')
+      let fechaParcial = new Date(date_string)
+      fechaParcial.setHours(hora_parcial[0])
+      fechaParcial.setMinutes(hora_parcial[1])
       /*let convocatoria: Convocatoria
       this.apiService.updateConvocatoria(convocatoria).subscribe(convocatoria => {
         console.log(convocatoria)

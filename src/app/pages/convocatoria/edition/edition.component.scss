@@ -1,3 +1,7 @@
+.container {
+  height: 100%;
+  display: flex;
+}
 .col {
   flex: 1;
   margin-right: 20px;
@@ -16,6 +20,11 @@ mat-form-field {
   margin: 0.5rem;
 }
 mat-card {
-  width: min(90vw, 780px);
+  width: min(90vw, 960px);
   align-self: center;
+  margin: auto;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
 }

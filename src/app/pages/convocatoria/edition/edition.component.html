@@ -14,12 +14,6 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="genero">Genero de la convocatoria</mat-label>
-            <mat-select formControlName="genero">
-              <mat-option [value]="genero.genero" *ngFor="let genero of listaGenerosConvocatoria$ | async">{{ genero.genero }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="col">
             <mat-label for="nivel">Nivel de la convocatoria</mat-label>
             <mat-select formControlName="nivel">
               <mat-option [value]="nivel.nivel" *ngFor="let nivel of listaNivelesConvocatoria$ | async">{{ nivel.nivel }}</mat-option>
@@ -58,8 +52,8 @@
             <input matInput type="number" formControlName="maxComprensionAuditiva" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="maxExpresion_oral" name="maxExpresion_oral">Peso maximo de la parte de Expresion oral</mat-label>
-            <input matInput type="number" formControlName="maxExpresion_oral" />
+            <mat-label for="maxExpresionOral" name="maxExpresionOral">Peso maximo de la parte de Expresion oral</mat-label>
+            <input matInput type="number" formControlName="maxExpresionOral" />
           </mat-form-field>
         </div>
       </form>

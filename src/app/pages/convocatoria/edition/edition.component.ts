@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { COMPONENTS, CONSTANTS, MODULES } from '@constants';
-import { Genero } from '@models/genero';
 import { Horario } from '@models/horario';
 import { Lenguaje } from '@models/lenguaje';
 import { Nivel } from '@models/nivel';
-
 import { ApiService } from '@services/api.service';
 import { Observable } from 'rxjs';
 
@@ -25,28 +23,20 @@ export class EditionComponent {
   listaNivelesConvocatoria$: Observable<Nivel[]> = this.apiService.getNivelesConvocatoria()
   listRoute = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST
 
-  constructor(
-    private apiService: ApiService,
-    private formBuilder: FormBuilder,
-    private activactedRoute: ActivatedRoute
-  ) {
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private activactedRoute: ActivatedRoute) { }
 
-  }
-  ngOnInit(): void {
-    this.activactedRoute.snapshot.params['idConvocatoria'] ? this.loadForm(this.activactedRoute.snapshot.params['idConvocatoria']) : this.initializeForm()
-  }
+  ngOnInit(): void { this.activactedRoute.snapshot.params['idConvocatoria'] ? this.loadForm(this.activactedRoute.snapshot.params['idConvocatoria']) : this.initializeNewForm() }
 
-  private initializeForm(): void {
+  private initializeNewForm(): void {
     this.convocatoriaForm = this.formBuilder.group({
       fechaParcial: [Date.now, Validators.required], // Date sin el horario
       horarioParcial: ['', Validators.required],
       lenguaje: ['', Validators.required],
       nivel: ['', Validators.required],
-      genero: ['', Validators.required],
-      maxComprensionAuditiva: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      maxComprensionLectora: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      maxExpresionEscrita: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
-      maxExpresionOral: [CONSTANTS.VALOR_PUNTUACION_MAX_DEFECTO, Validators.required],
+      comprensionAuditiva: this.formBuilder.group({ maxComprensionAuditiva: [0, Validators.required], listaTareas: this.formBuilder.array([]) }),
+      comprensionLectora: this.formBuilder.group({ maxComprensionLectora: [0, Validators.required], listaTareas: this.formBuilder.array([]) }),
+      expresionEscrita: this.formBuilder.group({ maxExpresionEscrita: [0, Validators.required], listaTareas: this.formBuilder.array([]) }),
+      expresionOral: this.formBuilder.group({ maxExpresionOral: [0, Validators.required], listaTareas: this.formBuilder.array([]) }),
     })
     this.creating = false
     this.loading = false
@@ -58,15 +48,43 @@ export class EditionComponent {
         fechaParcial: [convocatoria.fecha, Validators.required], // Date sin el horario
         horarioParcial: [convocatoria.horario.horario, Validators.required],
         lenguaje: [convocatoria.lenguaje.lenguaje, Validators.required],
-        maxComprensionAuditiva: [convocatoria.maxComprensionAuditiva, Validators.required],
-        maxComprensionLectora: [convocatoria.maxComprensionLectora, Validators.required],
-        maxExpresionEscrita: [convocatoria.maxExpresionEscrita, Validators.required],
-        maxExpresionOral: [convocatoria.maxExpresion_oral, Validators.required],
+        nivel: ['', Validators.required],
+        comprensionAuditiva: this.formBuilder.group({ maxComprensionAuditiva: [convocatoria.maxComprensionAuditiva, Validators.required], listaTareas: this.formBuilder.array([]) }),
+        comprensionLectora: this.formBuilder.group({ maxComprensionLectora: [convocatoria.maxComprensionAuditiva, Validators.required], listaTareas: this.formBuilder.array([]) }),
+        expresionEscrita: this.formBuilder.group({ maxExpresionEscrita: [convocatoria.maxComprensionAuditiva, Validators.required], listaTareas: this.formBuilder.array([]) }),
+        expresionOral: this.formBuilder.group({ maxExpresionOral: [convocatoria.maxComprensionAuditiva, Validators.required], listaTareas: this.formBuilder.array([]) }),
       })
       this.creating = false
       this.loading = false
     })
   }
+
+  public addTareaComprensionAuditiva() {
+    let tarea = this.formBuilder.group({ nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required), valor: new FormControl(0, [Validators.required, Validators.min(0)]) });
+    this.listaTareasComprensionAuditiva.push(tarea);
+  }
+  public addTareaComprensionLectora() {
+    let tarea = this.formBuilder.group({ nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required), valor: new FormControl(0, [Validators.required, Validators.min(0)]) });
+    this.listaTareasComprensionLectora.push(tarea);
+  }
+  public addTareaExpresionEscrita() {
+    let tarea = this.formBuilder.group({ nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required), valor: new FormControl(0, [Validators.required, Validators.min(0)]) });
+    this.listaTareasExpresionEscrita.push(tarea);
+  }
+  public addTareaExpresionOral() {
+    let tarea = this.formBuilder.group({ nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required), valor: new FormControl(0, [Validators.required, Validators.min(0)]) });
+    this.listaTareasExpresionOral.push(tarea);
+  }
+
+  public deleteTareaComprensionAuditiva(index: number): void { this.listaTareasComprensionLectora.removeAt(index); }
+  public deleteTareaComprensionLectora(index: number): void { this.listaTareasComprensionLectora.removeAt(index); }
+  public deleteTareaExpresionEscrita(index: number): void { this.listaTareasComprensionLectora.removeAt(index); }
+  public deleteTareaExpresionOral(index: number): void { this.listaTareasComprensionLectora.removeAt(index); }
+
+  public get listaTareasComprensionAuditiva() { return this.convocatoriaForm.get('comprensionAuditiva')?.get('listaTareas') as FormArray; }
+  public get listaTareasComprensionLectora() { return this.convocatoriaForm.get('comprensionLectora')?.get('listaTareas') as FormArray; }
+  public get listaTareasExpresionEscrita() { return this.convocatoriaForm.get('expresionEscrita')?.get('listaTareas') as FormArray; }
+  public get listaTareasExpresionOral() { return this.convocatoriaForm.get('expresionOral')?.get('listaTareas') as FormArray; }
 
   public saveConvocatoria(): void {
     this.loading = true

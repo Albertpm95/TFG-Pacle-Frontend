@@ -5,3 +5,10 @@
   align-items: center;
   width: 100%;
 }
+
+.container {
+  width: 100vw;
+  mat-card {
+    width: 95%;
+  }
+}

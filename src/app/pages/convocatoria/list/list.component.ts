@@ -9,7 +9,7 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayed_columns: string[] = ['lenguaje', 'fecha', 'horario', 'estado', 'idConvocatoria', 'acciones']
+  displayed_columns: string[] = ['idConvocatoria', 'lenguaje', 'nivel', 'fecha', 'horario', 'estado', 'acciones']
   data_source: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
   list_loaded: boolean = false;
@@ -23,6 +23,7 @@ export class ListComponent {
   private initializeList(): void {
     this.apiService.getConvocatorias().subscribe((convocatorias) => {
       if (convocatorias) {
+        console.log(convocatorias)
         this.data_source = new MatTableDataSource(convocatorias)
         if (convocatorias.length)
           this.list_loaded = true

@@ -12,31 +12,31 @@
       <table mat-table [dataSource]="data_source" *ngIf="list_loaded">
         <div>
           <ng-container matColumnDef="idActa">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>ID</th>
             <td mat-cell *matCellDef="let acta">
               {{ acta.idActa }}
             </td>
           </ng-container>
           <ng-container matColumnDef="alumno">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>Alumno</th>
             <td mat-cell *matCellDef="let acta">
               {{acta.alumno.dni }}
             </td>
           </ng-container>
           <ng-container matColumnDef="convocatoria">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>Convocatoria</th>
             <td mat-cell *matCellDef="let acta">
-              {{ acta.convocatoria}}
+              {{ acta.convocatoria.nivel.nivel}} - {{ acta.convocatoria.lenguaje.lenguaje}}
             </td>
           </ng-container>
           <ng-container matColumnDef="resultado">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>Resultado</th>
             <td mat-cell *matCellDef="let acta">
               {{ acta.resultado}}
             </td>
           </ng-container>
           <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let acta">
               <button mat-icon-button [routerLink]="[edit_route, { idActa: acta.idActa}]"><mat-icon>edit</mat-icon></button>
               <button mat-icon-button><mat-icon>delete</mat-icon></button>

@@ -1,6 +1,4 @@
-import { CONSTANTS } from "@constants"
-
-export class Lenguaje {
+export interface Lenguaje {
   idLenguaje?: number
-  lenguaje: string = CONSTANTS.LENGUAJE_POR_DEFECTO
+  lenguaje: string
 }

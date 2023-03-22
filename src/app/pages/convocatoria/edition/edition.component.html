@@ -1,16 +1,28 @@
-<div class="convocatoria-form-container container" *ngIf="convocatoria_form">
+<div class="convocatoria-form-container container" *ngIf="convocatoriaForm">
   <mat-card>
     <mat-card-header>
       <mat-card-title *ngIf="creating">Creaccion de una convocatoria</mat-card-title>
       <mat-card-title *ngIf="!creating">Edicion de una convocatoria</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="convocatoria_form" *ngIf="!loading">
+      <form [formGroup]="convocatoriaForm" *ngIf="!loading">
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
             <mat-select formControlName="lenguaje">
-              <mat-option [value]="lenguaje.lenguaje" *ngFor="let lenguaje of lista_idiomas_convocatoria$ | async">{{ lenguaje.lenguaje }}</mat-option>
+              <mat-option [value]="lenguaje.lenguaje" *ngFor="let lenguaje of listaLenguajesConvocatoria$ | async">{{ lenguaje.lenguaje }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="col">
+            <mat-label for="genero">Genero de la convocatoria</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option [value]="genero.genero" *ngFor="let genero of listaGenerosConvocatoria$ | async">{{ genero.genero }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="col">
+            <mat-label for="nivel">Nivel de la convocatoria</mat-label>
+            <mat-select formControlName="nivel">
+              <mat-option [value]="nivel.nivel" *ngFor="let nivel of listaNivelesConvocatoria$ | async">{{ nivel.nivel }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -24,7 +36,7 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
             <mat-select formControlName="horarioParcial">
-              <mat-option [value]="horario.horario" *ngFor="let horario of lista_horarios_convocatoria$ | async">{{ horario.horario }}</mat-option>
+              <mat-option [value]="horario.horario" *ngFor="let horario of listaHorariosConvocatoria$ | async">{{ horario.horario }}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

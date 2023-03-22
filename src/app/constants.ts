@@ -11,9 +11,8 @@ export class HttpError {
 export class CONSTANTS {
   static ESTADO_POR_DEFECTO: boolean = true
   static HORARIO: string = 'horario'
-  static HORARIO_POR_DEFECTO: string = '09:00'
   static LENGUAJE: string = 'lenguaje'
-  static LENGUAJE_POR_DEFECTO: string = 'Español'
+  static NIVEL: string = 'nivel'
   static NOMBRE_CORRECTOR_DEFECTO: string = 'No asignado'
   static NOMBRE_TAREA_DEFECTO: string = 'No asignado'
   static RESULTADO_ACTA: string = 'No corregido'

@@ -1,0 +1,15 @@
+<div class="nivels-container">
+  <mat-form-field>
+    <mat-label for="nivel_nuevo">Añadir nuevo nivel</mat-label>
+    <input matInput id="nivel_nuevo" [formControl]="nuevoNivelForm">
+    <mat-icon matSuffix (click)="addNivelConvocatoria()">add</mat-icon>
+  </mat-form-field>
+  <mat-list>
+    <div class="list-item" *ngFor="let nivel of niveles$ | async">
+      <mat-list-item>
+        <span matListItemTitle>{{nivel.nivel}}<mat-icon (click)="deleteNivelConvocatoria(nivel.idNivel)">delete</mat-icon></span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
+</div>

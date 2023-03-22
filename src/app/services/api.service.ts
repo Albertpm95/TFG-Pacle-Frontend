@@ -10,8 +10,10 @@ import { Convocatoria } from '@models/convocatoria'
 import { ExpresionEscrita } from '@models/expresion_escrita'
 import { ExpresionOral } from '@models/expresion_oral'
 import { FakeDB } from '@models/fake-db'
+import { Genero } from '@models/genero'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
+import { Nivel } from '@models/nivel'
 import { Rol } from '@models/rol'
 import { Usuario } from '@models/usuario'
 import { Observable, of } from 'rxjs'
@@ -80,6 +82,28 @@ export class ApiService {
   }
   deleteIdiomaConvocatoria(idLenguaje: number): Observable<Lenguaje> {
     return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idLenguaje)
+  }
+  getNivelesConvocatoria(): Observable<Nivel[]> {
+    return this.http.get<Nivel[]>(
+      this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
+    )
+  }
+  addNivelConvocatoria(nivel: string): Observable<Nivel> {
+    return this.http.put<Nivel>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { nivel })
+  }
+  deleteNivelConvocatoria(idNivel: number): Observable<Nivel> {
+    return this.http.delete<Nivel>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idNivel)
+  }
+  getGenerosConvocatoria(): Observable<Genero[]> {
+    return this.http.get<Genero[]>(
+      this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
+    )
+  }
+  addGeneroConvocatoria(genero: string): Observable<Genero> {
+    return this.http.put<Genero>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { genero })
+  }
+  deleteGeneroConvocatoria(idGenero: number): Observable<Genero> {
+    return this.http.delete<Genero>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idGenero)
   }
   /** ---------------------------------------------------------------------- */
 

@@ -9,7 +9,7 @@ import { ComprensionLectora } from '@models/comprension_lectora'
 import { Convocatoria } from '@models/convocatoria'
 import { ExpresionEscrita } from '@models/expresion_escrita'
 import { ExpresionOral } from '@models/expresion_oral'
-import { FakeDB } from '@models/fake-db'
+import { MockUpDB } from '@models/mockup'
 import { Genero } from '@models/genero'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
@@ -27,7 +27,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   /** Admin */
-  subirFicheroExcel(excel: File) {
+  subirFicheroExcel(excel: File): Observable<File> {
     return this.http.post<File>(
       this.apiUrl + API_ENDPOINTS.ADMIN_UPLOAD_ALUMNOS,
       excel,
@@ -40,13 +40,13 @@ export class ApiService {
 
   /** Convocatorias */
   getConvocatorias(): Observable<Convocatoria[]> {
-    return of([FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake, FakeDB.convocatoriaFake]) // TODO Remove
+    //return of([MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp]) // TODO Remove
     return this.http.get<Convocatoria[]>(
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST,
     )
   }
   getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
-    return of(FakeDB.convocatoriaFake)
+    return of(MockUpDB.convocatoriaMockUp)
     return this.http.get<Convocatoria>(
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria,
     )
@@ -64,7 +64,7 @@ export class ApiService {
 
   /** Configuracion */
   getHorariosConvocatoria(): Observable<Horario[]> {
-    return of([FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake, FakeDB.horarioFake,])
+    //return of([MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp,])
     return this.http.get<Horario[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_LIST,
     )
@@ -76,7 +76,7 @@ export class ApiService {
     return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_DELETE + idHorario)
   }
   getLenguajesConvocatoria(): Observable<Lenguaje[]> {
-    return of([FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake, FakeDB.lenguajeFake,])
+    //return of([MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp,])
     return this.http.get<Lenguaje[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -88,7 +88,7 @@ export class ApiService {
     return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idLenguaje)
   }
   getNivelesConvocatoria(): Observable<Nivel[]> {
-    return of([FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake, FakeDB.nivelFake,])
+    //return of([MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp,])
     return this.http.get<Nivel[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -100,7 +100,7 @@ export class ApiService {
     return this.http.delete<Nivel>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idNivel)
   }
   getGenerosConvocatoria(): Observable<Genero[]> {
-    return of([FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake, FakeDB.generoFake,])
+    //return of([MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp,])
     return this.http.get<Genero[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -115,7 +115,7 @@ export class ApiService {
 
   /** Actas */
   getActas(): Observable<Acta[]> {
-    return of([FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake, FakeDB.actaFake])
+    // return of([MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp])
     return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
   }
   getActaID(idActa: number): Observable<Acta> {
@@ -146,13 +146,12 @@ export class ApiService {
 
   /** Alumnos */
   getAlumnos(): Observable<Alumno[]> {
-    return of([FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake, FakeDB.alumnoFake,])
+    //return of([MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp,])
     return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
   getAlumnoID(idAlumno: number): Observable<Alumno> {
-    this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno)
-    console.log('Retrieving fake alumno')
-    return of(FakeDB.alumnoFake)
+    //return of(MockUpDB.alumnoMockUp)
+    return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno)
   }
   updateAlumno(alumno: Alumno): Observable<Alumno> {
     return this.http.post<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE, { alumno })
@@ -161,7 +160,7 @@ export class ApiService {
 
   /** Usuarios */
   getUsuarios(): Observable<Usuario[]> {
-    return of([FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake, FakeDB.usuarioFake,])
+    //return of([MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp,])
     return this.http.get<Usuario[]>(this.apiUrl + API_ENDPOINTS.USUARIO_LIST)
   }
   getUsuarioID(

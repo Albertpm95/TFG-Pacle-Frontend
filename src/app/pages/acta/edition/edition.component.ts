@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Acta } from '@models/acta';
-import { FakeDB } from '@models/fake-db';
+import { MockUpDB } from '@models/mockup';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { FakeDB } from '@models/fake-db';
 })
 export class EditionComponent {
 
-  acta: Acta = FakeDB.actaFake
+  acta: Acta = MockUpDB.actaMockUp
   constructor() { }
   ngOnInit(): void {
     console.log(this.acta)

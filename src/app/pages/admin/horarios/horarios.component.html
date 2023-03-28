@@ -7,7 +7,7 @@
   <mat-list>
     <div class="list-item" *ngFor="let horario of horarios$ | async">
       <mat-list-item>
-        <span matListItemTitle>{{horario.horario}}<mat-icon (click)="deleteHorarioConvocatoria(horario.idHorario)">delete</mat-icon></span>
+        <span class="list-item-span" matListItemTitle>{{horario.horario}}<mat-icon (click)="deleteHorarioConvocatoria(horario.idHorario)">delete</mat-icon></span>
       </mat-list-item>
       <mat-divider></mat-divider>
     </div>

@@ -15,7 +15,7 @@ export class ListComponent {
   list_loaded: boolean = false;
   edit_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
 
-  private destroy$: Subject<boolean> = new Subject<boolean>() // TODO Review
+  private destroy$: Subject<boolean> = new Subject<boolean>()
 
   constructor(private apiService: ApiService) { }
 

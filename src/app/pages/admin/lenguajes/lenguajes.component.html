@@ -7,7 +7,7 @@
   <mat-list>
     <div class="list-item" *ngFor="let lenguaje of lenguajes$ | async">
       <mat-list-item>
-        <span matListItemTitle>{{lenguaje.lenguaje}}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)">delete</mat-icon></span>
+        <span class="list-item-span" matListItemTitle>{{lenguaje.lenguaje}}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)">delete</mat-icon></span>
       </mat-list-item>
       <mat-divider></mat-divider>
     </div>

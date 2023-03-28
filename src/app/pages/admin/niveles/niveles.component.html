@@ -7,7 +7,7 @@
   <mat-list>
     <div class="list-item" *ngFor="let nivel of niveles$ | async">
       <mat-list-item>
-        <span matListItemTitle>{{nivel.nivel}}<mat-icon (click)="deleteNivelConvocatoria(nivel.idNivel)">delete</mat-icon></span>
+        <span class="list-item-span" matListItemTitle>{{nivel.nivel}}<mat-icon (click)="deleteNivelConvocatoria(nivel.idNivel)">delete</mat-icon></span>
       </mat-list-item>
       <mat-divider></mat-divider>
     </div>

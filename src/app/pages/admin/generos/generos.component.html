@@ -7,7 +7,7 @@
   <mat-list>
     <div class="list-item" *ngFor="let genero of generos$ | async">
       <mat-list-item>
-        <span matListItemTitle>{{genero.genero}}<mat-icon (click)="deleteGeneroConvocatoria(genero.idGenero)">delete</mat-icon></span>
+        <span class="list-item-span" matListItemTitle>{{genero.genero}}<mat-icon (click)="deleteGeneroConvocatoria(genero.idGenero)">delete</mat-icon></span>
       </mat-list-item>
       <mat-divider></mat-divider>
     </div>

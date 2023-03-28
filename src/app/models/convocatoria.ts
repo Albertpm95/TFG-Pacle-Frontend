@@ -11,7 +11,7 @@ export interface Convocatoria {
   maxComprensionAuditiva: number
   maxComprensionLectora: number
   maxExpresionEscrita: number
-  maxExpresion_oral: number
+  maxExpresionOral: number
   idConvocatoriaDB: number
   idConvocatoria: number
 }

@@ -11,6 +11,12 @@
     <mat-card-content>
       <table mat-table [dataSource]="data_source" *ngIf="list_loaded">
         <div>
+          <ng-container matColumnDef="idConvocatoria">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let convocatoria">
+              {{convocatoria.idConvocatoria }}
+            </td>
+          </ng-container>
           <ng-container matColumnDef="lenguaje">
             <th mat-header-cell *matHeaderCellDef>Lenguaje</th>
             <td mat-cell *matCellDef="let convocatoria">
@@ -41,16 +47,35 @@
               <mat-slide-toggle [(ngModel)]="convocatoria.estado"></mat-slide-toggle>
             </td>
           </ng-container>
-          <ng-container matColumnDef="idConvocatoria">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
+          <ng-container matColumnDef="maxComprensionAuditiva">
+            <th mat-header-cell *matHeaderCellDef>Max Comp. Auditiva</th>
             <td mat-cell *matCellDef="let convocatoria">
-              {{convocatoria.idConvocatoria }}
+              {{convocatoria.maxComprensionAuditiva }}
             </td>
           </ng-container>
+          <ng-container matColumnDef="maxComprensionLectora">
+            <th mat-header-cell *matHeaderCellDef>Max Comp. Lectora.</th>
+            <td mat-cell *matCellDef="let convocatoria">
+              {{convocatoria.maxComprensionLectora }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="maxExpresionEscrita">
+            <th mat-header-cell *matHeaderCellDef>Max Exp. Escrita</th>
+            <td mat-cell *matCellDef="let convocatoria">
+              {{convocatoria.maxExpresionEscrita }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="maxExpresionOral">
+            <th mat-header-cell *matHeaderCellDef>Max Exp. Oral</th>
+            <td mat-cell *matCellDef="let convocatoria">
+              {{convocatoria.maxExpresionOral }}
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let convocatoria">
-              <button mat-icon-button [routerLink]="[edit_route, { idConvocatoria: convocatoria.idConvocatoria}]"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button [routerLink]="[edit_route, { idConvocatoria: convocatoria.idConvocatoriaDB }]"><mat-icon>edit</mat-icon></button>
               <button mat-icon-button><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>

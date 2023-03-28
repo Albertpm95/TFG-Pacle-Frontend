@@ -40,13 +40,13 @@ export class ApiService {
 
   /** Convocatorias */
   getConvocatorias(): Observable<Convocatoria[]> {
-    //return of([MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp, MockUpDB.convocatoriaMockUp]) // TODO Remove
+    return of(MockUpDB.convocatoriasMockUp)
     return this.http.get<Convocatoria[]>(
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST,
     )
   }
   getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
-    return of(MockUpDB.convocatoriaMockUp)
+    return of(MockUpDB.convocatoriaMockUp1)
     return this.http.get<Convocatoria>(
       this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria,
     )
@@ -64,7 +64,7 @@ export class ApiService {
 
   /** Configuracion */
   getHorariosConvocatoria(): Observable<Horario[]> {
-    //return of([MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp, MockUpDB.horarioMockUp,])
+    return of(MockUpDB.horariosMockUp)
     return this.http.get<Horario[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_LIST,
     )
@@ -76,7 +76,7 @@ export class ApiService {
     return this.http.delete<Horario>(this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_DELETE + idHorario)
   }
   getLenguajesConvocatoria(): Observable<Lenguaje[]> {
-    //return of([MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp, MockUpDB.lenguajeMockUp,])
+    return of(MockUpDB.lenguajesMockUp)
     return this.http.get<Lenguaje[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -88,7 +88,7 @@ export class ApiService {
     return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idLenguaje)
   }
   getNivelesConvocatoria(): Observable<Nivel[]> {
-    //return of([MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp, MockUpDB.nivelMockUp,])
+    return of(MockUpDB.nivelesMockUp)
     return this.http.get<Nivel[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -100,7 +100,7 @@ export class ApiService {
     return this.http.delete<Nivel>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idNivel)
   }
   getGenerosConvocatoria(): Observable<Genero[]> {
-    //return of([MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp, MockUpDB.generoMockUp,])
+    return of(MockUpDB.generosMockUp)
     return this.http.get<Genero[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
@@ -115,7 +115,7 @@ export class ApiService {
 
   /** Actas */
   getActas(): Observable<Acta[]> {
-    // return of([MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp, MockUpDB.actaMockUp])
+    return of(MockUpDB.actasMockUp)
     return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
   }
   getActaID(idActa: number): Observable<Acta> {
@@ -131,14 +131,12 @@ export class ApiService {
   updateComprensionAuditiva(comprensionAuditiva: ComprensionAuditiva): Observable<ComprensionAuditiva> {
     return this.http.patch<ComprensionAuditiva>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { comprensionAuditiva })
   }
-
   /** ---------------------------------------------------------------------- */
 
   /** Expresion */
   updateExpresionEscrita(expresionEscrita: ExpresionEscrita): Observable<ExpresionEscrita> {
     return this.http.patch<ExpresionEscrita>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionEscrita })
   }
-
   updateExpresionOral(expresionOral: ExpresionOral): Observable<ExpresionOral> {
     return this.http.patch<ExpresionOral>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, { expresionOral })
   }
@@ -146,11 +144,11 @@ export class ApiService {
 
   /** Alumnos */
   getAlumnos(): Observable<Alumno[]> {
-    //return of([MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp, MockUpDB.alumnoMockUp,])
+    return of(MockUpDB.alumnosMockUp)
     return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
   getAlumnoID(idAlumno: number): Observable<Alumno> {
-    //return of(MockUpDB.alumnoMockUp)
+    return of(MockUpDB.alumnoMockUp1)
     return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno)
   }
   updateAlumno(alumno: Alumno): Observable<Alumno> {
@@ -160,12 +158,13 @@ export class ApiService {
 
   /** Usuarios */
   getUsuarios(): Observable<Usuario[]> {
-    //return of([MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp, MockUpDB.usuarioMockUp,])
+    return of(MockUpDB.usuariosMockUp)
     return this.http.get<Usuario[]>(this.apiUrl + API_ENDPOINTS.USUARIO_LIST)
   }
   getUsuarioID(
     idUsuario?: string,
   ): Observable<Usuario> {
+    return of(MockUpDB.usuarioMockUp1)
     return this.http.get<Usuario>(
       this.apiUrl + API_ENDPOINTS.USUARIO_UPDATE + { idUsuario },
     )

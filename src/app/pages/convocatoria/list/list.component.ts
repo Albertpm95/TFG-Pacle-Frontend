@@ -9,7 +9,7 @@ import { ApiService } from '@services/api.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayed_columns: string[] = ['idConvocatoria', 'lenguaje', 'nivel', 'fecha', 'horario', 'estado', 'acciones']
+  displayed_columns: string[] = ['idConvocatoria', 'lenguaje', 'nivel', 'fecha', 'horario', 'estado', 'maxComprensionAuditiva', 'maxComprensionLectora', 'maxExpresionEscrita', 'maxExpresionOral', 'acciones']
   data_source: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
   list_loaded: boolean = false;

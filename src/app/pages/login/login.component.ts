@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { API_ENDPOINTS, COMPONENTS } from '@constants'
+import { API_ENDPOINTS, COMPONENTS, MODULES } from '@constants'
 import { AuthService } from '@services/auth.service'
 
 @Component({
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       login_form_data.append('password', this.loginForm.value.password)
       this.authService.login(login_form_data)//.subscribe((data) => {        this.router.navigateByUrl(COMPONENTS.MENU)      })
     }
-    this.router.navigateByUrl(COMPONENTS.MENU) // TODO Remove
+    this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST) // TODO Remove
   }
 
   ngOnDestroy() {

@@ -29,6 +29,12 @@
               {{ acta.convocatoria.nivel.nivel}} - {{ acta.convocatoria.lenguaje.lenguaje}}
             </td>
           </ng-container>
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let acta">
+              {{ acta.convocatoria.fecha | date: "shortDate"}} - {{ acta.convocatoria.horario.horario}}
+            </td>
+          </ng-container>
           <ng-container matColumnDef="resultado">
             <th mat-header-cell *matHeaderCellDef>Resultado</th>
             <td mat-cell *matCellDef="let acta">

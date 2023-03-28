@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs'
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  displayed_columns: string[] = ['idActa', 'alumno', 'convocatoria', 'resultado', 'acciones']
+  displayed_columns: string[] = ['idActa', 'alumno', 'convocatoria', 'fecha', 'resultado', 'acciones']
   data_source: MatTableDataSource<Acta> = new MatTableDataSource()
 
   list_loaded: boolean = false;

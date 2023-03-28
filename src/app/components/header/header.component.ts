@@ -15,7 +15,7 @@ export class HeaderComponent {
     this.router.navigateByUrl('/' + COMPONENTS.LOGIN);
   }
 
-  volver() {
+  goToMenu() {
     this.router.navigateByUrl('/' + COMPONENTS.MENU);
   }
 }

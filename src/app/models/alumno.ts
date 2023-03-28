@@ -12,5 +12,5 @@ export interface Alumno {
   genero: Genero
   fechaNacimiento: Date
   colectivoUV: string
-  pruebaAdatada: boolean
+  pruebaAdaptada: boolean
 }

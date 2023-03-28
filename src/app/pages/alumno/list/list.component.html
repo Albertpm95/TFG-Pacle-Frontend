@@ -17,12 +17,6 @@
               {{alumno.dni }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="idAlumno">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let alumno">
-              {{alumno.idAlumno }}
-            </td>
-          </ng-container>
           <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef>Nombre</th>
             <td mat-cell *matCellDef="let alumno">
@@ -33,6 +27,30 @@
             <th mat-header-cell *matHeaderCellDef>Apellidos</th>
             <td mat-cell *matCellDef="let alumno">
               {{ alumno.apellidos}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="fechaNacimiento">
+            <th mat-header-cell *matHeaderCellDef>Fecha Nacimiento</th>
+            <td mat-cell *matCellDef="let alumno">
+              {{alumno.fechaNacimiento | date }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="colectivoUV">
+            <th mat-header-cell *matHeaderCellDef>ColectivoUV</th>
+            <td mat-cell *matCellDef="let alumno">
+              {{alumno.colectivoUV }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="genero">
+            <th mat-header-cell *matHeaderCellDef>Genero</th>
+            <td mat-cell *matCellDef="let alumno">
+              {{alumno.genero.genero }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="pruebaAdatada">
+            <th mat-header-cell *matHeaderCellDef>Prueba adaptada</th>
+            <td mat-cell *matCellDef="let alumno">
+              <span *ngIf="alumno.pruebaAdaptada">Si</span>{{alumno.pruebaAdatada }}
             </td>
           </ng-container>
           <ng-container matColumnDef="acciones">

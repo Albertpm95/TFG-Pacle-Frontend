@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { COMPONENTS, CONSTANTS, MODULES } from '@constants';
+import { ActivatedRoute } from '@angular/router';
+import { COMPONENTS, MODULES } from '@constants';
 import { Alumno } from '@models/alumno';
+import { Genero } from '@models/genero';
 
 import { ApiService } from '@services/api.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,22 +15,20 @@ import { ApiService } from '@services/api.service';
 })
 export class EditionComponent {
 
-  constants = CONSTANTS
   alumnoNuevoForm: FormGroup = new FormGroup('')
   alumno: Alumno | undefined
   loading: boolean = true
-  list_route = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST
+  listRoute = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST
+
+  listaGenerosAlumno$: Observable<Genero[]> = this.apiService.getGenerosAlumno()
 
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute
-  ) {
-
-  }
+  ) {}
   ngOnInit(): void {
     let idAlumno = this.activactedRoute.snapshot.params['idAlumno']
-
     idAlumno ? this.loadForm(idAlumno) : this.initializeForm()
   }
 
@@ -37,7 +37,15 @@ export class EditionComponent {
       dni: ['', Validators.required],
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
+      direccion: ['', Validators.required],
+      email: ['', Validators.required],
+      telefono: ['', Validators.required],
+      genero: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      colectivoUV: ['', Validators.required],
+      pruebaAdaptada: ['', Validators.required],
     })
+    this.loading = false;
   }
 
   private loadForm(idAlumno: number): void {

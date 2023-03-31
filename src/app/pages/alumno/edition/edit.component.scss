@@ -1,3 +1,14 @@
 mat-card {
   width: auto;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+mat-form-field {
+  margin: 1rem;
+}
+mat-checkbox {
+  margin: 1rem;
+}

@@ -147,6 +147,10 @@ export class ApiService {
     return of(MockUpDB.alumnosMockUp)
     return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
   }
+  getAlumnosConvocatoria(idConvocatoria: number): Observable<Alumno[]> {
+    return of(MockUpDB.alumnosMockUp)
+    return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST + idConvocatoria)
+  }
   getAlumnoID(idAlumno: number): Observable<Alumno> {
     return of(MockUpDB.alumnoMockUp1)
     return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno)

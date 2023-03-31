@@ -13,16 +13,16 @@ import { Observable } from 'rxjs/internal/Observable';
 export class GenerosComponent {
 
   nuevoGeneroForm = new FormControl()
-  generos$: Observable<Genero[]> = this.apiService.getGenerosConvocatoria()
+  generos$: Observable<Genero[]> = this.apiService.getGenerosAlumno()
 
   constructor(private apiService: ApiService) { }
 
   public deleteGeneroConvocatoria(idLenguaje: number | undefined) {
     if (idLenguaje)
-      this.apiService.deleteGeneroConvocatoria(idLenguaje)
+      this.apiService.deleteGeneroAlumno(idLenguaje)
   }
 
   public addGeneroConvocatoria() {
-    this.nuevoGeneroForm.valid ? this.apiService.addGeneroConvocatoria(this.nuevoGeneroForm.value) : ''
+    this.nuevoGeneroForm.valid ? this.apiService.addGeneroAlumno(this.nuevoGeneroForm.value) : ''
   }
 }

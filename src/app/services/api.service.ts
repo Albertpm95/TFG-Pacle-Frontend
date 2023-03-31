@@ -99,16 +99,16 @@ export class ApiService {
   deleteNivelConvocatoria(idNivel: number): Observable<Nivel> {
     return this.http.delete<Nivel>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idNivel)
   }
-  getGenerosConvocatoria(): Observable<Genero[]> {
+  getGenerosAlumno(): Observable<Genero[]> {
     return of(MockUpDB.generosMockUp)
     return this.http.get<Genero[]>(
       this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
     )
   }
-  addGeneroConvocatoria(genero: string): Observable<Genero> {
+  addGeneroAlumno(genero: string): Observable<Genero> {
     return this.http.put<Genero>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { genero })
   }
-  deleteGeneroConvocatoria(idGenero: number): Observable<Genero> {
+  deleteGeneroAlumno(idGenero: number): Observable<Genero> {
     return this.http.delete<Genero>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idGenero)
   }
   /** ---------------------------------------------------------------------- */

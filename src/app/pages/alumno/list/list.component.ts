@@ -3,7 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { COMPONENTS, MODULES } from '@constants';
 import { Alumno } from '@models/alumno';
+import { Convocatoria } from '@models/convocatoria';
 import { ApiService } from '@services/api.service';
+import { take } from 'rxjs';
 
 @Component({
     templateUrl: './list.component.html',
@@ -15,6 +17,9 @@ export class ListComponent {
 
     list_loaded: boolean = false;
     edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
+    correct_alumno_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
+
+    convocatoria: Convocatoria | undefined
 
     constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) { }
 
@@ -34,7 +39,8 @@ export class ListComponent {
     }
 
     private initializeFilteredListConvocatoria(idConvocatoria: number): void {
-        this.apiService.getAlumnosConvocatoria(idConvocatoria).subscribe((alumnos: Alumno[]) => {
+        this.apiService.getConvocatoria(idConvocatoria).pipe(take(1)).subscribe((convocatoria: Convocatoria) => { this.convocatoria = convocatoria })
+        this.apiService.getAlumnosConvocatoria(idConvocatoria).pipe(take(1)).subscribe((alumnos: Alumno[]) => {
             if (alumnos) {
                 this.data_source = new MatTableDataSource(alumnos)
                 if (alumnos.length)

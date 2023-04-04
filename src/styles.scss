@@ -114,6 +114,7 @@ $Pacle-Theme: mat.define-light-theme(
 html,
 body {
   height: 100%;
+  box-sizing: border-box;
 }
 html {
   font-size: 10px;
@@ -124,6 +125,9 @@ body {
   margin: 0;
   font-size: calc(0.75em + 1vmin);
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+div {
+  box-sizing: border-box;
 }
 mat-card {
   border-radius: 8px;

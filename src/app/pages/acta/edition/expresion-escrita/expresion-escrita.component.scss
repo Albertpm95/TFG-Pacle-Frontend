@@ -1,37 +1,31 @@
 .container {
-  div {
-    form {
+  width: 100%;
+  padding: 1rem;
+  border: solid 1px black;
+  .header {
+    width: 100%;
+    border-bottom: solid 1px gray;
+    margin-bottom: 1rem;
+  }
+  form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+    .tareas-container {
       display: flex;
-      flex-flow: column wrap;
-      align-items: center;
-      .tareas-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+      flex-direction: column;
+      @media (width >= 420px) {
+        width: 50%;
+      }
+      @media (width <= 420px) {
+        width: 390px;
+      }
+      padding: 0.5rem;
+      .tarea {
         width: 100%;
-        margin: 1rem 0;
-      }
-      .inputs-container {
-        width: 49%;
         display: flex;
-        flex-flow: column wrap;
-      }
-      .tareas-corrector {
-        width: 49%;
-        .corrector-container {
-          width: 100%;
-        }
-
-        mat-select {
-          width: 98%;
-        }
-
-        .tarea {
-          width: 100%;
-          display: flex;
-          flex-flow: row nowrap;
-        }
+        flex-flow: row nowrap;
         .tarea-label {
           width: 85%;
           height: 25px;
@@ -39,16 +33,32 @@
           border: none;
         }
         .tarea-valor {
-          width: 15%;
+          width: 10%;
           height: 25px;
           padding: 0.6rem 1rem;
+          box-shadow: inset 0 1px 3px #ddd;
+          border: 0.5px gray solid;
+          border-radius: 4px;
         }
       }
     }
+    .inputs-container {
+      display: flex;
+      flex-direction: column;
+      @media (width >= 420px) {
+        width: 50%;
+      }
+      @media (width <= 420px) {
+        width: 390px;
+      }
+      padding: 0.5rem;
+      justify-content: space-between;
+    }
   }
-}
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

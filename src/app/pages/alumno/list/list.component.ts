@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { COMPONENTS, MODULES } from '@constants';
 import { Alumno } from '@models/alumno';
 import { Convocatoria } from '@models/convocatoria';
+import { AlumnosConvocatoria } from '@models/dictionaries';
 import { ApiService } from '@services/api.service';
 import { map, take } from 'rxjs';
 
@@ -19,7 +20,8 @@ export class ListComponent {
     edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
     correct_alumno_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
 
-    mappedConvocatoriaAlumnos = new Map<Convocatoria, Alumno[]>
+    convocatoria: Convocatoria | undefined
+
 
     constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) { }
 
@@ -42,8 +44,11 @@ export class ListComponent {
     }
 
     private initializeFilteredListConvocatoria(idConvocatoria: number): void {
-        this.apiService.getAlumnosConvocatoria(idConvocatoria).pipe(take(1)).subscribe((mappedInfo: any) => {
-            this.mappedConvocatoriaAlumnos = mappedInfo
+        this.apiService.getAlumnosConvocatoria(idConvocatoria).pipe(take(1)).subscribe((mappedInfo: AlumnosConvocatoria) => {
+            this.convocatoria = mappedInfo.convocatoria
+            this.data_source = new MatTableDataSource(mappedInfo.alumnos)
+            if (mappedInfo.alumnos.length)
+                this.list_loaded = true
         })
     }
 }

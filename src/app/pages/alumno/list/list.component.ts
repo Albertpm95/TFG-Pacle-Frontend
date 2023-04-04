@@ -39,7 +39,6 @@ export class ListComponent {
     }
 
     private initializeFilteredListConvocatoria(idConvocatoria: number): void {
-        this.apiService.getConvocatoria(idConvocatoria).pipe(take(1)).subscribe((convocatoria: Convocatoria) => { this.convocatoria = convocatoria })
         this.apiService.getAlumnosConvocatoria(idConvocatoria).pipe(take(1)).subscribe((alumnos: Alumno[]) => {
             if (alumnos) {
                 this.data_source = new MatTableDataSource(alumnos)

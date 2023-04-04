@@ -25,7 +25,6 @@ export class ListComponent {
 
     private initializeList(): void {
         this.apiService.getAlumnos().subscribe((alumnos: Alumno[]) => {
-            console.log(alumnos)
             if (alumnos) {
                 this.data_source = new MatTableDataSource(alumnos)
                 if (alumnos.length)
@@ -36,7 +35,6 @@ export class ListComponent {
 
     private initializeFilteredListConvocatoria(idConvocatoria: number): void {
         this.apiService.getAlumnosConvocatoria(idConvocatoria).subscribe((alumnos: Alumno[]) => {
-            console.log(alumnos)
             if (alumnos) {
                 this.data_source = new MatTableDataSource(alumnos)
                 if (alumnos.length)

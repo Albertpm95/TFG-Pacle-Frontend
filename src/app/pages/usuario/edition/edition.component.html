@@ -19,7 +19,7 @@
           <input matInput formControlName="username">
         </mat-form-field>
         <mat-form-field>
-          <mat-label for="rol">Genero del usuario</mat-label>
+          <mat-label for="rol">Rol del usuario</mat-label>
           <mat-select formControlName="rol">
             <mat-option [value]="rol.rol" *ngFor="let rol of listaRolesUsuario$ | async">{{ rol.rol }}</mat-option>
           </mat-select>

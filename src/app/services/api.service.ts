@@ -112,7 +112,7 @@ export class ApiService {
         return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
     }
     getActaID(idActa: number): Observable<Acta> {
-        return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + idActa)
+        return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + '/' + idActa)
     }
     /** ---------------------------------------------------------------------- */
 
@@ -139,8 +139,8 @@ export class ApiService {
     getAlumnos(): Observable<Alumno[]> {
         return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
     }
-    getAlumnosConvocatoria(idConvocatoria: number): Observable<Alumno[]> {
-        return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST + idConvocatoria)
+    getAlumnosConvocatoria(idConvocatoria: number): Observable<Map<Convocatoria, Alumno[]>> {
+        return this.http.get<Map<Convocatoria, Alumno[]>>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST + '/' + idConvocatoria)
     }
     getAlumnoID(idAlumno: number): Observable<Alumno> {
         return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno)

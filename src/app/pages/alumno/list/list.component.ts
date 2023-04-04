@@ -5,7 +5,7 @@ import { COMPONENTS, MODULES } from '@constants';
 import { Alumno } from '@models/alumno';
 import { Convocatoria } from '@models/convocatoria';
 import { ApiService } from '@services/api.service';
-import { take } from 'rxjs';
+import { map, take } from 'rxjs';
 
 @Component({
     templateUrl: './list.component.html',
@@ -19,13 +19,16 @@ export class ListComponent {
     edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
     correct_alumno_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
 
-    convocatoria: Convocatoria | undefined
+    mappedConvocatoriaAlumnos = new Map<Convocatoria, Alumno[]>
 
     constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) { }
 
     ngOnInit() {
-        let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
-        idConvocatoria ? this.initializeFilteredListConvocatoria(idConvocatoria) : this.initializeList()
+        let idConvocatoriaString = this.activactedRoute.snapshot.paramMap.get('idConvocatoria')
+        if (idConvocatoriaString)
+            this.initializeFilteredListConvocatoria(+idConvocatoriaString)
+        else
+            this.initializeList()
     }
 
     private initializeList(): void {
@@ -39,12 +42,8 @@ export class ListComponent {
     }
 
     private initializeFilteredListConvocatoria(idConvocatoria: number): void {
-        this.apiService.getAlumnosConvocatoria(idConvocatoria).pipe(take(1)).subscribe((alumnos: Alumno[]) => {
-            if (alumnos) {
-                this.data_source = new MatTableDataSource(alumnos)
-                if (alumnos.length)
-                    this.list_loaded = true
-            }
+        this.apiService.getAlumnosConvocatoria(idConvocatoria).pipe(take(1)).subscribe((mappedInfo: any) => {
+            this.mappedConvocatoriaAlumnos = mappedInfo
         })
     }
 }

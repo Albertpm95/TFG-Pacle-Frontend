@@ -17,6 +17,7 @@ import { Nivel } from '@models/nivel'
 import { Rol } from '@models/rol'
 import { Usuario } from '@models/usuario'
 import { Observable, of } from 'rxjs'
+import { AlumnosConvocatoria } from '@models/dictionaries'
 
 @Injectable({
     providedIn: 'root',
@@ -139,8 +140,8 @@ export class ApiService {
     getAlumnos(): Observable<Alumno[]> {
         return this.http.get<Alumno[]>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST)
     }
-    getAlumnosConvocatoria(idConvocatoria: number): Observable<Map<Convocatoria, Alumno[]>> {
-        return this.http.get<Map<Convocatoria, Alumno[]>>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST + '/' + idConvocatoria)
+    getAlumnosConvocatoria(idConvocatoria: number): Observable<AlumnosConvocatoria> {
+        return this.http.get<AlumnosConvocatoria>(this.apiUrl + API_ENDPOINTS.ALUMNO_LIST + '/' + idConvocatoria)
     }
     getAlumnoID(idAlumno: number): Observable<Alumno> {
         return this.http.get<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno)

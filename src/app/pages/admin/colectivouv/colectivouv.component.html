@@ -7,9 +7,9 @@
     <mat-list>
         <div class="list-item" *ngFor="let colectivoUV of colectivosUV$ | async; let last=last">
             <mat-list-item *ngIf="colectivoUV">
-                <span class="list-item-span" matListItemTitle *ngIf="colectivoUV.idColectivoUV">{{colectivoUV.colectivoUV}}<mat-icon (click)="deleteColectivoUV(colectivoUV.idColectivoUV)" *ngIf="colectivoUV">delete</mat-icon></span>
+                <span class="list-item-span" matListItemTitle *ngIf="colectivoUV.idColectivoUV">{{colectivoUV.colectivoUV}}<mat-icon (click)="deleteColectivoUV(colectivoUV.idColectivoUV)">delete</mat-icon></span>
             </mat-list-item>
-            <mat-divider *ngIf="!last">{{last}}</mat-divider>
+            <mat-divider *ngIf=" !last">{{last}}</mat-divider>
         </div>
     </mat-list>
 </div>

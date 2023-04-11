@@ -138,7 +138,7 @@ export class ApiService {
     }
     addColectivoUV(colectivo_nuevo: ColectivoUV): Observable<ColectivoUV> {
         return this.http.post<ColectivoUV>(
-            this.apiUrl + API_ENDPOINTS.CONFIG_LENGUAJE_CREATE,
+            this.apiUrl + API_ENDPOINTS.CONFIG_COLECTIVOUV_CREATE,
             colectivo_nuevo,
         )
     }

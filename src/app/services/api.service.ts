@@ -71,10 +71,10 @@ export class ApiService {
             this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_LIST,
         )
     }
-    addHorarioConvocatoria(horario_nuevo: string): Observable<Horario> {
+    addHorarioConvocatoria(horario_nuevo: Horario): Observable<Horario> {
         return this.http.post<Horario>(
             this.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_CREATE,
-            { horario_nuevo },
+            horario_nuevo,
         )
     }
     deleteHorarioConvocatoria(idHorario: number): Observable<Horario> {
@@ -89,13 +89,12 @@ export class ApiService {
         )
     }
     addLenguajeConvocatoria(lenguaje_nuevo: Lenguaje): Observable<Lenguaje> {
-        console.log(lenguaje_nuevo)
         return this.http.post<Lenguaje>(
             this.apiUrl + API_ENDPOINTS.CONFIG_LENGUAJE_CREATE, lenguaje_nuevo,
         )
     }
     deleteLenguajeConvocatoria(idLenguaje: number): Observable<any> {
-        return this.http.delete<any>(
+        return this.http.delete<Lenguaje>(
             this.apiUrl + API_ENDPOINTS.CONFIG_LENGUAJE_DELETE + '/' + idLenguaje
         )
     }
@@ -103,7 +102,7 @@ export class ApiService {
     getNivelesConvocatoria(): Observable<Nivel[]> {
         return this.http.get<Nivel[]>(this.apiUrl + API_ENDPOINTS.CONFIG_NIVEL_LIST)
     }
-    addNivelConvocatoria(nivel_nuevo: string): Observable<Nivel> {
+    addNivelConvocatoria(nivel_nuevo: Nivel): Observable<Nivel> {
         return this.http.post<Nivel>(
             this.apiUrl + API_ENDPOINTS.CONFIG_NIVEL_CREATE,
             nivel_nuevo,

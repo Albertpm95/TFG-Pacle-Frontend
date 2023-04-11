@@ -2,27 +2,31 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Horario } from '@models/horario';
 import { ApiService } from '@services/api.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-horarios',
-  templateUrl: './horarios.component.html',
-  styleUrls: ['./horarios.component.scss']
+    selector: 'app-horarios',
+    templateUrl: './horarios.component.html',
+    styleUrls: ['./horarios.component.scss']
 })
 export class HorariosComponent {
 
-  nuevoHorarioForm = new FormControl()
-  horarios$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
+    nuevoHorarioForm = new FormControl()
+    horarios$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
 
-  constructor(private apiService: ApiService) { }
+    private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  public deleteHorarioConvocatoria(idHorario: number | undefined) {
-    if (idHorario)
-      this.apiService.deleteHorarioConvocatoria(idHorario)
-  }
+    constructor(private apiService: ApiService) { }
 
-  public addHorarioConvocatoria() {
-    console.log(this.nuevoHorarioForm.valid)
-    this.nuevoHorarioForm.valid ? this.apiService.addHorarioConvocatoria(this.nuevoHorarioForm.value) : ''
-  }
+    public deleteHorarioConvocatoria(idHorario: number) {
+        idHorario ? this.apiService.deleteHorarioConvocatoria(idHorario) : ''
+    }
+
+    public addHorarioConvocatoria() {
+        this.nuevoHorarioForm.valid ? this.apiService.addHorarioConvocatoria(this.nuevoHorarioForm.value).pipe(takeUntil(this.destroy$)).subscribe() : ''
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next(true)
+    }
 }

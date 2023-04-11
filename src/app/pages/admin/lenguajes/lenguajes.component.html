@@ -1,15 +1,15 @@
 <div class="lenguajes-container">
-  <mat-form-field>
-    <mat-label for="lenguaje_nuevo">Añadir nuevo lenguaje</mat-label>
-    <input matInput id="lenguaje_nuevo" [formControl]="nuevoLenguajeForm">
-    <mat-icon matSuffix (click)="addLenguajeConvocatoria()">add</mat-icon>
-  </mat-form-field>
-  <mat-list>
-    <div class="list-item" *ngFor="let lenguaje of lenguajes$ | async">
-      <mat-list-item>
-        <span class="list-item-span" matListItemTitle>{{lenguaje.lenguaje}}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)">delete</mat-icon></span>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </div>
-  </mat-list>
+    <mat-form-field>
+        <mat-label for="lenguaje-nuevo">Añadir nuevo lenguaje</mat-label>
+        <input matInput id="lenguaje-nuevo" [formControl]="nuevoLenguajeForm">
+        <mat-icon matSuffix (click)="addLenguajeConvocatoria()">add</mat-icon>
+    </mat-form-field>
+    <mat-list>
+        <div class="list-item" *ngFor="let lenguaje of lenguajes$ | async; let last=last">
+            <mat-list-item *ngIf="lenguaje">
+                <span class="list-item-span" matListItemTitle>{{lenguaje.lenguaje}}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)">delete</mat-icon></span>
+            </mat-list-item>
+            <mat-divider *ngIf="!last">{{last}}></mat-divider>
+        </div>
+    </mat-list>
 </div>

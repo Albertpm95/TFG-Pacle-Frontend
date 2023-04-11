@@ -1,15 +1,15 @@
 <div class="generos-container">
-  <mat-form-field>
-    <mat-label for="genero_nuevo">Añadir nuevo lenguaje</mat-label>
-    <input matInput id="genero_nuevo" [formControl]="nuevoGeneroForm">
-    <mat-icon matSuffix (click)="addGeneroConvocatoria()">add</mat-icon>
-  </mat-form-field>
-  <mat-list>
-    <div class="list-item" *ngFor="let genero of generos$ | async">
-      <mat-list-item>
-        <span class="list-item-span" matListItemTitle>{{genero.genero}}<mat-icon (click)="deleteGeneroConvocatoria(genero.idGenero)">delete</mat-icon></span>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </div>
-  </mat-list>
+    <mat-form-field>
+        <mat-label for="genero-nuevo">Añadir nuevo genero</mat-label>
+        <input matInput id="genero-nuevo" [formControl]="nuevoGeneroForm">
+        <mat-icon matSuffix (click)="addGeneroAlumno()">add</mat-icon>
+    </mat-form-field>
+    <mat-list>
+        <div class="list-item" *ngFor="let genero of generos$ | async; let last=last">
+            <mat-list-item *ngIf="genero">
+                <span class="list-item-span" matListItemTitle>{{genero.genero}}<mat-icon (click)="deleteGeneroAlumno(genero.idGenero)">delete</mat-icon></span>
+            </mat-list-item>
+            <mat-divider *ngIf="!last">{{last}}></mat-divider>
+        </div>
+    </mat-list>
 </div>

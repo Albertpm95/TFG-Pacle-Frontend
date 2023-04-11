@@ -2,27 +2,30 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Genero } from '@models/genero';
 import { ApiService } from '@services/api.service';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-generos',
-  templateUrl: './generos.component.html',
-  styleUrls: ['./generos.component.scss']
+    selector: 'app-generos',
+    templateUrl: './generos.component.html',
+    styleUrls: ['./generos.component.scss']
 })
-
 export class GenerosComponent {
 
-  nuevoGeneroForm = new FormControl()
-  generos$: Observable<Genero[]> = this.apiService.getGenerosAlumno()
+    nuevoGeneroForm = new FormControl()
+    generos$: Observable<Genero[]> = this.apiService.getGenerosAlumno()
 
-  constructor(private apiService: ApiService) { }
+    private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  public deleteGeneroConvocatoria(idLenguaje: number | undefined) {
-    if (idLenguaje)
-      this.apiService.deleteGeneroAlumno(idLenguaje)
-  }
+    constructor(private apiService: ApiService) { }
 
-  public addGeneroConvocatoria() {
-    this.nuevoGeneroForm.valid ? this.apiService.addGeneroAlumno(this.nuevoGeneroForm.value) : ''
-  }
+    public deleteGeneroAlumno(idGenero: number) {
+        idGenero ? this.apiService.deleteGeneroAlumno(idGenero) : ''
+    }
+
+    public addGeneroAlumno() {
+        this.nuevoGeneroForm.valid ? this.apiService.addGeneroAlumno(this.nuevoGeneroForm.value).pipe(takeUntil(this.destroy$)).subscribe() : ''
+    }
+    ngOnDestroy() {
+        this.destroy$.next(true)
+    }
 }

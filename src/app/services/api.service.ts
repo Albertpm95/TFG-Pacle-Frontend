@@ -228,8 +228,14 @@ export class ApiService {
     }
     getUsuarioID(idUsuario?: string): Observable<Usuario> {
         return this.http.get<Usuario>(
-            this.apiUrl + API_ENDPOINTS.USUARIO_UPDATE + { idUsuario },
+            this.apiUrl + API_ENDPOINTS.USUARIO_DETAILS + '/' + idUsuario,
         )
+    }
+    addUsuario(usuario_nuevo: Usuario): Observable<Usuario> {
+        return this.http.post<Usuario>(this.apiUrl + API_ENDPOINTS.USUARIO_CREATE, usuario_nuevo)
+    }
+    updateUsuario(usuario_editado: Usuario): Observable<Usuario> {
+        return this.http.put<Usuario>(this.apiUrl + API_ENDPOINTS.USUARIO_UPDATE, usuario_editado)
     }
     /** ---------------------------------------------------------------------- */
 }

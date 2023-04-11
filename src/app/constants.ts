@@ -50,6 +50,7 @@ export class API_Routers {
 export class ACTIONS {
     static CREATE = 'create'
     static DELETE = 'delete'
+    static DETAILS = 'details'
     static DISABLE = 'disable'
     static ENABLE = 'enable'
     static LIST = 'list'
@@ -92,6 +93,7 @@ export class API_ENDPOINTS {
     static EXPRESION_UPDATE = API_Routers.EXPRESION + '/' + ACTIONS.UPDATE
     static USUARIO_CREATE = API_Routers.USUARIO + '/' + ACTIONS.CREATE
     static USUARIO_DELETE = API_Routers.USUARIO + '/' + ACTIONS.DELETE
+    static USUARIO_DETAILS = API_Routers.USUARIO + '/' + ACTIONS.DETAILS
     static USUARIO_LIST = API_Routers.USUARIO + '/' + ACTIONS.LIST
     static USUARIO_UPDATE = API_Routers.USUARIO + '/' + ACTIONS.UPDATE
 }

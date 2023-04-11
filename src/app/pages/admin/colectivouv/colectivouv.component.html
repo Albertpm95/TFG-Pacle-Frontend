@@ -5,7 +5,7 @@
         <mat-icon matSuffix (click)="addColectivoUV()">add</mat-icon>
     </mat-form-field>
     <mat-list>
-        <div class="list-item" *ngFor="let colectivoUV of colectivosUV$ | async; let last=last">
+        <div class="list-item" *ngFor="let colectivoUV of colectivosUV; let last=last">
             <mat-list-item *ngIf="colectivoUV">
                 <span class="list-item-span" matListItemTitle *ngIf="colectivoUV.idColectivoUV">{{colectivoUV.colectivoUV}}<mat-icon (click)="deleteColectivoUV(colectivoUV.idColectivoUV)">delete</mat-icon></span>
             </mat-list-item>

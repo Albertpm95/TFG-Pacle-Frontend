@@ -1,25 +1,45 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ColectivoUV } from '@models/colectivouv';
-import { ApiService } from '@services/api.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Component } from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { ColectivoUV } from '@models/colectivouv'
+import { ApiService } from '@services/api.service'
+import { Subject, takeUntil } from 'rxjs'
 
 @Component({
     selector: 'app-colectivouv',
     templateUrl: './colectivouv.component.html',
-    styleUrls: ['./colectivouv.component.scss']
+    styleUrls: ['./colectivouv.component.scss'],
 })
 export class ColectivouvComponent {
-
     nuevoColectivoUVForm = new FormControl()
-    colectivosUV$: Observable<ColectivoUV[]> = this.apiService.getColectivosUV()
+    colectivosUV: ColectivoUV[] = []
 
     private destroy$: Subject<boolean> = new Subject<boolean>()
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService) {
+        this.apiService
+            .getColectivosUV()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((response: ColectivoUV[]) => { this.colectivosUV = response })
+    }
 
-    public deleteColectivoUV(idColectivoUV: number | undefined) {
-        idColectivoUV ? this.apiService.deleteColectivoUV(idColectivoUV).pipe(takeUntil(this.destroy$)).subscribe(response => { console.log(response) }) : ''
+    public deleteColectivoUV(idColectivoUV: number) {
+        idColectivoUV
+            ? this.apiService
+                .deleteColectivoUV(idColectivoUV)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                    let indexAEliminar = this.colectivosUV.findIndex(
+                        (colectivo) => colectivo.idColectivoUV === idColectivoUV,
+                    )
+                    if (indexAEliminar != -1)
+                        this.colectivosUV.splice(
+                            this.colectivosUV.findIndex(
+                                (colectivo) => colectivo.idColectivoUV === idColectivoUV,
+                            ),
+                            1,
+                        )
+                })
+            : ''
     }
 
     public addColectivoUV() {
@@ -28,12 +48,10 @@ export class ColectivouvComponent {
             this.apiService
                 .addColectivoUV(colectivoUV)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(
-                    response => {
-                        console.log(response)
-                        this.nuevoColectivoUVForm.reset()
-                    }
-                )
+                .subscribe((response: ColectivoUV) => {
+                    this.nuevoColectivoUVForm.reset()
+                    this.colectivosUV.push(response)
+                })
         }
     }
 

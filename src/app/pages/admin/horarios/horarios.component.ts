@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Horario } from '@models/horario';
 import { ApiService } from '@services/api.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-horarios',
@@ -10,30 +10,49 @@ import { Observable, Subject, takeUntil } from 'rxjs';
     styleUrls: ['./horarios.component.scss']
 })
 export class HorariosComponent {
-
     nuevoHorarioForm = new FormControl()
-    horarios$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
+    horarios: Horario[] = []
 
     private destroy$: Subject<boolean> = new Subject<boolean>()
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService) {
+        this.nuevoHorarioForm.setValidators(Validators.required)
+        this.apiService
+            .getHorariosConvocatoria()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((response: Horario[]) => (this.horarios = response))
+    }
 
     public deleteHorarioConvocatoria(idHorario: number) {
-        idHorario ? this.apiService.deleteHorarioConvocatoria(idHorario).pipe(takeUntil(this.destroy$)).subscribe(response => { console.log(response) }) : ''
+        idHorario
+            ? this.apiService
+                .deleteHorarioConvocatoria(idHorario)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                    let indexAEliminar = this.horarios.findIndex(
+                        (horario) => horario.idHorario === idHorario,
+                    )
+                    if (indexAEliminar != -1)
+                        this.horarios.splice(
+                            this.horarios.findIndex(
+                                (horario) => horario.idHorario === idHorario,
+                            ),
+                            1,
+                        )
+                })
+            : ''
     }
 
     public addHorarioConvocatoria() {
         if (this.nuevoHorarioForm.valid) {
-            let horario_nuevo: Horario = { horario: this.nuevoHorarioForm.value }
+            let lenguaje_nuevo: Horario = { horario: this.nuevoHorarioForm.value }
             this.apiService
-                .addHorarioConvocatoria(horario_nuevo)
+                .addHorarioConvocatoria(lenguaje_nuevo)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(
-                    response => {
-                        console.log(response)
-                        this.nuevoHorarioForm.reset()
-                    }
-                )
+                .subscribe((response: Horario) => {
+                    this.nuevoHorarioForm.reset()
+                    this.horarios.push(response)
+                })
         }
     }
 

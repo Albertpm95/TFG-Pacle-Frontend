@@ -5,7 +5,7 @@
         <mat-icon matSuffix (click)="addLenguajeConvocatoria()">add</mat-icon>
     </mat-form-field>
     <mat-list>
-        <div class="list-item" *ngFor="let lenguaje of lenguajes$ | async; let last=last">
+        <div class="list-item" *ngFor="let lenguaje of lenguajes; let last=last">
             <mat-list-item *ngIf="lenguaje">
                 <span class="list-item-span" matListItemTitle *ngIf="lenguaje.idLenguaje">{{lenguaje.lenguaje}}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)">delete</mat-icon></span>
             </mat-list-item>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import { FormControl, RequiredValidator, Validators } from '@angular/forms'
+import { FormControl, Validators } from '@angular/forms'
 import { Lenguaje } from '@models/lenguaje'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, takeUntil } from 'rxjs'
+import { Subject, takeUntil } from 'rxjs'
 
 @Component({
     selector: 'app-lenguajes',
@@ -11,19 +11,36 @@ import { Observable, Subject, takeUntil } from 'rxjs'
 })
 export class LenguajesComponent {
     nuevoLenguajeForm = new FormControl()
-    lenguajes$: Observable<Lenguaje[]> =
-        this.apiService.getLenguajesConvocatoria()
+    lenguajes: Lenguaje[] = []
 
     private destroy$: Subject<boolean> = new Subject<boolean>()
 
-    constructor(private apiService: ApiService) { }
-
-    ngOnInit() {
-        this.nuevoLenguajeForm.setValidators([Validators.required])
+    constructor(private apiService: ApiService) {
+        this.nuevoLenguajeForm.setValidators(Validators.required)
+        this.apiService
+            .getLenguajesConvocatoria()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((response: Lenguaje[]) => (this.lenguajes = response))
     }
 
     public deleteLenguajeConvocatoria(idLenguaje: number) {
-        idLenguaje ? this.apiService.deleteLenguajeConvocatoria(idLenguaje).pipe(takeUntil(this.destroy$)).subscribe(response => { console.log(response) }) : ''
+        idLenguaje
+            ? this.apiService
+                .deleteLenguajeConvocatoria(idLenguaje)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                    let indexAEliminar = this.lenguajes.findIndex(
+                        (lLenguaje) => lLenguaje.idLenguaje === idLenguaje,
+                    )
+                    if (indexAEliminar != -1)
+                        this.lenguajes.splice(
+                            this.lenguajes.findIndex(
+                                (lLenguaje) => lLenguaje.idLenguaje === idLenguaje,
+                            ),
+                            1,
+                        )
+                })
+            : ''
     }
 
     public addLenguajeConvocatoria() {
@@ -32,12 +49,10 @@ export class LenguajesComponent {
             this.apiService
                 .addLenguajeConvocatoria(lenguaje_nuevo)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(
-                    response => {
-                        console.log(response)
-                        this.nuevoLenguajeForm.reset()
-                    }
-                )
+                .subscribe((response: Lenguaje) => {
+                    this.nuevoLenguajeForm.reset()
+                    this.lenguajes.push(response)
+                })
         }
     }
 

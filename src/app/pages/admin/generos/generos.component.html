@@ -5,7 +5,7 @@
         <mat-icon matSuffix (click)="addGeneroAlumno()">add</mat-icon>
     </mat-form-field>
     <mat-list>
-        <div class="list-item" *ngFor="let genero of generos$ | async; let last=last">
+        <div class="list-item" *ngFor="let genero of generos; let last=last">
             <mat-list-item *ngIf="genero">
                 <span class="list-item-span" matListItemTitle *ngIf="genero.idGenero">{{genero.genero}}<mat-icon (click)="deleteGeneroAlumno(genero.idGenero)">delete</mat-icon></span>
             </mat-list-item>

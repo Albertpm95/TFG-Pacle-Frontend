@@ -144,7 +144,7 @@ export class ApiService {
     }
     deleteColectivoUV(idColectivo: number): Observable<ColectivoUV> {
         return this.http.delete<ColectivoUV>(
-            this.apiUrl + API_ENDPOINTS.CONFIG_LENGUAJE_DELETE + '/' + idColectivo,
+            this.apiUrl + API_ENDPOINTS.CONFIG_COLECTIVOUV_DELETE + '/' + idColectivo,
         )
     }
     /** ---------------------------------------------------------------------- */

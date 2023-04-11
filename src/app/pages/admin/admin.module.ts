@@ -7,6 +7,7 @@ import { HorariosComponent } from './horarios/horarios.component';
 import { GenerosComponent } from './generos/generos.component';
 import { NivelesComponent } from './niveles/niveles.component';
 import { LenguajesComponent } from './lenguajes/lenguajes.component';
+import { ColectivouvComponent } from './colectivouv/colectivouv.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { LenguajesComponent } from './lenguajes/lenguajes.component';
     HorariosComponent,
     GenerosComponent,
     NivelesComponent,
+    ColectivouvComponent,
 
   ],
   imports: [

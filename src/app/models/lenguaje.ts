@@ -1,4 +1,4 @@
 export interface Lenguaje {
-  idLenguaje?: number
-  lenguaje: string
+    idLenguaje: number
+    lenguaje: string
 }

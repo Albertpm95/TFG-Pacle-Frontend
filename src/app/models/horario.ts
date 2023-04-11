@@ -1,4 +1,4 @@
 export interface Horario {
-  idHorario?: number
+  idHorario: number
   horario: string
 }

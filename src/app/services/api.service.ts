@@ -18,6 +18,7 @@ import { Rol } from '@models/rol'
 import { Usuario } from '@models/usuario'
 import { Observable, of } from 'rxjs'
 import { AlumnosConvocatoria } from '@models/dictionaries'
+import { ColectivoUV } from '@models/colectivouv'
 
 @Injectable({
     providedIn: 'root',
@@ -105,6 +106,17 @@ export class ApiService {
     }
     deleteGeneroAlumno(idGenero: number): Observable<Genero> {
         return this.http.delete<Genero>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idGenero)
+    }
+    getColectivosUV(): Observable<ColectivoUV[]> {
+        return this.http.get<ColectivoUV[]>(
+            this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_LIST,
+        )
+    }
+    addColectivoUV(colectivo: string): Observable<ColectivoUV> {
+        return this.http.put<ColectivoUV>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_CREATE, { colectivo })
+    }
+    deleteColectivoUV(idColectivo: number): Observable<ColectivoUV> {
+        return this.http.delete<ColectivoUV>(this.apiUrl + API_ENDPOINTS.CONFIG_IDIOMA_DELETE + idColectivo)
     }
     /** ---------------------------------------------------------------------- */
 

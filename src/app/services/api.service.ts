@@ -38,6 +38,9 @@ export class ApiService {
     getRolesUsuario(): Observable<Rol[]> {
         return this.http.get<Rol[]>(this.apiUrl + API_ENDPOINTS.CONFIG_ROL_LIST)
     }
+    addRolUsuario(rol_nuevo: Rol): Observable<Rol> {
+        return this.http.post<Rol>(this.apiUrl + API_ENDPOINTS.CONFIG_ROL_CREATE, rol_nuevo)
+    }
     /** ---------------------------------------------------------------------- */
 
     /** Convocatorias */

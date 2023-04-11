@@ -1,0 +1,15 @@
+<div class="roles-container">
+    <mat-form-field>
+        <mat-label for="rol_nuevo">Añadir nuevo rol</mat-label>
+        <input matInput id="rol_nuevo" [formControl]="nuevoRolForm">
+        <mat-icon matSuffix (click)="addRolUsuario()">add</mat-icon>
+    </mat-form-field>
+    <mat-list>
+        <div class="list-item" *ngFor="let rol of roles; let last=last">
+            <mat-list-item *ngIf="rol">
+                <span class="list-item-span" matListItemTitle *ngIf="rol.idRol">{{rol.rol}}</span>
+            </mat-list-item>
+            <mat-divider *ngIf="!last">{{last}}></mat-divider>
+        </div>
+    </mat-list>
+</div>

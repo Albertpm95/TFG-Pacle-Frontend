@@ -1,4 +1,4 @@
 export interface Genero {
-  idGenero: number
-  genero: string
+    idGenero?: number
+    genero: string
 }

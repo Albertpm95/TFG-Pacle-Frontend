@@ -19,12 +19,24 @@ export class GenerosComponent {
     constructor(private apiService: ApiService) { }
 
     public deleteGeneroAlumno(idGenero: number) {
-        idGenero ? this.apiService.deleteGeneroAlumno(idGenero) : ''
+        idGenero ? this.apiService.deleteGeneroAlumno(idGenero).pipe(takeUntil(this.destroy$)).subscribe() : ''
     }
 
     public addGeneroAlumno() {
-        this.nuevoGeneroForm.valid ? this.apiService.addGeneroAlumno(this.nuevoGeneroForm.value).pipe(takeUntil(this.destroy$)).subscribe() : ''
+        if (this.nuevoGeneroForm.valid) {
+            let lenguaje_nuevo: Genero = { genero: this.nuevoGeneroForm.value }
+            this.apiService
+                .addGeneroAlumno(lenguaje_nuevo)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    response => {
+                        console.log(response)
+                        this.nuevoGeneroForm.reset()
+                    }
+                )
+        }
     }
+
     ngOnDestroy() {
         this.destroy$.next(true)
     }

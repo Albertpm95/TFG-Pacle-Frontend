@@ -1,4 +1,4 @@
 export interface ColectivoUV {
-    id: number
-    colectivo: string
+    idColectivoUV?: number
+    colectivoUV?: string
 }

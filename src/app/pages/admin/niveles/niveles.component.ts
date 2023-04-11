@@ -19,12 +19,24 @@ export class NivelesComponent {
     constructor(private apiService: ApiService) { }
 
     public deleteNivelConvocatoria(idNivel: number) {
-        idNivel ? this.apiService.deleteNivelConvocatoria(idNivel) : ''
+        idNivel ? this.apiService.deleteNivelConvocatoria(idNivel).pipe(takeUntil(this.destroy$)).subscribe(response => { console.log(response) }) : ''
     }
 
     public addNivelConvocatoria() {
-        this.nuevoNivelForm.valid ? this.apiService.addNivelConvocatoria(this.nuevoNivelForm.value).pipe(takeUntil(this.destroy$)).subscribe() : ''
+        if (this.nuevoNivelForm.valid) {
+            let nivel_nuevo: Nivel = { nivel: this.nuevoNivelForm.value }
+            this.apiService
+                .addNivelConvocatoria(nivel_nuevo)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    response => {
+                        console.log(response)
+                        this.nuevoNivelForm.reset()
+                    }
+                )
+        }
     }
+
     ngOnDestroy() {
         this.destroy$.next(true)
     }

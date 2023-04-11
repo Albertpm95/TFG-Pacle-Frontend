@@ -1,4 +1,4 @@
 export interface Nivel {
-  idNivel: number
-  nivel: string
+    idNivel?: number
+    nivel: string
 }

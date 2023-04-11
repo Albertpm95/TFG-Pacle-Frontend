@@ -19,12 +19,24 @@ export class ColectivouvComponent {
     constructor(private apiService: ApiService) { }
 
     public deleteColectivoUV(idColectivoUV: number | undefined) {
-        idColectivoUV ? this.apiService.deleteColectivoUV(idColectivoUV) : ''
+        idColectivoUV ? this.apiService.deleteColectivoUV(idColectivoUV).pipe(takeUntil(this.destroy$)).subscribe(response => { console.log(response) }) : ''
     }
 
     public addColectivoUV() {
-        this.nuevoColectivoUVForm.valid ? this.apiService.addColectivoUV(this.nuevoColectivoUVForm.value).pipe(takeUntil(this.destroy$)).subscribe() : ''
+        if (this.nuevoColectivoUVForm.valid) {
+            let colectivoUV: ColectivoUV = { colectivoUV: this.nuevoColectivoUVForm.value }
+            this.apiService
+                .addColectivoUV(colectivoUV)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    response => {
+                        console.log(response)
+                        this.nuevoColectivoUVForm.reset()
+                    }
+                )
+        }
     }
+
     ngOnDestroy() {
         this.destroy$.next(true)
     }

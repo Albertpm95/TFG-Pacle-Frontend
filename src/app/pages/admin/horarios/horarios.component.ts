@@ -19,11 +19,22 @@ export class HorariosComponent {
     constructor(private apiService: ApiService) { }
 
     public deleteHorarioConvocatoria(idHorario: number) {
-        idHorario ? this.apiService.deleteHorarioConvocatoria(idHorario) : ''
+        idHorario ? this.apiService.deleteHorarioConvocatoria(idHorario).pipe(takeUntil(this.destroy$)).subscribe(response => { console.log(response) }) : ''
     }
 
     public addHorarioConvocatoria() {
-        this.nuevoHorarioForm.valid ? this.apiService.addHorarioConvocatoria(this.nuevoHorarioForm.value).pipe(takeUntil(this.destroy$)).subscribe() : ''
+        if (this.nuevoHorarioForm.valid) {
+            let horario_nuevo: Horario = { horario: this.nuevoHorarioForm.value }
+            this.apiService
+                .addHorarioConvocatoria(horario_nuevo)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    response => {
+                        console.log(response)
+                        this.nuevoHorarioForm.reset()
+                    }
+                )
+        }
     }
 
     ngOnDestroy() {

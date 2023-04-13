@@ -40,7 +40,7 @@
                     <ng-container matColumnDef="colectivoUV">
                         <th mat-header-cell *matHeaderCellDef>ColectivoUV</th>
                         <td mat-cell *matCellDef="let alumno">
-                            {{alumno.colectivoUV.colectivo }}
+                            {{alumno.colectivoUV.colectivoUV }}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="genero">
@@ -60,7 +60,7 @@
                         <td mat-cell *matCellDef="let alumno">
                             <button mat-icon-button [routerLink]="[correct_alumno_route, { idAlumno: alumno.idAlumno, idConvocatoria: convocatoria.idConvocatoria}]" *ngIf="convocatoria && convocatoria?.idConvocatoria"><mat-icon>fact_check</mat-icon></button>
                             <button mat-icon-button [routerLink]="[edit_route, { idAlumno: alumno.idAlumno}]"><mat-icon>edit</mat-icon></button>
-                            <button mat-icon-button><mat-icon>delete</mat-icon></button>
+                            <button mat-icon-button (click)="deleteAlumno(alumno.idAlumno)"><mat-icon>delete</mat-icon></button>
                         </td>
                     </ng-container>
                 </div>

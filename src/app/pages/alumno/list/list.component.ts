@@ -6,7 +6,7 @@ import { Alumno } from '@models/alumno';
 import { Convocatoria } from '@models/convocatoria';
 import { AlumnosConvocatoria } from '@models/dictionaries';
 import { ApiService } from '@services/api.service';
-import { map, take } from 'rxjs';
+import { Subject, map, take, takeUntil } from 'rxjs';
 
 @Component({
     templateUrl: './list.component.html',
@@ -22,6 +22,7 @@ export class ListComponent {
 
     convocatoria: Convocatoria | undefined
 
+    private destroy$: Subject<boolean> = new Subject<boolean>()
 
     constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) { }
 
@@ -50,5 +51,23 @@ export class ListComponent {
             if (mappedInfo.alumnos.length)
                 this.list_loaded = true
         })
+    }
+
+    public deleteAlumno(idAlumno: number): void {
+        this.list_loaded = false
+        idAlumno ? this.apiService.deleteAlumno(idAlumno).pipe(takeUntil(this.destroy$)).subscribe(() => {
+            let indexAEliminar = this.data_source.data.findIndex(
+                (alumno) => alumno.idAlumno === idAlumno,
+            )
+            if (indexAEliminar != -1)
+                this.data_source.data.splice(indexAEliminar, 1)
+
+            this.list_loaded = true
+        }) : ''
+    }
+
+
+    ngOnDestroy() {
+        this.destroy$.next(true)
     }
 }

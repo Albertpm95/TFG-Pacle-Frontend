@@ -215,10 +215,14 @@ export class ApiService {
             this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE + '/' + idAlumno,
         )
     }
-    updateAlumno(alumno: Alumno): Observable<Alumno> {
-        return this.http.post<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE, {
-            alumno,
-        })
+    addAlumno(alumno_nuevo: Alumno): Observable<Alumno> {
+        return this.http.post<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_CREATE, alumno_nuevo)
+    }
+    updateAlumno(alumno_editado: Alumno): Observable<Alumno> {
+        return this.http.put<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_UPDATE, alumno_editado)
+    }
+    deleteAlumno(idAlumno: number): Observable<Alumno> {
+        return this.http.delete<Alumno>(this.apiUrl + API_ENDPOINTS.ALUMNO_DELETE + '/' + idAlumno)
     }
     /** ---------------------------------------------------------------------- */
 

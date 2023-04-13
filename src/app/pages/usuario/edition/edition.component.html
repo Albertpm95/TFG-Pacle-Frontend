@@ -28,10 +28,10 @@
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" type="submit" (click)="save()" *ngIf="!usuario">
+            <button mat-raised-button color="primary" type="submit" (click)="save()" *ngIf="!usuario" [disabled]="usuarioDetailsForm.invalid">
                 Crear usuario
             </button>
-            <button mat-raised-button color="primary" type="submit" (click)="save(usuario.idUsuario)" *ngIf="usuario && usuario.idUsuario">
+            <button mat-raised-button color="primary" type="submit" (click)="save(usuario.idUsuario)" *ngIf="usuario && usuario.idUsuario" [disabled]="usuarioDetailsForm.invalid">
                 Guardar cambios
             </button>
         </mat-card-actions>

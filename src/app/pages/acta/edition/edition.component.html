@@ -44,13 +44,13 @@
       <div class="parte">
         <comprension-lectora
           [comprensionLectora]="acta.comprensionLectora"
-          [puntuacionMaxima]="acta.convocatoria.maxComprensionAuditiva">
+          [puntuacionMaxima]="acta.convocatoria.expresionEscrita.puntuacionMaxima">
         </comprension-lectora>
       </div>
       <div class="parte">
         <expresion-escrita
           [expresionEscrita]="acta.expresionEscrita"
-          [puntuacionMaxima]="acta.convocatoria.maxExpresionEscrita">
+          [puntuacionMaxima]="acta.convocatoria.expresionOral.puntuacionMaxima">
         </expresion-escrita>
       </div>
     </div>
@@ -58,13 +58,13 @@
       <div class="parte">
         <comprension-auditiva
           [comprensionAuditiva]="acta.comprensionAuditiva"
-          [puntuacionMaxima]="acta.convocatoria.maxComprensionAuditiva">
+          [puntuacionMaxima]="acta.convocatoria.comprensionAuditiva.puntuacionMaxima">
         </comprension-auditiva>
       </div>
       <div class="parte">
         <expresion-oral
           [expresionOral]="acta.expresionOral"
-          [puntuacionMaxima]="acta.convocatoria.maxExpresionOral">
+          [puntuacionMaxima]="acta.convocatoria.comprensionLectora.puntuacionMaxima">
         </expresion-oral>
       </div>
     </div>

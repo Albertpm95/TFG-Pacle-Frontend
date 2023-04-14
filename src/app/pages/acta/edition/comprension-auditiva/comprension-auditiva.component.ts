@@ -8,7 +8,8 @@ import {
 } from '@angular/forms'
 import { CONSTANTS } from '@constants'
 
-import { ComprensionAuditiva } from '@models/comprension_auditiva'
+import { Comprension } from '@models/comprension'
+import { Tarea } from '@models/correccion'
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
 import { Observable } from 'rxjs'
@@ -16,10 +17,10 @@ import { Observable } from 'rxjs'
 @Component({
   selector: 'comprension-auditiva',
   templateUrl: './comprension-auditiva.component.html',
-  styleUrls: ['./comprension-auditiva.component.scss'],
+  styleUrls: ['./comprension-auditiva.component.scss']
 })
 export class ComprensionAuditivaComponent {
-  @Input() comprensionAuditiva!: ComprensionAuditiva
+  @Input() comprensionAuditiva!: Comprension
   @Input() puntuacionMaxima!: number
 
   loading: boolean = true
@@ -27,15 +28,10 @@ export class ComprensionAuditivaComponent {
 
   corrector$: Observable<Usuario[]> = this.apiService.getUsuarios()
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private apiService: ApiService,
-  ) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.comprensionAuditiva.idComprensionAuditiva
-      ? this.loadForm()
-      : this.initializeNewForm()
+    this.comprensionAuditiva.idComprension ? this.loadForm() : this.initializeNewForm()
     this.comprensionAuditiva.puntuacionMaxima = this.puntuacionMaxima
     this.loadTareas()
   }
@@ -44,7 +40,7 @@ export class ComprensionAuditivaComponent {
     this.form = this.formBuilder.group({
       observaciones: [''],
       corrector: ['', Validators.required],
-      listaTareas: this.formBuilder.array([]),
+      listaTareas: this.formBuilder.array([])
     })
     this.loading = false
   }
@@ -54,13 +50,10 @@ export class ComprensionAuditivaComponent {
   }
 
   private loadTareas() {
-    this.comprensionAuditiva.listaTareas.forEach((tarea) => {
+    this.comprensionAuditiva.correccion.listaTareas.forEach((tarea: Tarea) => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
-        valor: new FormControl(tarea.valor, [
-          Validators.required,
-          Validators.min(0),
-        ]),
+        valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
       this.listaTareas.push(tareaForm)
     })
@@ -73,14 +66,13 @@ export class ComprensionAuditivaComponent {
   public save(): void {
     if (this.form.valid) {
       this.extractForm()
-      this.apiService.updateComprensionAuditiva(this.comprensionAuditiva)
+      this.apiService.updateComprension(this.comprensionAuditiva)
     }
   }
 
   private calcularPorcentaje(): number {
     return (
-      (this.comprensionAuditiva.puntosConseguidos * CONSTANTS.PORCIENTO) /
-      this.comprensionAuditiva.puntuacionMaxima
+      (this.comprensionAuditiva.puntosConseguidos * CONSTANTS.PORCIENTO) / this.comprensionAuditiva.puntuacionMaxima
     )
   }
 
@@ -95,12 +87,12 @@ export class ComprensionAuditivaComponent {
 
   private extractForm(): void {
     this.comprensionAuditiva = {
-      corrector: this.form.value['corrector'],
+      correccion: this.form.value['coreccion'],
+      tipo: 'Auditiva',
       observaciones: this.form.value['observaciones'],
-      listaTareas: this.form.value['listaTareas'],
       puntuacionMaxima: this.puntuacionMaxima,
       puntosConseguidos: this.calcularPuntosTotales(),
-      porcentaje: this.calcularPorcentaje(),
+      porcentaje: this.calcularPorcentaje()
     }
   }
 }

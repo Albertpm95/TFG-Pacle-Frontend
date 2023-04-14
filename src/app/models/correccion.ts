@@ -6,7 +6,7 @@ export interface Tarea {
   valor: number
 }
 
-export interface TareaExpresion {
+export interface Correccion {
   corrector: Usuario
   listaTareas: Tarea[]
 }

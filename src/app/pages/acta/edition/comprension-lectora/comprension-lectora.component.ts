@@ -7,7 +7,8 @@ import {
   Validators,
 } from '@angular/forms'
 import { CONSTANTS } from '@constants'
-import { ComprensionLectora } from '@models/comprension_lectora'
+import { Comprension } from '@models/comprension'
+import { Tarea } from '@models/correccion'
 
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
@@ -17,10 +18,10 @@ import { Observable } from 'rxjs'
   selector: 'comprension-lectora',
   templateUrl: './comprension-lectora.component.html',
   styleUrls: ['./comprension-lectora.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComprensionLectoraComponent {
-  @Input() comprensionLectora!: ComprensionLectora
+  @Input() comprensionLectora!: Comprension
   @Input() puntuacionMaxima!: number
 
   loading: boolean = true
@@ -28,14 +29,9 @@ export class ComprensionLectoraComponent {
 
   corrector$: Observable<Usuario[]> = this.apiService.getUsuarios()
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private apiService: ApiService,
-  ) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
   ngOnInit() {
-    this.comprensionLectora.idComprensionLectora
-      ? this.loadForm()
-      : this.initializeNewForm()
+    this.comprensionLectora.idComprension ? this.loadForm() : this.initializeNewForm()
     this.comprensionLectora.puntuacionMaxima = this.puntuacionMaxima
     this.loadTareas()
   }
@@ -44,7 +40,7 @@ export class ComprensionLectoraComponent {
     this.form = this.formBuilder.group({
       observaciones: [''],
       corrector: ['', Validators.required],
-      listaTareas: this.formBuilder.array([]),
+      listaTareas: this.formBuilder.array([])
     })
     this.loading = false
   }
@@ -53,13 +49,10 @@ export class ComprensionLectoraComponent {
   }
 
   private loadTareas() {
-    this.comprensionLectora.listaTareas.forEach((tarea) => {
+    this.comprensionLectora.correccion.listaTareas.forEach((tarea: Tarea) => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
-        valor: new FormControl(tarea.valor, [
-          Validators.required,
-          Validators.min(0),
-        ]),
+        valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
       this.listaTareas.push(tareaForm)
     })
@@ -71,15 +64,12 @@ export class ComprensionLectoraComponent {
   public save(): void {
     if (this.form.valid) {
       this.extractForm()
-      this.apiService.updateComprensionLectora(this.comprensionLectora)
+      this.apiService.updateComprension(this.comprensionLectora)
     }
   }
 
   private calcularPorcentaje(): number {
-    return (
-      (this.comprensionLectora.puntosConseguidos * CONSTANTS.PORCIENTO) /
-      this.comprensionLectora.puntuacionMaxima
-    )
+    return (this.comprensionLectora.puntosConseguidos * CONSTANTS.PORCIENTO) / this.comprensionLectora.puntuacionMaxima
   }
 
   private calcularPuntosTotales(): number {
@@ -92,12 +82,12 @@ export class ComprensionLectoraComponent {
   }
   private extractForm(): void {
     this.comprensionLectora = {
-      corrector: this.form.value['corrector'],
+      correccion: this.form.value['correccion'],
+      tipo: 'Lectora',
       observaciones: this.form.value['observaciones'],
-      listaTareas: this.form.value['listaTareas'],
       puntuacionMaxima: this.puntuacionMaxima,
       puntosConseguidos: this.calcularPuntosTotales(),
-      porcentaje: this.calcularPorcentaje(),
+      porcentaje: this.calcularPorcentaje()
     }
   }
 }

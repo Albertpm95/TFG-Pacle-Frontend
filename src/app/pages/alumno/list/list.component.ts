@@ -6,7 +6,17 @@ import { Alumno } from '@models/alumno'
 import { Convocatoria } from '@models/convocatoria'
 import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
-import { Subject, map, take, takeUntil } from 'rxjs'
+import {
+  Observable,
+  Subject,
+  catchError,
+  finalize,
+  map,
+  take,
+  takeUntil,
+  throwError,
+  throwIfEmpty,
+} from 'rxjs'
 
 @Component({
   templateUrl: './list.component.html',
@@ -28,6 +38,7 @@ export class ListComponent {
   list_loaded: boolean = false
   edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
   correct_alumno_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
+  loading: boolean = true
 
   convocatoria: Convocatoria | undefined
 
@@ -47,18 +58,45 @@ export class ListComponent {
   }
 
   private initializeList(): void {
-    this.apiService.getAlumnos().subscribe((alumnos: Alumno[]) => {
-      if (alumnos) {
-        this.data_source = new MatTableDataSource(alumnos)
-        if (alumnos.length) this.list_loaded = true
-      }
-    })
+    this.apiService
+      .getAlumnos()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        }),
+      )
+      .subscribe((alumnos: Alumno[]) => {
+        if (alumnos) {
+          this.data_source = new MatTableDataSource(alumnos)
+          if (alumnos.length) this.list_loaded = true
+        }
+      })
   }
 
   private initializeFilteredListConvocatoria(idConvocatoria: number): void {
     this.apiService
       .getAlumnosConvocatoria(idConvocatoria)
-      .pipe(take(1))
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        }),
+      )
       .subscribe((mappedInfo: AlumnosConvocatoria) => {
         this.convocatoria = mappedInfo.convocatoria
         this.data_source = new MatTableDataSource(mappedInfo.alumnos)
@@ -71,7 +109,19 @@ export class ListComponent {
     idAlumno
       ? this.apiService
           .deleteAlumno(idAlumno)
-          .pipe(takeUntil(this.destroy$))
+          .pipe(
+            takeUntil(this.destroy$),
+            catchError((error): Observable<never> => {
+              console.error('Error fetching data from api:', error)
+              return throwError(() => error)
+            }),
+            finalize(() => {
+              this.loading = false
+            }),
+            throwIfEmpty(() => {
+              console.log('Vacio')
+            }),
+          )
           .subscribe(() => {
             let indexAEliminar = this.data_source.data.findIndex(
               (alumno) => alumno.idAlumno === idAlumno,

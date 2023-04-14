@@ -1,10 +1,10 @@
 <div class="convocatoria-form-container container" *ngIf="convocatoriaForm">
   <mat-card>
     <mat-card-header>
-      <mat-card-title *ngIf="creating"
+      <mat-card-title *ngIf="!convocatoria"
         >Creaccion de una convocatoria</mat-card-title
       >
-      <mat-card-title *ngIf="!creating"
+      <mat-card-title *ngIf="convocatoria && convocatoria.idConvocatoria"
         >Edicion de una convocatoria</mat-card-title
       >
     </mat-card-header>
@@ -49,7 +49,7 @@
             <mat-label for="horario" name="horario"
               >Hora de la convocatoria</mat-label
             >
-            <mat-select formControlName="horarioParcial">
+            <mat-select formControlName="horario">
               <mat-option
                 [value]="horario.horario"
                 *ngFor="let horario of listaHorariosConvocatoria$ | async"
@@ -226,15 +226,15 @@
         color="primary"
         type="submit"
         (click)="saveConvocatoria()"
-        *ngIf="creating">
+        *ngIf="!convocatoria">
         Crear Convocatoria
       </button>
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        (click)="saveConvocatoria()"
-        *ngIf="!creating">
+        (click)="saveConvocatoria(convocatoria.idConvocatoria)"
+        *ngIf="convocatoria && convocatoria.idConvocatoria">
         Actualizar Convocatoria
       </button>
     </mat-card-actions>

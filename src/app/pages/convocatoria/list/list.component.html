@@ -11,7 +11,7 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      <table mat-table [dataSource]="data_source" *ngIf="list_loaded">
+      <table mat-table [dataSource]="data_source" *ngIf="!loading">
         <div>
           <ng-container matColumnDef="idConvocatoria">
             <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -105,7 +105,7 @@
           mat-row
           *matRowDef="let convocatoria; columns: displayed_columns"></tr>
       </table>
-      <div *ngIf="!list_loaded">
+      <div *ngIf="!loading">
         <h2>No se han encontrado convocatorias.</h2>
       </div>
     </mat-card-content>

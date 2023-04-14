@@ -7,7 +7,8 @@ import {
   Validators,
 } from '@angular/forms'
 import { CONSTANTS } from '@constants'
-import { ExpresionOral } from '@models/expresion_oral'
+import { Tarea } from '@models/correccion'
+import { Expresion } from '@models/expresion'
 
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
@@ -17,10 +18,10 @@ import { Observable } from 'rxjs'
   selector: 'expresion-oral',
   templateUrl: './expresion-oral.component.html',
   styleUrls: ['./expresion-oral.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpresionOralComponent {
-  @Input() expresionOral!: ExpresionOral
+  @Input() expresionOral!: Expresion
   @Input() puntuacionMaxima!: number
 
   loading: boolean = true
@@ -28,15 +29,10 @@ export class ExpresionOralComponent {
 
   corrector$: Observable<Usuario[]> = this.apiService.getUsuarios()
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private apiService: ApiService,
-  ) {}
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.expresionOral.idExpresionOral
-      ? this.loadForm()
-      : this.initializeNewForm()
+    this.expresionOral.idExpresion ? this.loadForm() : this.initializeNewForm()
     this.expresionOral.puntuacionMaxima = this.puntuacionMaxima
     this.loadTareas()
   }
@@ -47,12 +43,12 @@ export class ExpresionOralComponent {
       corrector: ['', Validators.required],
       tareasCorrector1: this.formBuilder.group({
         corrector: ['', Validators.required],
-        listaTareas: this.formBuilder.array([]),
+        listaTareas: this.formBuilder.array([])
       }),
       tareasCorrector2: this.formBuilder.group({
         corrector: ['', Validators.required],
-        listaTareas: this.formBuilder.array([]),
-      }),
+        listaTareas: this.formBuilder.array([])
+      })
     })
     this.loading = false
   }
@@ -61,23 +57,17 @@ export class ExpresionOralComponent {
   }
 
   private loadTareas() {
-    this.expresionOral.tareasCorrector1.listaTareas.forEach((tarea) => {
+    this.expresionOral.correccion1.listaTareas.forEach((tarea: Tarea) => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
-        valor: new FormControl(tarea.valor, [
-          Validators.required,
-          Validators.min(0),
-        ]),
+        valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
       this.listaTareasCorrector1.push(tareaForm)
     })
-    this.expresionOral.tareasCorrector2.listaTareas.forEach((tarea) => {
+    this.expresionOral.correccion2.listaTareas.forEach((tarea: Tarea) => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
-        valor: new FormControl(tarea.valor, [
-          Validators.required,
-          Validators.min(0),
-        ]),
+        valor: new FormControl(tarea.valor, [Validators.required, Validators.min(0)])
       })
       this.listaTareasCorrector2.push(tareaForm)
     })
@@ -92,15 +82,12 @@ export class ExpresionOralComponent {
   public save(): void {
     if (this.form.valid) {
       this.extractForm()
-      this.apiService.updateExpresionOral(this.expresionOral)
+      this.apiService.updateExpresion(this.expresionOral)
     }
   }
 
   private calcularPorcentaje(): number {
-    return (
-      (this.expresionOral.puntosConseguidos * CONSTANTS.PORCIENTO) /
-      this.expresionOral.puntuacionMaxima
-    )
+    return (this.expresionOral.puntosConseguidos * CONSTANTS.PORCIENTO) / this.expresionOral.puntuacionMaxima
   }
 
   private calcularPuntosTotales(): number {
@@ -113,12 +100,13 @@ export class ExpresionOralComponent {
   }
   private extractForm(): void {
     this.expresionOral = {
-      tareasCorrector1: this.form.value[''],
-      tareasCorrector2: this.form.value[''],
+      tipo: 'Oral',
+      correccion1: this.form.value[''],
+      correccion2: this.form.value[''],
       observaciones: this.form.value['observaciones'],
       puntuacionMaxima: this.puntuacionMaxima,
       puntosConseguidos: this.calcularPuntosTotales(),
-      porcentaje: this.calcularPorcentaje(),
+      porcentaje: this.calcularPorcentaje()
     }
   }
 }

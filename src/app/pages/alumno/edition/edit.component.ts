@@ -6,7 +6,15 @@ import { Alumno } from '@models/alumno'
 import { ColectivoUV } from '@models/colectivouv'
 import { Genero } from '@models/genero'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, takeUntil } from 'rxjs'
+import {
+  Observable,
+  Subject,
+  catchError,
+  finalize,
+  takeUntil,
+  throwError,
+  throwIfEmpty,
+} from 'rxjs'
 
 @Component({
   templateUrl: './edit.component.html',
@@ -76,7 +84,6 @@ export class EditionComponent {
       let _date: Date = new Date(
         this.alumnoNuevoForm.controls['fechaNacimiento'].value,
       ) as Date
-      console.log(_date, typeof _date)
       let alumno: Alumno = {
         nombre: this.alumnoNuevoForm.controls['nombre'].value,
         apellidos: this.alumnoNuevoForm.controls['apellidos'].value,
@@ -93,23 +100,40 @@ export class EditionComponent {
       idAlumno
         ? this.apiService
             .updateAlumno(alumno)
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+              takeUntil(this.destroy$),
+              catchError((error): Observable<never> => {
+                console.error('Error fetching data from api:', error)
+                return throwError(() => error)
+              }),
+              finalize(() => {
+                this.loading = false
+              }),
+              throwIfEmpty(() => {
+                console.log('Vacio')
+              }),
+            )
             .subscribe(() => {
               this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
             })
         : this.apiService
             .addAlumno(alumno)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-              () => {
-                this.router.navigateByUrl(
-                  MODULES.ALUMNO + '/' + COMPONENTS.LIST,
-                )
-              },
-              (err) => {
-                console.log('Hola', err)
-              },
+            .pipe(
+              takeUntil(this.destroy$),
+              catchError((error): Observable<never> => {
+                console.error('Error fetching data from api:', error)
+                return throwError(() => error)
+              }),
+              finalize(() => {
+                this.loading = false
+              }),
+              throwIfEmpty(() => {
+                console.log('Vacio')
+              }),
             )
+            .subscribe(() => {
+              this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
+            })
     }
     this.loading = false
   }

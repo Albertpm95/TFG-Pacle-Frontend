@@ -11,15 +11,15 @@ import { ColectivouvComponent } from './colectivouv/colectivouv.component'
 import { RolesComponent } from './roles/roles.component'
 
 @NgModule({
-    declarations: [
-        PanelAdminComponent,
-        LenguajesComponent,
-        HorariosComponent,
-        GenerosComponent,
-        NivelesComponent,
-        ColectivouvComponent,
-        RolesComponent,
-    ],
-    imports: [AdminRoutingModule, SharedModule],
+  declarations: [
+    PanelAdminComponent,
+    LenguajesComponent,
+    HorariosComponent,
+    GenerosComponent,
+    NivelesComponent,
+    ColectivouvComponent,
+    RolesComponent,
+  ],
+  imports: [AdminRoutingModule, SharedModule],
 })
-export class AdminModule { }
+export class AdminModule {}

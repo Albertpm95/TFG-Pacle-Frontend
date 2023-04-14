@@ -1,14 +1,14 @@
-import { Rol } from "./rol"
+import { Rol } from './rol'
 
 export interface Usuario {
-    apellidos: string
-    estado: boolean
-    idUsuario?: number
-    nombre: string
-    rol: Rol
-    username: string
+  apellidos: string
+  estado: boolean
+  idUsuario?: number
+  nombre: string
+  rol: Rol
+  username: string
 }
 export interface UsuarioLogin {
-    username: string;
-    password: string;
+  username: string
+  password: string
 }

@@ -1,16 +1,24 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { COMPONENTS } from '@constants';
-import { EditionComponent } from './edition/edition.component';
-import { ListComponent } from './list/list.component';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { COMPONENTS } from '@constants'
+import { EditionComponent } from './edition/edition.component'
+import { ListComponent } from './list/list.component'
 
 const routes: Routes = [
-  { path: COMPONENTS.EDITION, component: EditionComponent, title: 'Edicion convocatoria' },
-  { path: COMPONENTS.LIST, component: ListComponent, title: 'Lista de convocatorias' },
-];
+  {
+    path: COMPONENTS.EDITION,
+    component: EditionComponent,
+    title: 'Edicion convocatoria',
+  },
+  {
+    path: COMPONENTS.LIST,
+    component: ListComponent,
+    title: 'Lista de convocatorias',
+  },
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ConvocatoriaRoutingModule { }
+export class ConvocatoriaRoutingModule {}

@@ -5,7 +5,9 @@
         <mat-card-title>
           <h1>Lista de actas</h1>
         </mat-card-title>
-        <button mat-raised-button [routerLink]="[edit_route]">Añadir acta nuevo<mat-icon matPrefix>add</mat-icon></button>
+        <button mat-raised-button [routerLink]="[edit_route]">
+          Añadir acta nuevo<mat-icon matPrefix>add</mat-icon>
+        </button>
       </div>
     </mat-card-header>
     <mat-card-content>
@@ -20,36 +22,44 @@
           <ng-container matColumnDef="alumno">
             <th mat-header-cell *matHeaderCellDef>Alumno</th>
             <td mat-cell *matCellDef="let acta">
-              {{acta.alumno.dni }}
+              {{ acta.alumno.dni }}
             </td>
           </ng-container>
           <ng-container matColumnDef="convocatoria">
             <th mat-header-cell *matHeaderCellDef>Convocatoria</th>
             <td mat-cell *matCellDef="let acta">
-              {{ acta.convocatoria.nivel.nivel}} - {{ acta.convocatoria.lenguaje.lenguaje}}
+              {{ acta.convocatoria.nivel.nivel }} -
+              {{ acta.convocatoria.lenguaje.lenguaje }}
             </td>
           </ng-container>
           <ng-container matColumnDef="fecha">
             <th mat-header-cell *matHeaderCellDef>Fecha</th>
             <td mat-cell *matCellDef="let acta">
-              {{ acta.convocatoria.fecha | date: "shortDate"}} - {{ acta.convocatoria.horario.horario}}
+              {{ acta.convocatoria.fecha | date : 'shortDate' }} -
+              {{ acta.convocatoria.horario.horario }}
             </td>
           </ng-container>
           <ng-container matColumnDef="resultado">
             <th mat-header-cell *matHeaderCellDef>Resultado</th>
             <td mat-cell *matCellDef="let acta">
-              {{ acta.resultado}}
+              {{ acta.resultado }}
             </td>
           </ng-container>
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let acta">
-              <button mat-icon-button [routerLink]="[edit_route, { idActa: acta.idActa}]"><mat-icon>edit</mat-icon></button>
+              <button
+                mat-icon-button
+                [routerLink]="[edit_route, { idActa: acta.idActa }]">
+                <mat-icon>edit</mat-icon>
+              </button>
               <button mat-icon-button><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>
         </div>
-        <tr mat-header-row *matHeaderRowDef="displayed_columns; sticky: true"></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayed_columns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayed_columns"></tr>
       </table>
       <div *ngIf="!list_loaded">

@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ColectivouvComponent } from './colectivouv.component';
+import { ColectivouvComponent } from './colectivouv.component'
 
 describe('ColectivouvComponent', () => {
-  let component: ColectivouvComponent;
-  let fixture: ComponentFixture<ColectivouvComponent>;
+  let component: ColectivouvComponent
+  let fixture: ComponentFixture<ColectivouvComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColectivouvComponent ]
-    })
-    .compileComponents();
+      declarations: [ColectivouvComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(ColectivouvComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ColectivouvComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

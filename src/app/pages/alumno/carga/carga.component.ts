@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ApiService } from '@services/api.service';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core'
+import { ApiService } from '@services/api.service'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-carga',
@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./carga.component.scss'],
 })
 export class CargaComponent {
-  ficheroExcel!: File;
+  ficheroExcel!: File
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
-  seleccionFichero(file: File) { }
+  seleccionFichero(file: File) {}
 
   public cargarFicheroExcel(file: File): Observable<File> {
-    return this.apiService.subirFicheroExcel(file);
+    return this.apiService.subirFicheroExcel(file)
   }
 }

@@ -1,6 +1,5 @@
 import { TareaExpresion } from './tarea'
 
-
 export interface ExpresionEscrita {
   idExpresionEscrita?: number
   tareasCorrector1: TareaExpresion

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { COMPONENTS, MODULES } from '@constants';
+import { Component } from '@angular/core'
+import { Router } from '@angular/router'
+import { COMPONENTS, MODULES } from '@constants'
 
 @Component({
   selector: 'app-header',
@@ -8,14 +8,13 @@ import { COMPONENTS, MODULES } from '@constants';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 
   logout() {
-    this.router.navigateByUrl('/' + COMPONENTS.LOGIN);
+    this.router.navigateByUrl('/' + COMPONENTS.LOGIN)
   }
 
   goToMenu() {
-    this.router.navigateByUrl('/' + COMPONENTS.MENU);
+    this.router.navigateByUrl('/' + COMPONENTS.MENU)
   }
 }

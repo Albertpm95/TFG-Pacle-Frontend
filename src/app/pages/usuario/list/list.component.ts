@@ -1,21 +1,29 @@
-import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { COMPONENTS, MODULES } from '@constants';
-import { Usuario } from '@models/usuario';
-import { ApiService } from '@services/api.service';
+import { Component } from '@angular/core'
+import { MatTableDataSource } from '@angular/material/table'
+import { COMPONENTS, MODULES } from '@constants'
+import { Usuario } from '@models/usuario'
+import { ApiService } from '@services/api.service'
 
 @Component({
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  displayed_columns: string[] = ['idUsuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
+  displayed_columns: string[] = [
+    'idUsuario',
+    'username',
+    'nombre',
+    'apellidos',
+    'estado',
+    'rol',
+    'acciones',
+  ]
   data_source: MatTableDataSource<Usuario> = new MatTableDataSource()
 
-  list_loaded: boolean = false;
+  list_loaded: boolean = false
   edit_route = '/' + MODULES.USUARIO + '/' + COMPONENTS.EDITION
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.initializeList()
@@ -25,13 +33,15 @@ export class ListComponent {
       if (usuarios) {
         console.log(usuarios)
         this.data_source = new MatTableDataSource(usuarios)
-        if (usuarios.length)
-          this.list_loaded = true
+        if (usuarios.length) this.list_loaded = true
       }
     })
   }
   public cambiarEstadoUsuario(usuario: Usuario): void {
     if (usuario.idUsuario)
-      this.apiService.cambiarEstadoConvocatoria(usuario.idUsuario, !usuario.estado)
+      this.apiService.cambiarEstadoConvocatoria(
+        usuario.idUsuario,
+        !usuario.estado,
+      )
   }
 }

@@ -2,66 +2,90 @@
   <div class="header">
     <div class="info" *ngIf="acta.alumno">
       <label>
-        <h5>DNI:</h5> {{ acta.alumno.dni }}
+        <h5>DNI:</h5>
+        {{ acta.alumno.dni }}
       </label>
       <label>
-        <h5>Alumno:</h5> {{ acta.alumno.nombre }} {{ acta.alumno.apellidos }}
+        <h5>Alumno:</h5>
+        {{ acta.alumno.nombre }} {{ acta.alumno.apellidos }}
       </label>
     </div>
     <div class="info" *ngIf="acta.corrector">
       <label *ngIf="acta.corrector.rol">
-        <h5>Rol:</h5> {{ acta.corrector.rol.rol }}
+        <h5>Rol:</h5>
+        {{ acta.corrector.rol.rol }}
       </label>
       <label>
-        <h5>Corrector:</h5> {{ acta.corrector.nombre }} {{ acta.corrector.apellidos }}
+        <h5>Corrector:</h5>
+        {{ acta.corrector.nombre }} {{ acta.corrector.apellidos }}
       </label>
     </div>
     <div class="info" *ngIf="acta.convocatoria">
       <label>
-        <h5>Fecha:</h5> {{ acta.convocatoria.fecha | date }}
+        <h5>Fecha:</h5>
+        {{ acta.convocatoria.fecha | date }}
       </label>
       <label>
-        <h5>Hora:</h5> {{ acta.convocatoria.horario.horario }}
+        <h5>Hora:</h5>
+        {{ acta.convocatoria.horario.horario }}
       </label>
       <label>
-        <h5>Lenguaje:</h5> {{ acta.convocatoria.lenguaje.lenguaje }}
+        <h5>Lenguaje:</h5>
+        {{ acta.convocatoria.lenguaje.lenguaje }}
       </label>
       <label>
-        <h5>Nivel:</h5> {{ acta.convocatoria.nivel.nivel }}
+        <h5>Nivel:</h5>
+        {{ acta.convocatoria.nivel.nivel }}
       </label>
     </div>
   </div>
   <div class="content">
     <div class="bloque-lectura-escritura">
       <div class="parte">
-        <comprension-lectora [comprensionLectora]="acta.comprensionLectora" [puntuacionMaxima]="acta.convocatoria.maxComprensionAuditiva"> </comprension-lectora>
+        <comprension-lectora
+          [comprensionLectora]="acta.comprensionLectora"
+          [puntuacionMaxima]="acta.convocatoria.maxComprensionAuditiva">
+        </comprension-lectora>
       </div>
       <div class="parte">
-        <expresion-escrita [expresionEscrita]="acta.expresionEscrita" [puntuacionMaxima]="acta.convocatoria.maxExpresionEscrita"> </expresion-escrita>
+        <expresion-escrita
+          [expresionEscrita]="acta.expresionEscrita"
+          [puntuacionMaxima]="acta.convocatoria.maxExpresionEscrita">
+        </expresion-escrita>
       </div>
     </div>
     <div class="bloque-oral-auditiva">
       <div class="parte">
-        <comprension-auditiva [comprensionAuditiva]="acta.comprensionAuditiva" [puntuacionMaxima]="acta.convocatoria.maxComprensionAuditiva"> </comprension-auditiva>
+        <comprension-auditiva
+          [comprensionAuditiva]="acta.comprensionAuditiva"
+          [puntuacionMaxima]="acta.convocatoria.maxComprensionAuditiva">
+        </comprension-auditiva>
       </div>
       <div class="parte">
-        <expresion-oral [expresionOral]="acta.expresionOral" [puntuacionMaxima]="acta.convocatoria.maxExpresionOral"> </expresion-oral>
+        <expresion-oral
+          [expresionOral]="acta.expresionOral"
+          [puntuacionMaxima]="acta.convocatoria.maxExpresionOral">
+        </expresion-oral>
       </div>
     </div>
   </div>
   <div class="footer">
     <div class="info-acta" *ngIf="acta">
       <label>
-        <h5>Resultado bloque lectoescritura:</h5> {{acta.resultadoLectoEscritura}}%
+        <h5>Resultado bloque lectoescritura:</h5>
+        {{ acta.resultadoLectoEscritura }}%
       </label>
       <label>
-        <h5>Resultado bloque destrezas orales:</h5> {{acta.resultadoDestrezasOrales}}%
+        <h5>Resultado bloque destrezas orales:</h5>
+        {{ acta.resultadoDestrezasOrales }}%
       </label>
       <label>
-        <h5>Resultado global de la prueba:</h5> {{acta.resultadoGlobal}}%
+        <h5>Resultado global de la prueba:</h5>
+        {{ acta.resultadoGlobal }}%
       </label>
       <label>
-        <h5>Resultado:</h5> {{ acta.resultado }}
+        <h5>Resultado:</h5>
+        {{ acta.resultado }}
       </label>
     </div>
   </div>

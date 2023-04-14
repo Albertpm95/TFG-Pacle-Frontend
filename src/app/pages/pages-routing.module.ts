@@ -41,17 +41,17 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: COMPONENTS.LOGIN,
-    pathMatch: 'prefix'
+    pathMatch: 'prefix',
   },
   {
     path: '**',
     component: WildcardComponent,
-    title: '404'
-  }
+    title: '404',
+  },
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule { }
+export class PagesRoutingModule {}

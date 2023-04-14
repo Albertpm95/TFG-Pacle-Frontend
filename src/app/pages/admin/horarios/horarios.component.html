@@ -1,15 +1,20 @@
 <div class="horarios-container">
-    <mat-form-field>
-        <mat-label for="horario-nuevo">Añadir nuevo horario</mat-label>
-        <input matInput id="horario-nuevo" [formControl]="nuevoHorarioForm">
-        <mat-icon matSuffix (click)="addHorarioConvocatoria()">add</mat-icon>
-    </mat-form-field>
-    <mat-list>
-        <div class="list-item" *ngFor="let horario of horarios; let last=last">
-            <mat-list-item *ngIf="horario">
-                <span class="list-item-span" matListItemTitle *ngIf="horario.idHorario">{{horario.horario}}<mat-icon (click)="deleteHorarioConvocatoria(horario.idHorario)">delete</mat-icon></span>
-            </mat-list-item>
-            <mat-divider *ngIf="!last">{{last}}></mat-divider>
-        </div>
-    </mat-list>
+  <mat-form-field>
+    <mat-label for="horario-nuevo">Añadir nuevo horario</mat-label>
+    <input matInput id="horario-nuevo" [formControl]="nuevoHorarioForm" />
+    <mat-icon matSuffix (click)="addHorarioConvocatoria()">add</mat-icon>
+  </mat-form-field>
+  <mat-list>
+    <div class="list-item" *ngFor="let horario of horarios; let last = last">
+      <mat-list-item *ngIf="horario">
+        <span class="list-item-span" matListItemTitle *ngIf="horario.idHorario"
+          >{{ horario.horario
+          }}<mat-icon (click)="deleteHorarioConvocatoria(horario.idHorario)"
+            >delete</mat-icon
+          ></span
+        >
+      </mat-list-item>
+      <mat-divider *ngIf="!last">{{ last }}></mat-divider>
+    </div>
+  </mat-list>
 </div>

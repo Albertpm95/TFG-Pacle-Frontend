@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'
 
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from '@shared/shared.module'
 
-import { ActaModule } from './acta/acta.module';
-import { MenuComponent } from './menu/menu.component';
-import { AdminModule } from './admin/admin.module';
-import { AlumnoModule } from './alumno/alumno.module';
-import { ConvocatoriaModule } from './convocatoria/convocatoria.module';
-import { LoginComponent } from './login/login.component';
-import { PagesRoutingModule } from './pages-routing.module';
-import { WildcardComponent } from './wildcard/wildcard.component';
+import { ActaModule } from './acta/acta.module'
+import { MenuComponent } from './menu/menu.component'
+import { AdminModule } from './admin/admin.module'
+import { AlumnoModule } from './alumno/alumno.module'
+import { ConvocatoriaModule } from './convocatoria/convocatoria.module'
+import { LoginComponent } from './login/login.component'
+import { PagesRoutingModule } from './pages-routing.module'
+import { WildcardComponent } from './wildcard/wildcard.component'
 
 @NgModule({
   declarations: [LoginComponent, MenuComponent, WildcardComponent],
@@ -20,8 +20,7 @@ import { WildcardComponent } from './wildcard/wildcard.component';
     ConvocatoriaModule,
     SharedModule,
     PagesRoutingModule,
-    
   ],
-  exports: []
+  exports: [],
 })
-export class PagesModule { }
+export class PagesModule {}

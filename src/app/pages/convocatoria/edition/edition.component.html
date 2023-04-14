@@ -1,8 +1,12 @@
 <div class="convocatoria-form-container container" *ngIf="convocatoriaForm">
   <mat-card>
     <mat-card-header>
-      <mat-card-title *ngIf="creating">Creaccion de una convocatoria</mat-card-title>
-      <mat-card-title *ngIf="!creating">Edicion de una convocatoria</mat-card-title>
+      <mat-card-title *ngIf="creating"
+        >Creaccion de una convocatoria</mat-card-title
+      >
+      <mat-card-title *ngIf="!creating"
+        >Edicion de una convocatoria</mat-card-title
+      >
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="convocatoriaForm" *ngIf="!loading">
@@ -10,61 +14,127 @@
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
             <mat-select formControlName="lenguaje">
-              <mat-option [value]="lenguaje.lenguaje" *ngFor="let lenguaje of listaLenguajesConvocatoria$ | async">{{ lenguaje.lenguaje }}</mat-option>
+              <mat-option
+                [value]="lenguaje.lenguaje"
+                *ngFor="let lenguaje of listaLenguajesConvocatoria$ | async"
+                >{{ lenguaje.lenguaje }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
             <mat-label for="nivel">Nivel de la convocatoria</mat-label>
             <mat-select formControlName="nivel">
-              <mat-option [value]="nivel.nivel" *ngFor="let nivel of listaNivelesConvocatoria$ | async">{{ nivel.nivel }}</mat-option>
+              <mat-option
+                [value]="nivel.nivel"
+                *ngFor="let nivel of listaNivelesConvocatoria$ | async"
+                >{{ nivel.nivel }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label for="fechaParcial">Choose a date</mat-label>
-            <input matInput startAt="fechaParcial" [matDatepicker]="fechaParcial" formControlName="fechaParcial" />
-            <mat-datepicker-toggle matIconSuffix [for]="fechaParcial"></mat-datepicker-toggle>
+            <input
+              matInput
+              startAt="fechaParcial"
+              [matDatepicker]="fechaParcial"
+              formControlName="fechaParcial" />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="fechaParcial"></mat-datepicker-toggle>
             <mat-datepicker #fechaParcial></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
+            <mat-label for="horario" name="horario"
+              >Hora de la convocatoria</mat-label
+            >
             <mat-select formControlName="horarioParcial">
-              <mat-option [value]="horario.horario" *ngFor="let horario of listaHorariosConvocatoria$ | async">{{ horario.horario }}</mat-option>
+              <mat-option
+                [value]="horario.horario"
+                *ngFor="let horario of listaHorariosConvocatoria$ | async"
+                >{{ horario.horario }}</mat-option
+              >
             </mat-select>
           </mat-form-field>
         </div>
         <div class="row">
           <div class="formGroup col" formGroupName="comprensionLectora">
             <mat-form-field appearance="fill">
-              <mat-label for="maxComprensionLectora" name="maxComprensionLectora">
-                Peso maximo de la parte de comprension lectora</mat-label>
-              <input matInput type="number" formControlName="maxComprensionLectora" />
-              <mat-icon matSuffix (click)="addTareaComprensionLectora()">add</mat-icon>
+              <mat-label
+                for="maxComprensionLectora"
+                name="maxComprensionLectora">
+                Peso maximo de la parte de comprension lectora</mat-label
+              >
+              <input
+                matInput
+                type="number"
+                formControlName="maxComprensionLectora" />
+              <mat-icon matSuffix (click)="addTareaComprensionLectora()"
+                >add</mat-icon
+              >
             </mat-form-field>
             <ng-container formArrayName="listaTareas">
-              <ng-container *ngFor="let tarea of listaTareasComprensionLectora.controls; let i = index">
+              <ng-container
+                *ngFor="
+                  let tarea of listaTareasComprensionLectora.controls;
+                  let i = index
+                ">
                 <div class="tarea" [formGroupName]="i">
-                  <input matInput type="text" formControlName="nombreTarea" class="tarea-label">
-                  <input matInput type="number" formControlName="valor" class="tarea-valor" readonly>
-                  <mat-icon (click)="deleteTareaComprensionLectora(i)">delete</mat-icon>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="nombreTarea"
+                    class="tarea-label" />
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="valor"
+                    class="tarea-valor"
+                    readonly />
+                  <mat-icon (click)="deleteTareaComprensionLectora(i)"
+                    >delete</mat-icon
+                  >
                 </div>
               </ng-container>
             </ng-container>
           </div>
           <div class="formGroup col" formGroupName="comprensionAuditiva">
             <mat-form-field appearance="fill">
-              <mat-label for="maxComprensionAuditiva" name="maxComprensionAuditiva">
-                Peso maximo de la parte de comprension auditiva</mat-label>
-              <input matInput type="number" formControlName="maxComprensionAuditiva" />
-              <mat-icon matSuffix (click)="addTareaComprensionAuditiva()">add</mat-icon>
+              <mat-label
+                for="maxComprensionAuditiva"
+                name="maxComprensionAuditiva">
+                Peso maximo de la parte de comprension auditiva</mat-label
+              >
+              <input
+                matInput
+                type="number"
+                formControlName="maxComprensionAuditiva" />
+              <mat-icon matSuffix (click)="addTareaComprensionAuditiva()"
+                >add</mat-icon
+              >
             </mat-form-field>
             <ng-container formArrayName="listaTareas">
-              <ng-container *ngFor="let tarea of listaTareasComprensionAuditiva.controls; let i = index">
+              <ng-container
+                *ngFor="
+                  let tarea of listaTareasComprensionAuditiva.controls;
+                  let i = index
+                ">
                 <div class="tarea" [formGroupName]="i">
-                  <input matInput type="text" formControlName="nombreTarea" class="tarea-label">
-                  <input matInput type="number" formControlName="valor" class="tarea-valor" readonly>
-                  <mat-icon (click)="deleteTareaComprensionAuditiva(i)">delete</mat-icon>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="nombreTarea"
+                    class="tarea-label" />
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="valor"
+                    class="tarea-valor"
+                    readonly />
+                  <mat-icon (click)="deleteTareaComprensionAuditiva(i)"
+                    >delete</mat-icon
+                  >
                 </div>
               </ng-container>
             </ng-container>
@@ -74,16 +144,37 @@
           <div class="formGroup col" formGroupName="expresionEscrita">
             <mat-form-field appearance="fill">
               <mat-label for="maxExpresionEscrita" name="maxExpresionEscrita">
-                Peso maximo de la parte de expresion escrita</mat-label>
-              <input matInput type="number" formControlName="maxExpresionEscrita" />
-              <mat-icon matSuffix (click)="addTareaExpresionEscrita()">add</mat-icon>
+                Peso maximo de la parte de expresion escrita</mat-label
+              >
+              <input
+                matInput
+                type="number"
+                formControlName="maxExpresionEscrita" />
+              <mat-icon matSuffix (click)="addTareaExpresionEscrita()"
+                >add</mat-icon
+              >
             </mat-form-field>
             <ng-container formArrayName="listaTareas">
-              <ng-container *ngFor="let tarea of listaTareasExpresionEscrita.controls; let i = index">
+              <ng-container
+                *ngFor="
+                  let tarea of listaTareasExpresionEscrita.controls;
+                  let i = index
+                ">
                 <div class="tarea" [formGroupName]="i">
-                  <input matInput type="text" formControlName="nombreTarea" class="tarea-label">
-                  <input matInput type="number" formControlName="valor" class="tarea-valor" readonly>
-                  <mat-icon (click)="deleteTareaExpresionEscrita(i)">delete</mat-icon>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="nombreTarea"
+                    class="tarea-label" />
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="valor"
+                    class="tarea-valor"
+                    readonly />
+                  <mat-icon (click)="deleteTareaExpresionEscrita(i)"
+                    >delete</mat-icon
+                  >
                 </div>
               </ng-container>
             </ng-container>
@@ -91,29 +182,59 @@
           <div class="formGroup col" formGroupName="expresionOral">
             <mat-form-field appearance="fill">
               <mat-label for="maxExpresionOral" name="maxExpresionOral">
-                Peso maximo de la parte de expresion oral</mat-label>
-              <input matInput type="number" formControlName="maxExpresionOral" />
-              <mat-icon matSuffix (click)="addTareaExpresionOral()">add</mat-icon>
+                Peso maximo de la parte de expresion oral</mat-label
+              >
+              <input
+                matInput
+                type="number"
+                formControlName="maxExpresionOral" />
+              <mat-icon matSuffix (click)="addTareaExpresionOral()"
+                >add</mat-icon
+              >
             </mat-form-field>
             <ng-container formArrayName="listaTareas">
-              <ng-container *ngFor="let tarea of listaTareasExpresionOral.controls; let i = index">
+              <ng-container
+                *ngFor="
+                  let tarea of listaTareasExpresionOral.controls;
+                  let i = index
+                ">
                 <div class="tarea" [formGroupName]="i">
-                  <input matInput type="text" formControlName="nombreTarea" class="tarea-label">
-                  <input matInput type="number" formControlName="valor" class="tarea-valor" readonly>
-                  <mat-icon (click)="deleteTareaExpresionOral(i)">delete</mat-icon>
+                  <input
+                    matInput
+                    type="text"
+                    formControlName="nombreTarea"
+                    class="tarea-label" />
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="valor"
+                    class="tarea-valor"
+                    readonly />
+                  <mat-icon (click)="deleteTareaExpresionOral(i)"
+                    >delete</mat-icon
+                  >
                 </div>
               </ng-container>
             </ng-container>
           </div>
         </div>
-
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()" *ngIf="creating">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="saveConvocatoria()"
+        *ngIf="creating">
         Crear Convocatoria
       </button>
-      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()" *ngIf="!creating">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="saveConvocatoria()"
+        *ngIf="!creating">
         Actualizar Convocatoria
       </button>
     </mat-card-actions>

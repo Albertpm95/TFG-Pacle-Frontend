@@ -1,5 +1,4 @@
-import { TareaExpresion } from "./tarea"
-
+import { TareaExpresion } from './tarea'
 
 export interface ExpresionOral {
   idExpresionOral?: number

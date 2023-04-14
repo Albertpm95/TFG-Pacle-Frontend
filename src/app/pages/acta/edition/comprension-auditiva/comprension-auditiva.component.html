@@ -6,10 +6,20 @@
     <form [formGroup]="form" (submit)="save()">
       <div class="tareas-container">
         <ng-container formArrayName="listaTareas">
-          <ng-container *ngFor="let tarea of listaTareas.controls; let i = index">
+          <ng-container
+            *ngFor="let tarea of listaTareas.controls; let i = index">
             <div class="tarea" [formGroupName]="i">
-              <input matInput type="text" formControlName="nombreTarea" class="tarea-label" readonly>
-              <input matInput type="number" formControlName="valor" class="tarea-valor">
+              <input
+                matInput
+                type="text"
+                formControlName="nombreTarea"
+                class="tarea-label"
+                readonly />
+              <input
+                matInput
+                type="number"
+                formControlName="valor"
+                class="tarea-valor" />
             </div>
           </ng-container>
         </ng-container>
@@ -18,22 +28,31 @@
         <mat-form-field>
           <mat-label for="corrector">Corrector</mat-label>
           <mat-select formControlName="corrector">
-            <mat-option [value]="corrector.username" *ngFor="let corrector of corrector$ | async">
-              {{corrector.nombre}} {{corrector.apellidos}}
+            <mat-option
+              [value]="corrector.username"
+              *ngFor="let corrector of corrector$ | async">
+              {{ corrector.nombre }} {{ corrector.apellidos }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label for="observaciones">Observaciones</mat-label>
-          <textarea matInput id="observaciones" formControlName="observaciones"></textarea>
+          <textarea
+            matInput
+            id="observaciones"
+            formControlName="observaciones"></textarea>
         </mat-form-field>
         <button mat-button type="submit" color="primary">Guardar</button>
       </div>
     </form>
   </div>
   <div class="footer">
-    <label *ngIf="comprensionAuditiva && comprensionAuditiva.puntosConseguidos">Puntuacion total: {{ comprensionAuditiva.puntosConseguidos }}</label>
-    <label *ngIf="comprensionAuditiva && comprensionAuditiva.porcentaje">Porcentaje: {{ comprensionAuditiva.porcentaje }} %</label>
+    <label *ngIf="comprensionAuditiva && comprensionAuditiva.puntosConseguidos"
+      >Puntuacion total: {{ comprensionAuditiva.puntosConseguidos }}</label
+    >
+    <label *ngIf="comprensionAuditiva && comprensionAuditiva.porcentaje"
+      >Porcentaje: {{ comprensionAuditiva.porcentaje }} %</label
+    >
   </div>
 </div>
 <div class="loading" *ngIf="loading">

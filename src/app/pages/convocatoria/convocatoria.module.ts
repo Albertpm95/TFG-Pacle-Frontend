@@ -6,13 +6,8 @@ import { ConvocatoriaRoutingModule } from './convocatoria-routing.module'
 import { EditionComponent } from './edition/edition.component'
 import { ListComponent } from './list/list.component'
 
-
 @NgModule({
   declarations: [EditionComponent, ListComponent],
-  imports: [
-    CommonModule,
-    ConvocatoriaRoutingModule,
-    SharedModule
-  ],
+  imports: [CommonModule, ConvocatoriaRoutingModule, SharedModule],
 })
-export class ConvocatoriaModule { }
+export class ConvocatoriaModule {}

@@ -1,21 +1,20 @@
 import { Alumno } from './alumno'
-import { Comprension } from './comprension'
 import { Convocatoria } from './convocatoria'
-import { Expresion } from './expresion'
+import { ParteCorregida } from './parte'
 
 import { Usuario } from './usuario'
 
 export interface Acta {
   alumno: Alumno
-  comprensionAuditiva: Comprension
-  comprensionLectora: Comprension
+  comprensionAuditiva: ParteCorregida
+  comprensionLectora: ParteCorregida
   convocatoria: Convocatoria
   corrector: Usuario
-  expresionEscrita: Expresion
-  expresionOral: Expresion
+  expresionEscrita: ParteCorregida
+  expresionOral: ParteCorregida
   idActa?: number
-  resultado: string
-  resultadoLectoEscritura: number
-  resultadoDestrezasOrales: number
-  resultadoGlobal: number
+  resultado?: string
+  resultadoLectoEscritura?: number
+  resultadoDestrezasOrales?: number
+  resultadoGlobal?: number
 }

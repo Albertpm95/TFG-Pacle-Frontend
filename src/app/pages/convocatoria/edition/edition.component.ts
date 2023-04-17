@@ -3,11 +3,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router'
 import { COMPONENTS, CONSTANTS, MODULES } from '@constants'
 import { Convocatoria } from '@models/convocatoria'
-import { ExpresionConvocatoria } from '@models/expresion'
-import { ComprensionConvocatoria } from '@models/comprension'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
 import { Nivel } from '@models/nivel'
+import { Parte } from '@models/parte'
 import { ApiService } from '@services/api.service'
 import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
@@ -112,6 +111,7 @@ export class EditionComponent {
   }
 
   public saveConvocatoria(idConvocatoria?: number): void {
+    /*
     this.loading = true
     if (this.convocatoriaForm.valid) {
       let date_string = this.convocatoriaForm.controls['fechaParcial'].value
@@ -120,9 +120,8 @@ export class EditionComponent {
       fechaParcial.setHours(hora_parcial[0])
       fechaParcial.setMinutes(hora_parcial[1])
 
-      console.log(this.convocatoriaForm.controls)
-      let fakeComprensionConvocatoria: ComprensionConvocatoria = { puntuacionMaxima: 0, listaTareas: [] }
-      let fakeExpresionConvocatoria: ExpresionConvocatoria = { puntuacionMaxima: 0, listaTareas: [] }
+      let fakeComprensionConvocatoria: Parte = { puntuacionMaxima: 0, tareas: [], tipo: '' }
+      let fakeExpresionConvocatoria: Parte = { puntuacionMaxima: 0, tareas: [] }
       let convocatoria: Convocatoria = {
         estado: this.convocatoriaForm.controls['estado'].value,
         fecha: fechaParcial,
@@ -174,6 +173,7 @@ export class EditionComponent {
               this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST)
             })
     }
+    */
   }
 
   public get listaTareasComprensionAuditiva() {

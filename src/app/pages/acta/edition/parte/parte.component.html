@@ -1,6 +1,6 @@
 <div class="container" *ngIf="!loading">
   <div class="header">
-    <h4>Comprension lectora</h4>
+    <h4>Comprension auditiva</h4>
   </div>
   <div class="form">
     <form [formGroup]="form" (submit)="save()">
@@ -47,11 +47,11 @@
     </form>
   </div>
   <div class="footer">
-    <label *ngIf="comprensionLectora && comprensionLectora.puntosConseguidos"
-      >Puntuacion total: {{ comprensionLectora.puntosConseguidos }}</label
+    <label *ngIf="parte && parte.puntosConseguidos"
+      >Puntuacion total: {{ parte.puntosConseguidos }}</label
     >
-    <label *ngIf="comprensionLectora && comprensionLectora.porcentaje"
-      >Porcentaje: {{ comprensionLectora.porcentaje }} %</label
+    <label *ngIf="parte && parte.porcentaje"
+      >Porcentaje: {{ parte.porcentaje }} %</label
     >
   </div>
 </div>

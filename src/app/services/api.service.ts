@@ -4,9 +4,7 @@ import { API_ENDPOINTS } from '@constants'
 import { environment } from '@environments/environment'
 import { Acta } from '@models/acta'
 import { Alumno } from '@models/alumno'
-import { Comprension } from '@models/comprension'
 import { Convocatoria } from '@models/convocatoria'
-import { Expresion } from '@models/expresion'
 import { Genero } from '@models/genero'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
@@ -16,6 +14,7 @@ import { Usuario } from '@models/usuario'
 import { Observable, of } from 'rxjs'
 import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ColectivoUV } from '@models/colectivouv'
+import { Parte } from '@models/parte'
 
 @Injectable({
   providedIn: 'root'
@@ -119,15 +118,8 @@ export class ApiService {
   }
   /** ---------------------------------------------------------------------- */
 
-  /** Comprension */
-  updateComprension(comprension: Comprension): Observable<Comprension> {
-    return this.http.patch<Comprension>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, comprension)
-  }
-  /** ---------------------------------------------------------------------- */
-
-  /** Expresion */
-  updateExpresion(expresion: Expresion): Observable<Expresion> {
-    return this.http.patch<Expresion>(this.apiUrl + API_ENDPOINTS.EXPRESION_UPDATE, expresion)
+  updateComprension(comprension: Parte): Observable<Parte> {
+    return this.http.patch<Parte>(this.apiUrl + API_ENDPOINTS.PARTE_UPDATE, comprension)
   }
   /** ---------------------------------------------------------------------- */
 

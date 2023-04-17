@@ -1,8 +1,7 @@
-import { ComprensionConvocatoria } from './comprension'
-import { ExpresionConvocatoria } from './expresion'
 import { Horario } from './horario'
 import { Lenguaje } from './lenguaje'
 import { Nivel } from './nivel'
+import { Parte } from './parte'
 
 export interface Convocatoria {
   idConvocatoria?: number
@@ -11,9 +10,9 @@ export interface Convocatoria {
   horario: Horario
   lenguaje: Lenguaje
   nivel: Nivel
-  comprensionAuditiva: ComprensionConvocatoria
-  comprensionLectora: ComprensionConvocatoria
-  expresionEscrita: ExpresionConvocatoria
-  expresionOral: ExpresionConvocatoria
+  comprensionAuditiva: Parte
+  comprensionLectora: Parte
+  expresionEscrita: Parte
+  expresionOral: Parte
   specificIdentifier: number
 }

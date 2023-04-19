@@ -1,0 +1,22 @@
+<div class="card" *ngIf="!loading">
+    <mat-form-field appearance="fill" class="col">
+        <mat-label for="convocatoriaControl">Selecciona convocatoria</mat-label>
+        <mat-select [formControl]="convocatoriaControl">
+          <mat-option
+            [value]="selectedConvocatoria"
+            *ngFor="let convocatoria of listConvocatorias"
+            >{{ convocatoria }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="col">
+        <mat-label for="alumnoControl">Selecciona Alumno</mat-label>
+        <mat-select [formControl]="alumnoControl">
+          <mat-option
+            [value]="selectedAlumno"
+            *ngFor="let alumno of listAlumno"
+            >{{ alumno.dni }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+</div>

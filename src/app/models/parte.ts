@@ -7,9 +7,10 @@ export interface Parte {
   tareas: Tarea[]
 }
 
-export interface ParteCorregida extends Parte {
+export interface ParteCorregida {
+  parte: Parte
   observaciones?: string
-  correccion: Correccion
+  correccion?: Correccion
   correccion2?: Correccion
   puntosConseguidos: number
   idParteCorregida?: number

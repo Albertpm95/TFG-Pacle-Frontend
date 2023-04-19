@@ -47,6 +47,7 @@ export class API_Routers {
   static USUARIO = 'usuario'
 }
 export class ACTIONS {
+  static ACTUAL = 'actual'
   static CREATE = 'create'
   static DELETE = 'delete'
   static DETAILS = 'details'
@@ -89,6 +90,7 @@ export class API_ENDPOINTS {
   static CONVOCATORIA_LIST = API_Routers.CONVOCATORIA + '/' + ACTIONS.LIST
   static CONVOCATORIA_UPDATE = API_Routers.CONVOCATORIA + '/' + ACTIONS.UPDATE
   static PARTE_UPDATE = API_Routers.PARTE + '/' + ACTIONS.UPDATE
+  static USUARIO_ACTUAL = API_Routers.USUARIO + '/' + ACTIONS.ACTUAL
   static USUARIO_CREATE = API_Routers.USUARIO + '/' + ACTIONS.CREATE
   static USUARIO_DELETE = API_Routers.USUARIO + '/' + ACTIONS.DELETE
   static USUARIO_DETAILS = API_Routers.USUARIO + '/' + ACTIONS.DETAILS

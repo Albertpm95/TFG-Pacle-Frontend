@@ -40,7 +40,7 @@ export class ApiService {
   getConvocatorias(): Observable<Convocatoria[]> {
     return this.http.get<Convocatoria[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
   }
-  getConvocatoria(idConvocatoria: number): Observable<Convocatoria> {
+  getConvocatoriaID(idConvocatoria: number): Observable<Convocatoria> {
     return this.http.get<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria)
   }
   cambiarEstadoConvocatoria(idConvocatoria: number, estado_nuevo: boolean): Observable<Convocatoria> {
@@ -150,6 +150,9 @@ export class ApiService {
   }
   getUsuarioID(idUsuario?: string): Observable<Usuario> {
     return this.http.get<Usuario>(this.apiUrl + API_ENDPOINTS.USUARIO_DETAILS + '/' + idUsuario)
+  }
+  getUsuarioActual(): Observable<Usuario> {
+    return this.http.get<Usuario>(this.apiUrl + API_ENDPOINTS.USUARIO_ACTUAL)
   }
   addUsuario(usuario_nuevo: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.apiUrl + API_ENDPOINTS.USUARIO_CREATE, usuario_nuevo)

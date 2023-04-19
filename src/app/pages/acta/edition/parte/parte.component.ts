@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { CONSTANTS } from '@constants'
-import { Tarea, TareaCorregida } from '@models/correccion'
-import { Parte, ParteCorregida } from '@models/parte'
+import { ParteCorregida } from '@models/parte'
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
 import { Observable, Subject } from 'rxjs'
@@ -25,15 +23,14 @@ export class ParteComponent {
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.parte?.idParte ? this.loadForm() : this.initializeNewForm()
-    this.loadTareas()
+    this.parte?.idParteCorregida ? this.loadForm() : this.initializeNewForm()
+    // this.loadTareas()
   }
 
   private initializeNewForm() {
     this.form = this.formBuilder.group({
-      observaciones: ['']
-
-      //listaTareas: this.formBuilder.array([])
+      observaciones: [''],
+      listaTareas: this.formBuilder.array([])
     })
     this.loading = false
   }
@@ -43,6 +40,7 @@ export class ParteComponent {
   }
 
   private loadTareas() {
+    /*
     this.parte?.tareas.forEach((tarea: any) => {
       let tareaForm = this.formBuilder.group({
         nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
@@ -50,6 +48,7 @@ export class ParteComponent {
       })
       this.listaTareas.push(tareaForm)
     })
+    */
   }
 
   public get listaTareas() {

@@ -1,13 +1,173 @@
 import { Component } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
+import { ActivatedRoute } from '@angular/router'
 import { Acta } from '@models/acta'
-import { MockUpDB } from '@models/mockup'
+import { Alumno } from '@models/alumno'
+import { Convocatoria } from '@models/convocatoria'
+import { Tarea, TareaCorregida } from '@models/correccion'
+import { Usuario } from '@models/usuario'
+import { ApiService } from '@services/api.service'
+import { ConvocatoriaAlumnoSelectorDialog } from 'app/components/dialogs/convocatoria-alumno-selector/convocatoria-alumno-selector.component'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
-  styleUrls: ['./edition.component.scss'],
+  styleUrls: ['./edition.component.scss']
 })
 export class EditionComponent {
-  acta: Acta = MockUpDB.actaMockUp
-  constructor() {}
-  ngOnInit(): void {}
+  loading: boolean = true
+  acta: Partial<Acta> | undefined
+  alumno: Alumno | undefined
+  convocatoria: Convocatoria | undefined
+  usuario: Usuario | undefined
+
+  private destroy$: Subject<boolean> = new Subject<boolean>()
+
+  constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute, private dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.loadOwnUser()
+    let idActa: number | undefined = this.activactedRoute.snapshot.params['idActa']
+    let idAlumno: number | undefined = this.activactedRoute.snapshot.params['idAlumno']
+    let idConvocatoria: number | undefined = this.activactedRoute.snapshot.params['idConvocatoria']
+    if (idActa) this.loadActa(idActa)
+    else if (idAlumno && idConvocatoria) this.createActaVacia(idAlumno, idConvocatoria)
+    else this.selectAlumnoConvocatoria(idConvocatoria, idAlumno)
+  }
+
+  private loadActa(idActa: number) {
+    this.apiService
+      .getActaID(idActa)
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        })
+      )
+      .subscribe((acta: Acta) => {
+        this.acta = acta
+      })
+  }
+
+  private createActaVacia(idAlumno: number, idConvocatoria: number): void {
+    this.loadAlumno(idAlumno)
+    if (this.alumno) this.loadConvocatoria
+    if (this.alumno && this.convocatoria && this.usuario) {
+      let newActa: Acta = {
+        alumno: this.alumno,
+        convocatoria: this.convocatoria,
+        resultado: '',
+        corrector: this.usuario,
+        resultadoDestrezasOrales: 0,
+        resultadoGlobal: 0,
+        resultadoLectoEscritura: 0,
+        comprensionAuditiva: {
+          parte: this.convocatoria.comprensionAuditiva,
+          puntosConseguidos: 0,
+          correccion: {
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.comprensionAuditiva.tareas),
+            corrector: this.usuario
+          }
+        },
+        comprensionLectora: {
+          parte: this.convocatoria.comprensionLectora,
+          puntosConseguidos: 0,
+          correccion: {
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.comprensionLectora.tareas),
+            corrector: this.usuario
+          }
+        },
+        expresionEscrita: {
+          parte: this.convocatoria.expresionEscrita,
+          puntosConseguidos: 0,
+          correccion: {
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.expresionEscrita.tareas),
+            corrector: this.usuario
+          }
+        },
+        expresionOral: {
+          parte: this.convocatoria.expresionOral,
+          puntosConseguidos: 0,
+          correccion: {
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.expresionOral.tareas),
+            corrector: this.usuario
+          }
+        }
+      }
+      this.acta = newActa
+    }
+  }
+
+  private selectAlumnoConvocatoria(idConvocatoria?: number, idAlumno?: number): void {
+    const dialogRef = this.dialog.open(ConvocatoriaAlumnoSelectorDialog, {
+      data: { idAlumno: idAlumno, idConvocatoria: idConvocatoria }
+    })
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result)
+    })
+  }
+
+  private loadOwnUser(): void {
+    this.apiService.getUsuarioActual().subscribe((usuarioActual: Usuario) => {
+      this.usuario = usuarioActual
+    })
+  }
+
+  private initializeTareasCorregidasFromTareas(tareas: Tarea[]): TareaCorregida[] {
+    let tareasCorregidas: TareaCorregida[] = []
+    tareas.forEach((tarea: Tarea) => {
+      let tareaCorregida: TareaCorregida = new TareaCorregida(tarea, 0)
+      tareasCorregidas.push(tareaCorregida)
+    })
+    return tareasCorregidas
+  }
+
+  private loadAlumno(idAlumno: number): void {
+    this.apiService
+      .getAlumnoID(idAlumno)
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        })
+      )
+      .subscribe((alumno: Alumno) => {
+        this.alumno = alumno
+      })
+  }
+
+  private loadConvocatoria(idConvocatoria: number): void {
+    this.apiService.getConvocatoriaID(idConvocatoria).pipe(
+      takeUntil(this.destroy$),
+      catchError((error): Observable<never> => {
+        console.error('Error fetching data from api:', error)
+        return throwError(() => error)
+      }),
+      finalize(() => {
+        this.loading = false
+      }),
+      throwIfEmpty(() => {
+        console.log('Vacio')
+      })
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true)
+  }
 }

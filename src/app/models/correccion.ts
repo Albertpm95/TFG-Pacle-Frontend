@@ -1,13 +1,23 @@
 import { Usuario } from './usuario'
 
-export interface Tarea {
-  idTarea: number
+export class Tarea {
+  idTarea?: number
   nombreTarea: string
+
+  constructor(nombreTarea: string) {
+    this.nombreTarea = nombreTarea
+  }
 }
-export interface TareaCorregida extends Tarea {
-  puntuacion: number
+export class TareaCorregida {
+  puntuacion: number = 0
+  tarea: Tarea
+
+  constructor(tarea: Tarea, puntuacion: number) {
+    this.tarea = tarea
+    this.puntuacion = puntuacion
+  }
 }
 export interface Correccion {
-  corrector: Usuario
+  corrector?: Usuario
   tareasCorregidas: TareaCorregida[]
 }

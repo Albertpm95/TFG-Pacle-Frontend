@@ -69,34 +69,38 @@ export class EditionComponent {
         resultadoGlobal: 0,
         resultadoLectoEscritura: 0,
         comprensionAuditiva: {
-          parte: this.convocatoria.comprensionAuditiva,
+          parte: this.convocatoria.parteComprensionAuditiva,
           puntosConseguidos: 0,
           correccion: {
-            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.comprensionAuditiva.tareas),
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(
+              this.convocatoria.parteComprensionAuditiva.tareas
+            ),
             corrector: this.usuario
           }
         },
         comprensionLectora: {
-          parte: this.convocatoria.comprensionLectora,
+          parte: this.convocatoria.parteComprensionLectora,
           puntosConseguidos: 0,
           correccion: {
-            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.comprensionLectora.tareas),
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(
+              this.convocatoria.parteComprensionLectora.tareas
+            ),
             corrector: this.usuario
           }
         },
         expresionEscrita: {
-          parte: this.convocatoria.expresionEscrita,
+          parte: this.convocatoria.parteExpresionEscrita,
           puntosConseguidos: 0,
           correccion: {
-            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.expresionEscrita.tareas),
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.parteExpresionEscrita.tareas),
             corrector: this.usuario
           }
         },
         expresionOral: {
-          parte: this.convocatoria.expresionOral,
+          parte: this.convocatoria.parteExpresionOral,
           puntosConseguidos: 0,
           correccion: {
-            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.expresionOral.tareas),
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.parteExpresionOral.tareas),
             corrector: this.usuario
           }
         }

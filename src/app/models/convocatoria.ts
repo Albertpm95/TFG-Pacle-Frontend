@@ -10,9 +10,9 @@ export interface Convocatoria {
   horario: Horario
   lenguaje: Lenguaje
   nivel: Nivel
-  comprensionAuditiva: Parte
-  comprensionLectora: Parte
-  expresionEscrita: Parte
-  expresionOral: Parte
+  parteComprensionAuditiva: Parte
+  parteComprensionLectora: Parte
+  parteExpresionEscrita: Parte
+  parteExpresionOral: Parte
   specificIdentifier: number
 }

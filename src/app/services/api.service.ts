@@ -49,11 +49,11 @@ export class ApiService {
       estado_nuevo
     })
   }
-  createConvocatoria(convocatoria: Convocatoria): Observable<Convocatoria> {
-    return this.http.post<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_CREATE, convocatoria)
+  createConvocatoria(convocatoria_nueva: Convocatoria): Observable<Convocatoria> {
+    return this.http.post<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_CREATE, convocatoria_nueva)
   }
-  updateConvocatoria(convocatoria: Convocatoria): Observable<Convocatoria> {
-    return this.http.post<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE, convocatoria)
+  updateConvocatoria(convocatoria_nueva: Convocatoria): Observable<Convocatoria> {
+    return this.http.post<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE, convocatoria_nueva)
   }
   /** ---------------------------------------------------------------------- */
 

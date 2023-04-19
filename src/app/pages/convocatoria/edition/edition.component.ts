@@ -47,19 +47,19 @@ export class EditionComponent {
       lenguaje: ['', Validators.required],
       nivel: ['', Validators.required],
       specificIdentifier: [''],
-      comprensionAuditiva: this.formBuilder.group({
+      parteComprensionAuditiva: this.formBuilder.group({
         puntuacionMaxima: [0, Validators.required],
         listaTareas: this.formBuilder.array([])
       }),
-      comprensionLectora: this.formBuilder.group({
+      parteComprensionLectora: this.formBuilder.group({
         puntuacionMaxima: [0, Validators.required],
         listaTareas: this.formBuilder.array([])
       }),
-      expresionEscrita: this.formBuilder.group({
+      parteExpresionEscrita: this.formBuilder.group({
         puntuacionMaxima: [0, Validators.required],
         listaTareas: this.formBuilder.array([])
       }),
-      expresionOral: this.formBuilder.group({
+      parteExpresionOral: this.formBuilder.group({
         puntuacionMaxima: [0, Validators.required],
         listaTareas: this.formBuilder.array([])
       })
@@ -90,20 +90,20 @@ export class EditionComponent {
           horario: [convocatoria.horario, Validators.required],
           lenguaje: [convocatoria.lenguaje, Validators.required],
           nivel: [convocatoria.nivel, Validators.required],
-          comprensionAuditiva: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.comprensionAuditiva.puntuacionMaxima, Validators.required],
+          parteComprensionAuditiva: this.formBuilder.group({
+            puntuacionMaxima: [convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
             listaTareas: this.formBuilder.array([])
           }),
-          comprensionLectora: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.comprensionLectora.puntuacionMaxima, Validators.required],
+          parteComprensionLectora: this.formBuilder.group({
+            puntuacionMaxima: [convocatoria.parteComprensionLectora.puntuacionMaxima, Validators.required],
             listaTareas: this.formBuilder.array([])
           }),
-          expresionEscrita: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.expresionEscrita.puntuacionMaxima, Validators.required],
+          parteExpresionEscrita: this.formBuilder.group({
+            puntuacionMaxima: [convocatoria.parteExpresionEscrita.puntuacionMaxima, Validators.required],
             listaTareas: this.formBuilder.array([])
           }),
-          expresionOral: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.expresionOral.puntuacionMaxima, Validators.required],
+          parteExpresionOral: this.formBuilder.group({
+            puntuacionMaxima: [convocatoria.parteExpresionOral.puntuacionMaxima, Validators.required],
             listaTareas: this.formBuilder.array([])
           })
         })
@@ -122,20 +122,21 @@ export class EditionComponent {
   }
 
   public get listaTareasComprensionAuditiva() {
-    return this.convocatoriaForm.get('comprensionAuditiva')?.get('listaTareas') as FormArray
+    return this.convocatoriaForm.get('parteComprensionAuditiva')?.get('listaTareas') as FormArray
   }
   public get listaTareasComprensionLectora() {
-    return this.convocatoriaForm.get('comprensionLectora')?.get('listaTareas') as FormArray
+    return this.convocatoriaForm.get('parteComprensionLectora')?.get('listaTareas') as FormArray
   }
   public get listaTareasExpresionEscrita() {
-    return this.convocatoriaForm.get('expresionEscrita')?.get('listaTareas') as FormArray
+    return this.convocatoriaForm.get('parteExpresionEscrita')?.get('listaTareas') as FormArray
   }
   public get listaTareasExpresionOral() {
-    return this.convocatoriaForm.get('expresionOral')?.get('listaTareas') as FormArray
+    return this.convocatoriaForm.get('parteExpresionOral')?.get('listaTareas') as FormArray
   }
+
   private extractFecha(): Date {
     let date_string = this.convocatoriaForm.controls['fechaParcial'].value
-    let hora_parcial = this.convocatoriaForm.controls['horario'].value.split(':')
+    let hora_parcial = this.convocatoriaForm.controls['horario'].value.horario.split(':')
     let fechaParcial = new Date(date_string)
     fechaParcial.setHours(hora_parcial[0])
     fechaParcial.setMinutes(hora_parcial[1])
@@ -151,10 +152,10 @@ export class EditionComponent {
       nivel: this.convocatoriaForm.controls['nivel'].value,
       fecha: this.extractFecha(),
       idConvocatoria: this.convocatoria?.idConvocatoria,
-      comprensionAuditiva: this.extractParte('comprensionAuditiva', 'Comprension Auditiva'),
-      comprensionLectora: this.extractParte('comprensionLectora', 'Comprension Lectora'),
-      expresionEscrita: this.extractParte('expresionEscrita', 'Expresion Escrita'),
-      expresionOral: this.extractParte('expresionOral', 'Expresion Oral'),
+      parteComprensionAuditiva: this.extractParte('parteComprensionAuditiva', 'Comprension Auditiva'),
+      parteComprensionLectora: this.extractParte('parteComprensionLectora', 'Comprension Lectora'),
+      parteExpresionEscrita: this.extractParte('parteExpresionEscrita', 'Expresion Escrita'),
+      parteExpresionOral: this.extractParte('parteExpresionOral', 'Expresion Oral'),
       specificIdentifier: this.convocatoriaForm.controls['specificIdentifier'].value
     }
 
@@ -164,7 +165,7 @@ export class EditionComponent {
   private extractParte(label: string, tipo: string): Parte {
     let parte: Parte = {
       puntuacionMaxima: this.convocatoriaForm.controls[label].value['puntuacionMaxima'],
-      tareas: this.convocatoriaForm.controls[label].value['tareas'],
+      tareas: this.convocatoriaForm.controls[label].value['tareas'] ?? [],
       tipo: tipo
     }
     return parte

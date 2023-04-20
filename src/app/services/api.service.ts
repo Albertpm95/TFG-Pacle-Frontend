@@ -41,7 +41,8 @@ export class ApiService {
     return this.http.get<Convocatoria[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
   }
   getConvocatoriaID(idConvocatoria: number): Observable<Convocatoria> {
-    return this.http.get<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE + '/' + idConvocatoria)
+    console.log(idConvocatoria)
+    return this.http.get<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_DETAILS + '/' + idConvocatoria)
   }
   cambiarEstadoConvocatoria(idConvocatoria: number, estado_nuevo: boolean): Observable<Convocatoria> {
     return this.http.patch<Convocatoria>(this.apiUrl, {

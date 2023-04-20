@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs'
 @Component({
   selector: 'app-horarios',
   templateUrl: './horarios.component.html',
-  styleUrls: ['./horarios.component.scss'],
+  styleUrls: ['./horarios.component.scss']
 })
 export class HorariosComponent {
   nuevoHorarioForm = new FormControl()
@@ -16,7 +16,7 @@ export class HorariosComponent {
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
   constructor(private apiService: ApiService) {
-    this.nuevoHorarioForm.setValidators(Validators.required)
+    this.nuevoHorarioForm.setValidators([Validators.required, Validators.pattern('([01]?[0-9]|2[0-4]):([0-5]?[0-9])')])
     this.apiService
       .getHorariosConvocatoria()
       .pipe(takeUntil(this.destroy$))
@@ -29,15 +29,11 @@ export class HorariosComponent {
           .deleteHorarioConvocatoria(idHorario)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            let indexAEliminar = this.horarios.findIndex(
-              (horario) => horario.idHorario === idHorario,
-            )
+            let indexAEliminar = this.horarios.findIndex((horario) => horario.idHorario === idHorario)
             if (indexAEliminar != -1)
               this.horarios.splice(
-                this.horarios.findIndex(
-                  (horario) => horario.idHorario === idHorario,
-                ),
-                1,
+                this.horarios.findIndex((horario) => horario.idHorario === idHorario),
+                1
               )
           })
       : ''

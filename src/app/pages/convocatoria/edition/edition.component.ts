@@ -20,9 +20,9 @@ export class EditionComponent {
   convocatoria: Convocatoria | undefined
   loading: boolean = true
 
-  listaLenguajesConvocatoria$: Observable<Lenguaje[]> = this.apiService.getLenguajesConvocatoria()
-  listaHorariosConvocatoria$: Observable<Horario[]> = this.apiService.getHorariosConvocatoria()
-  listaNivelesConvocatoria$: Observable<Nivel[]> = this.apiService.getNivelesConvocatoria()
+  listaLenguajesConvocatoria: Lenguaje[] = []
+  listaHorariosConvocatoria: Horario[] = []
+  listaNivelesConvocatoria: Nivel[] = []
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
@@ -34,18 +34,26 @@ export class EditionComponent {
   ) {}
 
   ngOnInit(): void {
-    this.activactedRoute.snapshot.params['idConvocatoria']
-      ? this.loadForm(this.activactedRoute.snapshot.params['idConvocatoria'])
-      : this.initializeNewForm()
+    this.initializeLists()
+    let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
+    if (this.initializeLists()) {
+      if (idConvocatoria === undefined) {
+        this.initializeNewForm()
+      } else if (idConvocatoria) {
+        this.loadForm(idConvocatoria)
+      }
+    }
   }
-
   private initializeNewForm(): void {
     this.convocatoriaForm = this.formBuilder.group({
       estado: [true],
-      fechaParcial: [Date.now, Validators.required], // Date sin el horario
-      horario: ['', Validators.required],
-      lenguaje: ['', Validators.required],
-      nivel: ['', Validators.required],
+      fechaParcial: [Date.now, [Validators.required]], // Date sin el horario
+      horario: [
+        this.listaHorariosConvocatoria[0],
+        [Validators.required, Validators.pattern('([01]?[0-9]|2[0-4]):([0-5]?[0-9])')]
+      ],
+      lenguaje: [this.listaLenguajesConvocatoria[0], [Validators.required]],
+      nivel: [this.listaNivelesConvocatoria[0], [Validators.required]],
       specificIdentifier: [''],
       parteComprensionAuditiva: this.formBuilder.group({
         puntuacionMaxima: [0, Validators.required],
@@ -83,32 +91,42 @@ export class EditionComponent {
           console.log('Vacio')
         })
       )
-      .subscribe((convocatoria) => {
-        this.convocatoriaForm = this.formBuilder.group({
-          estado: [convocatoria.estado],
-          fechaParcial: [convocatoria.fecha, Validators.required], // Date sin el horario
-          horario: [convocatoria.horario, Validators.required],
-          lenguaje: [convocatoria.lenguaje, Validators.required],
-          nivel: [convocatoria.nivel, Validators.required],
-          parteComprensionAuditiva: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
-            listaTareas: this.formBuilder.array([])
-          }),
-          parteComprensionLectora: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.parteComprensionLectora.puntuacionMaxima, Validators.required],
-            listaTareas: this.formBuilder.array([])
-          }),
-          parteExpresionEscrita: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.parteExpresionEscrita.puntuacionMaxima, Validators.required],
-            listaTareas: this.formBuilder.array([])
-          }),
-          parteExpresionOral: this.formBuilder.group({
-            puntuacionMaxima: [convocatoria.parteExpresionOral.puntuacionMaxima, Validators.required],
-            listaTareas: this.formBuilder.array([])
-          })
-        })
-        this.loading = false
+      .subscribe((convocatoria: Convocatoria) => {
+        this.convocatoria = convocatoria
+        this.transformConvocatoriaToForm()
       })
+    console.log(this.convocatoriaForm)
+  }
+
+  private transformConvocatoriaToForm(): void {
+    if (this.convocatoria)
+      this.convocatoriaForm = this.formBuilder.group({
+        estado: [this.convocatoria.estado],
+        fechaParcial: [this.convocatoria.fecha, Validators.required], // Date sin el horario
+        horario: [
+          this.convocatoria.horario,
+          [Validators.required, Validators.pattern('([01]?[0-9]|2[0-4]):([0-5]?[0-9])')]
+        ],
+        lenguaje: [this.convocatoria.lenguaje, Validators.required],
+        nivel: [this.convocatoria.nivel, [Validators.required]],
+        parteComprensionAuditiva: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        }),
+        parteComprensionLectora: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteComprensionLectora.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        }),
+        parteExpresionEscrita: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteExpresionEscrita.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        }),
+        parteExpresionOral: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteExpresionOral.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        })
+      })
+    this.loading = false
   }
 
   public saveConvocatoria(idConvocatoria?: number): void {
@@ -140,7 +158,6 @@ export class EditionComponent {
     let fechaParcial = new Date(date_string)
     fechaParcial.setHours(hora_parcial[0])
     fechaParcial.setMinutes(hora_parcial[1])
-
     return fechaParcial
   }
 
@@ -158,7 +175,6 @@ export class EditionComponent {
       parteExpresionOral: this.extractParte('parteExpresionOral', 'Expresion Oral'),
       specificIdentifier: this.convocatoriaForm.controls['specificIdentifier'].value
     }
-
     return convocatoria
   }
 
@@ -252,6 +268,71 @@ export class EditionComponent {
       .subscribe(() => {
         this.router.navigate([])
       })
+  }
+
+  private initializeLists(): boolean {
+    let listsLoaded: boolean = false
+    this.apiService
+      .getLenguajesConvocatoria()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          listsLoaded = false
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        })
+      )
+      .subscribe((lenguajes: Lenguaje[]) => {
+        this.listaLenguajesConvocatoria = lenguajes
+        listsLoaded = true
+      })
+    this.apiService
+      .getHorariosConvocatoria()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          listsLoaded = false
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        })
+      )
+      .subscribe((horarios: Horario[]) => {
+        this.listaHorariosConvocatoria = horarios
+        listsLoaded = true
+      })
+    this.apiService
+      .getNivelesConvocatoria()
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          listsLoaded = false
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        })
+      )
+      .subscribe((niveles: Nivel[]) => {
+        this.listaNivelesConvocatoria = niveles
+        listsLoaded = true
+      })
+    return listsLoaded
   }
   ngOnDestroy() {
     this.destroy$.next(true)

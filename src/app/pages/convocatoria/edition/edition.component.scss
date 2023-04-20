@@ -2,22 +2,28 @@
   height: 100%;
   display: flex;
 }
+
 .col:last-child {
   margin-right: 0;
 }
+
 .acta-form-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 mat-form-field {
   margin: 0.5rem;
+  width: 370px;
 }
+
 mat-card {
   width: min(90vw, 960px);
   align-self: center;
   margin: auto;
 }
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -25,23 +31,27 @@ mat-card {
   align-items: center;
   width: 100%;
 }
+
 .tarea {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 }
+
 .tarea-label {
   width: 85%;
   height: 25px;
   padding: 0.6rem 1rem;
   border: none;
 }
+
 .tarea-valor {
   width: 15%;
   height: 25px;
   padding: 0.6rem 1rem;
 }
+
 .formGroup {
   display: flex;
   flex-direction: column;

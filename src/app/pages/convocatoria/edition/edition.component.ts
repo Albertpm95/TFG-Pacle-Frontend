@@ -8,7 +8,7 @@ import { Lenguaje } from '@models/lenguaje'
 import { Nivel } from '@models/nivel'
 import { Parte } from '@models/parte'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, forkJoin, take, takeUntil } from 'rxjs'
+import { Observable, Subject, catchError, finalize, forkJoin, take, takeUntil, throwError } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
@@ -70,6 +70,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     return fechaParcial
   }
   private extractConvocatoriaForm(): Convocatoria {
+    console.log('Nivel: ', this.convocatoriaForm.controls['nivel'])
     const convocatoria: Convocatoria = {
       estado: this.convocatoriaForm.controls['estado'].value,
       horario: this.convocatoriaForm.controls['horario'].value,
@@ -140,7 +141,16 @@ export class EditionComponent implements OnInit, OnDestroy {
   private createConvocatoriaAPI(convocatoria: Convocatoria): void {
     this.apiService
       .createConvocatoria(convocatoria)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          this.loading = false
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        })
+      )
       .subscribe(() => {
         console.log('Navigating')
         this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST)
@@ -150,7 +160,16 @@ export class EditionComponent implements OnInit, OnDestroy {
   private updateConvocatoriaAPI(convocatoria: Convocatoria): void {
     this.apiService
       .updateConvocatoria(convocatoria)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          this.loading = false
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        })
+      )
       .subscribe(() => {
         console.log('Navigating')
         this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST)
@@ -205,7 +224,7 @@ export class EditionComponent implements OnInit, OnDestroy {
         fechaParcial: [this.convocatoria.fecha, Validators.required], // Date sin el horario
         horario: [this.convocatoria.horario, Validators.required],
         lenguaje: [this.convocatoria.lenguaje, Validators.required],
-        nivel: [this.convocatoria.nivel, Validators.required],
+        nivel: [this.convocatoria.nivel, [Validators.required]],
         specificIdentifier: '',
         parteComprensionAuditiva: this.formBuilder.group({
           puntuacionMaxima: [this.convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
@@ -224,10 +243,11 @@ export class EditionComponent implements OnInit, OnDestroy {
           listaTareas: this.formBuilder.array([])
         })
       })
-    this.convocatoriaForm.reset
     this.loading = false
   }
-
+  compareFn(obj1: any, obj2: any) {
+    return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
+}
   ngOnDestroy() {
     this.destroy$.next(true)
   }

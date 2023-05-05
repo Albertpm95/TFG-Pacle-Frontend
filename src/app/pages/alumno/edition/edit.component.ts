@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { COMPONENTS, MODULES } from '@constants'
@@ -12,10 +12,10 @@ import { Observable, Subject, catchError, finalize, takeUntil, throwError, throw
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditionComponent {
+export class EditionComponent implements OnInit {
   alumnoNuevoForm: FormGroup = new FormGroup('')
   alumno: Alumno | undefined
-  loading: boolean = true
+  loading = true
 
   listaGenerosAlumno$: Observable<Genero[]> = this.apiService.getGenerosAlumno()
   listaColectivosUVAlumno$: Observable<ColectivoUV[]> = this.apiService.getColectivosUV()
@@ -30,7 +30,7 @@ export class EditionComponent {
   ) {}
 
   ngOnInit(): void {
-    let idAlumno = this.activactedRoute.snapshot.params['idAlumno']
+    const idAlumno = this.activactedRoute.snapshot.params['idAlumno']
     idAlumno ? this.loadForm(idAlumno) : this.initializeForm()
   }
 
@@ -72,8 +72,8 @@ export class EditionComponent {
   public saveAlumno(idAlumno?: number): void {
     this.loading = true
     if (this.alumnoNuevoForm.valid) {
-      let _date: Date = new Date(this.alumnoNuevoForm.controls['fechaNacimiento'].value) as Date
-      let alumno: Alumno = {
+      const _date: Date = new Date(this.alumnoNuevoForm.controls['fechaNacimiento'].value) as Date
+      const alumno: Alumno = {
         nombre: this.alumnoNuevoForm.controls['nombre'].value,
         apellidos: this.alumnoNuevoForm.controls['apellidos'].value,
         colectivoUV: this.alumnoNuevoForm.controls['colectivoUV'].value,
@@ -92,7 +92,6 @@ export class EditionComponent {
             .pipe(
               takeUntil(this.destroy$),
               catchError((error): Observable<never> => {
-                console.error('Error fetching data from api:', error)
                 return throwError(() => error)
               }),
               finalize(() => {
@@ -110,7 +109,6 @@ export class EditionComponent {
             .pipe(
               takeUntil(this.destroy$),
               catchError((error): Observable<never> => {
-                console.error('Error fetching data from api:', error)
                 return throwError(() => error)
               }),
               finalize(() => {

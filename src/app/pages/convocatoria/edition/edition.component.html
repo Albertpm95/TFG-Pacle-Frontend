@@ -9,15 +9,15 @@
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label for="lenguaje">Lenguaje de la convocatoria</mat-label>
-            <mat-select formControlName="lenguaje">
+            <mat-select formControlName="lenguaje" [compareWith]="compareFn">
               <mat-option *ngFor="let lenguaje of listaLenguajesConvocatoria" [value]="lenguaje">{{
                 lenguaje.lenguaje
               }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="fill" class="col" *ngIf="convocatoria.nivel">
+          <mat-form-field appearance="fill" class="col">
             <mat-label for="nivel">Nivel de la convocatoria</mat-label>
-            <mat-select formControlName="nivel">
+            <mat-select formControlName="nivel" [compareWith]="compareFn">
               <mat-option *ngFor="let nivel of listaNivelesConvocatoria" [value]="nivel">{{ nivel.nivel }}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -35,7 +35,7 @@
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
             <mat-label for="horario" name="horario">Hora de la convocatoria</mat-label>
-            <mat-select formControlName="horario">
+            <mat-select formControlName="horario" [compareWith]="compareFn">
               <mat-option *ngFor="let horario of listaHorariosConvocatoria" [value]="horario">{{
                 horario.horario
               }}</mat-option>
@@ -121,7 +121,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()" *ngIf="!convocatoria">
+      <button mat-raised-button color="primary" type="submit" (click)="saveConvocatoria()" *ngIf="convocatoria && !convocatoria.idConvocatoria">
         Crear Convocatoria
       </button>
       <button

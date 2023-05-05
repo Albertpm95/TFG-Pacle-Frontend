@@ -1,19 +1,19 @@
-import { Component, Input } from '@angular/core'
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { ParteCorregida } from '@models/parte'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms'
+import { ParteCorregidaDB, ParteCorregidaNueva } from '@models/parte'
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
 import { Observable, Subject } from 'rxjs'
 
 @Component({
-  selector: 'parte-acta',
+  selector: 'app-parte-acta',
   templateUrl: './parte.component.html',
   styleUrls: ['./parte.component.scss']
 })
-export class ParteComponent {
-  @Input() parte: ParteCorregida | undefined
+export class ParteComponent implements OnInit, OnDestroy {
+  @Input() parte: ParteCorregidaNueva | ParteCorregidaDB | undefined
 
-  loading: boolean = true
+  loading = true
   form: FormGroup = new FormGroup({})
 
   corrector$: Observable<Usuario[]> = this.apiService.getUsuarios()
@@ -23,7 +23,10 @@ export class ParteComponent {
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.parte?.idParteCorregida ? this.loadForm() : this.initializeNewForm()
+    if (this.parte) {
+      this.parte.parte ? this.loadForm() : this.initializeNewForm()
+    }
+
     // this.loadTareas()
   }
 
@@ -57,6 +60,7 @@ export class ParteComponent {
 
   public save(): void {
     if (this.form.valid) {
+      console.log('Not implemented')
     }
   }
 
@@ -65,12 +69,12 @@ export class ParteComponent {
   }
 
   private calcularPuntosTotales(): number {
-    let puntosTotales: number = 0
+    let puntosTotales = 0
     this.listaTareas.controls.forEach((control) => {
       if (control.valid) puntosTotales += control.value['valor']
     })
 
-    return 0
+    return puntosTotales
   }
 
   ngOnDestroy() {

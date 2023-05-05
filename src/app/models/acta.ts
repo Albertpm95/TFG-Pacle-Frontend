@@ -1,17 +1,31 @@
 import { Alumno } from './alumno'
-import { Convocatoria } from './convocatoria'
-import { ParteCorregida } from './parte'
+import { ConvocatoriaDB } from './convocatoria'
+import { ParteCorregidaDB, ParteCorregidaNueva } from './parte'
 import { Usuario } from './usuario'
 
-export interface Acta {
+export interface ActaNueva {
   alumno: Alumno
-  convocatoria: Convocatoria
+  convocatoria: ConvocatoriaDB
   corrector: Usuario
-  comprensionAuditiva: ParteCorregida
-  comprensionLectora: ParteCorregida
-  expresionEscrita: ParteCorregida
-  expresionOral: ParteCorregida
-  idActa?: number
+  comprensionAuditiva: ParteCorregidaNueva
+  comprensionLectora: ParteCorregidaNueva
+  expresionEscrita: ParteCorregidaNueva
+  expresionOral: ParteCorregidaNueva
+  resultado?: string
+  resultadoLectoEscritura?: number
+  resultadoDestrezasOrales?: number
+  resultadoGlobal?: number
+}
+
+export interface ActaDB {
+  alumno: Alumno
+  convocatoria: ConvocatoriaDB
+  corrector: Usuario
+  comprensionAuditiva: ParteCorregidaDB
+  comprensionLectora: ParteCorregidaDB
+  expresionEscrita: ParteCorregidaDB
+  expresionOral: ParteCorregidaDB
+  idActa: number
   resultado?: string
   resultadoLectoEscritura?: number
   resultadoDestrezasOrales?: number

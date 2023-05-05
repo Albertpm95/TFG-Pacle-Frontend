@@ -1,18 +1,18 @@
-import { Component } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute } from '@angular/router'
 import { COMPONENTS, MODULES } from '@constants'
 import { Alumno } from '@models/alumno'
-import { Convocatoria } from '@models/convocatoria'
+import { ConvocatoriaDB } from '@models/convocatoria'
 import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, catchError, finalize, map, take, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnInit, OnDestroy {
   displayed_columns: string[] = [
     'dni',
     'nombre',
@@ -25,19 +25,19 @@ export class ListComponent {
   ]
   data_source: MatTableDataSource<Alumno> = new MatTableDataSource()
 
-  list_loaded: boolean = false
+  list_loaded = false
   edit_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.EDITION
   correct_alumno_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
-  loading: boolean = true
+  loading = true
 
-  convocatoria: Convocatoria | undefined
+  convocatoria: ConvocatoriaDB | undefined
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
   constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    let idConvocatoriaString = this.activactedRoute.snapshot.paramMap.get('idConvocatoria')
+    const idConvocatoriaString = this.activactedRoute.snapshot.paramMap.get('idConvocatoria')
     if (idConvocatoriaString) this.initializeFilteredListConvocatoria(+idConvocatoriaString)
     else this.initializeList()
   }
@@ -108,7 +108,7 @@ export class ListComponent {
             })
           )
           .subscribe(() => {
-            let indexAEliminar = this.data_source.data.findIndex((alumno) => alumno.idAlumno === idAlumno)
+            const indexAEliminar = this.data_source.data.findIndex((alumno) => alumno.idAlumno === idAlumno)
             if (indexAEliminar != -1) this.data_source.data.splice(indexAEliminar, 1)
 
             this.list_loaded = true

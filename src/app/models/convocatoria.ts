@@ -1,18 +1,30 @@
 import { Horario } from './horario'
 import { Lenguaje } from './lenguaje'
 import { Nivel } from './nivel'
-import { Parte } from './parte'
+import { Parte, ParteNueva } from './parte'
 
-export class Convocatoria {
-  idConvocatoria?: number
-  parteComprensionAuditiva: Parte = new Parte()
-  parteComprensionLectora: Parte = new Parte()
-  parteExpresionEscrita: Parte = new Parte()
-  parteExpresionOral: Parte = new Parte()
-  estado: boolean = true
-  fecha: Date = new Date()
-  horario: Horario | undefined
-  lenguaje: Lenguaje | undefined
-  nivel: Nivel | undefined
-  specificIdentifier: string = ''
+export interface ConvocatoriaNueva {
+  estado: boolean
+  fecha: Date
+  parteComprensionAuditiva: ParteNueva
+  parteComprensionLectora: ParteNueva
+  parteExpresionEscrita: ParteNueva
+  parteExpresionOral: ParteNueva
+  horario: Horario
+  lenguaje: Lenguaje
+  nivel: Nivel
+  specificIdentifier: string
+}
+export interface ConvocatoriaDB {
+  estado: boolean
+  fecha: Date
+  parteComprensionAuditiva: Parte
+  parteComprensionLectora: Parte
+  parteExpresionEscrita: Parte
+  parteExpresionOral: Parte
+  horario: Horario
+  lenguaje: Lenguaje
+  nivel: Nivel
+  specificIdentifier: string
+  idConvocatoria: number
 }

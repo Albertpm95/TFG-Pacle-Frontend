@@ -1,7 +1,7 @@
 import { Alumno } from './alumno'
-import { Convocatoria } from './convocatoria'
+import { ConvocatoriaDB } from './convocatoria'
 
 export interface AlumnosConvocatoria {
-  convocatoria: Convocatoria
+  convocatoria: ConvocatoriaDB
   alumnos: Alumno[]
 }

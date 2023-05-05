@@ -1,18 +1,31 @@
 import { Correccion, Tarea } from './correccion'
 
-export class Parte {
-  idParte?: number
-  tipo: string = ''
-  puntuacionMaxima: number = 0
-  tareas: Tarea[] = []
+export interface ParteNueva {
+  tipo: string
+  puntuacionMaxima: number
+  tareas: Tarea[]
 }
-
-export interface ParteCorregida {
+export interface Parte {
+  idParte: number
+  tipo: string
+  puntuacionMaxima: number
+  tareas: Tarea[]
+}
+export interface ParteCorregidaNueva {
   parte: Parte
-  observaciones?: string
-  correccion?: Correccion
+  observaciones: string
+  correccion: Correccion
   correccion2?: Correccion
   puntosConseguidos: number
-  idParteCorregida?: number
-  porcentaje?: number
+  porcentaje: number
+}
+
+export interface ParteCorregidaDB {
+  parte: Parte
+  observaciones: string
+  correccion: Correccion
+  correccion2?: Correccion
+  puntosConseguidos: number
+  idParte: number
+  porcentaje: number
 }

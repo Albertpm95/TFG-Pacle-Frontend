@@ -1,7 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
 import { COMPONENTS, MODULES } from '@constants'
-import { Convocatoria } from '@models/convocatoria'
+import { ConvocatoriaDB } from '@models/convocatoria'
 import { ApiService } from '@services/api.service'
 import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
@@ -9,7 +9,7 @@ import { Observable, Subject, catchError, finalize, takeUntil, throwError, throw
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnInit, OnDestroy {
   displayed_columns: string[] = [
     'idConvocatoria',
     'lenguaje',
@@ -23,9 +23,9 @@ export class ListComponent {
     'maxExpresionOral',
     'acciones'
   ]
-  data_source: MatTableDataSource<Convocatoria> = new MatTableDataSource()
+  data_source: MatTableDataSource<ConvocatoriaDB> = new MatTableDataSource()
 
-  loading: boolean = true
+  loading = true
   edit_route = '/' + MODULES.CONVOCATORIA + '/' + COMPONENTS.EDITION
   alumno_list_route = '/' + MODULES.ALUMNO + '/' + COMPONENTS.LIST
 
@@ -60,7 +60,7 @@ export class ListComponent {
         }
       })
   }
-  public cambiarEstadoConvocatoria(convocatoria: Convocatoria): void {
+  public cambiarEstadoConvocatoria(convocatoria: ConvocatoriaDB): void {
     if (convocatoria.idConvocatoria)
       this.apiService.cambiarEstadoConvocatoria(convocatoria.idConvocatoria, !convocatoria.estado).pipe(
         takeUntil(this.destroy$),

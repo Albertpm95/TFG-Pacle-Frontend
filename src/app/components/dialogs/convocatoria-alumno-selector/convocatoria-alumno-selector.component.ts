@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Alumno } from '@models/alumno'
-import { Convocatoria } from '@models/convocatoria'
+import { ConvocatoriaDB } from '@models/convocatoria'
 import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
 import { Subject, finalize, takeUntil } from 'rxjs'
@@ -11,16 +11,16 @@ import { Subject, finalize, takeUntil } from 'rxjs'
   templateUrl: './convocatoria-alumno-selector.component.html',
   styleUrls: ['./convocatoria-alumno-selector.component.scss']
 })
-export class ConvocatoriaAlumnoSelectorDialogComponent {
+export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
   loading = true
-  listConvocatorias: Convocatoria[] = []
+  listConvocatorias: ConvocatoriaDB[] = []
   listAlumno: Alumno[] = []
 
   alumnoControl: FormControl = new FormControl()
   convocatoriaControl: FormControl = new FormControl()
 
   selectedAlumno: Alumno | undefined
-  selectedConvocatoria: Convocatoria | undefined
+  selectedConvocatoria: ConvocatoriaDB | undefined
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
@@ -68,7 +68,7 @@ export class ConvocatoriaAlumnoSelectorDialogComponent {
           this.loading = false
         })
       )
-      .subscribe((convocatorias: Convocatoria[]) => {
+      .subscribe((convocatorias: ConvocatoriaDB[]) => {
         this.listConvocatorias = convocatorias
       })
   }

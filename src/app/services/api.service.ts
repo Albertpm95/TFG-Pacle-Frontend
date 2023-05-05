@@ -2,19 +2,19 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { API_ENDPOINTS } from '@constants'
 import { environment } from '@environments/environment'
-import { Acta } from '@models/acta'
+import { ActaDB, ActaNueva } from '@models/acta'
 import { Alumno } from '@models/alumno'
-import { Convocatoria } from '@models/convocatoria'
+import { ColectivoUV } from '@models/colectivouv'
+import { ConvocatoriaDB, ConvocatoriaNueva } from '@models/convocatoria'
+import { AlumnosConvocatoria } from '@models/dictionaries'
 import { Genero } from '@models/genero'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
 import { Nivel } from '@models/nivel'
+import { Parte } from '@models/parte'
 import { Rol } from '@models/rol'
 import { Usuario } from '@models/usuario'
-import { Observable, of } from 'rxjs'
-import { AlumnosConvocatoria } from '@models/dictionaries'
-import { ColectivoUV } from '@models/colectivouv'
-import { Parte } from '@models/parte'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -37,23 +37,24 @@ export class ApiService {
   /** ---------------------------------------------------------------------- */
 
   /** Convocatorias */
-  getConvocatorias(): Observable<Convocatoria[]> {
-    return this.http.get<Convocatoria[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
+  getConvocatorias(): Observable<ConvocatoriaDB[]> {
+    return this.http.get<ConvocatoriaDB[]>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
   }
-  getConvocatoriaID(idConvocatoria: number): Observable<Convocatoria> {
-    return this.http.get<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_DETAILS + '/' + idConvocatoria)
+  getConvocatoriaID(idConvocatoria: number): Observable<ConvocatoriaDB> {
+    return this.http.get<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_DETAILS + '/' + idConvocatoria)
   }
-  cambiarEstadoConvocatoria(idConvocatoria: number, estado_nuevo: boolean): Observable<Convocatoria> {
-    return this.http.patch<Convocatoria>(this.apiUrl, {
+  cambiarEstadoConvocatoria(idConvocatoria: number, estado_nuevo: boolean): Observable<ConvocatoriaDB> {
+    return this.http.patch<ConvocatoriaDB>(this.apiUrl, {
       idConvocatoria,
       estado_nuevo
     })
   }
-  createConvocatoria(convocatoria_nueva: Convocatoria): Observable<Convocatoria> {
-    return this.http.post<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_CREATE, convocatoria_nueva)
+  createConvocatoria(convocatoria_nueva: ConvocatoriaNueva): Observable<ConvocatoriaDB> {
+    return this.http.post<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_CREATE, convocatoria_nueva)
   }
-  updateConvocatoria(convocatoria_nueva: Convocatoria): Observable<Convocatoria> {
-    return this.http.post<Convocatoria>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE, convocatoria_nueva)
+  updateConvocatoria(convocatoria_update: ConvocatoriaDB): Observable<ConvocatoriaDB> {
+    console.log(convocatoria_update)
+    return this.http.put<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE, convocatoria_update)
   }
   /** ---------------------------------------------------------------------- */
 
@@ -110,11 +111,18 @@ export class ApiService {
   /** ---------------------------------------------------------------------- */
 
   /** Actas */
-  getActas(): Observable<Acta[]> {
-    return this.http.get<Acta[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
+  getActas(): Observable<ActaDB[]> {
+    return this.http.get<ActaDB[]>(this.apiUrl + API_ENDPOINTS.ACTA_LIST)
   }
-  getActaID(idActa: number): Observable<Acta> {
-    return this.http.get<Acta>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + '/' + idActa)
+  getActaID(idActa: number): Observable<ActaDB> {
+    return this.http.get<ActaDB>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE + '/' + idActa)
+  }
+  createActa(acta_nueva: ConvocatoriaNueva): Observable<ActaNueva> {
+    return this.http.post<ActaNueva>(this.apiUrl + API_ENDPOINTS.ACTA_CREATE, acta_nueva)
+  }
+  updateActa(acta_update: ActaDB): Observable<ActaDB> {
+    console.log(acta_update)
+    return this.http.put<ActaDB>(this.apiUrl + API_ENDPOINTS.ACTA_UPDATE, acta_update)
   }
   /** ---------------------------------------------------------------------- */
 

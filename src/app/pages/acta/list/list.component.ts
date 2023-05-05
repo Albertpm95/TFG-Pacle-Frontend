@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
 import { COMPONENTS, MODULES } from '@constants'
-import { Acta } from '@models/acta'
+import { ActaDB } from '@models/acta'
 import { ApiService } from '@services/api.service'
 import { Subject, takeUntil } from 'rxjs'
 @Component({
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   displayed_columns: string[] = ['idActa', 'alumno', 'convocatoria', 'fecha', 'resultado', 'acciones']
-  data_source: MatTableDataSource<Acta> = new MatTableDataSource()
+  data_source: MatTableDataSource<ActaDB> = new MatTableDataSource()
 
   list_loaded = false
   edit_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
-import { Acta } from '@models/acta'
+import { ActaDB, ActaNueva } from '@models/acta'
 import { Alumno } from '@models/alumno'
-import { Convocatoria } from '@models/convocatoria'
+import { ConvocatoriaDB } from '@models/convocatoria'
 import { Tarea, TareaCorregida } from '@models/correccion'
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
@@ -14,11 +14,11 @@ import { Observable, Subject, catchError, finalize, takeUntil, throwError, throw
   templateUrl: './edition.component.html',
   styleUrls: ['./edition.component.scss']
 })
-export class EditionComponent implements OnInit {
+export class EditionComponent implements OnInit, OnDestroy {
   loading = true
-  acta: Partial<Acta> | undefined
+  acta: Partial<ActaNueva> | Partial<ActaDB> | undefined
   alumno: Alumno | undefined
-  convocatoria: Convocatoria | undefined
+  convocatoria: ConvocatoriaDB | undefined
   usuario: Usuario | undefined
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
@@ -44,16 +44,16 @@ export class EditionComponent implements OnInit {
           this.loading = false
         })
       )
-      .subscribe((acta: Acta) => {
+      .subscribe((acta: ActaDB) => {
         this.acta = acta
       })
   }
 
   private createActaVacia(idAlumno: number, idConvocatoria: number): void {
     this.loadAlumno(idAlumno)
-    if (this.alumno) this.loadConvocatoria
+    if (this.alumno) this.loadConvocatoria(idConvocatoria)
     if (this.alumno && this.convocatoria && this.usuario) {
-      const newActa: Acta = {
+      const newActa: ActaNueva = {
         alumno: this.alumno,
         convocatoria: this.convocatoria,
         resultado: '',
@@ -64,6 +64,8 @@ export class EditionComponent implements OnInit {
         comprensionAuditiva: {
           parte: this.convocatoria.parteComprensionAuditiva,
           puntosConseguidos: 0,
+          observaciones: '',
+          porcentaje: 0,
           correccion: {
             tareasCorregidas: this.initializeTareasCorregidasFromTareas(
               this.convocatoria.parteComprensionAuditiva.tareas
@@ -74,6 +76,8 @@ export class EditionComponent implements OnInit {
         comprensionLectora: {
           parte: this.convocatoria.parteComprensionLectora,
           puntosConseguidos: 0,
+          observaciones: '',
+          porcentaje: 0,
           correccion: {
             tareasCorregidas: this.initializeTareasCorregidasFromTareas(
               this.convocatoria.parteComprensionLectora.tareas
@@ -84,7 +88,13 @@ export class EditionComponent implements OnInit {
         expresionEscrita: {
           parte: this.convocatoria.parteExpresionEscrita,
           puntosConseguidos: 0,
+          observaciones: '',
+          porcentaje: 0,
           correccion: {
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.parteExpresionEscrita.tareas),
+            corrector: this.usuario
+          },
+          correccion2: {
             tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.parteExpresionEscrita.tareas),
             corrector: this.usuario
           }
@@ -92,7 +102,13 @@ export class EditionComponent implements OnInit {
         expresionOral: {
           parte: this.convocatoria.parteExpresionOral,
           puntosConseguidos: 0,
+          observaciones: '',
+          porcentaje: 0,
           correccion: {
+            tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.parteExpresionOral.tareas),
+            corrector: this.usuario
+          },
+          correccion2: {
             tareasCorregidas: this.initializeTareasCorregidasFromTareas(this.convocatoria.parteExpresionOral.tareas),
             corrector: this.usuario
           }

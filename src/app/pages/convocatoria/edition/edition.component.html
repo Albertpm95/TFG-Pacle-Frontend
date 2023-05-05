@@ -24,7 +24,11 @@
         </div>
         <div class="row">
           <mat-form-field appearance="fill" class="col">
-            <mat-label for="fechaParcial">Choose a date</mat-label>
+            <mat-label for="fechaParcial">Identificador especifico</mat-label>
+            <input matInput formControlName="specificIdentifier" />
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col">
+              <mat-label for="fechaParcial">Choose a date</mat-label>
             <input matInput startAt="fechaParcial" [matDatepicker]="fechaParcial" formControlName="fechaParcial" />
             <mat-datepicker-toggle matIconSuffix [for]="fechaParcial"></mat-datepicker-toggle>
             <mat-datepicker #fechaParcial></mat-datepicker>

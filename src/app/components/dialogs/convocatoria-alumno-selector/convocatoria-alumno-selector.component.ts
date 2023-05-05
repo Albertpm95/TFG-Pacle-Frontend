@@ -1,18 +1,18 @@
 import { Component, Inject } from '@angular/core'
 import { FormControl } from '@angular/forms'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Alumno } from '@models/alumno'
 import { Convocatoria } from '@models/convocatoria'
 import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
-import { Subject, takeUntil, catchError, Observable, throwError, finalize, throwIfEmpty } from 'rxjs'
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { Subject, finalize, takeUntil } from 'rxjs'
 
 @Component({
   templateUrl: './convocatoria-alumno-selector.component.html',
   styleUrls: ['./convocatoria-alumno-selector.component.scss']
 })
-export class ConvocatoriaAlumnoSelectorDialog {
-  loading: boolean = true
+export class ConvocatoriaAlumnoSelectorDialogComponent {
+  loading = true
   listConvocatorias: Convocatoria[] = []
   listAlumno: Alumno[] = []
 
@@ -26,7 +26,7 @@ export class ConvocatoriaAlumnoSelectorDialog {
 
   constructor(
     private apiService: ApiService,
-    public dialogRef: MatDialogRef<ConvocatoriaAlumnoSelectorDialog>,
+    public dialogRef: MatDialogRef<ConvocatoriaAlumnoSelectorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { idConvocatoria: number; idAlumno: number }
   ) {}
 
@@ -48,16 +48,8 @@ export class ConvocatoriaAlumnoSelectorDialog {
       .getAlumnosConvocatoria(idConvocatoria)
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
         finalize(() => {
-          console.log('Finalizado')
           this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
         })
       )
       .subscribe((alumnosConvocatoria: AlumnosConvocatoria) => {
@@ -71,16 +63,9 @@ export class ConvocatoriaAlumnoSelectorDialog {
       .getConvocatorias()
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
         finalize(() => {
           console.log('Finalizado')
           this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
         })
       )
       .subscribe((convocatorias: Convocatoria[]) => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
 import { Acta } from '@models/acta'
@@ -7,15 +7,15 @@ import { Convocatoria } from '@models/convocatoria'
 import { Tarea, TareaCorregida } from '@models/correccion'
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
-import { ConvocatoriaAlumnoSelectorDialog } from 'app/components/dialogs/convocatoria-alumno-selector/convocatoria-alumno-selector.component'
+import { ConvocatoriaAlumnoSelectorDialogComponent } from 'app/components/dialogs/convocatoria-alumno-selector/convocatoria-alumno-selector.component'
 import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
   styleUrls: ['./edition.component.scss']
 })
-export class EditionComponent {
-  loading: boolean = true
+export class EditionComponent implements OnInit {
+  loading = true
   acta: Partial<Acta> | undefined
   alumno: Alumno | undefined
   convocatoria: Convocatoria | undefined
@@ -27,9 +27,9 @@ export class EditionComponent {
 
   ngOnInit(): void {
     this.loadOwnUser()
-    let idActa: number | undefined = this.activactedRoute.snapshot.params['idActa']
-    let idAlumno: number | undefined = this.activactedRoute.snapshot.params['idAlumno']
-    let idConvocatoria: number | undefined = this.activactedRoute.snapshot.params['idConvocatoria']
+    const idActa: number | undefined = this.activactedRoute.snapshot.params['idActa']
+    const idAlumno: number | undefined = this.activactedRoute.snapshot.params['idAlumno']
+    const idConvocatoria: number | undefined = this.activactedRoute.snapshot.params['idConvocatoria']
     if (idActa) this.loadActa(idActa)
     else if (idAlumno && idConvocatoria) this.createActaVacia(idAlumno, idConvocatoria)
     else this.selectAlumnoConvocatoria(idConvocatoria, idAlumno)
@@ -40,15 +40,8 @@ export class EditionComponent {
       .getActaID(idActa)
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
         finalize(() => {
           this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
         })
       )
       .subscribe((acta: Acta) => {
@@ -60,7 +53,7 @@ export class EditionComponent {
     this.loadAlumno(idAlumno)
     if (this.alumno) this.loadConvocatoria
     if (this.alumno && this.convocatoria && this.usuario) {
-      let newActa: Acta = {
+      const newActa: Acta = {
         alumno: this.alumno,
         convocatoria: this.convocatoria,
         resultado: '',
@@ -110,13 +103,11 @@ export class EditionComponent {
   }
 
   private selectAlumnoConvocatoria(idConvocatoria?: number, idAlumno?: number): void {
-    const dialogRef = this.dialog.open(ConvocatoriaAlumnoSelectorDialog, {
+    const dialogRef = this.dialog.open(ConvocatoriaAlumnoSelectorDialogComponent, {
       data: { idAlumno: idAlumno, idConvocatoria: idConvocatoria }
     })
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result)
-    })
+    dialogRef.afterClosed().subscribe()
   }
 
   private loadOwnUser(): void {
@@ -126,9 +117,9 @@ export class EditionComponent {
   }
 
   private initializeTareasCorregidasFromTareas(tareas: Tarea[]): TareaCorregida[] {
-    let tareasCorregidas: TareaCorregida[] = []
+    const tareasCorregidas: TareaCorregida[] = []
     tareas.forEach((tarea: Tarea) => {
-      let tareaCorregida: TareaCorregida = new TareaCorregida(tarea, 0)
+      const tareaCorregida: TareaCorregida = new TareaCorregida(tarea, 0)
       tareasCorregidas.push(tareaCorregida)
     })
     return tareasCorregidas

@@ -1,18 +1,18 @@
-import { Component } from '@angular/core'
+import { Component, OnDestroy } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { Rol } from '@models/rol'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Subject, finalize, takeUntil } from 'rxjs'
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
 })
-export class RolesComponent {
+export class RolesComponent implements OnDestroy {
   nuevoRolForm = new FormControl()
   roles: Rol[] = []
-  loading: boolean = true
+  loading = true
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
@@ -26,21 +26,14 @@ export class RolesComponent {
 
   public addRolUsuario(): void {
     if (this.nuevoRolForm.valid) {
-      let rol_nuevo: Rol = { rol: this.nuevoRolForm.value }
+      const rol_nuevo: Rol = { rol: this.nuevoRolForm.value }
       this.loading = true
       this.apiService
         .addRolUsuario(rol_nuevo)
         .pipe(
           takeUntil(this.destroy$),
-          catchError((error): Observable<never> => {
-            console.error('Error fetching data from api:', error)
-            return throwError(() => error)
-          }),
           finalize(() => {
             this.loading = false
-          }),
-          throwIfEmpty(() => {
-            console.log('Vacio')
           })
         )
         .subscribe((response: Rol): void => {

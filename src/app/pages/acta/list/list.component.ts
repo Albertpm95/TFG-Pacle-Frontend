@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { MatTableDataSource } from '@angular/material/table'
 import { COMPONENTS, MODULES } from '@constants'
 import { Acta } from '@models/acta'
@@ -8,11 +8,11 @@ import { Subject, takeUntil } from 'rxjs'
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   displayed_columns: string[] = ['idActa', 'alumno', 'convocatoria', 'fecha', 'resultado', 'acciones']
   data_source: MatTableDataSource<Acta> = new MatTableDataSource()
 
-  list_loaded: boolean = false
+  list_loaded = false
   edit_route = '/' + MODULES.ACTA + '/' + COMPONENTS.EDITION
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
@@ -27,7 +27,6 @@ export class ListComponent {
       .getActas()
       .pipe(takeUntil(this.destroy$))
       .subscribe((actas) => {
-        console.log(actas)
         if (actas) {
           this.data_source = new MatTableDataSource(actas)
           if (actas.length) this.list_loaded = true

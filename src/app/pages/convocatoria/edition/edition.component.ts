@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { COMPONENTS, CONSTANTS, MODULES } from '@constants'
@@ -8,18 +8,17 @@ import { Lenguaje } from '@models/lenguaje'
 import { Nivel } from '@models/nivel'
 import { Parte } from '@models/parte'
 import { ApiService } from '@services/api.service'
-import { SnackbarService } from '@services/snackbar.service'
-import { Observable, Subject, catchError, finalize, forkJoin, take, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Observable, Subject, forkJoin, take, takeUntil } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
   styleUrls: ['./edition.component.scss']
 })
-export class EditionComponent {
+export class EditionComponent implements OnInit, OnDestroy {
   convocatoriaForm: FormGroup = new FormGroup('')
 
   convocatoria: Convocatoria | undefined
-  loading: boolean = true
+  loading = true
 
   listaLenguajesConvocatoria: Lenguaje[] = []
   listaHorariosConvocatoria: Horario[] = []
@@ -33,48 +32,17 @@ export class EditionComponent {
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute,
-    private router: Router,
-    private snackbarService: SnackbarService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.initializeLists()
   }
-  private createForm(): void {
-    if (this.convocatoria)
-      this.convocatoriaForm = this.formBuilder.group({
-        estado: [this.convocatoria.estado],
-        fechaParcial: [this.convocatoria.fecha, Validators.required], // Date sin el horario
-        horario: [this.convocatoria.horario, Validators.required],
-        lenguaje: [this.convocatoria.lenguaje, Validators.required],
-        nivel: [this.convocatoria.nivel, Validators.required],
-        parteComprensionAuditiva: this.formBuilder.group({
-          puntuacionMaxima: [this.convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
-        }),
-        parteComprensionLectora: this.formBuilder.group({
-          puntuacionMaxima: [this.convocatoria.parteComprensionLectora.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
-        }),
-        parteExpresionEscrita: this.formBuilder.group({
-          puntuacionMaxima: [this.convocatoria.parteExpresionEscrita.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
-        }),
-        parteExpresionOral: this.formBuilder.group({
-          puntuacionMaxima: [this.convocatoria.parteExpresionOral.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
-        })
-      })
-  }
-
-  ngAfterViewInit() {
-    if (this.convocatoriaForm) this.loading = false
-  }
 
   public saveConvocatoria(idConvocatoria?: number): void {
     this.loading = true
     if (this.convocatoriaForm.valid) {
-      let convocatoria: Convocatoria = this.extractConvocatoriaForm()
+      const convocatoria: Convocatoria = this.extractConvocatoriaForm()
       idConvocatoria ? this.updateConvocatoriaAPI(convocatoria) : this.createConvocatoriaAPI(convocatoria)
     } else {
       this.loading = false
@@ -94,15 +62,15 @@ export class EditionComponent {
     return this.convocatoriaForm.get('parteExpresionOral')?.get('listaTareas') as FormArray
   }
   private extractFecha(): Date {
-    let date_string = this.convocatoriaForm.controls['fechaParcial'].value
-    let hora_parcial = this.convocatoriaForm.controls['horario'].value.horario.split(':')
-    let fechaParcial = new Date(date_string)
+    const date_string = this.convocatoriaForm.controls['fechaParcial'].value
+    const hora_parcial = this.convocatoriaForm.controls['horario'].value.horario.split(':')
+    const fechaParcial = new Date(date_string)
     fechaParcial.setHours(hora_parcial[0])
     fechaParcial.setMinutes(hora_parcial[1])
     return fechaParcial
   }
   private extractConvocatoriaForm(): Convocatoria {
-    let convocatoria: Convocatoria = {
+    const convocatoria: Convocatoria = {
       estado: this.convocatoriaForm.controls['estado'].value,
       horario: this.convocatoriaForm.controls['horario'].value,
       lenguaje: this.convocatoriaForm.controls['lenguaje'].value,
@@ -113,13 +81,13 @@ export class EditionComponent {
       parteComprensionLectora: this.extractParte('parteComprensionLectora', 'Comprension Lectora'),
       parteExpresionEscrita: this.extractParte('parteExpresionEscrita', 'Expresion Escrita'),
       parteExpresionOral: this.extractParte('parteExpresionOral', 'Expresion Oral'),
-      specificIdentifier: this.convocatoriaForm.controls['specificIdentifier'].value
+      specificIdentifier: ''
     }
     return convocatoria
   }
 
   private extractParte(label: string, tipo: string): Parte {
-    let parte: Parte = {
+    const parte: Parte = {
       puntuacionMaxima: this.convocatoriaForm.controls[label].value['puntuacionMaxima'],
       tareas: this.convocatoriaForm.controls[label].value['tareas'] ?? [],
       tipo: tipo
@@ -128,28 +96,28 @@ export class EditionComponent {
   }
   // TODO Fusion add tareas functions
   public addTareaComprensionAuditiva() {
-    let tarea = this.formBuilder.group({
+    const tarea = this.formBuilder.group({
       nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required),
       valor: new FormControl(0, [Validators.required, Validators.min(0)])
     })
     this.listaTareasComprensionAuditiva.push(tarea)
   }
   public addTareaComprensionLectora() {
-    let tarea = this.formBuilder.group({
+    const tarea = this.formBuilder.group({
       nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required),
       valor: new FormControl(0, [Validators.required, Validators.min(0)])
     })
     this.listaTareasComprensionLectora.push(tarea)
   }
   public addTareaExpresionEscrita() {
-    let tarea = this.formBuilder.group({
+    const tarea = this.formBuilder.group({
       nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required),
       valor: new FormControl(0, [Validators.required, Validators.min(0)])
     })
     this.listaTareasExpresionEscrita.push(tarea)
   }
   public addTareaExpresionOral() {
-    let tarea = this.formBuilder.group({
+    const tarea = this.formBuilder.group({
       nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required),
       valor: new FormControl(0, [Validators.required, Validators.min(0)])
     })
@@ -172,20 +140,9 @@ export class EditionComponent {
   private createConvocatoriaAPI(convocatoria: Convocatoria): void {
     this.apiService
       .createConvocatoria(convocatoria)
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
-        finalize(() => {
-          this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
-        })
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
+        console.log('Navigating')
         this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST)
       })
   }
@@ -193,26 +150,15 @@ export class EditionComponent {
   private updateConvocatoriaAPI(convocatoria: Convocatoria): void {
     this.apiService
       .updateConvocatoria(convocatoria)
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
-        finalize(() => {
-          this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
-        })
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.router.navigate([])
+        console.log('Navigating')
+        this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST)
       })
   }
 
   private initializeLists(): void {
-    let initializations = forkJoin({
+    const initializations = forkJoin({
       lenguajes: this.apiService.getLenguajesConvocatoria(),
       horarios: this.apiService.getHorariosConvocatoria(),
       niveles: this.apiService.getNivelesConvocatoria()
@@ -227,7 +173,7 @@ export class EditionComponent {
     })
   }
   private initializeConvocatoria(): void {
-    let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
+    const idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
     if (idConvocatoria) {
       this.apiService
         .getConvocatoriaID(idConvocatoria)
@@ -252,6 +198,36 @@ export class EditionComponent {
       this.createForm()
     }
   }
+  private createForm(): void {
+    if (this.convocatoria)
+      this.convocatoriaForm = this.formBuilder.group({
+        estado: [this.convocatoria.estado],
+        fechaParcial: [this.convocatoria.fecha, Validators.required], // Date sin el horario
+        horario: [this.convocatoria.horario, Validators.required],
+        lenguaje: [this.convocatoria.lenguaje, Validators.required],
+        nivel: [this.convocatoria.nivel, Validators.required],
+        specificIdentifier: '',
+        parteComprensionAuditiva: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        }),
+        parteComprensionLectora: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteComprensionLectora.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        }),
+        parteExpresionEscrita: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteExpresionEscrita.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        }),
+        parteExpresionOral: this.formBuilder.group({
+          puntuacionMaxima: [this.convocatoria.parteExpresionOral.puntuacionMaxima, Validators.required],
+          listaTareas: this.formBuilder.array([])
+        })
+      })
+    this.convocatoriaForm.reset
+    this.loading = false
+  }
+
   ngOnDestroy() {
     this.destroy$.next(true)
   }

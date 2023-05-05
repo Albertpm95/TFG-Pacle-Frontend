@@ -8,10 +8,7 @@
     <div class="list-item" *ngFor="let horario of horarios; let last = last">
       <mat-list-item *ngIf="horario">
         <span class="list-item-span" matListItemTitle *ngIf="horario.idHorario"
-          >{{ horario.horario
-          }}<mat-icon (click)="deleteHorarioConvocatoria(horario.idHorario)"
-            >delete</mat-icon
-          ></span
+          >{{ horario.horario }}<mat-icon (click)="deleteHorarioConvocatoria(horario.idHorario)">delete</mat-icon></span
         >
       </mat-list-item>
       <mat-divider *ngIf="!last">{{ last }}></mat-divider>

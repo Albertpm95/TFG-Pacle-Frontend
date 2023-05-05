@@ -5,7 +5,7 @@ import { Observable } from 'rxjs'
 @Component({
   selector: 'app-carga',
   templateUrl: './carga.component.html',
-  styleUrls: ['./carga.component.scss'],
+  styleUrls: ['./carga.component.scss']
 })
 export class CargaComponent {
   ficheroExcel!: File

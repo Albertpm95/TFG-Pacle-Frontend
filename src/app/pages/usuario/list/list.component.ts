@@ -6,18 +6,10 @@ import { ApiService } from '@services/api.service'
 
 @Component({
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  displayed_columns: string[] = [
-    'idUsuario',
-    'username',
-    'nombre',
-    'apellidos',
-    'estado',
-    'rol',
-    'acciones',
-  ]
+  displayed_columns: string[] = ['idUsuario', 'username', 'nombre', 'apellidos', 'estado', 'rol', 'acciones']
   data_source: MatTableDataSource<Usuario> = new MatTableDataSource()
 
   list_loaded: boolean = false
@@ -38,10 +30,6 @@ export class ListComponent {
     })
   }
   public cambiarEstadoUsuario(usuario: Usuario): void {
-    if (usuario.idUsuario)
-      this.apiService.cambiarEstadoConvocatoria(
-        usuario.idUsuario,
-        !usuario.estado,
-      )
+    if (usuario.idUsuario) this.apiService.cambiarEstadoConvocatoria(usuario.idUsuario, !usuario.estado)
   }
 }

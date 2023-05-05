@@ -6,21 +6,11 @@ import { Alumno } from '@models/alumno'
 import { Convocatoria } from '@models/convocatoria'
 import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
-import {
-  Observable,
-  Subject,
-  catchError,
-  finalize,
-  map,
-  take,
-  takeUntil,
-  throwError,
-  throwIfEmpty,
-} from 'rxjs'
+import { Observable, Subject, catchError, finalize, map, take, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
   displayed_columns: string[] = [
@@ -31,7 +21,7 @@ export class ListComponent {
     'colectivoUV',
     'genero',
     'pruebaAdatada',
-    'acciones',
+    'acciones'
   ]
   data_source: MatTableDataSource<Alumno> = new MatTableDataSource()
 
@@ -44,16 +34,11 @@ export class ListComponent {
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  constructor(
-    private apiService: ApiService,
-    private activactedRoute: ActivatedRoute,
-  ) {}
+  constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    let idConvocatoriaString =
-      this.activactedRoute.snapshot.paramMap.get('idConvocatoria')
-    if (idConvocatoriaString)
-      this.initializeFilteredListConvocatoria(+idConvocatoriaString)
+    let idConvocatoriaString = this.activactedRoute.snapshot.paramMap.get('idConvocatoria')
+    if (idConvocatoriaString) this.initializeFilteredListConvocatoria(+idConvocatoriaString)
     else this.initializeList()
   }
 
@@ -71,7 +56,7 @@ export class ListComponent {
         }),
         throwIfEmpty(() => {
           console.log('Vacio')
-        }),
+        })
       )
       .subscribe((alumnos: Alumno[]) => {
         if (alumnos) {
@@ -95,7 +80,7 @@ export class ListComponent {
         }),
         throwIfEmpty(() => {
           console.log('Vacio')
-        }),
+        })
       )
       .subscribe((mappedInfo: AlumnosConvocatoria) => {
         this.convocatoria = mappedInfo.convocatoria
@@ -120,14 +105,11 @@ export class ListComponent {
             }),
             throwIfEmpty(() => {
               console.log('Vacio')
-            }),
+            })
           )
           .subscribe(() => {
-            let indexAEliminar = this.data_source.data.findIndex(
-              (alumno) => alumno.idAlumno === idAlumno,
-            )
-            if (indexAEliminar != -1)
-              this.data_source.data.splice(indexAEliminar, 1)
+            let indexAEliminar = this.data_source.data.findIndex((alumno) => alumno.idAlumno === idAlumno)
+            if (indexAEliminar != -1) this.data_source.data.splice(indexAEliminar, 1)
 
             this.list_loaded = true
           })

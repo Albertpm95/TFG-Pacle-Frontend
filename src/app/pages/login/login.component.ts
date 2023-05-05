@@ -8,7 +8,7 @@ import { StorageService } from '@services/storage.service'
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({})
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private storageService: StorageService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit(): void {
@@ -29,11 +29,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: [
         '',
-        [
-          Validators.minLength(6),
-          Validators.maxLength(12),
-          Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]+$'),
-        ],
+        [Validators.minLength(6), Validators.maxLength(12), Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]+$')]
       ],
       password: [
         '',
@@ -41,9 +37,9 @@ export class LoginComponent implements OnInit {
           Validators.required,
           Validators.minLength(6),
           Validators.maxLength(24),
-          Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]+$'),
-        ],
-      ],
+          Validators.pattern('^[a-zA-Z][a-zA-Z0-9_]+$')
+        ]
+      ]
     })
   }
 
@@ -57,14 +53,12 @@ export class LoginComponent implements OnInit {
         next: (data) => {
           this.storageService.saveUser(data)
           this.loading = false
-          this.router.navigateByUrl(
-            MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST,
-          )
+          this.router.navigateByUrl(MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST)
         },
         error: (err) => {
           this.storageService.clean()
           this.loading = false
-        },
+        }
       })
     }
   }

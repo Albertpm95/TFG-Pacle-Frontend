@@ -8,17 +8,17 @@ const routes: Routes = [
   {
     path: COMPONENTS.EDITION,
     component: EditionComponent,
-    title: 'Edicion convocatoria',
+    title: 'Edicion convocatoria'
   },
   {
     path: COMPONENTS.LIST,
     component: ListComponent,
-    title: 'Lista de convocatorias',
-  },
+    title: 'Lista de convocatorias'
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class ConvocatoriaRoutingModule {}

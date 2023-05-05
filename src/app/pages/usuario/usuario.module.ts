@@ -7,6 +7,6 @@ import { UsuarioRoutingModule } from './usuario-routing.module'
 
 @NgModule({
   declarations: [ListComponent, EditionComponent],
-  imports: [UsuarioRoutingModule, SharedModule],
+  imports: [UsuarioRoutingModule, SharedModule]
 })
 export class UsuarioModule {}

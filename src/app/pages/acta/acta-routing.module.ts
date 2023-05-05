@@ -6,11 +6,11 @@ import { ListComponent } from './list/list.component'
 
 const routes: Routes = [
   { path: COMPONENTS.EDITION, component: EditionComponent },
-  { path: COMPONENTS.LIST, component: ListComponent },
+  { path: COMPONENTS.LIST, component: ListComponent }
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class ActaRoutingModule {}

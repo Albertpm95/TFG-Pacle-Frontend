@@ -7,9 +7,7 @@
   <mat-list>
     <div class="list-item" *ngFor="let rol of roles; let last = last">
       <mat-list-item *ngIf="rol">
-        <span class="list-item-span" matListItemTitle *ngIf="rol.idRol">{{
-          rol.rol
-        }}</span>
+        <span class="list-item-span" matListItemTitle *ngIf="rol.idRol">{{ rol.rol }}</span>
       </mat-list-item>
       <mat-divider *ngIf="!last">{{ last }}></mat-divider>
     </div>

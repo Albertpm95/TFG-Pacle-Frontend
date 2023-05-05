@@ -10,22 +10,22 @@ const routes: Routes = [
   {
     path: COMPONENTS.UPLOAD,
     component: CargaComponent,
-    title: 'Cargar lista de alumnos',
+    title: 'Cargar lista de alumnos'
   },
   {
     path: COMPONENTS.EDITION,
     component: EditionComponent,
-    title: 'Edicion alumno',
+    title: 'Edicion alumno'
   },
   {
     path: COMPONENTS.LIST,
     component: ListComponent,
-    title: 'Lista de alumnos',
-  },
+    title: 'Lista de alumnos'
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AlumnoRoutingModule {}

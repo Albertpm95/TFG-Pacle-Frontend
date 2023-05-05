@@ -7,14 +7,9 @@
   <mat-list>
     <div class="list-item" *ngFor="let lenguaje of lenguajes; let last = last">
       <mat-list-item *ngIf="lenguaje">
-        <span
-          class="list-item-span"
-          matListItemTitle
-          *ngIf="lenguaje.idLenguaje"
+        <span class="list-item-span" matListItemTitle *ngIf="lenguaje.idLenguaje"
           >{{ lenguaje.lenguaje
-          }}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)"
-            >delete</mat-icon
-          ></span
+          }}<mat-icon (click)="deleteLenguajeConvocatoria(lenguaje.idLenguaje)">delete</mat-icon></span
         >
       </mat-list-item>
       <mat-divider *ngIf="!last">{{ last }}></mat-divider>

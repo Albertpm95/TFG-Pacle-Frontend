@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { COMPONENTS, CONSTANTS, MODULES } from '@constants'
@@ -8,7 +8,8 @@ import { Lenguaje } from '@models/lenguaje'
 import { Nivel } from '@models/nivel'
 import { Parte } from '@models/parte'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { SnackbarService } from '@services/snackbar.service'
+import { Observable, Subject, catchError, finalize, forkJoin, take, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
@@ -24,91 +25,29 @@ export class EditionComponent {
   listaHorariosConvocatoria: Horario[] = []
   listaNivelesConvocatoria: Nivel[] = []
 
+  listsLoaded = Observable<number>
+
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
   constructor(
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
     this.initializeLists()
-    let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
-    if (this.initializeLists()) {
-      if (idConvocatoria === undefined) {
-        this.initializeNewForm()
-      } else if (idConvocatoria) {
-        this.loadForm(idConvocatoria)
-      }
-    }
   }
-  private initializeNewForm(): void {
-    this.convocatoriaForm = this.formBuilder.group({
-      estado: [true],
-      fechaParcial: [Date.now, [Validators.required]], // Date sin el horario
-      horario: [
-        this.listaHorariosConvocatoria[0],
-        [Validators.required, Validators.pattern('([01]?[0-9]|2[0-4]):([0-5]?[0-9])')]
-      ],
-      lenguaje: [this.listaLenguajesConvocatoria[0], [Validators.required]],
-      nivel: [this.listaNivelesConvocatoria[0], [Validators.required]],
-      specificIdentifier: [''],
-      parteComprensionAuditiva: this.formBuilder.group({
-        puntuacionMaxima: [0, Validators.required],
-        listaTareas: this.formBuilder.array([])
-      }),
-      parteComprensionLectora: this.formBuilder.group({
-        puntuacionMaxima: [0, Validators.required],
-        listaTareas: this.formBuilder.array([])
-      }),
-      parteExpresionEscrita: this.formBuilder.group({
-        puntuacionMaxima: [0, Validators.required],
-        listaTareas: this.formBuilder.array([])
-      }),
-      parteExpresionOral: this.formBuilder.group({
-        puntuacionMaxima: [0, Validators.required],
-        listaTareas: this.formBuilder.array([])
-      })
-    })
-    this.loading = false
-  }
-
-  private loadForm(idConvocatoria: number): void {
-    this.apiService
-      .getConvocatoriaID(idConvocatoria)
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
-        finalize(() => {
-          this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
-        })
-      )
-      .subscribe((convocatoria: Convocatoria) => {
-        this.convocatoria = convocatoria
-        this.transformConvocatoriaToForm()
-      })
-    console.log(this.convocatoriaForm)
-  }
-
-  private transformConvocatoriaToForm(): void {
+  private createForm(): void {
     if (this.convocatoria)
       this.convocatoriaForm = this.formBuilder.group({
         estado: [this.convocatoria.estado],
         fechaParcial: [this.convocatoria.fecha, Validators.required], // Date sin el horario
-        horario: [
-          this.convocatoria.horario,
-          [Validators.required, Validators.pattern('([01]?[0-9]|2[0-4]):([0-5]?[0-9])')]
-        ],
+        horario: [this.convocatoria.horario, Validators.required],
         lenguaje: [this.convocatoria.lenguaje, Validators.required],
-        nivel: [this.convocatoria.nivel, [Validators.required]],
+        nivel: [this.convocatoria.nivel, Validators.required],
         parteComprensionAuditiva: this.formBuilder.group({
           puntuacionMaxima: [this.convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
           listaTareas: this.formBuilder.array([])
@@ -126,7 +65,10 @@ export class EditionComponent {
           listaTareas: this.formBuilder.array([])
         })
       })
-    this.loading = false
+  }
+
+  ngAfterViewInit() {
+    if (this.convocatoriaForm) this.loading = false
   }
 
   public saveConvocatoria(idConvocatoria?: number): void {
@@ -151,7 +93,6 @@ export class EditionComponent {
   public get listaTareasExpresionOral() {
     return this.convocatoriaForm.get('parteExpresionOral')?.get('listaTareas') as FormArray
   }
-
   private extractFecha(): Date {
     let date_string = this.convocatoriaForm.controls['fechaParcial'].value
     let hora_parcial = this.convocatoriaForm.controls['horario'].value.horario.split(':')
@@ -160,7 +101,6 @@ export class EditionComponent {
     fechaParcial.setMinutes(hora_parcial[1])
     return fechaParcial
   }
-
   private extractConvocatoriaForm(): Convocatoria {
     let convocatoria: Convocatoria = {
       estado: this.convocatoriaForm.controls['estado'].value,
@@ -186,6 +126,7 @@ export class EditionComponent {
     }
     return parte
   }
+  // TODO Fusion add tareas functions
   public addTareaComprensionAuditiva() {
     let tarea = this.formBuilder.group({
       nombreTarea: new FormControl(CONSTANTS.NOMBRE_TAREA_DEFECTO, Validators.required),
@@ -214,7 +155,7 @@ export class EditionComponent {
     })
     this.listaTareasExpresionOral.push(tarea)
   }
-
+  // TODO Fusion Delete tareas functions
   public deleteTareaComprensionAuditiva(index: number): void {
     this.listaTareasComprensionLectora.removeAt(index)
   }
@@ -270,69 +211,46 @@ export class EditionComponent {
       })
   }
 
-  private initializeLists(): boolean {
-    let listsLoaded: boolean = false
-    this.apiService
-      .getLenguajesConvocatoria()
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          listsLoaded = false
-          return throwError(() => error)
-        }),
-        finalize(() => {
-          this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
+  private initializeLists(): void {
+    let initializations = forkJoin({
+      lenguajes: this.apiService.getLenguajesConvocatoria(),
+      horarios: this.apiService.getHorariosConvocatoria(),
+      niveles: this.apiService.getNivelesConvocatoria()
+    })
+    initializations.pipe(take(1)).subscribe((loadedLists) => {
+      if (loadedLists) {
+        this.listaHorariosConvocatoria = loadedLists.horarios
+        this.listaLenguajesConvocatoria = loadedLists.lenguajes
+        this.listaNivelesConvocatoria = loadedLists.niveles
+        this.initializeConvocatoria()
+      }
+    })
+  }
+  private initializeConvocatoria(): void {
+    let idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
+    if (idConvocatoria) {
+      this.apiService
+        .getConvocatoriaID(idConvocatoria)
+        .pipe(take(1))
+        .subscribe((convocatoria: Convocatoria) => {
+          this.convocatoria = convocatoria
+          this.createForm()
         })
-      )
-      .subscribe((lenguajes: Lenguaje[]) => {
-        this.listaLenguajesConvocatoria = lenguajes
-        listsLoaded = true
-      })
-    this.apiService
-      .getHorariosConvocatoria()
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          listsLoaded = false
-          return throwError(() => error)
-        }),
-        finalize(() => {
-          this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
-        })
-      )
-      .subscribe((horarios: Horario[]) => {
-        this.listaHorariosConvocatoria = horarios
-        listsLoaded = true
-      })
-    this.apiService
-      .getNivelesConvocatoria()
-      .pipe(
-        takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          listsLoaded = false
-          return throwError(() => error)
-        }),
-        finalize(() => {
-          this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
-        })
-      )
-      .subscribe((niveles: Nivel[]) => {
-        this.listaNivelesConvocatoria = niveles
-        listsLoaded = true
-      })
-    return listsLoaded
+    } else {
+      this.convocatoria = {
+        estado: true,
+        fecha: new Date(),
+        horario: this.listaHorariosConvocatoria[0],
+        nivel: this.listaNivelesConvocatoria[0],
+        lenguaje: this.listaLenguajesConvocatoria[0],
+        parteComprensionAuditiva: { puntuacionMaxima: 0, tareas: [], tipo: 'Comprension Auditiva' },
+        parteComprensionLectora: { puntuacionMaxima: 0, tareas: [], tipo: 'Comprension Lectora' },
+        parteExpresionEscrita: { puntuacionMaxima: 0, tareas: [], tipo: 'Expresion Escrita' },
+        parteExpresionOral: { puntuacionMaxima: 0, tareas: [], tipo: 'Expresion Oral' },
+        specificIdentifier: ''
+      }
+      this.createForm()
+    }
   }
   ngOnDestroy() {
     this.destroy$.next(true)

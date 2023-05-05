@@ -16,42 +16,42 @@ const routes: Routes = [
   {
     path: MODULES.ACTA,
     loadChildren: () => ActaModule,
-    title: 'Acta',
+    title: 'Acta'
   },
   {
     path: MODULES.ALUMNO,
     loadChildren: () => AlumnoModule,
-    title: 'Alumno',
+    title: 'Alumno'
   },
   {
     path: MODULES.CONVOCATORIA,
     loadChildren: () => ConvocatoriaModule,
-    title: 'Convocatoria',
+    title: 'Convocatoria'
   },
   {
     path: MODULES.ADMIN,
     loadChildren: () => AdminModule,
-    title: 'Panel de admin',
+    title: 'Panel de admin'
   },
   {
     path: MODULES.USUARIO,
     loadChildren: () => UsuarioModule,
-    title: 'Usuario',
+    title: 'Usuario'
   },
   {
     path: '',
     redirectTo: COMPONENTS.LOGIN,
-    pathMatch: 'prefix',
+    pathMatch: 'prefix'
   },
   {
     path: '**',
     component: WildcardComponent,
-    title: '404',
-  },
+    title: '404'
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class PagesRoutingModule {}

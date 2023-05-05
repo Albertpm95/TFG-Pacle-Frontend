@@ -2,12 +2,13 @@ import { Component } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { Lenguaje } from '@models/lenguaje'
 import { ApiService } from '@services/api.service'
-import { Subject, takeUntil } from 'rxjs'
+import { SnackbarService } from '@services/snackbar.service'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   selector: 'app-lenguajes',
   templateUrl: './lenguajes.component.html',
-  styleUrls: ['./lenguajes.component.scss'],
+  styleUrls: ['./lenguajes.component.scss']
 })
 export class LenguajesComponent {
   nuevoLenguajeForm = new FormControl()
@@ -15,7 +16,7 @@ export class LenguajesComponent {
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private snackbarService: SnackbarService) {
     this.nuevoLenguajeForm.setValidators(Validators.required)
     this.apiService
       .getLenguajesConvocatoria()
@@ -29,15 +30,11 @@ export class LenguajesComponent {
           .deleteLenguajeConvocatoria(idLenguaje)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            let indexAEliminar = this.lenguajes.findIndex(
-              (lLenguaje) => lLenguaje.idLenguaje === idLenguaje,
-            )
+            let indexAEliminar = this.lenguajes.findIndex((lLenguaje) => lLenguaje.idLenguaje === idLenguaje)
             if (indexAEliminar != -1)
               this.lenguajes.splice(
-                this.lenguajes.findIndex(
-                  (lLenguaje) => lLenguaje.idLenguaje === idLenguaje,
-                ),
-                1,
+                this.lenguajes.findIndex((lLenguaje) => lLenguaje.idLenguaje === idLenguaje),
+                1
               )
           })
       : ''

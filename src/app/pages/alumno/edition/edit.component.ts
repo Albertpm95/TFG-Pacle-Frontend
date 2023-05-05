@@ -6,19 +6,11 @@ import { Alumno } from '@models/alumno'
 import { ColectivoUV } from '@models/colectivouv'
 import { Genero } from '@models/genero'
 import { ApiService } from '@services/api.service'
-import {
-  Observable,
-  Subject,
-  catchError,
-  finalize,
-  takeUntil,
-  throwError,
-  throwIfEmpty,
-} from 'rxjs'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'],
+  styleUrls: ['./edit.component.scss']
 })
 export class EditionComponent {
   alumnoNuevoForm: FormGroup = new FormGroup('')
@@ -26,8 +18,7 @@ export class EditionComponent {
   loading: boolean = true
 
   listaGenerosAlumno$: Observable<Genero[]> = this.apiService.getGenerosAlumno()
-  listaColectivosUVAlumno$: Observable<ColectivoUV[]> =
-    this.apiService.getColectivosUV()
+  listaColectivosUVAlumno$: Observable<ColectivoUV[]> = this.apiService.getColectivosUV()
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
@@ -35,7 +26,7 @@ export class EditionComponent {
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +45,7 @@ export class EditionComponent {
       genero: ['', Validators.required],
       fechaNacimiento: ['', Validators.required],
       colectivoUV: ['', Validators.required],
-      pruebaAdaptada: [false],
+      pruebaAdaptada: [false]
     })
     this.loading = false
   }
@@ -71,7 +62,7 @@ export class EditionComponent {
         genero: [alumno.genero, Validators.required],
         fechaNacimiento: [alumno.fechaNacimiento, Validators.required],
         colectivoUV: [alumno.colectivoUV, Validators.required],
-        pruebaAdaptada: [alumno.pruebaAdaptada],
+        pruebaAdaptada: [alumno.pruebaAdaptada]
       })
       this.alumno = alumno
       this.loading = false
@@ -81,9 +72,7 @@ export class EditionComponent {
   public saveAlumno(idAlumno?: number): void {
     this.loading = true
     if (this.alumnoNuevoForm.valid) {
-      let _date: Date = new Date(
-        this.alumnoNuevoForm.controls['fechaNacimiento'].value,
-      ) as Date
+      let _date: Date = new Date(this.alumnoNuevoForm.controls['fechaNacimiento'].value) as Date
       let alumno: Alumno = {
         nombre: this.alumnoNuevoForm.controls['nombre'].value,
         apellidos: this.alumnoNuevoForm.controls['apellidos'].value,
@@ -95,7 +84,7 @@ export class EditionComponent {
         genero: this.alumnoNuevoForm.controls['genero'].value,
         pruebaAdaptada: this.alumnoNuevoForm.controls['pruebaAdaptada'].value,
         telefono: this.alumnoNuevoForm.controls['telefono'].value,
-        idAlumno: idAlumno,
+        idAlumno: idAlumno
       }
       idAlumno
         ? this.apiService
@@ -111,7 +100,7 @@ export class EditionComponent {
               }),
               throwIfEmpty(() => {
                 console.log('Vacio')
-              }),
+              })
             )
             .subscribe(() => {
               this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
@@ -129,7 +118,7 @@ export class EditionComponent {
               }),
               throwIfEmpty(() => {
                 console.log('Vacio')
-              }),
+              })
             )
             .subscribe(() => {
               this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)

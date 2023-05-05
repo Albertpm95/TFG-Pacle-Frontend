@@ -15,7 +15,7 @@ describe('Login component', () => {
       imports: [HttpClientTestingModule, FormsModule, ReactiveFormsModule],
       declarations: [LoginComponent],
       providers: [AuthService],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     }).compileComponents()
     formBuilder = new FormBuilder()
   })

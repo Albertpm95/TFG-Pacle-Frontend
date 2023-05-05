@@ -9,6 +9,6 @@ import { ListComponent } from './list/list.component'
 
 @NgModule({
   declarations: [ListComponent],
-  imports: [ActaRoutingModule, EditionModule, SharedModule],
+  imports: [ActaRoutingModule, EditionModule, SharedModule]
 })
 export class ActaModule {}

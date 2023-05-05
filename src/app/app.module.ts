@@ -21,16 +21,16 @@ import { HttpRequestInterceptor } from '@interceptors/http-request.interceptor'
     BrowserAnimationsModule,
     MatNativeDateModule,
     ComponentsModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [
     HttpRequestInterceptor,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorCatchingInterceptor,
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

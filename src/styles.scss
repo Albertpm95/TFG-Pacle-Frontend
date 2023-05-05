@@ -1,6 +1,7 @@
-@use '@angular/material'as mat;
+@use '@angular/material' as mat;
 @include mat.core();
-$md-base: (50: #e6e0ec,
+$md-base: (
+  50: #e6e0ec,
   100: #c1b3cf,
   200: #9880b0,
   300: #6e4d90,
@@ -14,7 +15,8 @@ $md-base: (50: #e6e0ec,
   A200: #6a38ff,
   A400: #4405ff,
   A700: #3b00eb,
-  contrast: (50: #000000,
+  contrast: (
+    50: #000000,
     100: #000000,
     200: #000000,
     300: #ffffff,
@@ -27,10 +29,11 @@ $md-base: (50: #e6e0ec,
     A100: #000000,
     A200: #ffffff,
     A400: #ffffff,
-    A700: #ffffff,
-  ),
+    A700: #ffffff
+  )
 );
-$md-acento: (50: #e0fff0,
+$md-acento: (
+  50: #e0fff0,
   100: #b3ffd9,
   200: #80ffc0,
   300: #4dffa6,
@@ -44,7 +47,8 @@ $md-acento: (50: #e0fff0,
   A200: #f2fff5,
   A400: #bfffcf,
   A700: #a6ffbc,
-  contrast: (50: #000000,
+  contrast: (
+    50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -57,10 +61,11 @@ $md-acento: (50: #e0fff0,
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000,
-  ),
+    A700: #000000
+  )
 );
-$md-warning: (50: #fff0e0,
+$md-warning: (
+  50: #fff0e0,
   100: #ffd9b3,
   200: #ffc080,
   300: #ffa64d,
@@ -74,7 +79,8 @@ $md-warning: (50: #fff0e0,
   A200: #fff5f2,
   A400: #ffcfbf,
   A700: #ffbca6,
-  contrast: (50: #000000,
+  contrast: (
+    50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -87,25 +93,29 @@ $md-warning: (50: #fff0e0,
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000,
-  ),
+    A700: #000000
+  )
 );
 $Pacle-Primary: mat.define-palette($md-base, 900, A700);
 $Pacle-Accent: mat.define-palette($md-acento, 500);
 $Pacle-Warning: mat.define-palette($md-warning, 500);
-$Pacle-Theme: mat.define-light-theme((color: (primary: $Pacle-Primary,
+$Pacle-Theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $Pacle-Primary,
       accent: $Pacle-Accent,
-      warning: $Pacle-Warning,
+      warning: $Pacle-Warning
     ),
     typography: mat.define-typography-config(),
-    density: 0,
-  ));
+    density: 0
+  )
+);
 @include mat.all-component-themes($Pacle-Theme);
 
 :root {
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  background-color: rgba(255, 255, 255, .3);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 html,

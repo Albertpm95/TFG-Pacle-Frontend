@@ -6,12 +6,12 @@ const routes: Routes = [
   {
     path: 'panel',
     component: PanelAdminComponent,
-    title: 'Panel de administracion',
-  },
+    title: 'Panel de administracion'
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AdminRoutingModule {}

@@ -5,9 +5,9 @@
         <mat-card-title>
           <h1 *ngIf="!convocatoria">Lista de alumnos</h1>
           <h1 *ngIf="convocatoria">Lista de alumnos de la convocatoria:</h1>
-          <h3 *ngIf="convocatoria">
-            {{ convocatoria.lenguaje.lenguaje }} {{ convocatoria.nivel.nivel }}
-            {{ convocatoria.fecha | date }} {{ convocatoria.horario.horario }}
+          <h3 *ngIf="convocatoria && convocatoria.lenguaje && convocatoria.horario && convocatoria.nivel">
+            {{ convocatoria.lenguaje.lenguaje }} {{ convocatoria.nivel.nivel }} {{ convocatoria.fecha | date }}
+            {{ convocatoria.horario.horario }}
           </h3>
         </mat-card-title>
         <button mat-raised-button [routerLink]="[edit_route]">
@@ -57,8 +57,7 @@
           <ng-container matColumnDef="pruebaAdatada">
             <th mat-header-cell *matHeaderCellDef>Prueba adaptada</th>
             <td mat-cell *matCellDef="let alumno">
-              <span *ngIf="alumno.pruebaAdaptada">Si</span
-              >{{ alumno.pruebaAdatada }}
+              <span *ngIf="alumno.pruebaAdaptada">Si</span>{{ alumno.pruebaAdatada }}
             </td>
           </ng-container>
           <ng-container matColumnDef="acciones">
@@ -76,9 +75,7 @@
                 *ngIf="convocatoria && convocatoria?.idConvocatoria">
                 <mat-icon>fact_check</mat-icon>
               </button>
-              <button
-                mat-icon-button
-                [routerLink]="[edit_route, { idAlumno: alumno.idAlumno }]">
+              <button mat-icon-button [routerLink]="[edit_route, { idAlumno: alumno.idAlumno }]">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button (click)="deleteAlumno(alumno.idAlumno)">
@@ -87,9 +84,7 @@
             </td>
           </ng-container>
         </div>
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displayed_columns; sticky: true"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayed_columns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayed_columns"></tr>
       </table>
       <div *ngIf="!list_loaded">

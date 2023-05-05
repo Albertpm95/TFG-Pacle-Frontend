@@ -46,8 +46,7 @@
           <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef>Estado</th>
             <td mat-cell *matCellDef="let convocatoria">
-              <mat-slide-toggle
-                [(ngModel)]="convocatoria.estado"></mat-slide-toggle>
+              <mat-slide-toggle [(ngModel)]="convocatoria.estado"></mat-slide-toggle>
             </td>
           </ng-container>
           <ng-container matColumnDef="maxComprensionAuditiva">
@@ -78,32 +77,24 @@
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let convocatoria">
-              <button *ngIf="convocatoria.idConvocatoria"
+              <button
+                *ngIf="convocatoria.idConvocatoria"
                 mat-icon-button
-                [routerLink]="[
-                  alumno_list_route,
-                  { idConvocatoria: convocatoria.idConvocatoria }
-                ]">
+                [routerLink]="[alumno_list_route, { idConvocatoria: convocatoria.idConvocatoria }]">
                 <mat-icon>list</mat-icon>
               </button>
-              <button *ngIf="convocatoria.idConvocatoria"
+              <button
+                *ngIf="convocatoria.idConvocatoria"
                 mat-icon-button
-                [routerLink]="[
-                  edit_route,
-                  { idConvocatoria: convocatoria.idConvocatoria }
-                ]">
+                [routerLink]="[edit_route, { idConvocatoria: convocatoria.idConvocatoria }]">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>
         </div>
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displayed_columns; sticky: true"></tr>
-        <tr
-          mat-row
-          *matRowDef="let convocatoria; columns: displayed_columns"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayed_columns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let convocatoria; columns: displayed_columns"></tr>
       </table>
       <div *ngIf="!loading">
         <h2>No se han encontrado convocatorias.</h2>

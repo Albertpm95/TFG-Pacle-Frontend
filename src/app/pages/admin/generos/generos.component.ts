@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs'
 @Component({
   selector: 'app-generos',
   templateUrl: './generos.component.html',
-  styleUrls: ['./generos.component.scss'],
+  styleUrls: ['./generos.component.scss']
 })
 export class GenerosComponent {
   nuevoGeneroForm = new FormControl()
@@ -29,15 +29,11 @@ export class GenerosComponent {
           .deleteGeneroAlumno(idGenero)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            let indexAEliminar = this.generos.findIndex(
-              (genero) => genero.idGenero === idGenero,
-            )
+            let indexAEliminar = this.generos.findIndex((genero) => genero.idGenero === idGenero)
             if (indexAEliminar != -1)
               this.generos.splice(
-                this.generos.findIndex(
-                  (genero) => genero.idGenero === idGenero,
-                ),
-                1,
+                this.generos.findIndex((genero) => genero.idGenero === idGenero),
+                1
               )
           })
       : ''

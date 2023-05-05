@@ -8,7 +8,7 @@ describe('ColectivouvComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ColectivouvComponent],
+      declarations: [ColectivouvComponent]
     }).compileComponents()
 
     fixture = TestBed.createComponent(ColectivouvComponent)

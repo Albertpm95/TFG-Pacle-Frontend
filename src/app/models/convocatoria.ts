@@ -3,16 +3,16 @@ import { Lenguaje } from './lenguaje'
 import { Nivel } from './nivel'
 import { Parte } from './parte'
 
-export interface Convocatoria {
+export class Convocatoria {
   idConvocatoria?: number
-  estado: boolean
-  fecha: Date
-  horario: Horario
-  lenguaje: Lenguaje
-  nivel: Nivel
-  parteComprensionAuditiva: Parte
-  parteComprensionLectora: Parte
-  parteExpresionEscrita: Parte
-  parteExpresionOral: Parte
-  specificIdentifier: number
+  parteComprensionAuditiva: Parte = new Parte()
+  parteComprensionLectora: Parte = new Parte()
+  parteExpresionEscrita: Parte = new Parte()
+  parteExpresionOral: Parte = new Parte()
+  estado: boolean = true
+  fecha: Date = new Date()
+  horario: Horario | undefined
+  lenguaje: Lenguaje | undefined
+  nivel: Nivel | undefined
+  specificIdentifier: string = ''
 }

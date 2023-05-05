@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs'
 @Component({
   selector: 'app-niveles',
   templateUrl: './niveles.component.html',
-  styleUrls: ['./niveles.component.scss'],
+  styleUrls: ['./niveles.component.scss']
 })
 export class NivelesComponent {
   nuevoNivelForm = new FormControl()
@@ -29,13 +29,11 @@ export class NivelesComponent {
           .deleteNivelConvocatoria(idNivel)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            let indexAEliminar = this.niveles.findIndex(
-              (nivel) => nivel.idNivel === idNivel,
-            )
+            let indexAEliminar = this.niveles.findIndex((nivel) => nivel.idNivel === idNivel)
             if (indexAEliminar != -1)
               this.niveles.splice(
                 this.niveles.findIndex((nivel) => nivel.idNivel === idNivel),
-                1,
+                1
               )
           })
       : ''

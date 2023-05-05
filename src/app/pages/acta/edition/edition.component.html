@@ -25,15 +25,15 @@
         <h5>Fecha:</h5>
         {{ acta.convocatoria.fecha | date }}
       </label>
-      <label>
+      <label *ngIf="acta.convocatoria.horario">
         <h5>Hora:</h5>
         {{ acta.convocatoria.horario.horario }}
       </label>
-      <label>
+      <label *ngIf="acta.convocatoria.lenguaje">
         <h5>Lenguaje:</h5>
         {{ acta.convocatoria.lenguaje.lenguaje }}
       </label>
-      <label>
+      <label *ngIf="acta.convocatoria.nivel">
         <h5>Nivel:</h5>
         {{ acta.convocatoria.nivel.nivel }}
       </label>

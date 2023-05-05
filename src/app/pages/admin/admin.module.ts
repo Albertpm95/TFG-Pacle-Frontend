@@ -18,8 +18,8 @@ import { RolesComponent } from './roles/roles.component'
     GenerosComponent,
     NivelesComponent,
     ColectivouvComponent,
-    RolesComponent,
+    RolesComponent
   ],
-  imports: [AdminRoutingModule, SharedModule],
+  imports: [AdminRoutingModule, SharedModule]
 })
 export class AdminModule {}

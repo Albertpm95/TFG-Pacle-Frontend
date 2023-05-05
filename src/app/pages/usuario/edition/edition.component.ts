@@ -9,7 +9,7 @@ import { Observable, Subject, takeUntil } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
-  styleUrls: ['./edition.component.scss'],
+  styleUrls: ['./edition.component.scss']
 })
 export class EditionComponent {
   usuarioDetailsForm: FormGroup = new FormGroup('')
@@ -25,7 +25,7 @@ export class EditionComponent {
     private apiService: ApiService,
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class EditionComponent {
       apellidos: ['', Validators.required],
       rol: ['', Validators.required],
       estado: [true],
-      username: ['', Validators.required],
+      username: ['', Validators.required]
     })
     this.loading = false
   }
@@ -54,7 +54,7 @@ export class EditionComponent {
           apellidos: [response.apellidos, Validators.required],
           rol: [response.rol, Validators.required],
           estado: [response.estado],
-          username: [response.username, Validators.required],
+          username: [response.username, Validators.required]
         })
         this.usuario = response
         this.loading = false
@@ -69,7 +69,7 @@ export class EditionComponent {
         estado: this.usuarioDetailsForm.controls['estado'].value,
         idUsuario: idUsuario,
         rol: this.usuarioDetailsForm.controls['rol'].value,
-        username: this.usuarioDetailsForm.controls['username'].value,
+        username: this.usuarioDetailsForm.controls['username'].value
       }
       idUsuario
         ? this.apiService

@@ -3,19 +3,11 @@ import { MatTableDataSource } from '@angular/material/table'
 import { COMPONENTS, MODULES } from '@constants'
 import { Convocatoria } from '@models/convocatoria'
 import { ApiService } from '@services/api.service'
-import {
-  Observable,
-  Subject,
-  catchError,
-  finalize,
-  takeUntil,
-  throwError,
-  throwIfEmpty,
-} from 'rxjs'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
   displayed_columns: string[] = [
@@ -29,7 +21,7 @@ export class ListComponent {
     'maxComprensionLectora',
     'maxExpresionEscrita',
     'maxExpresionOral',
-    'acciones',
+    'acciones'
   ]
   data_source: MatTableDataSource<Convocatoria> = new MatTableDataSource()
 
@@ -58,7 +50,7 @@ export class ListComponent {
         }),
         throwIfEmpty(() => {
           console.log('Vacio')
-        }),
+        })
       )
       .subscribe((convocatorias) => {
         if (convocatorias) {
@@ -70,24 +62,19 @@ export class ListComponent {
   }
   public cambiarEstadoConvocatoria(convocatoria: Convocatoria): void {
     if (convocatoria.idConvocatoria)
-      this.apiService
-        .cambiarEstadoConvocatoria(
-          convocatoria.idConvocatoria,
-          !convocatoria.estado,
-        )
-        .pipe(
-          takeUntil(this.destroy$),
-          catchError((error): Observable<never> => {
-            console.error('Error fetching data from api:', error)
-            return throwError(() => error)
-          }),
-          finalize(() => {
-            this.loading = false
-          }),
-          throwIfEmpty(() => {
-            console.log('Vacio')
-          }),
-        )
+      this.apiService.cambiarEstadoConvocatoria(convocatoria.idConvocatoria, !convocatoria.estado).pipe(
+        takeUntil(this.destroy$),
+        catchError((error): Observable<never> => {
+          console.error('Error fetching data from api:', error)
+          return throwError(() => error)
+        }),
+        finalize(() => {
+          this.loading = false
+        }),
+        throwIfEmpty(() => {
+          console.log('Vacio')
+        })
+      )
   }
 
   ngOnDestroy() {

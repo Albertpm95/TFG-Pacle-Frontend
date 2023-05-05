@@ -1,10 +1,10 @@
 import { Correccion, Tarea } from './correccion'
 
-export interface Parte {
+export class Parte {
   idParte?: number
-  tipo: string
-  puntuacionMaxima: number
-  tareas: Tarea[]
+  tipo: string = ''
+  puntuacionMaxima: number = 0
+  tareas: Tarea[] = []
 }
 
 export interface ParteCorregida {

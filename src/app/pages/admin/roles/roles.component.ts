@@ -2,20 +2,12 @@ import { Component } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { Rol } from '@models/rol'
 import { ApiService } from '@services/api.service'
-import {
-  Observable,
-  Subject,
-  catchError,
-  finalize,
-  takeUntil,
-  throwError,
-  throwIfEmpty,
-} from 'rxjs'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.scss'],
+  styleUrls: ['./roles.component.scss']
 })
 export class RolesComponent {
   nuevoRolForm = new FormControl()
@@ -49,7 +41,7 @@ export class RolesComponent {
           }),
           throwIfEmpty(() => {
             console.log('Vacio')
-          }),
+          })
         )
         .subscribe((response: Rol): void => {
           this.nuevoRolForm.reset()

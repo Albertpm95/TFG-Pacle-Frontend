@@ -8,6 +8,6 @@ import { ListComponent } from './list/list.component'
 
 @NgModule({
   declarations: [EditionComponent, ListComponent],
-  imports: [CommonModule, ConvocatoriaRoutingModule, SharedModule],
+  imports: [CommonModule, ConvocatoriaRoutingModule, SharedModule]
 })
 export class ConvocatoriaModule {}

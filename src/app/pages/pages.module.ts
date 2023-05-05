@@ -13,14 +13,7 @@ import { WildcardComponent } from './wildcard/wildcard.component'
 
 @NgModule({
   declarations: [LoginComponent, MenuComponent, WildcardComponent],
-  imports: [
-    ActaModule,
-    AdminModule,
-    AlumnoModule,
-    ConvocatoriaModule,
-    SharedModule,
-    PagesRoutingModule,
-  ],
-  exports: [],
+  imports: [ActaModule, AdminModule, AlumnoModule, ConvocatoriaModule, SharedModule, PagesRoutingModule],
+  exports: []
 })
 export class PagesModule {}

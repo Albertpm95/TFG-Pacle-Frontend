@@ -111,27 +111,27 @@ export abstract class ACTION_LIST {
     {
       actionLabel: 'Ver la lista de convocatorias',
       url: MODULES.CONVOCATORIA + '/' + COMPONENTS.LIST,
-      rol: [ROLES.ADMIN],
+      rol: [ROLES.ADMIN]
     },
     {
       actionLabel: 'Ver la lista de usuarios',
       url: MODULES.USUARIO + '/' + COMPONENTS.LIST,
-      rol: [ROLES.ADMIN],
+      rol: [ROLES.ADMIN]
     },
     {
       actionLabel: 'Ver la lista de alumnos',
       url: MODULES.ALUMNO + '/' + COMPONENTS.LIST,
-      rol: [ROLES.ADMIN],
+      rol: [ROLES.ADMIN]
     },
     {
       actionLabel: 'Ver la lista de actas',
       url: MODULES.ACTA + '/' + COMPONENTS.LIST,
-      rol: [ROLES.ADMIN],
+      rol: [ROLES.ADMIN]
     },
     {
       actionLabel: 'Panel de administrador',
       url: MODULES.ADMIN + '/' + COMPONENTS.PANEL,
-      rol: [ROLES.ADMIN],
-    },
+      rol: [ROLES.ADMIN]
+    }
   ]
 }

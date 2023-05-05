@@ -15,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSortModule } from '@angular/material/sort'
 import { MatTableModule } from '@angular/material/table'
 import { MatToolbarModule } from '@angular/material/toolbar'
@@ -26,9 +27,6 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     CommonModule,
     FormsModule,
     MatButtonModule,
-    MatButtonModule,
-    MatButtonModule,
-    MatCardModule,
     MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -41,6 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatToolbarModule,

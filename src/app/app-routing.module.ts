@@ -5,17 +5,17 @@ import { PagesModule } from '@pages/pages.module'
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => PagesModule,
-  },
+    loadChildren: () => PagesModule
+  }
 ]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
       //enableTracing: true,
-      scrollPositionRestoration: 'top',
-    }),
+      scrollPositionRestoration: 'top'
+    })
   ],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

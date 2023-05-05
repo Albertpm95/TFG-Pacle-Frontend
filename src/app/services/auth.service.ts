@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
   title = environment.title

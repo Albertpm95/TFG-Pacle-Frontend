@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs'
 @Component({
   selector: 'app-colectivouv',
   templateUrl: './colectivouv.component.html',
-  styleUrls: ['./colectivouv.component.scss'],
+  styleUrls: ['./colectivouv.component.scss']
 })
 export class ColectivouvComponent {
   nuevoColectivoUVForm = new FormControl()
@@ -31,15 +31,11 @@ export class ColectivouvComponent {
           .deleteColectivoUV(idColectivoUV)
           .pipe(takeUntil(this.destroy$))
           .subscribe(() => {
-            let indexAEliminar = this.colectivosUV.findIndex(
-              (colectivo) => colectivo.idColectivoUV === idColectivoUV,
-            )
+            let indexAEliminar = this.colectivosUV.findIndex((colectivo) => colectivo.idColectivoUV === idColectivoUV)
             if (indexAEliminar != -1)
               this.colectivosUV.splice(
-                this.colectivosUV.findIndex(
-                  (colectivo) => colectivo.idColectivoUV === idColectivoUV,
-                ),
-                1,
+                this.colectivosUV.findIndex((colectivo) => colectivo.idColectivoUV === idColectivoUV),
+                1
               )
           })
       : ''
@@ -48,7 +44,7 @@ export class ColectivouvComponent {
   public addColectivoUV() {
     if (this.nuevoColectivoUVForm.valid) {
       let colectivoUV: ColectivoUV = {
-        colectivoUV: this.nuevoColectivoUVForm.value,
+        colectivoUV: this.nuevoColectivoUVForm.value
       }
       this.apiService
         .addColectivoUV(colectivoUV)

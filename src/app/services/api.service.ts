@@ -55,6 +55,9 @@ export class ApiService {
   updateConvocatoria(convocatoria_update: ConvocatoriaDB): Observable<ConvocatoriaDB> {
     return this.http.put<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE, convocatoria_update)
   }
+  deleteConvocatoria(idConvocatoria: number): Observable<ConvocatoriaDB> {
+    return this.http.delete<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_DELETE + '/' + idConvocatoria)
+  }
   /** ---------------------------------------------------------------------- */
 
   /** Configuracion */
@@ -74,7 +77,7 @@ export class ApiService {
   addLenguajeConvocatoria(lenguaje_nuevo: Lenguaje): Observable<Lenguaje> {
     return this.http.post<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_LENGUAJE_CREATE, lenguaje_nuevo)
   }
-  deleteLenguajeConvocatoria(idLenguaje: number): Observable<any> {
+  deleteLenguajeConvocatoria(idLenguaje: number): Observable<Lenguaje> {
     return this.http.delete<Lenguaje>(this.apiUrl + API_ENDPOINTS.CONFIG_LENGUAJE_DELETE + '/' + idLenguaje)
   }
 

@@ -89,14 +89,14 @@
                 [routerLink]="[edit_route, { idConvocatoria: convocatoria.idConvocatoria }]">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button><mat-icon>delete</mat-icon></button>
+              <button mat-icon-button (click)="deleteConvocatoria(convocatoria.idConvocatoria)"><mat-icon>delete</mat-icon></button>
             </td>
           </ng-container>
         </div>
         <tr mat-header-row *matHeaderRowDef="displayed_columns; sticky: true"></tr>
         <tr mat-row *matRowDef="let convocatoria; columns: displayed_columns"></tr>
       </table>
-      <div *ngIf="!loading">
+      <div *ngIf="!loading && !data_source.filteredData.length">
         <h2>No se han encontrado convocatorias.</h2>
       </div>
     </mat-card-content>

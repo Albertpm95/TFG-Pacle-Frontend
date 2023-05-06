@@ -52,7 +52,8 @@ export class ListComponent implements OnInit, OnDestroy {
       .subscribe((convocatorias) => {
         if (convocatorias) {
           this.data_source = new MatTableDataSource(convocatorias)
-          if (convocatorias.length) this.loading = true
+          console.log(this.data_source.filteredData.length)
+          this.loading = false
         }
       })
   }
@@ -71,6 +72,10 @@ export class ListComponent implements OnInit, OnDestroy {
           console.log('Vacio')
         })
       )
+  }
+
+  public deleteConvocatoria(idConvocatoria: number): void {
+    this.apiService.deleteConvocatoria(idConvocatoria).pipe(takeUntil(this.destroy$)).subscribe()
   }
 
   ngOnDestroy() {

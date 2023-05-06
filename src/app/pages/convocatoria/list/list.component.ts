@@ -47,14 +47,10 @@ export class ListComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
         })
       )
       .subscribe((convocatorias) => {
         if (convocatorias) {
-          console.log(convocatorias)
           this.data_source = new MatTableDataSource(convocatorias)
           if (convocatorias.length) this.loading = true
         }

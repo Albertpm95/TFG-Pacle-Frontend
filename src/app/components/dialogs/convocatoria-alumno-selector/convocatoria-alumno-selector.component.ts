@@ -64,7 +64,6 @@ export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
       .pipe(
         takeUntil(this.destroy$),
         finalize(() => {
-          console.log('Finalizado')
           this.loading = false
         })
       )

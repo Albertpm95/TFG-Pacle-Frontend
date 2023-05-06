@@ -89,7 +89,7 @@ export class EditionComponent implements OnInit, OnDestroy {
       parteExpresionEscrita: this.extractParte('parteExpresionEscrita', 'Expresion Escrita'),
       parteExpresionOral: this.extractParte('parteExpresionOral', 'Expresion Oral'),
       specificIdentifier: this.convocatoriaForm.controls['specificIdentifier'].value,
-      idConvocatoria: this.idConvocatoria
+      idConvocatoria: this.idConvocatoria as number
     }
     if (this.convocatoriaDB) return convocatoria as ConvocatoriaDB
     else return convocatoria as ConvocatoriaNueva
@@ -124,7 +124,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     }
     const parte: Parte | ParteNueva = {
       puntuacionMaxima: this.convocatoriaForm.controls[label].value['puntuacionMaxima'],
-      tareas: this.convocatoriaForm.controls[label].value['tareas'] ?? [],
+      tareas: this.convocatoriaForm.controls[label].value['listaTareas'] ?? [],
       tipo: tipo,
       idParte: idParte
     }
@@ -195,7 +195,7 @@ export class EditionComponent implements OnInit, OnDestroy {
   private updateConvocatoriaAPI(): void {
     if (this.convocatoriaDB) {
       this.apiService
-        .updateConvocatoria(this.convocatoriaDB)
+        .updateConvocatoria(this.convocatoriaDB as ConvocatoriaDB)
         .pipe(
           takeUntil(this.destroy$),
           catchError((error): Observable<never> => {
@@ -228,7 +228,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     })
   }
   private initializeConvocatoria(): void {
-    this.idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria']
+    this.idConvocatoria = this.activactedRoute.snapshot.params['idConvocatoria'] as number
     if (this.idConvocatoria) {
       this.apiService
         .getConvocatoriaID(this.idConvocatoria)
@@ -261,7 +261,7 @@ export class EditionComponent implements OnInit, OnDestroy {
         horario: [convocatoria.horario, Validators.required],
         lenguaje: [convocatoria.lenguaje, Validators.required],
         nivel: [convocatoria.nivel, [Validators.required]],
-        specificIdentifier: '',
+        specificIdentifier: [convocatoria.specificIdentifier, [Validators.required]],
         parteComprensionAuditiva: this.formBuilder.group({
           puntuacionMaxima: [convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
           listaTareas: this.formBuilder.array([])

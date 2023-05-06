@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { COMPONENTS, MODULES } from '@constants'
@@ -6,13 +6,13 @@ import { Alumno } from '@models/alumno'
 import { ColectivoUV } from '@models/colectivouv'
 import { Genero } from '@models/genero'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Observable, Subject, catchError, finalize, takeUntil, throwError } from 'rxjs'
 
 @Component({
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditionComponent implements OnInit {
+export class EditionComponent implements OnInit, OnDestroy {
   alumnoNuevoForm: FormGroup = new FormGroup('')
   alumno: Alumno | undefined
   loading = true
@@ -96,9 +96,6 @@ export class EditionComponent implements OnInit {
               }),
               finalize(() => {
                 this.loading = false
-              }),
-              throwIfEmpty(() => {
-                console.log('Vacio')
               })
             )
             .subscribe(() => {
@@ -113,9 +110,6 @@ export class EditionComponent implements OnInit {
               }),
               finalize(() => {
                 this.loading = false
-              }),
-              throwIfEmpty(() => {
-                console.log('Vacio')
               })
             )
             .subscribe(() => {

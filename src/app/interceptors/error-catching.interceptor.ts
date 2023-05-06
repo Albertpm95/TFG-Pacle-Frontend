@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core'
 import { HttpError } from '@constants'
 import { SnackbarService } from '@services/snackbar.service'
-import { catchError, Observable, throwError } from 'rxjs'
+import { Observable, catchError, throwError } from 'rxjs'
 
 @Injectable()
 export class ErrorCatchingInterceptor implements HttpInterceptor {
@@ -13,7 +13,7 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
-            console.log('Angular error', error)
+            console.error('Angular error', error)
           } else {
             switch (error.status) {
               case HttpError.BadRequest:
@@ -77,7 +77,6 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
           //console.error('An error ocurred.')
         }
         return throwError(() => {
-          //console.log('Throw error: ', error)
           error
         })
       })

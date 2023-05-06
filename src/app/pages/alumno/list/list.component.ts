@@ -53,9 +53,6 @@ export class ListComponent implements OnInit, OnDestroy {
         }),
         finalize(() => {
           this.loading = false
-        }),
-        throwIfEmpty(() => {
-          console.log('Vacio')
         })
       )
       .subscribe((alumnos: Alumno[]) => {
@@ -102,9 +99,6 @@ export class ListComponent implements OnInit, OnDestroy {
             }),
             finalize(() => {
               this.loading = false
-            }),
-            throwIfEmpty(() => {
-              console.log('Vacio')
             })
           )
           .subscribe(() => {

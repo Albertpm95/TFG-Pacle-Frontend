@@ -53,7 +53,6 @@ export class ApiService {
     return this.http.post<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_CREATE, convocatoria_nueva)
   }
   updateConvocatoria(convocatoria_update: ConvocatoriaDB): Observable<ConvocatoriaDB> {
-    console.log(convocatoria_update)
     return this.http.put<ConvocatoriaDB>(this.apiUrl + API_ENDPOINTS.CONVOCATORIA_UPDATE, convocatoria_update)
   }
   /** ---------------------------------------------------------------------- */

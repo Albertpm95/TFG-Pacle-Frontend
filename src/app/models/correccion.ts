@@ -9,7 +9,7 @@ export class Tarea {
   }
 }
 export class TareaCorregida {
-  puntuacion: number = 0
+  puntuacion = 0
   tarea: Tarea
 
   constructor(tarea: Tarea, puntuacion: number) {

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { ActivatedRoute, Router } from '@angular/router'
 import { COMPONENTS, CONSTANTS, MODULES } from '@constants'
 import { ConvocatoriaDB, ConvocatoriaNueva } from '@models/convocatoria'
+import { Tarea } from '@models/correccion'
 import { Horario } from '@models/horario'
 import { Lenguaje } from '@models/lenguaje'
 import { Nivel } from '@models/nivel'
@@ -16,7 +17,6 @@ import { Observable, Subject, catchError, finalize, forkJoin, take, takeUntil, t
 })
 export class EditionComponent implements OnInit, OnDestroy {
   convocatoriaForm: FormGroup = new FormGroup('')
-
   convocatoriaNueva: ConvocatoriaNueva | undefined
   convocatoriaDB: ConvocatoriaDB | undefined
   loading = true
@@ -41,15 +41,20 @@ export class EditionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeLists()
   }
+  ngOnDestroy() {
+    this.destroy$.next(true)
+  }
 
   public saveConvocatoria(): void {
     this.loading = true
     if (this.convocatoriaForm.valid) {
       if (this.convocatoriaDB) {
         this.convocatoriaDB = this.extractConvocatoriaForm() as ConvocatoriaDB
+        console.log(this.convocatoriaDB)
         this.updateConvocatoriaAPI()
       } else if (this.convocatoriaNueva) {
         this.convocatoriaNueva = this.extractConvocatoriaForm() as ConvocatoriaNueva
+        console.log(this.convocatoriaNueva)
         this.createConvocatoriaAPI()
       }
     } else {
@@ -159,6 +164,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     })
     this.listaTareasExpresionOral.push(tarea)
   }
+
   // TODO Fusion Delete tareas functions
   public deleteTareaComprensionAuditiva(index: number): void {
     this.listaTareasComprensionLectora.removeAt(index)
@@ -195,7 +201,7 @@ export class EditionComponent implements OnInit, OnDestroy {
   private updateConvocatoriaAPI(): void {
     if (this.convocatoriaDB) {
       this.apiService
-        .updateConvocatoria(this.convocatoriaDB as ConvocatoriaDB)
+        .updateConvocatoria(this.convocatoriaDB)
         .pipe(
           takeUntil(this.destroy$),
           catchError((error): Observable<never> => {
@@ -218,7 +224,7 @@ export class EditionComponent implements OnInit, OnDestroy {
       horarios: this.apiService.getHorariosConvocatoria(),
       niveles: this.apiService.getNivelesConvocatoria()
     })
-    initializations.pipe(take(1)).subscribe((loadedLists) => {
+    initializations.pipe(takeUntil(this.destroy$)).subscribe((loadedLists) => {
       if (loadedLists) {
         this.listaHorariosConvocatoria = loadedLists.horarios
         this.listaLenguajesConvocatoria = loadedLists.lenguajes
@@ -254,7 +260,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     }
   }
   private createForm(convocatoria: ConvocatoriaDB | ConvocatoriaNueva): void {
-    if (convocatoria)
+    if (convocatoria) {
       this.convocatoriaForm = this.formBuilder.group({
         estado: [convocatoria.estado],
         fechaParcial: [convocatoria.fecha, Validators.required], // Date sin el horario
@@ -264,27 +270,40 @@ export class EditionComponent implements OnInit, OnDestroy {
         specificIdentifier: [convocatoria.specificIdentifier, [Validators.required]],
         parteComprensionAuditiva: this.formBuilder.group({
           puntuacionMaxima: [convocatoria.parteComprensionAuditiva.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
+          listaTareas: this.crearFormArrayDesdeLista(convocatoria.parteComprensionAuditiva.tareas)
         }),
         parteComprensionLectora: this.formBuilder.group({
           puntuacionMaxima: [convocatoria.parteComprensionLectora.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
+          listaTareas: this.crearFormArrayDesdeLista(convocatoria.parteComprensionLectora.tareas)
         }),
         parteExpresionEscrita: this.formBuilder.group({
           puntuacionMaxima: [convocatoria.parteExpresionEscrita.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
+          listaTareas: this.crearFormArrayDesdeLista(convocatoria.parteExpresionEscrita.tareas)
         }),
         parteExpresionOral: this.formBuilder.group({
           puntuacionMaxima: [convocatoria.parteExpresionOral.puntuacionMaxima, Validators.required],
-          listaTareas: this.formBuilder.array([])
+          listaTareas: this.crearFormArrayDesdeLista(convocatoria.parteExpresionOral.tareas)
         })
       })
-    this.loading = false
+      console.log(this.convocatoriaForm)
+      this.loading = false
+    }
   }
+
+  crearFormArrayDesdeLista(listaTareas: Tarea[]): FormArray {
+    const formGroupArray = listaTareas.map((tarea) => {
+      return this.formBuilder.group({
+        nombreTarea: new FormControl(tarea.nombreTarea, Validators.required),
+        valor: new FormControl(0, [Validators.required, Validators.min(0)]),
+        idTarea: new FormControl(tarea.idTarea)
+      })
+    })
+
+    return this.formBuilder.array(formGroupArray)
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   compareFn(obj1: any, obj2: any) {
+    // To make the mat-select load the value if updating convocatoria
     return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2
-  }
-  ngOnDestroy() {
-    this.destroy$.next(true)
   }
 }

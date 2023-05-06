@@ -9,20 +9,20 @@ export class HttpError {
   static InternalServerError = 500
 }
 export class CONSTANTS {
-  static ESTADO_POR_DEFECTO: boolean = true
-  static HORARIO: string = 'horario'
-  static LENGUAJE: string = 'lenguaje'
-  static NIVEL: string = 'nivel'
-  static GENERO: string = 'genero'
-  static COLECTIVOUV: string = 'colectivoUV'
-  static NOMBRE_CORRECTOR_DEFECTO: string = 'No asignado'
-  static NOMBRE_TAREA_DEFECTO: string = 'No asignado'
-  static RESULTADO_ACTA: string = 'No corregido'
-  static PORCIENTO: number = 100 // Para calcular el porcentaje
-  static ROL: string = 'rol'
-  static VALOR_PUNTUACION_MAX_DEFECTO: number = 0
-  static VALOR_TAREA_DEFECTO: number = 0
-  static PANEL: string = 'panel'
+  static ESTADO_POR_DEFECTO = true
+  static HORARIO = 'horario'
+  static LENGUAJE = 'lenguaje'
+  static NIVEL = 'nivel'
+  static GENERO = 'genero'
+  static COLECTIVOUV = 'colectivoUV'
+  static NOMBRE_CORRECTOR_DEFECTO = 'No asignado'
+  static NOMBRE_TAREA_DEFECTO = 'No asignado'
+  static RESULTADO_ACTA = 'No corregido'
+  static PORCIENTO = 100 // Para calcular el porcentaje
+  static ROL = 'rol'
+  static VALOR_PUNTUACION_MAX_DEFECTO = 0
+  static VALOR_TAREA_DEFECTO = 0
+  static PANEL = 'panel'
 }
 export class ROLES {
   static ADMIN = 'admin'

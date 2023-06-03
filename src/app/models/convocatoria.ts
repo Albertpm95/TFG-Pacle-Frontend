@@ -15,6 +15,7 @@ export interface ConvocatoriaNueva {
   nivel: Nivel
   specificIdentifier: string
 }
+
 export interface ConvocatoriaDB {
   estado: boolean
   fecha: Date

@@ -1,4 +1,5 @@
 import { UserAction } from '@models/acciones-usuario'
+
 export class HttpError {
   static BadRequest = 400
   static Unauthorized = 401
@@ -35,6 +36,7 @@ export class MODULES {
   static ALUMNO = 'alumno'
   static CONVOCATORIA = 'convocatoria'
   static USUARIO = 'usuario'
+  static MATRICULA = 'matricula'
 }
 export class API_Routers {
   static ACTA = 'acta'
@@ -45,6 +47,7 @@ export class API_Routers {
   static LOGIN = 'login'
   static PARTE = 'parte'
   static USUARIO = 'usuario'
+  static MATRICULA = 'matricula'
 }
 export class ACTIONS {
   static ACTUAL = 'actual'
@@ -65,6 +68,7 @@ export class API_ENDPOINTS {
   static ACTA_UPDATE = API_Routers.ACTA + '/' + ACTIONS.UPDATE
   static ADMIN_UPLOAD_ALUMNOS = API_Routers.ADMIN + '/' + ACTIONS.UPDATE + '/' + API_Routers.ALUMNO
   static ALUMNO_CREATE = API_Routers.ALUMNO + '/' + ACTIONS.CREATE
+  static ALUMNO_DETAILS = API_Routers.ALUMNO + '/' + ACTIONS.DETAILS
   static ALUMNO_DELETE = API_Routers.ALUMNO + '/' + ACTIONS.DELETE
   static ALUMNO_LIST = API_Routers.ALUMNO + '/' + ACTIONS.LIST
   static ALUMNO_UPDATE = API_Routers.ALUMNO + '/' + ACTIONS.UPDATE
@@ -97,6 +101,7 @@ export class API_ENDPOINTS {
   static USUARIO_DETAILS = API_Routers.USUARIO + '/' + ACTIONS.DETAILS
   static USUARIO_LIST = API_Routers.USUARIO + '/' + ACTIONS.LIST
   static USUARIO_UPDATE = API_Routers.USUARIO + '/' + ACTIONS.UPDATE
+  static MATRICULAR = API_Routers.MATRICULA + '/' + API_Routers.ALUMNO + '/' + API_Routers.CONVOCATORIA
 }
 export class COMPONENTS {
   static EDITION = 'edition'
@@ -105,7 +110,9 @@ export class COMPONENTS {
   static PANEL = 'panel'
   static UPLOAD = 'upload'
   static LOGIN = 'login'
+  static REGISTER = 'register'
 }
+
 export abstract class ACTION_LIST {
   static readonly MENU: UserAction[] = [
     {
@@ -126,6 +133,11 @@ export abstract class ACTION_LIST {
     {
       actionLabel: 'Ver la lista de actas',
       url: MODULES.ACTA + '/' + COMPONENTS.LIST,
+      rol: [ROLES.ADMIN]
+    },
+    {
+      actionLabel: 'Matricular alumno en convocatira',
+      url: MODULES.MATRICULA + '/' + COMPONENTS.REGISTER,
       rol: [ROLES.ADMIN]
     },
     {

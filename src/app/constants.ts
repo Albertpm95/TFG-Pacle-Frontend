@@ -136,7 +136,7 @@ export abstract class ACTION_LIST {
       rol: [ROLES.ADMIN]
     },
     {
-      actionLabel: 'Matricular alumno en convocatira',
+      actionLabel: 'Matricular alumno en convocatoria',
       url: MODULES.MATRICULA + '/' + COMPONENTS.REGISTER,
       rol: [ROLES.ADMIN]
     },

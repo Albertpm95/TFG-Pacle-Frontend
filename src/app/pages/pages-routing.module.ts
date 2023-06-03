@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: COMPONENTS.LOGIN,
-    pathMatch: 'prefix'
+    pathMatch: 'full'
   },
   {
     path: '**',

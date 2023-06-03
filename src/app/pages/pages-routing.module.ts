@@ -6,6 +6,7 @@ import { AdminModule } from './admin/admin.module'
 import { AlumnoModule } from './alumno/alumno.module'
 import { ConvocatoriaModule } from './convocatoria/convocatoria.module'
 import { LoginComponent } from './login/login.component'
+import { MatriculaModule } from './matricula/matricula.module'
 import { MenuComponent } from './menu/menu.component'
 import { UsuarioModule } from './usuario/usuario.module'
 import { WildcardComponent } from './wildcard/wildcard.component'
@@ -37,6 +38,11 @@ const routes: Routes = [
     path: MODULES.USUARIO,
     loadChildren: () => UsuarioModule,
     title: 'Usuario'
+  },
+  {
+    path: MODULES.MATRICULA,
+    loadChildren: () => MatriculaModule,
+    title: 'Matricular'
   },
   {
     path: '',

@@ -1,0 +1,11 @@
+.matricula-form {
+    display: flex;
+    flex-direction: column;
+    width: 80dvw;
+    form{
+        width: 100%;
+        mat-form-field{
+            width: 50%;
+        }
+    }
+}

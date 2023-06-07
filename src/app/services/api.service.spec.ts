@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing'
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import { TestBed } from '@angular/core/testing'
 
-import { ApiService } from './api.service'
+import { APIENDPOINTS } from '@constants'
 import { Convocatoria } from '@models/convocatoria'
 import { Horario } from '@models/horario'
-import { API_ENDPOINTS } from '@constants'
 import { MockUpDB } from '@models/mockup'
+import { ApiService } from './api.service'
 
 describe('ApiService', () => {
   let service: ApiService
@@ -33,7 +33,7 @@ describe('ApiService', () => {
         expect(result).toEqual(convocatorias)
       })
 
-      const req = httpMock.expectOne(service.apiUrl + API_ENDPOINTS.CONVOCATORIA_LIST)
+      const req = httpMock.expectOne(service.apiUrl + APIENDPOINTS.CONVOCATORIA_LIST)
       expect(req.request.method).toBe('GET')
       req.flush(convocatorias)
     })
@@ -47,7 +47,7 @@ describe('ApiService', () => {
         expect(result).toEqual(horario)
       })
 
-      const req = httpMock.expectOne(service.apiUrl + API_ENDPOINTS.CONFIG_HORARIO_CREATE)
+      const req = httpMock.expectOne(service.apiUrl + APIENDPOINTS.CONFIG_HORARIO_CREATE)
       expect(req.request.method).toBe('PUT')
       expect(req.request.body.horario).toBe(horario.horario)
       req.flush(horario)

@@ -16,17 +16,16 @@ import { Observable, Subject, catchError, finalize, takeUntil, throwError, throw
 })
 export class EditionComponent implements OnInit, OnDestroy {
   loading = true
-  acta: Partial<ActaNueva> | Partial<ActaDB> | undefined
+  acta: ActaNueva | ActaDB | undefined
   alumno: Alumno | undefined
   convocatoria: ConvocatoriaDB | undefined
-  usuario: Usuario | undefined
+  usuario = new Usuario('rick', 'sanchez', true, { idRol: 1, rol: 'Administrador' }, 'rick_sanchez')
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
   constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.loadOwnUser()
     const idActa: number | undefined = this.activactedRoute.snapshot.params['idActa']
     const idAlumno: number | undefined = this.activactedRoute.snapshot.params['idAlumno']
     const idConvocatoria: number | undefined = this.activactedRoute.snapshot.params['idConvocatoria']

@@ -119,6 +119,12 @@ export class EditionComponent implements OnInit, OnDestroy {
     this.loading = false
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  compareFn(obj1: any, obj2: any) {
+    // To make the mat-select load the value if updating convocatoria
+    return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next(true)
   }

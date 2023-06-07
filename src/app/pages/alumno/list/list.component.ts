@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router'
 import { COMPONENTS, MODULES } from '@constants'
 import { Alumno } from '@models/alumno'
 import { ConvocatoriaDB } from '@models/convocatoria'
-import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
-import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Observable, Subject, catchError, finalize, take, takeUntil, throwError, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './list.component.html',
@@ -65,24 +64,26 @@ export class ListComponent implements OnInit, OnDestroy {
 
   private initializeFilteredListConvocatoria(idConvocatoria: number): void {
     this.apiService
+      .getConvocatoriaID(idConvocatoria)
+      .pipe(take(1))
+      .subscribe((convocatoria: ConvocatoriaDB) => {
+        this.convocatoria = convocatoria
+      })
+    this.apiService
       .getAlumnosConvocatoria(idConvocatoria)
       .pipe(
         takeUntil(this.destroy$),
         catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
           return throwError(() => error)
         }),
         finalize(() => {
           this.loading = false
         }),
         throwIfEmpty(() => {
-          console.log('Vacio')
         })
       )
-      .subscribe((mappedInfo: AlumnosConvocatoria) => {
-        this.convocatoria = mappedInfo.convocatoria
-        this.data_source = new MatTableDataSource(mappedInfo.alumnos)
-        if (mappedInfo.alumnos.length) this.list_loaded = true
+      .subscribe((alumnos: Alumno[]) => {
+        this.data_source = new MatTableDataSource(alumnos)
       })
   }
 
@@ -94,7 +95,6 @@ export class ListComponent implements OnInit, OnDestroy {
           .pipe(
             takeUntil(this.destroy$),
             catchError((error): Observable<never> => {
-              console.error('Error fetching data from api:', error)
               return throwError(() => error)
             }),
             finalize(() => {

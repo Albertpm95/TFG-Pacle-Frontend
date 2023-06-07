@@ -3,9 +3,8 @@ import { FormControl } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { Alumno } from '@models/alumno'
 import { ConvocatoriaDB } from '@models/convocatoria'
-import { AlumnosConvocatoria } from '@models/dictionaries'
 import { ApiService } from '@services/api.service'
-import { Subject, finalize, takeUntil } from 'rxjs'
+import { Subject, finalize, take, takeUntil } from 'rxjs'
 
 @Component({
   templateUrl: './convocatoria-alumno-selector.component.html',
@@ -31,31 +30,15 @@ export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.data)
     if (this.data.idAlumno && this.data.idConvocatoria) {
       this.close()
     } else if (this.data.idConvocatoria) {
+      console.log(this.data.idConvocatoria)
       this.loadAlumnosConvocatoria(this.data.idConvocatoria)
     } else if (!this.data.idConvocatoria) {
       this.loadConvocatorias()
-      this.convocatoriaControl.valueChanges.subscribe((convocatoria) => {
-        this.loadAlumnosConvocatoria(convocatoria.idConvocatoria)
-      })
     }
-  }
-
-  private loadAlumnosConvocatoria(idConvocatoria: number): void {
-    this.apiService
-      .getAlumnosConvocatoria(idConvocatoria)
-      .pipe(
-        takeUntil(this.destroy$),
-        finalize(() => {
-          this.loading = false
-        })
-      )
-      .subscribe((alumnosConvocatoria: AlumnosConvocatoria) => {
-        this.listAlumno = alumnosConvocatoria.alumnos
-        this.selectedConvocatoria = alumnosConvocatoria.convocatoria
-      })
   }
 
   private loadConvocatorias(): void {
@@ -69,8 +52,32 @@ export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
       )
       .subscribe((convocatorias: ConvocatoriaDB[]) => {
         this.listConvocatorias = convocatorias
+        console.log(convocatorias)
       })
   }
+
+  public selectConvocatoria(convocatoria: ConvocatoriaDB): void {
+    console.log(convocatoria)
+    this.selectedConvocatoria = convocatoria
+    this.loadAlumnosConvocatoria(this.selectedConvocatoria.idConvocatoria)
+  }
+
+  private loadAlumnosConvocatoria(idConvocatoria: number): void {
+    if (idConvocatoria)
+      this.apiService
+        .getAlumnosConvocatoria(idConvocatoria)
+        .pipe(
+          take(1),
+          finalize(() => {
+            this.loading = false
+          })
+        )
+        .subscribe((alumnosConvocatoria: Alumno[]) => {
+          this.listAlumno = alumnosConvocatoria
+          console.log('Alunos convocatoria: ', alumnosConvocatoria)
+        })
+  }
+
   private close() {
     this.dialogRef.close()
   }

@@ -50,11 +50,9 @@ export class EditionComponent implements OnInit, OnDestroy {
     if (this.convocatoriaForm.valid) {
       if (this.convocatoriaDB) {
         this.convocatoriaDB = this.extractConvocatoriaForm() as ConvocatoriaDB
-        console.log(this.convocatoriaDB)
         this.updateConvocatoriaAPI()
       } else if (this.convocatoriaNueva) {
         this.convocatoriaNueva = this.extractConvocatoriaForm() as ConvocatoriaNueva
-        console.log(this.convocatoriaNueva)
         this.createConvocatoriaAPI()
       }
     } else {
@@ -127,12 +125,14 @@ export class EditionComponent implements OnInit, OnDestroy {
         idParte = undefined
         break
     }
+    console.log(this.convocatoriaForm.controls[label].value['puntuacionMaxima'])
     const parte: Parte | ParteNueva = {
       puntuacionMaxima: this.convocatoriaForm.controls[label].value['puntuacionMaxima'],
       tareas: this.convocatoriaForm.controls[label].value['listaTareas'] ?? [],
       tipo: tipo,
       idParte: idParte
     }
+    console.log(parte)
     return parte
   }
   // TODO Fusion add tareas functions
@@ -200,6 +200,7 @@ export class EditionComponent implements OnInit, OnDestroy {
 
   private updateConvocatoriaAPI(): void {
     if (this.convocatoriaDB) {
+      console.log(this.convocatoriaDB)
       this.apiService
         .updateConvocatoria(this.convocatoriaDB)
         .pipe(
@@ -240,7 +241,7 @@ export class EditionComponent implements OnInit, OnDestroy {
         .getConvocatoriaID(this.idConvocatoria)
         .pipe(take(1))
         .subscribe((convocatoria: ConvocatoriaDB) => {
-          this.convocatoriaDB = convocatoria as ConvocatoriaDB
+          this.convocatoriaDB = convocatoria 
           this.createForm(this.convocatoriaDB)
         })
     } else {

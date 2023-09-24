@@ -27,7 +27,7 @@ export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
     private apiService: ApiService,
     public dialogRef: MatDialogRef<ConvocatoriaAlumnoSelectorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { idConvocatoria: number; idAlumno: number }
-  ) {}
+  ) { }
 
   ngOnInit() {
     console.log(this.data)
@@ -80,5 +80,9 @@ export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
 
   private close() {
     this.dialogRef.close()
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true)
   }
 }

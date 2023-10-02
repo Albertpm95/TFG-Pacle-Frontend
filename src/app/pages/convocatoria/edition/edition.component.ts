@@ -36,7 +36,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeLists()
@@ -185,10 +185,7 @@ export class EditionComponent implements OnInit, OnDestroy {
         .createConvocatoria(this.convocatoriaNueva)
         .pipe(
           takeUntil(this.destroy$),
-          catchError((error): Observable<never> => {
-            this.loading = false
-            return throwError(() => error)
-          }),
+
           finalize(() => {
             this.loading = false
           })
@@ -205,10 +202,6 @@ export class EditionComponent implements OnInit, OnDestroy {
         .updateConvocatoria(this.convocatoriaDB)
         .pipe(
           takeUntil(this.destroy$),
-          catchError((error): Observable<never> => {
-            this.loading = false
-            return throwError(() => error)
-          }),
           finalize(() => {
             this.loading = false
           })
@@ -241,7 +234,7 @@ export class EditionComponent implements OnInit, OnDestroy {
         .getConvocatoriaID(this.idConvocatoria)
         .pipe(take(1))
         .subscribe((convocatoria: ConvocatoriaDB) => {
-          this.convocatoriaDB = convocatoria 
+          this.convocatoriaDB = convocatoria
           this.createForm(this.convocatoriaDB)
         })
     } else {

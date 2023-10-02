@@ -6,14 +6,14 @@ import { Observable, catchError, throwError } from 'rxjs'
 
 @Injectable()
 export class ErrorCatchingInterceptor implements HttpInterceptor {
-  constructor(private _snackbarService: SnackbarService) {}
+  constructor(private _snackbarService: SnackbarService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
-            console.error('Angular error', error)
+            console.error(error.error)
           } else {
             switch (error.status) {
               case HttpError.BadRequest:

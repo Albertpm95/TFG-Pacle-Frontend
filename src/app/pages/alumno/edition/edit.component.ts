@@ -27,7 +27,7 @@ export class EditionComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private activactedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const idAlumno = this.activactedRoute.snapshot.params['idAlumno']
@@ -88,33 +88,29 @@ export class EditionComponent implements OnInit, OnDestroy {
       }
       idAlumno
         ? this.apiService
-            .updateAlumno(alumno)
-            .pipe(
-              takeUntil(this.destroy$),
-              catchError((error): Observable<never> => {
-                return throwError(() => error)
-              }),
-              finalize(() => {
-                this.loading = false
-              })
-            )
-            .subscribe(() => {
-              this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
+          .updateAlumno(alumno)
+          .pipe(
+            takeUntil(this.destroy$),
+
+            finalize(() => {
+              this.loading = false
             })
+          )
+          .subscribe(() => {
+            this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
+          })
         : this.apiService
-            .addAlumno(alumno)
-            .pipe(
-              takeUntil(this.destroy$),
-              catchError((error): Observable<never> => {
-                return throwError(() => error)
-              }),
-              finalize(() => {
-                this.loading = false
-              })
-            )
-            .subscribe(() => {
-              this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
+          .addAlumno(alumno)
+          .pipe(
+            takeUntil(this.destroy$),
+
+            finalize(() => {
+              this.loading = false
             })
+          )
+          .subscribe(() => {
+            this.router.navigateByUrl(MODULES.ALUMNO + '/' + COMPONENTS.LIST)
+          })
     }
     this.loading = false
   }

@@ -1,16 +1,17 @@
 <div class="card" *ngIf="!loading">
-  <mat-form-field appearance="fill" class="col">
+  <mat-form-field appearance="fill">
     <mat-label for="convocatoriaControl">Selecciona convocatoria</mat-label>
     <mat-select [formControl]="convocatoriaControl" (selectionChange)="selectConvocatoria($event.value)">
       <mat-option [value]="convocatoria" *ngFor=" let convocatoria of listConvocatorias">
-        {{convocatoria.lenguaje.lenguaje}} {{convocatoria.nivel.nivel}} {{convocatoria.fecha | date: 'short'}}
+        <b>{{convocatoria.lenguaje.lenguaje}} {{convocatoria.nivel.nivel}}</b> {{convocatoria.fecha | date: 'short'}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field appearance="fill" class="col">
+  <mat-form-field appearance="fill" class="col-1">
     <mat-label for="alumnoControl">Selecciona Alumno</mat-label>
-    <mat-select [formControl]="alumnoControl">
-      <mat-option [value]="alumno" *ngFor="let alumno of listAlumno">{{ alumno.dni }} {{ alumno.nombre }} {{ alumno.apellidos }} </mat-option>
+    <mat-select [formControl]="alumnoControl" (selectionChange)="selectAlumno($event.value)">
+      <mat-option [value]="alumno" *ngFor="let alumno of listAlumno"><b>{{ alumno.dni }}</b> {{ alumno.nombre }} {{
+        alumno.apellidos }} </mat-option>
     </mat-select>
   </mat-form-field>
 </div>

@@ -31,7 +31,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.initializeList()
@@ -41,10 +41,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .getConvocatorias()
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
+
         finalize(() => {
           this.loading = false
         })
@@ -61,10 +58,7 @@ export class ListComponent implements OnInit, OnDestroy {
     if (convocatoria.idConvocatoria)
       this.apiService.cambiarEstadoConvocatoria(convocatoria.idConvocatoria, !convocatoria.estado).pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
+
         finalize(() => {
           this.loading = false
         }),

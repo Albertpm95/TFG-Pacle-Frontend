@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ApiService } from '@services/api.service'
 import { SnackbarService } from '@services/snackbar.service'
-import { Observable, Subject, catchError, takeUntil, throwError } from 'rxjs'
+import { Subject, takeUntil } from 'rxjs'
 
 @Component({
   selector: 'app-matricular',
@@ -37,12 +37,7 @@ export class MatricularComponent {
         )
         .pipe(
           takeUntil(this.destroy$),
-          catchError((error): Observable<never> => {
-            this.snackbarService.openSnackBar('El alumno ya esta matriculado en esa convocatoria.', 'X')
-            return throwError(() => error)
-          })
         )
-
         .subscribe((result) => {
           if (result) {
             console.log(result)

@@ -78,8 +78,13 @@ export class ConvocatoriaAlumnoSelectorDialogComponent implements OnInit {
         })
   }
 
-  private close() {
-    this.dialogRef.close()
+  public selectAlumno(alumno: Alumno) {
+    this.selectedAlumno = alumno
+    this.close(alumno)
+  }
+
+  private close(alumno?: Alumno) {
+    this.dialogRef.close(alumno)
   }
 
   ngOnDestroy() {

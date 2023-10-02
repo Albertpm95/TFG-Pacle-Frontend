@@ -4,15 +4,14 @@
   </div>
   <form [formGroup]="matriculaForm">
     <mat-form-field appearance="fill" class="col">
-        <mat-label for="convocatoria">Selecciona una convocatoria</mat-label>
-        <mat-select formControlName="convocatoriaSeleccionada" [compareWith]="compareFn">
-          <mat-option *ngFor="let convocatoria of listadoConvocatorias$ | async" [value]="convocatoria"
-            >{{ convocatoria.specificIdentifier }} {{ convocatoria.lenguaje.lenguaje }} 
-            {{ convocatoria.nivel.nivel }} 
-             {{ convocatoria.fecha | date : 'medium' }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
+      <mat-label for="convocatoria">Selecciona una convocatoria</mat-label>
+      <mat-select formControlName="convocatoriaSeleccionada" [compareWith]="compareFn">
+        <mat-option *ngFor="let convocatoria of listadoConvocatorias$ | async" [value]="convocatoria">{{
+          convocatoria.specificIdentifier }} {{ convocatoria.lenguaje.lenguaje }}
+          {{ convocatoria.nivel.nivel }}
+          {{ convocatoria.fecha | date : 'medium' }}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field appearance="fill" class="col">
       <mat-label for="alumno">Selecciona un alumno</mat-label>
       <mat-select formControlName="alumnoSeleccionado" [compareWith]="compareFn">
@@ -20,5 +19,5 @@
       </mat-select>
     </mat-form-field>
   </form>
-  <button type="button" (click)="matricular()">Matricular</button>
+  <button mat-raised-button color="primary" type="button" (click)="matricular()">Matricular</button>
 </div>

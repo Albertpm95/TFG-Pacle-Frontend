@@ -33,7 +33,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) {}
+  constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     const idConvocatoriaString = this.activactedRoute.snapshot.paramMap.get('idConvocatoria')
@@ -46,10 +46,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .getAlumnos()
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
+
         finalize(() => {
           this.loading = false
         })
@@ -73,9 +70,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .getAlumnosConvocatoria(idConvocatoria)
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          return throwError(() => error)
-        }),
+
         finalize(() => {
           this.loading = false
         }),
@@ -89,25 +84,22 @@ export class ListComponent implements OnInit, OnDestroy {
 
   public deleteAlumno(idAlumno: number): void {
     this.list_loaded = false
-    idAlumno
-      ? this.apiService
-          .deleteAlumno(idAlumno)
-          .pipe(
-            takeUntil(this.destroy$),
-            catchError((error): Observable<never> => {
-              return throwError(() => error)
-            }),
-            finalize(() => {
-              this.loading = false
-            })
-          )
-          .subscribe(() => {
-            const indexAEliminar = this.data_source.data.findIndex((alumno) => alumno.idAlumno === idAlumno)
-            if (indexAEliminar != -1) this.data_source.data.splice(indexAEliminar, 1)
-
-            this.list_loaded = true
+    if (idAlumno)
+      this.apiService
+        .deleteAlumno(idAlumno)
+        .pipe(
+          takeUntil(this.destroy$),
+          finalize(() => {
+            this.loading = false
           })
-      : ''
+        )
+        .subscribe(() => {
+          const indexAEliminar = this.data_source.data.findIndex((alumno) => alumno.idAlumno === idAlumno)
+          if (indexAEliminar != -1) this.data_source.data.splice(indexAEliminar, 1)
+
+          this.list_loaded = true
+        })
+
   }
 
   ngOnDestroy() {

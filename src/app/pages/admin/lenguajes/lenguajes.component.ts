@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms'
 import { Lenguaje } from '@models/lenguaje'
 import { ApiService } from '@services/api.service'
 import { SnackbarService } from '@services/snackbar.service'
-import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Subject, takeUntil } from 'rxjs'
 
 @Component({
   selector: 'app-lenguajes',
@@ -25,19 +25,19 @@ export class LenguajesComponent {
   }
 
   public deleteLenguajeConvocatoria(idLenguaje: number) {
-    idLenguaje
-      ? this.apiService
-          .deleteLenguajeConvocatoria(idLenguaje)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe(() => {
-            let indexAEliminar = this.lenguajes.findIndex((lLenguaje) => lLenguaje.idLenguaje === idLenguaje)
-            if (indexAEliminar != -1)
-              this.lenguajes.splice(
-                this.lenguajes.findIndex((lLenguaje) => lLenguaje.idLenguaje === idLenguaje),
-                1
-              )
-          })
-      : ''
+    if (idLenguaje)
+      this.apiService
+        .deleteLenguajeConvocatoria(idLenguaje)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          let indexAEliminar = this.lenguajes.findIndex((lLenguaje) => lLenguaje.idLenguaje === idLenguaje)
+          if (indexAEliminar != -1)
+            this.lenguajes.splice(
+              this.lenguajes.findIndex((lLenguaje) => lLenguaje.idLenguaje === idLenguaje),
+              1
+            )
+        })
+
   }
 
   public addLenguajeConvocatoria() {

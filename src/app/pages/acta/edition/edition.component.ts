@@ -8,7 +8,7 @@ import { Tarea, TareaCorregida } from '@models/correccion'
 import { Usuario } from '@models/usuario'
 import { ApiService } from '@services/api.service'
 import { ConvocatoriaAlumnoSelectorDialogComponent } from 'app/components/dialogs/convocatoria-alumno-selector/convocatoria-alumno-selector.component'
-import { Observable, Subject, catchError, finalize, takeUntil, throwError, throwIfEmpty } from 'rxjs'
+import { Subject, finalize, takeUntil, throwIfEmpty } from 'rxjs'
 
 @Component({
   templateUrl: './edition.component.html',
@@ -23,7 +23,7 @@ export class EditionComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<boolean> = new Subject<boolean>()
 
-  constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute, private dialog: MatDialog) {}
+  constructor(private apiService: ApiService, private activactedRoute: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const idActa: number | undefined = this.activactedRoute.snapshot.params['idActa']
@@ -116,13 +116,14 @@ export class EditionComponent implements OnInit, OnDestroy {
       this.acta = newActa
     }
   }
-
   private selectAlumnoConvocatoria(idConvocatoria?: number, idAlumno?: number): void {
     const dialogRef = this.dialog.open(ConvocatoriaAlumnoSelectorDialogComponent, {
-      data: { idAlumno: idAlumno, idConvocatoria: idConvocatoria }
+      data: { idAlumno: idAlumno, idConvocatoria: idConvocatoria },
+      height: '300px',
+      width: '720px'
     })
 
-    dialogRef.afterClosed().subscribe()
+    dialogRef.afterClosed().subscribe(alumno => { this.alumno = alumno })
   }
 
   private loadOwnUser(): void {
@@ -145,10 +146,6 @@ export class EditionComponent implements OnInit, OnDestroy {
       .getAlumnoID(idAlumno)
       .pipe(
         takeUntil(this.destroy$),
-        catchError((error): Observable<never> => {
-          console.error('Error fetching data from api:', error)
-          return throwError(() => error)
-        }),
         finalize(() => {
           this.loading = false
         }),
@@ -164,10 +161,6 @@ export class EditionComponent implements OnInit, OnDestroy {
   private loadConvocatoria(idConvocatoria: number): void {
     this.apiService.getConvocatoriaID(idConvocatoria).pipe(
       takeUntil(this.destroy$),
-      catchError((error): Observable<never> => {
-        console.error('Error fetching data from api:', error)
-        return throwError(() => error)
-      }),
       finalize(() => {
         this.loading = false
       }),
